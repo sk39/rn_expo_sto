@@ -4,7 +4,11 @@ import {DrawerContentComponentProps} from "react-navigation-drawer/src/types";
 import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
 import _ from "lodash";
 import {ScreenIcon} from "@common/components/ScreenIcon";
-import Colors from "../../constants/Colors";
+import Colors from "@constants/Colors";
+import {Avatar} from 'react-native-elements';
+import {getPlatformElevation} from "@common/utils/getPlatformElevation";
+import ViewUtils from "@common/utils/ViewUtils";
+
 
 export default class DrawerMenu extends Component<DrawerContentComponentProps> {
 
@@ -36,7 +40,25 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps> {
             <ImageBackground source={require("@assets/sideMenu.png")}
                              style={styles.menu}>
                 <View style={styles.logo}>
-                    <Text style={styles.logoText}>STO Platform</Text>
+                    <Text style={styles.logoText}>STO Platform Demo</Text>
+                </View>
+                <View style={styles.userArea}>
+                    <Avatar
+                        rounded
+                        size="large"
+                        source={{
+                            uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                        }}
+                    />
+                    <Text style={styles.username}>Test User</Text>
+                    <View style={styles.balanceArea}>
+                        <Text style={styles.balanceLabel}>
+                            Balance
+                        </Text>
+                        <Text style={styles.balanceValue}>
+                            $ 327,640
+                        </Text>
+                    </View>
                 </View>
                 {this.renderItem(null, "Login")}
                 {_.map(DisplayInTabScreens, this.renderItem)}
@@ -52,14 +74,15 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     logo: {
-        paddingVertical: 24,
-        marginTop: 12,
+        paddingTop: ViewUtils.isIphoneX() ? 48 : 24,
+        paddingBottom: 12,
+        // marginTop: 2,
         alignItems: "center",
     },
     logoText: {
         color: Colors.labelFont,
         fontWeight: "700",
-        fontSize: 26,
+        fontSize: 18,
     },
     item: {
         paddingLeft: 22,
@@ -70,11 +93,44 @@ const styles = StyleSheet.create({
     },
     itemText: {
         color: Colors.fontColor,
-        fontSize: 20,
+        fontSize: 16,
         marginLeft: 16,
         paddingBottom: 2
     },
     icon: {
         color: Colors.tabSelected
+    },
+    userArea: {
+        paddingVertical: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        width: '100%',
+    },
+    username: {
+        fontSize: 16,
+        paddingVertical: 5,
+    },
+    balanceArea: {
+        marginTop: 12,
+        width: '100%',
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "white",
+        ...getPlatformElevation(2)
+    },
+    balanceLabel: {
+        color: Colors.labelFont,
+        fontSize: 16,
+        fontWeight: "700"
+    },
+    balanceValue: {
+        paddingRight: 15,
+        color: Colors.primaryColor,
+        fontSize: 22,
+        fontWeight: "700",
+        letterSpacing: 1,
     }
 });

@@ -1,4 +1,4 @@
-const getPlatformElevation = elevation => {
+const getPlatformElevation = (elevation, color) => {
     if (elevation === 0) {
         return {
             shadowColor: 'transparent',
@@ -6,10 +6,15 @@ const getPlatformElevation = elevation => {
         };
     }
 
+    let _elevation = elevation;
+    if (elevation._value != null) {
+        _elevation = elevation._value;
+    }
+
     return {
-        shadowColor: 'black',
+        shadowColor: color || 'black',
         shadowOpacity: 0.3,
-        shadowRadius: elevation / 2,
+        shadowRadius: _elevation / 2,
         shadowOffset: {
             height: 1,
             width: 0,

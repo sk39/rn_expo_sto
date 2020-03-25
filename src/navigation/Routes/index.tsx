@@ -1,23 +1,21 @@
 import React from "react";
-import HomeScreen from "../../screens/Home/HomeScreen";
-import SettingsScreen from "../../screens/Settgins/SettingsScreen";
-import STOScreen from "../../screens/STO/STOScreen";
+import Index from "../../screens/Home";
+import Token from "../../screens/Token";
+import ChartScreen from "../../screens/Sandbox/Chart/ChartScreen";
+import LottieScreen from "../../screens/Sandbox/Lottie/LottieScreen";
+import InnerRouterScreen from "../../screens/Sandbox/InnerRouterScreen";
 import Sandbox from "../../screens/Sandbox/Sandbox";
-import ChartScreen from "../../screens/Chart/ChartScreen";
-import LottieScreen from "../../screens/Lottie/LottieScreen";
-import CounterScreen from "../../screens/Counter/CounterScreen";
-import InnerRouterScreen from "../../screens/InnerRouter/InnerRouterScreen";
+import AppInfoScreen from "../../screens/Sandbox/AppInfoScreen";
 
 export const DisplayInTabScreens = {
-    Home: HomeScreen,
-    Tokens: STOScreen,
+    Home: Index,
+    Tokens: Token,
 };
 
 export const OnlySideMenuScreens = {
-    Settings: SettingsScreen,
+    Sandbox: Sandbox,
     Lottie: LottieScreen,
     Chart: ChartScreen,
     InnerRouter: InnerRouterScreen,
-    Counter: CounterScreen,
-    Sandbox: Sandbox,
+    AppInfo: AppInfoScreen,
 };

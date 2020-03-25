@@ -13,8 +13,15 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["assets/*"],
-      "@common/*": ["src/common/*"]
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@common/*": [
+        "src/common/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ]
     }
   }
 }

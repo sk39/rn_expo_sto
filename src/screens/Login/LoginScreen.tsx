@@ -6,8 +6,7 @@ import {Button, Icon} from "react-native-elements";
 import LoginStore from "./LoginStore";
 import PageLoading from '@common/components/PageLoading';
 import Input from "@common/components/Input/Input";
-import Colors from "../../constants/Colors";
-import LottieView from "lottie-react-native";
+import Colors from "@constants/Colors";
 
 @observer
 export default class LoginScreen extends Component<NavigationProps> {
@@ -36,16 +35,16 @@ export default class LoginScreen extends Component<NavigationProps> {
             <Container>
                 <PageLoading loading={this.store.processing}/>
                 <View style={styles.back}>
-                    <View style={{marginBottom: 0}}>
-                        <LottieView
-                            loop
-                            autoPlay
-                            style={{
-                                width: 200,
-                                height: 200,
-                            }}
-                            source={require("assets/lottie/3738-blockchain-2.json")}/>
-                    </View>
+                    {/*<View style={{marginBottom: 0}}>*/}
+                    {/*    <LottieView*/}
+                    {/*        loop*/}
+                    {/*        autoPlay*/}
+                    {/*        style={{*/}
+                    {/*            width: 300,*/}
+                    {/*            height: 300,*/}
+                    {/*        }}*/}
+                    {/*        source={require("assets/lottie/3738-blockchain-2.json")}/>*/}
+                    {/*</View>*/}
                     <View style={styles.form}>
                         <Input inputState={this.store.userId}
                                label="User Id"
@@ -102,9 +101,10 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primaryColor,
         borderRadius: 26,
         width: 256,
+        height: 48,
     },
     btnText: {
-        color: Colors.fontColor,
+        color: "white",
     },
     link: {
         marginTop: 16

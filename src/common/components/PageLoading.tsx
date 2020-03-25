@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {ActivityIndicator, Modal, StyleSheet, View} from "react-native";
-import Colors from "../../constants/Colors";
+import Colors from "@constants/Colors";
 
 interface Props {
     loading?: boolean,

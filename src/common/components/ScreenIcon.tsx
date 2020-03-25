@@ -1,7 +1,7 @@
 import {Icon} from "react-native-elements";
 import React from "react";
-import Icons from "../../constants/Icons";
-import Colors from "../../constants/Colors";
+import Icons from "@constants/Icons";
+import Colors from "@constants/Colors";
 
 export function ScreenIcon(props) {
     const {screenName, color, size} = props;

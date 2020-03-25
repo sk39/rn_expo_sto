@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "rn_expo_sto",
-    "slug": "rn_expo_sto",
-    "description": "Example projects to trial React Native (Expo) and ecosystem.",
+    "name": "rn_expo_sto_demo",
+    "slug": "rn_expo_sto_demo",
+    "description": "Security Token Trade App. Powered by React Native (Expo).",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -16,7 +16,7 @@
     "splash": {
       "image": "./assets/sideMenu.png",
       "resizeMode": "cover",
-      "backgroundColor": "#292c37"
+      "backgroundColor": "#f6f7ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

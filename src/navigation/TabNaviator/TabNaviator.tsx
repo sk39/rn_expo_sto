@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from "react-navigation-tabs";
 import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
 import MoreNavigationOptions from "./MoreNavigationOptions";
 import {createSwitchNavigator} from "react-navigation";
-import Colors from "../../constants/Colors";
+import Colors from "@constants/Colors";
 
 const TabNavigator = createBottomTabNavigator(
     {

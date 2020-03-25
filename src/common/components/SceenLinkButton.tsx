@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button} from "native-base";
 import {ScreenIcon} from "@common/components/ScreenIcon";
-import Colors from "../../constants/Colors";
+import Colors from "@constants/Colors";
 import {NavigationInjectedProps, withNavigation} from "react-navigation";
 import {StyleProp, Text, TextStyle, ViewStyle} from "react-native";
 

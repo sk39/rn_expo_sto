@@ -3,8 +3,8 @@ import {IconNode, Input as ElInput} from "react-native-elements";
 import {StyleSheet} from "react-native";
 import InputState from "./InputState";
 import {observer} from "mobx-react";
-import Colors from "../../../constants/Colors";
-import Layout from "../../../constants/Layout";
+import Colors from "@constants/Colors";
+import Layout from "@constants/Layout";
 
 interface Props {
     inputState: InputState,

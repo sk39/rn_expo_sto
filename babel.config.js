@@ -11,7 +11,8 @@ module.exports = function (api) {
                 "root": ["./"],
                 "alias": {
                     "@assets": path.resolve("assets"),
-                    "@common": path.resolve("src/common")
+                    "@common": path.resolve("src/common"),
+                    "@constants": path.resolve("src/constants")
                 }
             }]
         ]

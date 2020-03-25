@@ -3,7 +3,7 @@ import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom
 import {createSwitchNavigator} from "react-navigation";
 import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
 import MoreNavigationOptions from "./MoreNavigationOptions";
-import Colors from "../../constants/Colors";
+import Colors from "@constants/Colors";
 
 const TabNavigator = createMaterialBottomTabNavigator(
     {

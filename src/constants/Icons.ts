@@ -12,8 +12,8 @@ export default {
         type: "ionicon"
     },
     Tokens: {
-        name: `${ioniconPrefix}-card`,
-        type: "ionicon"
+        name: `search`,
+        type: "feather"
     },
     Chart: {
         name: "pie-chart",

@@ -8,8 +8,22 @@ import {observer, Provider} from "mobx-react";
 import RootStack from "./src/navigation/RootStack";
 import {createAppContainer} from "react-navigation";
 import RootStoreProvider from "./src/store/RootStoreProvider";
+import {EasingFunction} from "react-native";
+import {Root} from 'native-base';
 
 const AppContainer = createAppContainer(RootStack);
+
+declare module "react-native" {
+    interface EasingStatic {
+        back(s?: number): EasingFunction;
+
+        in(easing?: EasingFunction): EasingFunction;
+
+        out(easing?: EasingFunction): EasingFunction;
+
+        inOut(easing?: EasingFunction): EasingFunction;
+    }
+}
 
 @observer
 export default class App extends React.Component {
@@ -32,9 +46,11 @@ export default class App extends React.Component {
         }
 
         return (
-            <Provider rootStore={RootStoreProvider.rootStore}>
-                <AppContainer/>
-            </Provider>
+            <Root>
+                <Provider rootStore={RootStoreProvider.rootStore}>
+                    <AppContainer/>
+                </Provider>
+            </Root>
         )
     }
 }

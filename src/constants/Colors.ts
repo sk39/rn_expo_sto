@@ -1,13 +1,16 @@
 const tintColor = '#6f6f8c';
 const primaryColor = '#7462ff';
-const primaryColorLight = '#ded7ff';
+const primaryColorLight = '#b8b7ff';
+const primaryColorLight2 = '#d1d1ff';
 const primaryColorDark = '#39307e';
 
 export default {
     fontColor: "#201922",
-    backColor: "#f6f7ff",  //faf8fd
+    backColor: "#f6f7ff",
     primaryColor,
+    primaryColorThin: "rgba(116,98,255,0.62)",
     primaryColorLight,
+    primaryColorLight2,
     primaryColorDark,
     tintColor,
     labelFont: "#626473",
@@ -16,10 +19,10 @@ export default {
     tabSelected: primaryColor,
     tabBar: '#f6f7ff',
     toolBar: '#f6f7ff',
+    toolBarInverse: "#0f153c",
     linkColor: '#00f',
     disablesLayer: "rgba(56,103,122,0.5)",
+    disablesLayerDark: "rgba(11,10,25,0.83)",
     cardBackColor: '#fff',
     cardBorderColor: '#f1f1f1',
-    //TODO:
-    _btn: "rgb(67,67,85)",
 };

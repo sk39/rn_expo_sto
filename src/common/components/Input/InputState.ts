@@ -1,8 +1,8 @@
 import {observable} from "mobx";
 
 export default class InputState {
-    @observable value: string;
-    @observable errorMsg: string;
+    @observable value: string = "";
+    @observable errorMsg: string = "";
 
     isEmpty() {
         return !this.value;
