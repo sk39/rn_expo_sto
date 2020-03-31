@@ -54,13 +54,13 @@ class TranslateYAndOpacity extends PureComponent {
             Animated.timing(opacityValue, {
                 toValue: 1,
                 useNativeDriver: true,
-                duration: 300,
+                duration,
                 delay,
             }),
             Animated.timing(translateYValue, {
                 toValue: 0,
                 useNativeDriver: true,
-                duration: 300,
+                duration,
                 delay,
             }),
         ]).start(() => {

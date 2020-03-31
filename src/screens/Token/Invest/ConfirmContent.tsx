@@ -4,13 +4,16 @@ import {observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import DialogContent from "@common/components/ProcessDialog/DialogContent";
 import Layout from "@constants/Layout";
+import {Icon} from "react-native-elements";
+
+const offeringPrice = 200;
 
 @observer
 export default class ConfirmContent extends PureComponent<any, any> {
 
     render() {
         const {onDone, onCancel, amount, amountUnit, item} = this.props;
-        const token = Number(amount.value) / 2;
+        const token = Number(amount.value) / offeringPrice;
         return (
             <DialogContent
                 show
@@ -21,7 +24,18 @@ export default class ConfirmContent extends PureComponent<any, any> {
                 onPress={onDone}
                 onCancel={onCancel}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>Confirm</Text>
+                    <Text style={styles.title}>Do you really want to invest?</Text>
+                    <View style={styles.summaryWrapper}>
+                        <View style={styles.summaryItem}>
+                            <Icon name='dollar-sign' type="feather" color={Colors.primaryColor2} size={24}/>
+                        </View>
+                        <View style={{marginHorizontal: 6}}>
+                            <Icon name='arrow-right' type="feather" color={Colors.primaryColor2} size={24}/>
+                        </View>
+                        <View style={styles.summaryItem}>
+                            <Text style={styles.summaryItemText}>{item.symbol}</Text>
+                        </View>
+                    </View>
                     <View style={styles.dataWrapper}>
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Amount</Text>
@@ -51,6 +65,7 @@ export default class ConfirmContent extends PureComponent<any, any> {
                             </View>
                         </View>
                     </View>
+
                 </View>
             </DialogContent>
         );
@@ -66,11 +81,11 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start"
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: "700",
         color: Colors.labelFont,
-        letterSpacing: 2,
-        marginBottom: 6
+        letterSpacing: 0,
+        marginBottom: 24
     },
     btnStyle: {
         backgroundColor: Colors.primaryColor,
@@ -114,9 +129,30 @@ const styles = StyleSheet.create({
     },
     dataWrapper: {
         paddingHorizontal: 24,
-        paddingTop: 16,
-        paddingBottom: 32,
+        paddingTop: 8,
         width: Layout.window.width - 64,
+    },
+    summaryWrapper: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 8,
+        opacity: 0.8
+    },
+    summaryItem: {
+        borderWidth: 3,
+        borderColor: Colors.primaryColor2,
+        // padding: 32,
+        height: 60,
+        width: 60,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 50,
+    },
+    summaryItemText: {
+        color: Colors.primaryColor2,
+        fontWeight: "700",
+        fontSize: 12,
     }
 });
 

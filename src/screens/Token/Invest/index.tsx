@@ -12,6 +12,9 @@ import ProcessDialogState from "@common/components/ProcessDialog/ProcessDialogSt
 import ProcessDialog from "@common/components/ProcessDialog";
 import ConfirmContent from "./ConfirmContent";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
+import userData from "@constants/dummyData/userInfo";
+
+const offeringPrice = 200;
 
 const FieldList = [
     {
@@ -20,7 +23,7 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={styles.valueText}>2</Text>
+                    <Text style={styles.valueText}>{offeringPrice}</Text>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -34,7 +37,7 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={styles.valueText}>1</Text>
+                    <Text style={styles.valueText}>{offeringPrice}</Text>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -48,7 +51,7 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={[styles.valueText]}>327,640</Text>
+                    <Text style={[styles.valueText]}>{userData.balance}</Text>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -60,7 +63,14 @@ const FieldList = [
         name: 'Buy Token Qty',
         description: "TODO:description",
         render: (item, amount) => {
-            const token = Number(amount.value) / 2;
+            if (!amount.value || amount.value.length === 0) {
+                return (
+                    <View style={styles.valWrapper}>
+                        <Text style={styles.valueEmptyText}>(No entry amount)</Text>
+                    </View>
+                )
+            }
+            const token = Number(amount.value) / offeringPrice;
             return (
                 <View style={styles.valWrapper}>
                     <Text style={styles.valueText}>{token.toFixed(1)}</Text>
@@ -121,7 +131,7 @@ export default class Invest extends PureComponent<any, any> {
             if (Number(this.amount.value) > 0) {
                 this.processState.success();
             } else {
-                this.processState.error("Amount must be more than zero");
+                this.processState.error("Amount must be more than zero.");
             }
         }, 1000)
     }
@@ -144,6 +154,7 @@ export default class Invest extends PureComponent<any, any> {
                 <ProcessDialog
                     model={this.processState}
                     onClose={this.onClose}
+                    onError={this.onCancel}
                 >
                     <ConfirmContent amount={this.amount}
                                     amountUnit="USD"
@@ -224,6 +235,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "700",
         color: Colors.primaryColor,
+    },
+    valueEmptyText: {
+        fontSize: 18,
+        fontWeight: "400",
+        color: "#b3b1ba",
     },
     unitWrapper: {
         marginLeft: 8

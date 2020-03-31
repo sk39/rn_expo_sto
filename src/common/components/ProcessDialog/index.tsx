@@ -12,6 +12,7 @@ import Layout from "@constants/Layout";
 interface Props {
     model: ProcessDialogState;
     onClose: any,
+    onError: any,
     indicatorColor?: string,
     indicatorBackgroundColor?: string,
     disablesLayerBackgroundColor?: string,
@@ -32,6 +33,7 @@ export default class ProcessDialog extends Component<Props> {
         super(props);
         this.onAnimationFinish = this.onAnimationFinish.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onError = this.onError.bind(this);
     }
 
     @action
@@ -45,6 +47,12 @@ export default class ProcessDialog extends Component<Props> {
         this.props.onClose();
     }
 
+    @action
+    onError() {
+        this.finAnimation = false;
+        this.props.onError();
+    }
+
     renderContents() {
         const {model} = this.props;
         const {showConfirm, processing, isFinish, isError, errorMsg} = model;
@@ -52,15 +60,15 @@ export default class ProcessDialog extends Component<Props> {
             return (
                 <DialogContent show={this.finAnimation} btnText="Close" onPress={this.onClose}>
                     <View style={styles.textWrapper}>
-                        <Text>Success!</Text>
+                        <Text style={[styles.msg, styles.successMsg]}>Success!</Text>
                     </View>
                 </DialogContent>
             )
         } else if (isError) {
             return (
-                <DialogContent show={this.finAnimation} btnText="Close" onPress={this.onClose}>
+                <DialogContent show={this.finAnimation} btnText="Close" onPress={this.onError}>
                     <View style={styles.textWrapper}>
-                        <Text>{errorMsg}</Text>
+                        <Text style={[styles.msg, styles.errorMsg]}>{errorMsg}</Text>
                     </View>
                 </DialogContent>
             )
@@ -68,9 +76,11 @@ export default class ProcessDialog extends Component<Props> {
             return this.props.children
         } else if (processing) {
             return (
-                <View style={styles.textWrapper}>
-                    <Text>Processing...</Text>
-                </View>
+                <DialogContent show>
+                    <View style={styles.textWrapper}>
+                        <Text style={styles.msg}>Processing...</Text>
+                    </View>
+                </DialogContent>
             )
         }
     }
@@ -112,13 +122,13 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     indicatorWrapper: {
-        height: 270,
+        height: 360,
         width: Layout.window.width - 64,
         borderRadius: 10,
         // paddingBottom:12,
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: 66,
+        paddingTop: 98,
     },
     closeBtn: {
         borderRadius: 0,
@@ -133,8 +143,19 @@ const styles = StyleSheet.create({
         right: 0
     },
     textWrapper: {
+        height: 120,
         padding: 12,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "flex-start"
+    },
+    msg: {
+        marginVertical: 12,
+        fontSize: 20,
+        color: Colors.labelFont,
+    },
+    successMsg: {},
+    errorMsg: {
+        color: "#ca1a41",
+        fontSize: 16,
     }
 });

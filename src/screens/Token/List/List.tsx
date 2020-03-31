@@ -4,6 +4,7 @@ import {SharedElement} from '../animations';
 import Toolbar from './Toolbar';
 import data from '@constants/dummyData/sto';
 import {ListItem} from "../ListItem";
+import AnimatedRow from "@common/components/Animations/AnimatedRow";
 
 export default class List extends PureComponent<any, any> {
 
@@ -39,7 +40,7 @@ export default class List extends PureComponent<any, any> {
             </View>
         );
     };
-    renderItem = ({item}) => {
+    renderItem = ({item, index}) => {
         const {opacityOfSelectedItem} = this.state;
         const {selectedItem} = this.props;
 
@@ -64,11 +65,13 @@ export default class List extends PureComponent<any, any> {
                         backgroundColor: 'transparent',
                     }}
                 >
-                    <ListItem
-                        item={item}
-                        onPress={this.onListItemPressed}
-                        isHidden={isHidden}
-                    />
+                    <AnimatedRow delay={(index + 1) * 200}>
+                        <ListItem
+                            item={item}
+                            onPress={this.onListItemPressed}
+                            isHidden={isHidden}
+                        />
+                    </AnimatedRow>
                 </View>
             </SharedElement>
         );

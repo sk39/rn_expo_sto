@@ -1,5 +1,6 @@
 const data = {
-    balance: "200",
+    name: "Test User",
+    balance: "327,640",
 };
 
 export default data;

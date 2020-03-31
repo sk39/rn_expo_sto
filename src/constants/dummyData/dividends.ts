@@ -1,37 +1,37 @@
 const data = [
     {
-        name: 'TEST1',
-        symbol: 'TT1',
+        name: 'DigiShares',
+        symbol: 'DSS',
         date: "2020-03-01",
         cashBalance: "333"
     },
     {
-        name: 'Fvndit',
-        symbol: 'FVND',
+        name: 'Blockstack',
+        symbol: 'STX',
         date: "2020-03-01",
         cashBalance: "20,301",
     },
     {
-        name: 'TEST1',
-        symbol: 'TT1',
+        name: 'DigiShares',
+        symbol: 'DSS',
         date: "2019-03-01",
         cashBalance: "104"
     },
     {
-        name: 'Fvndit',
-        symbol: 'FVND',
+        name: 'Blockstack',
+        symbol: 'STX',
         date: "2019-03-01",
         cashBalance: "7,167",
     },
     {
-        name: 'TEST1',
-        symbol: 'TT1',
+        name: 'DigiShares',
+        symbol: 'DSS',
         date: "2018-03-01",
         cashBalance: "52"
     },
     {
-        name: 'Fvndit',
-        symbol: 'FVND',
+        name: 'Blockstack',
+        symbol: 'STX',
         date: "2018-03-01",
         cashBalance: "2,434",
     }

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Animated, InteractionManager} from 'react-native';
 
-const translateAndOpacity = Wrapped => {
+const TranslateAndOpacity = Wrapped => {
     return class TranslateAndOpacity extends PureComponent {
         constructor(props) {
             super(props);
@@ -13,9 +13,10 @@ const translateAndOpacity = Wrapped => {
         }
 
         componentDidMount() {
-            InteractionManager.runAfterInteractions().then(() => {
-                this.showAnimation();
-            });
+            // InteractionManager.runAfterInteractions().then(() => {
+            //     this.showAnimation();
+            // });
+            this.showAnimation();
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
@@ -84,4 +85,4 @@ const translateAndOpacity = Wrapped => {
     };
 };
 
-export default translateAndOpacity;
+export default TranslateAndOpacity;

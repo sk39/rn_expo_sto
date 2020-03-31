@@ -73,7 +73,6 @@ export default class Detail extends PureComponent<any, any> {
         return (
             <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={32}>
                 <Text style={styles.descriptionDetail}>{item.descriptionDetail}</Text>
-                <Text style={styles.descriptionDetail}>{item.descriptionDetail}</Text>
             </TranslateYAndOpacity>
         );
     };

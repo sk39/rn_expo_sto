@@ -8,7 +8,7 @@ import Colors from "@constants/Colors";
 import {Avatar} from 'react-native-elements';
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
-
+import data from "@constants/dummyData/userInfo";
 
 export default class DrawerMenu extends Component<DrawerContentComponentProps> {
 
@@ -50,13 +50,13 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps> {
                             uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                         }}
                     />
-                    <Text style={styles.username}>Test User</Text>
+                    <Text style={styles.username}>{data.name}</Text>
                     <View style={styles.balanceArea}>
                         <Text style={styles.balanceLabel}>
                             Balance
                         </Text>
                         <Text style={styles.balanceValue}>
-                            $ 327,640
+                            $ {data.balance}
                         </Text>
                     </View>
                 </View>

@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {View} from "native-base";
+import {Icon} from "react-native-elements";
+import Colors from "@constants/Colors";
 
 @observer
 export default class AssetImage extends Component {
     render() {
         return (
             <View style={styles.logoWrapper}>
-                <Image
-                    style={styles.image}
-                    source={require("@assets/asset-icon.png")}
-                />
+                <View style={styles.logo1}>
+                    <Icon name='home' type="feather" color={Colors.primaryColorLight2} size={280}/>
+                </View>
+                <View style={styles.logo2}>
+                    <Icon name='home' type="feather" color={Colors.primaryColor} size={100}/>
+                </View>
             </View>
         );
     }
@@ -21,12 +25,21 @@ export default class AssetImage extends Component {
 const styles = StyleSheet.create({
     logoWrapper: {
         position: "absolute",
-        right: -7,
-        bottom: -28,
+        top: 0,
+        right: 0
     },
-    image: {
-        width: 180,
-        height: 180,
-        opacity: 0.3,
+    logo1: {
+        position: "absolute",
+        top: 0,
+        right: -40,
+        opacity: 0.09,
+        zIndex: 2
+    },
+    logo2: {
+        position: "absolute",
+        top: 100,
+        right: 10,
+        opacity: 0.52,
+        zIndex: 2
     },
 });

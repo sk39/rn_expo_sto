@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View,} from 'react-native';
-import translateAndOpacity from '../animations/translateAndOpacity';
+import TranslateAndOpacity from '../animations/TranslateAndOpacity';
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default translateAndOpacity(Toolbar);
+export default TranslateAndOpacity(Toolbar);

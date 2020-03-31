@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Feather, Ionicons} from '@expo/vector-icons';
-import translateAndOpacity from '../animations/translateAndOpacity';
+import TranslateAndOpacity from '../animations/TranslateAndOpacity';
 import ViewUtils from "@common/utils/ViewUtils";
 
 class Toolbar extends PureComponent<any> {
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default translateAndOpacity(Toolbar);
+export default TranslateAndOpacity(Toolbar);

@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {Text, View} from 'native-base';
 import Colors from "@constants/Colors";
+import data from "@constants/dummyData/userInfo";
 
 @observer
 export default class TotalBalance extends Component {
@@ -14,7 +15,7 @@ export default class TotalBalance extends Component {
                     Your Total Balance
                 </Text>
                 <Text style={styles.balanceValue}>
-                    $ 327,640
+                    $ {data.balance}
                 </Text>
             </View>
         );

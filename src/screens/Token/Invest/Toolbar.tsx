@@ -69,14 +69,13 @@ const styles = StyleSheet.create({
     },
     titleWrapper: {
         flexDirection: "row",
-        paddingLeft: 36,
-        paddingRight: 48,
+        paddingHorizontal: 30,
         // paddingTop: 24,
         justifyContent: "space-between",
         alignItems: "flex-end"
     },
     nameWrapper: {
-        paddingTop: 12,
+        paddingTop: 8,
         paddingLeft: 24,
         justifyContent: "flex-end",
         alignItems: "flex-end"
@@ -89,12 +88,13 @@ const styles = StyleSheet.create({
     },
     titleNameText: {
         color: "white",
-        fontSize: 42,
+        fontSize: 32,
         fontWeight: "700",
         letterSpacing: 3
     },
     titleSymbolText: {
         fontSize: 24,
+        marginTop: 12,
         fontWeight: "700",
         letterSpacing: 1,
         color: Colors.primaryColorLight,

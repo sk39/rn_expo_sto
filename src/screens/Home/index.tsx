@@ -47,10 +47,10 @@ export default class Index extends Component<NavigationProps> {
                 </HomeHeader>
                 <View style={styles.body}>
                     <ScrollView style={styles.innerBody} onScroll={this.onScroll}>
-                        <View style={{padding: 12, paddingTop: 0}}>
+                        <View style={{padding: 16, paddingTop: 12}}>
                             <Button block bordered iconLeft style={styles.btn}
                                     onPress={() => navigation.navigate("Tokens")}>
-                                <Icon name='search' type="Feather" style={{fontSize: 18}}/>
+                                <Icon name='search' type="Feather" style={[styles.btnText, {fontSize: 18}]}/>
                                 <Text style={styles.btnText}>
                                     Explorer Security Tokens
                                 </Text>
@@ -117,10 +117,13 @@ const styles = StyleSheet.create({
         paddingVertical: 12
     },
     btn: {
-        borderRadius: 20
+        borderRadius: 30,
+        borderColor: Colors.primaryColor2
     },
     btnText: {
         fontSize: 14,
+        fontWeight: "700",
+        color: Colors.primaryColor2
     },
     areaCard: {
         // backgroundColor: "rgb(216,224,244)",

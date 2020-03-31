@@ -52,8 +52,6 @@ export default class ShowInvestButton extends Component<Props> {
                 })
             ]).start();
         } else if (prevProps.isInvestMode && !this.props.isInvestMode) {
-            this.height.setValue(Layout.window.height);
-            this.backgroundNum.setValue(100);
             Animated.parallel([
                 Animated.timing(this.height, {
                     easing: Easing.in(Easing.back()),
@@ -64,8 +62,8 @@ export default class ShowInvestButton extends Component<Props> {
                 Animated.timing(this.backgroundNum, {
                     easing: Easing.in(Easing.back()),
                     toValue: 0,
-                    duration: 250,
-                    delay: 0,
+                    duration: 500,
+                    delay: 350,
                 })
             ]).start();
         }
