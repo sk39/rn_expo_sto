@@ -57,7 +57,7 @@ export default class Index extends Component<NavigationProps> {
                             </Button>
                         </View>
 
-                        <View style={{height: 16}}/>
+                        <View style={{height: 12}}/>
 
                         <View style={styles.areaCard}>
                             <View style={{alignSelf: "center"}}>
@@ -70,7 +70,7 @@ export default class Index extends Component<NavigationProps> {
 
                         <View style={{height: 12}}/>
 
-                        <View style={styles.areaCard2}>
+                        <View style={styles.areaCard}>
                             <View style={{alignSelf: "center"}}>
                                 <Text style={styles.headerText}>Dividends</Text>
                             </View>
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: Colors.backColor,
         flex: 1,
-        borderTopStartRadius: 14,
-        borderTopEndRadius: 14,
+        borderTopStartRadius: 32,
+        borderTopEndRadius: 32,
         ...getPlatformElevation(14)
     },
     innerBody: {
@@ -118,34 +118,15 @@ const styles = StyleSheet.create({
     },
     btn: {
         borderRadius: 30,
-        borderColor: Colors.primaryColor2
+        borderColor: Colors.primaryColor
     },
     btnText: {
         fontSize: 14,
         fontWeight: "700",
-        color: Colors.primaryColor2
+        color: Colors.primaryColor
     },
     areaCard: {
-        // backgroundColor: "rgb(216,224,244)",
-        // padding: 12,
-        // paddingBottom: 4,
-        // borderRadius: 14,
-        // ...Platform.select({
-        //     ios: {
-        //         ...getPlatformElevation(4, "rgb(43,73,255)")
-        //     }
-        // })
-    },
-    areaCard2: {
-        // backgroundColor: "rgb(224,217,251)",
         padding: 12,
         paddingTop: 6,
-        // paddingBottom: 4,
-        // borderRadius: 14,
-        // ...Platform.select({
-        //     ios: {
-        //         ...getPlatformElevation(4, "rgb(155,28,255)")
-        //     }
-        // })
     }
 });

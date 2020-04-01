@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Animated, InteractionManager} from 'react-native';
+import {Animated} from 'react-native';
 
 const TranslateAndOpacity = Wrapped => {
     return class TranslateAndOpacity extends PureComponent {

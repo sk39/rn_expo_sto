@@ -20,7 +20,7 @@ export default class InputNumber extends PureComponent<Props> {
             <ElInput inputStyle={styles.input}
                      label={label}
                      keyboardType='numeric'
-                     selectionColor={Colors.primaryColor}
+                // selectionColor={Colors.primaryColor}
                      leftIcon={leftIcon}
                      rightIcon={<Text style={styles.unit}>{inputState.unit}</Text>}
                      containerStyle={styles.containerStyle}
@@ -30,6 +30,8 @@ export default class InputNumber extends PureComponent<Props> {
                      errorStyle={styles.inputError}
                      errorMessage={inputState.errorMsg}
                      onChangeText={(v) => inputState.setValue(v)}
+                     maxLength={8}
+                // selection={{start: 0, end: 0}}
             />
         )
     }

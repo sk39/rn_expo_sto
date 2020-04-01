@@ -46,14 +46,14 @@ class Toolbar extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        height: 212,
+        height: 230,
         paddingTop: 12,
         top: -25
     },
     mask: {
         zIndex: 1,
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: "rgba(0,0,0,0.63)"
+        backgroundColor: "rgba(0,0,0,0.58)"
     },
     statusBar: {
         height: 24
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
     },
     titleWrapper: {
         flexDirection: "row",
-        paddingHorizontal: 30,
+        paddingHorizontal: 32,
         // paddingTop: 24,
         justifyContent: "space-between",
         alignItems: "flex-end"
     },
     nameWrapper: {
-        paddingTop: 8,
+        paddingTop: 4,
         paddingLeft: 24,
         justifyContent: "flex-end",
         alignItems: "flex-end"
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     titleSymbolText: {
         fontSize: 24,
-        marginTop: 12,
+        marginTop: 10,
         fontWeight: "700",
         letterSpacing: 1,
         color: Colors.primaryColorLight,

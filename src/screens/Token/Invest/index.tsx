@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native'
+import {FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native'
 import InvestButton from "./InvestButton";
 import Layout from "@constants/Layout";
 import Toolbar from "./Toolbar";
@@ -149,43 +149,45 @@ export default class Invest extends PureComponent<any, any> {
         const {onClose, item, isInvestMode} = this.props;
 
         return (
-            <View style={styles.container}>
-                <Toolbar item={item} onBackPress={onClose}/>
-                <ProcessDialog
-                    model={this.processState}
-                    onClose={this.onClose}
-                    onError={this.onCancel}
-                >
-                    <ConfirmContent amount={this.amount}
-                                    amountUnit="USD"
-                                    item={item}
-                                    onDone={this.onDone}
-                                    onCancel={this.onCancel}/>
-                </ProcessDialog>
-                <View style={{flex: 1}}>
-                    <AnimatedRow key="description-row" delay={1000}>
-                        <View style={styles.inputWrapper}>
-                            <View style={{padding: 12}}>
-                                <Text style={styles.description}>How many tokens do you want to buy?</Text>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <Toolbar item={item} onBackPress={onClose}/>
+                    <ProcessDialog
+                        model={this.processState}
+                        onClose={this.onClose}
+                        onError={this.onCancel}
+                    >
+                        <ConfirmContent amount={this.amount}
+                                        amountUnit="USD"
+                                        item={item}
+                                        onDone={this.onDone}
+                                        onCancel={this.onCancel}/>
+                    </ProcessDialog>
+                    <View style={{flex: 1, zIndex: 20}}>
+                        <AnimatedRow key="description-row" delay={1000}>
+                            <View style={styles.inputWrapper}>
+                                <View style={{padding: 12}}>
+                                    <Text style={styles.description}>How many tokens do you want to buy?</Text>
+                                </View>
+                                <View style={styles.rowInputContainer}>
+                                    <Text style={[styles.label, {paddingTop: 12, paddingLeft: 12}]}>Amount</Text>
+                                    <InputNumber inputState={this.amount}/>
+                                </View>
                             </View>
-                            <View style={styles.rowInputContainer}>
-                                <Text style={[styles.label, {paddingTop: 12, paddingLeft: 12}]}>Amount</Text>
-                                <InputNumber inputState={this.amount}/>
-                            </View>
+                        </AnimatedRow>
+                        <View style={{paddingTop: 12, paddingHorizontal: 24}}>
+                            <FlatList
+                                data={FieldList}
+                                keyExtractor={item => item.name}
+                                renderItem={this.renderItem}
+                            />
                         </View>
-                    </AnimatedRow>
-                    <View style={{paddingTop: 12, paddingHorizontal: 24}}>
-                        <FlatList
-                            data={FieldList}
-                            keyExtractor={item => item.name}
-                            renderItem={this.renderItem}
-                        />
                     </View>
+                    <InvestButton onPress={this.onPress}
+                                  isHidden={!isInvestMode}
+                                  disabled={this.amount.value.length === 0}/>
                 </View>
-                <InvestButton onPress={this.onPress}
-                              isHidden={!isInvestMode}
-                              disabled={this.amount.value.length === 0}/>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
@@ -215,8 +217,10 @@ const styles = StyleSheet.create({
     },
     inputWrapper: {
         backgroundColor: "white",
+        borderTopStartRadius: 32,
+        borderTopEndRadius: 32,
         ...getPlatformElevation(2),
-        marginTop: -24,
+        marginTop: -54,
     },
     label: {
         // color: Colors.labelFont,
@@ -251,10 +255,9 @@ const styles = StyleSheet.create({
     },
     description: {
         color: Colors.primaryColor,
+        textAlign: "center",
         fontSize: 18,
-        paddingTop: 6,
-        paddingLeft: 5,
-        // marginTop: -20
+        paddingTop: 4,
     }
 });
 
