@@ -1,6 +1,6 @@
 {
   "name": "rn_expo_sto",
-  "version": "0.0.1",
+  "version": "1.0.2",
   "description": "Example projects to trial React Native (Expo) and ecosystem.",
   "author": "sk39",
   "license": "MIT",
@@ -41,7 +41,8 @@
     "react-navigation-drawer": "^2.3.3",
     "react-navigation-material-bottom-tabs": "^2.1.5",
     "react-navigation-stack": "^1.10.3",
-    "react-navigation-tabs": "^2.6.2"
+    "react-navigation-tabs": "^2.6.2",
+    "underscore.string": "^3.3.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.7.4",

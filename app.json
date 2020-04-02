@@ -7,16 +7,15 @@
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/sideMenu.png",
       "resizeMode": "cover",
-      "backgroundColor": "#f6f7ff"
+      "backgroundColor": "#39307e"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

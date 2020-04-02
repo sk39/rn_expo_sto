@@ -13,6 +13,7 @@ import ProcessDialog from "@common/components/ProcessDialog";
 import ConfirmContent from "./ConfirmContent";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import userData from "@constants/dummyData/userInfo";
+import NumberLabel from "@common/components/Label/NumberLabel";
 
 const offeringPrice = 200;
 
@@ -23,7 +24,10 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={styles.valueText}>{offeringPrice}</Text>
+                    <NumberLabel
+                        value={offeringPrice}
+                        decimals={0}
+                        style={styles.valueText}/>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -37,7 +41,10 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={styles.valueText}>{offeringPrice}</Text>
+                    <NumberLabel
+                        value={offeringPrice}
+                        decimals={0}
+                        style={styles.valueText}/>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -51,7 +58,10 @@ const FieldList = [
         render: (item) => {
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={[styles.valueText]}>{userData.balance}</Text>
+                    <NumberLabel
+                        value={userData.balance}
+                        decimals={0}
+                        style={styles.valueText}/>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{"USD"}</Text>
                     </View>
@@ -73,7 +83,10 @@ const FieldList = [
             const token = Number(amount.value) / offeringPrice;
             return (
                 <View style={styles.valWrapper}>
-                    <Text style={styles.valueText}>{token.toFixed(1)}</Text>
+                    <NumberLabel
+                        value={token}
+                        decimals={2}
+                        style={styles.valueText}/>
                     <View style={styles.unitWrapper}>
                         <Text style={styles.unit}>{item.symbol}</Text>
                     </View>
@@ -239,6 +252,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "700",
         color: Colors.primaryColor,
+        letterSpacing: 1,
     },
     valueEmptyText: {
         fontSize: 18,

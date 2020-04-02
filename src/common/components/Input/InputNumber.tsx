@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         fontSize: 26,
         textAlign: "right",
-        color: Colors.primaryColor
+        color: Colors.primaryColor,
+        letterSpacing:1,
     },
     labelStyle: {
         marginBottom: 8

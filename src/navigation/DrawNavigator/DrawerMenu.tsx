@@ -9,6 +9,7 @@ import {Avatar} from 'react-native-elements';
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
 import data from "@constants/dummyData/userInfo";
+import NumberLabel from "@common/components/Label/NumberLabel";
 
 export default class DrawerMenu extends Component<DrawerContentComponentProps> {
 
@@ -55,9 +56,11 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps> {
                         <Text style={styles.balanceLabel}>
                             Balance
                         </Text>
-                        <Text style={styles.balanceValue}>
-                            $ {data.balance}
-                        </Text>
+                        <NumberLabel
+                            value={data.balance}
+                            decimals={0}
+                            prefix={"$"}
+                            style={styles.balanceValue}/>
                     </View>
                 </View>
                 {this.renderItem(null, "Login")}

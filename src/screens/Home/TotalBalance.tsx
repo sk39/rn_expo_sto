@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {Text, View} from 'native-base';
 import Colors from "@constants/Colors";
 import data from "@constants/dummyData/userInfo";
+import NumberLabel from "@common/components/Label/NumberLabel";
 
 @observer
 export default class TotalBalance extends Component {
@@ -14,9 +15,11 @@ export default class TotalBalance extends Component {
                 <Text style={styles.balanceLabel}>
                     Your Total Balance
                 </Text>
-                <Text style={styles.balanceValue}>
-                    $ {data.balance}
-                </Text>
+                <NumberLabel
+                    value={data.balance}
+                    decimals={0}
+                    prefix={"$"}
+                    style={styles.balanceValue}/>
             </View>
         );
     }

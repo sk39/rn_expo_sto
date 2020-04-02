@@ -1,5 +1,6 @@
 import Layout from "../../constants/Layout";
 import {Platform, StatusBar} from "react-native";
+import s from "underscore.string";
 
 export default class ViewUtils {
 
@@ -19,5 +20,9 @@ export default class ViewUtils {
             android: StatusBar.currentHeight,
             default: 0
         });
+    }
+
+    static numberFormat(num: string | number, decimals?: number): string {
+        return s.numberFormat(Number(num), decimals);
     }
 }

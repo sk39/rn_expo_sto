@@ -9,7 +9,7 @@ const data = [
         name: 'Blockstack',
         symbol: 'STX',
         date: "2020-03-01",
-        cashBalance: "20,301",
+        cashBalance: "20301",
     },
     {
         name: 'DigiShares',
@@ -21,7 +21,7 @@ const data = [
         name: 'Blockstack',
         symbol: 'STX',
         date: "2019-03-01",
-        cashBalance: "7,167",
+        cashBalance: "7167",
     },
     {
         name: 'DigiShares',
@@ -33,7 +33,7 @@ const data = [
         name: 'Blockstack',
         symbol: 'STX',
         date: "2018-03-01",
-        cashBalance: "2,434",
+        cashBalance: "2434",
     }
 ];
 

@@ -5,6 +5,8 @@ import Colors from "@constants/Colors";
 import DialogContent from "@common/components/ProcessDialog/DialogContent";
 import Layout from "@constants/Layout";
 import {Icon} from "react-native-elements";
+import NumberLabel from "@common/components/Label/NumberLabel";
+import userData from "@constants/dummyData/userInfo";
 
 const offeringPrice = 200;
 
@@ -40,7 +42,10 @@ export default class ConfirmContent extends PureComponent<any, any> {
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Amount</Text>
                             <View style={styles.valWrapper}>
-                                <Text style={styles.valueText}>{amount.value}</Text>
+                                <NumberLabel
+                                    value={amount.value}
+                                    decimals={0}
+                                    style={styles.valueText}/>
                                 <View style={styles.unitWrapper}>
                                     <Text style={styles.unit}>{amountUnit}</Text>
                                 </View>
@@ -49,7 +54,10 @@ export default class ConfirmContent extends PureComponent<any, any> {
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Buy Token Qty</Text>
                             <View style={styles.valWrapper}>
-                                <Text style={styles.valueText}>{token.toFixed(1)}</Text>
+                                <NumberLabel
+                                    value={token}
+                                    decimals={2}
+                                    style={styles.valueText}/>
                                 <View style={styles.unitWrapper}>
                                     <Text style={styles.unit}>{item.symbol}</Text>
                                 </View>
@@ -58,7 +66,10 @@ export default class ConfirmContent extends PureComponent<any, any> {
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Your Balance</Text>
                             <View style={styles.valWrapper}>
-                                <Text style={styles.valueText}>327,640</Text>
+                                <NumberLabel
+                                    value={userData.balance}
+                                    decimals={0}
+                                    style={styles.valueText}/>
                                 <View style={styles.unitWrapper}>
                                     <Text style={styles.unit}>{"USD"}</Text>
                                 </View>
@@ -99,8 +110,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "space-between",
         paddingTop: 8,
-        paddingLeft: 8,
-        paddingRight: 2,
+        paddingLeft: 6,
         borderBottomWidth: 1,
         borderBottomColor: "#e1e1e1",
     },
@@ -116,7 +126,8 @@ const styles = StyleSheet.create({
     valueText: {
         fontSize: 18,
         fontWeight: "700",
-        color: Colors.primaryColor
+        color: Colors.primaryColor,
+        letterSpacing: 1,
     },
     unitWrapper: {
         marginLeft: 6

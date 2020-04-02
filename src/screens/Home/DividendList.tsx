@@ -6,6 +6,7 @@ import data from '@constants/dummyData/dividends';
 import Colors from "@constants/Colors";
 import BlockLoading from "@common/components/BlockLoading";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import NumberLabel from "@common/components/Label/NumberLabel";
 
 @observer
 export default class DividendList extends Component<NavigationProps> {
@@ -37,10 +38,12 @@ export default class DividendList extends Component<NavigationProps> {
             <AnimatedRow delay={32 * index}>
                 <View style={styles.row}>
                     <Text style={styles.label}>{item.date}{"         "}{item.name}</Text>
-                    <Text style={styles.value}>
-                        <Text style={styles.unit}>$ </Text>
-                        {item.cashBalance}
-                    </Text>
+                    <NumberLabel
+                        value={item.cashBalance}
+                        decimals={0}
+                        prefix={"$"}
+                        style={styles.value}
+                    />
                 </View>
             </AnimatedRow>
         )
