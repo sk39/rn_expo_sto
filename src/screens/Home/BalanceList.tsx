@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {observer} from "mobx-react";
 import {observable} from "mobx";
 import data from '@constants/dummyData/balances';
@@ -7,6 +7,7 @@ import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
 import BlockLoading from "@common/components/BlockLoading";
 import {ActionSheet, Icon} from "native-base";
+import SimpleList from "@common/components/SimpleList";
 
 @observer
 export default class BalanceList extends Component<NavigationProps> {
@@ -53,7 +54,7 @@ export default class BalanceList extends Component<NavigationProps> {
 
     renderItem({item, index}) {
         return (
-            <TouchableOpacity onPress={this.onSelect}>
+            <TouchableOpacity key={item.symbol} onPress={this.onSelect}>
                 <AnimatedRow delay={120 * index}>
                     <View style={styles.row}>
                         <Text style={styles.label}>{item.name}</Text>
@@ -79,9 +80,8 @@ export default class BalanceList extends Component<NavigationProps> {
             <View style={{minHeight: 100}}>
                 <BlockLoading
                     loading={this.processing}/>
-                <FlatList
+                <SimpleList
                     data={this.list}
-                    keyExtractor={item => item.symbol}
                     renderItem={this.renderItem}
                 />
             </View>

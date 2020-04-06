@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {observer} from "mobx-react";
 import {observable} from "mobx";
 import data from '@constants/dummyData/dividends';
@@ -7,6 +7,7 @@ import Colors from "@constants/Colors";
 import BlockLoading from "@common/components/BlockLoading";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
+import SimpleList from "@common/components/SimpleList";
 
 @observer
 export default class DividendList extends Component<NavigationProps> {
@@ -35,9 +36,9 @@ export default class DividendList extends Component<NavigationProps> {
 
     renderItem({item, index}) {
         return (
-            <AnimatedRow delay={32 * index}>
+            <AnimatedRow key={item.symbol + item.date} delay={32 * index}>
                 <View style={styles.row}>
-                    <Text style={styles.label}>{item.date}{"         "}{item.name}</Text>
+                    <Text style={styles.label}>{item.date}{"     "}{item.name}</Text>
                     <NumberLabel
                         value={item.cashBalance}
                         decimals={0}
@@ -54,9 +55,8 @@ export default class DividendList extends Component<NavigationProps> {
             <View style={{minHeight: 100}}>
                 <BlockLoading
                     loading={this.processing}/>
-                <FlatList
+                <SimpleList
                     data={this.list}
-                    keyExtractor={item => item.symbol + item.date}
                     renderItem={this.renderItem}
                 />
             </View>
