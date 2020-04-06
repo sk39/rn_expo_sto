@@ -13,7 +13,7 @@ interface Props {
     onClose: Function;
 }
 
-const BTN_HEIGHT = ViewUtils.isIphoneX() ? 66 : 48;
+const BTN_HEIGHT = ViewUtils.getBottomBtnHeight();
 @observer
 export default class ShowInvestButton extends Component<Props> {
 
@@ -108,14 +108,13 @@ export default class ShowInvestButton extends Component<Props> {
 
         const child = this.props.isInvestMode
             ? this.props.children
-            : null;
+            : <Text style={styles.text}>Invest</Text>;
 
         return (
             <View style={styles.container}>
                 <Animated.View style={[styles.buttonContainer, animationStyle]}>
                     <TouchableWithoutFeedback onPress={this.onPress}>
                         <View style={[styles.btn]}>
-                            <Text style={styles.text}>Invest</Text>
                             {child}
                         </View>
                     </TouchableWithoutFeedback>

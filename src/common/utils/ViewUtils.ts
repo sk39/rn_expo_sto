@@ -25,4 +25,10 @@ export default class ViewUtils {
     static numberFormat(num: string | number, decimals?: number): string {
         return s.numberFormat(Number(num), decimals);
     }
+
+    static getBottomBtnHeight() {
+        return this.isIphoneX()
+            ? Layout.bottomBtn.heightIPhoneX :
+            Layout.bottomBtn.height
+    }
 }

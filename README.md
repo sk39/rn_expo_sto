@@ -50,6 +50,12 @@ https://github.com/fram-x/FluidTransitions/issues/44
 expo login
 expo publish
 
+npm i -g expo-cli@latest
+
 
 
 https://github.com/GeekyAnts/NativeBase/issues/2947
+
+https://forums.expo.io/t/non-critical-errors-during-packaging-with-module-resolver/33191
+
+

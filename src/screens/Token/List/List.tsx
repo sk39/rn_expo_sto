@@ -83,7 +83,7 @@ export default class List extends PureComponent<any, any> {
 
         return (
             <View style={styles.container}>
-                <StatusBar barStyle="light-content"/>
+                <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
                 <Toolbar
                     isHidden={phase !== 'phase-0'}
                 />

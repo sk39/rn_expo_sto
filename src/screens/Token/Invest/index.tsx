@@ -1,5 +1,14 @@
 import React, {PureComponent} from 'react';
-import {FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native'
+import {
+    Keyboard,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableWithoutFeedback,
+    View
+} from 'react-native'
 import InvestButton from "./InvestButton";
 import Layout from "@constants/Layout";
 import Toolbar from "./Toolbar";
@@ -14,6 +23,8 @@ import ConfirmContent from "./ConfirmContent";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import userData from "@constants/dummyData/userInfo";
 import NumberLabel from "@common/components/Label/NumberLabel";
+import ViewUtils from "@common/utils/ViewUtils";
+import SimpleList from "@common/components/SimpleList";
 
 const offeringPrice = 200;
 
@@ -108,7 +119,6 @@ export default class Invest extends PureComponent<any, any> {
         this.onDone = this.onDone.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.handleChangeAmount = this.handleChangeAmount.bind(this);
         this.amount = new InputNumberState();
         this.amount.setUnit("USD")
     }
@@ -118,7 +128,7 @@ export default class Invest extends PureComponent<any, any> {
         const delay = 1000 + (index + 1) * 32;
         const selectedItem = this.props.item;
         return (
-            <AnimatedRow delay={delay}>
+            <AnimatedRow key={fieldDef.name} delay={delay}>
                 <View style={styles.rowContainer}>
                     <View>
                         <Text style={styles.label}>{fieldDef.name}</Text>
@@ -129,10 +139,6 @@ export default class Invest extends PureComponent<any, any> {
             </AnimatedRow>
         );
     };
-
-    handleChangeAmount() {
-
-    }
 
     onPress() {
         this.processState.confirm();
@@ -168,17 +174,18 @@ export default class Invest extends PureComponent<any, any> {
                     <ProcessDialog
                         model={this.processState}
                         onClose={this.onClose}
-                        onError={this.onCancel}
-                    >
+                        onError={this.onCancel}>
                         <ConfirmContent amount={this.amount}
                                         amountUnit="USD"
                                         item={item}
                                         onDone={this.onDone}
                                         onCancel={this.onCancel}/>
                     </ProcessDialog>
-                    <View style={{flex: 1, zIndex: 20}}>
+                    <View style={{flex: 1, zIndex: 2}}>
                         <AnimatedRow key="description-row" delay={1000}>
-                            <View style={styles.inputWrapper}>
+                            <KeyboardAvoidingView
+                                style={styles.inputWrapper}
+                                behavior={Platform.OS == "ios" ? "padding" : "height"}>
                                 <View style={{padding: 12}}>
                                     <Text style={styles.description}>How many tokens do you want to buy?</Text>
                                 </View>
@@ -186,19 +193,25 @@ export default class Invest extends PureComponent<any, any> {
                                     <Text style={[styles.label, {paddingTop: 12, paddingLeft: 12}]}>Amount</Text>
                                     <InputNumber inputState={this.amount}/>
                                 </View>
-                            </View>
+                            </KeyboardAvoidingView>
                         </AnimatedRow>
-                        <View style={{paddingTop: 12, paddingHorizontal: 24}}>
-                            <FlatList
-                                data={FieldList}
-                                keyExtractor={item => item.name}
-                                renderItem={this.renderItem}
-                            />
+                        <View style={{flex: 1, paddingBottom: ViewUtils.getBottomBtnHeight()}}>
+                            <ScrollView>
+                                <TouchableWithoutFeedback>
+                                    <View style={{padding: 12, paddingHorizontal: 24}}>
+                                        <SimpleList
+                                            data={FieldList}
+                                            renderItem={this.renderItem}
+                                        />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </ScrollView>
                         </View>
                     </View>
-                    <InvestButton onPress={this.onPress}
-                                  isHidden={!isInvestMode}
-                                  disabled={this.amount.value.length === 0}/>
+                    <InvestButton
+                        onPress={this.onPress}
+                        isHidden={!isInvestMode}
+                        disabled={this.amount.value.length === 0}/>
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -226,7 +239,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         padding: 7,
         borderBottomWidth: 1,
-        borderBottomColor: "#e1e1e1",
+        borderBottomColor: "#e1e1e1"
     },
     inputWrapper: {
         backgroundColor: "white",

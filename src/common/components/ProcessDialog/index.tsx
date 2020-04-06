@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     indicatorWrapper: {
         height: 360,
-        width: Layout.window.width - 64,
+        width: Layout.window.width - 56,
         borderRadius: 10,
         // paddingBottom:12,
         alignItems: "center",

@@ -46,8 +46,10 @@ class Toolbar extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        height: 230,
-        paddingTop: 12,
+        height: 255,
+        paddingTop: 36,
+        paddingBottom: 24,
+        // paddingTop: 12,
         top: -25
     },
     mask: {

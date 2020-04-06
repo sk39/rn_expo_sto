@@ -11,7 +11,6 @@ interface Props {
     disabled: boolean;
 }
 
-const BTN_HEIGHT = ViewUtils.isIphoneX() ? 66 : 48;
 @observer
 export default class InvestButton extends Component<Props> {
 
@@ -69,7 +68,6 @@ export default class InvestButton extends Component<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        // flexDirection: "row",
         backgroundColor: 'transparent',
         position: 'absolute',
         bottom: 0,
@@ -78,8 +76,7 @@ const styles = StyleSheet.create({
         zIndex: 100,
     },
     btn: {
-        height: BTN_HEIGHT,
-        // width: 200,
+        height: ViewUtils.getBottomBtnHeight(),
         flex: 1,
         borderRadius: 0,
         alignItems: 'center',

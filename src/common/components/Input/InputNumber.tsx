@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
         textAlign: "right",
         color: Colors.primaryColor,
-        letterSpacing:1,
+        letterSpacing: 1,
     },
     labelStyle: {
         marginBottom: 8

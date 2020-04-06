@@ -12,5 +12,9 @@ export default {
     input: {
         width: width - 90,
     },
+    bottomBtn: {
+        height: 48,
+        heightIPhoneX: 66,
+    },
     isSmallDevice: width < 375,
 };

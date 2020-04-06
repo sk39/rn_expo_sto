@@ -40,7 +40,7 @@ export default class Index extends Component<NavigationProps> {
         const {navigation} = this.props;
         return (
             <Container style={styles.back}>
-                <StatusBar barStyle="light-content"/>
+                <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
                 <HomeHeader ref={this.headerRef}>
                     <TotalBalance/>
                     <AssetImage/>
