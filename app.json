@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sk39.sto.demo"
+    },
+    "android": {
+      "package": "com.sk39.sto.demo",
+      "googleServicesFile": "./google-services.json"
     },
     "androidStatusBar": {
       "barStyle": "light-content",

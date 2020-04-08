@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {DrawerContentComponentProps} from "react-navigation-drawer/src/types";
 import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
 import _ from "lodash";
@@ -63,9 +63,11 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps> {
                             style={styles.balanceValue}/>
                     </View>
                 </View>
-                {this.renderItem(null, "Login")}
-                {_.map(DisplayInTabScreens, this.renderItem)}
-                {_.map(OnlySideMenuScreens, this.renderItem)}
+               <ScrollView>
+                   {this.renderItem(null, "Login")}
+                   {_.map(DisplayInTabScreens, this.renderItem)}
+                   {_.map(OnlySideMenuScreens, this.renderItem)}
+               </ScrollView>
             </ImageBackground>
         )
     }

@@ -54,8 +54,18 @@ npm i -g expo-cli@latest
 
 
 
+expo diagnostics
+
 https://github.com/GeekyAnts/NativeBase/issues/2947
 
 https://forums.expo.io/t/non-critical-errors-during-packaging-with-module-resolver/33191
 
 
+Android Push
+https://github.com/expo/expo/issues/7673
+
+Location
+https://github.com/expo/expo/issues/4304
+
+
+expo push:android:upload --api-key AAAA5HpPwJ4:APA91bHCsrTZenUPzhm6c29Ime6xP-ETdkbsXQjhY6udXMzK0QMoXj6SUyKk9jjhK76DaoxSUs3OinwauC1Tle8yujtDPhczFmwL1AWn540grpEeq30m6evKzRlwE2P4oguqzeiNFCf2
