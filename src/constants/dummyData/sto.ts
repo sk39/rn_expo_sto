@@ -1,5 +1,27 @@
 const data = [
     {
+        name: 'Simplex',
+        symbol: 'STX',
+        description: "Simplex providers new security token platform solution for financial institution.",
+        descriptionDetail: "Simplex providers new security token platform solution for financial institution.",
+        localImage: require("@assets/sto/bulletin-board-3233653_1280.jpg"),
+        maxRaise: '120.0',
+        raise: '80.3',
+        investors: '3',
+        closeDate: "2021-12-01"
+    },
+    {
+        name: 'WhiteShare',
+        symbol: 'WST',
+        description: "WhiteShares is the tokenized equities of WhiteShares asset management company, Ltd.",
+        descriptionDetail: "WhiteShares is the tokenized equities of WhiteShares asset management company, Ltd.",
+        localImage: require("@assets/sto/cherry-blossoms-4069596_1280.jpg"),
+        maxRaise: '200.0',
+        raise: '22.6',
+        investors: '3',
+        closeDate: "2022-01-01"
+    },
+    {
         name: 'DigiShares',
         symbol: 'DSS',
         description: "Building bridges between traditional finance and blockchain technology.",
@@ -8,7 +30,7 @@ const data = [
             "DigiShares partners with international exchanges for the listing and trading of security tokens as well as investor networks to help ensure that issuers can sell their tokens and provide investors with future liquidity. DigiShares also partners with legal advisors across many jurisdictions to provide assistance with setting up SPVs, drafting private placement memorandums, prospectus documents, etc. We have a focus on white-label partnerships so our solution is targeted towards easy customization and branding such that partners can operate it.\n" +
             "\n" +
             "The STO is carried out using our own platform.",
-        image: "https://dapplife.com/wp-content/uploads/2019/02/Security-Token-Offerings-STO-Crypto-Next-Big-Thing.jpg",
+        localImage: require("@assets/sto/money-2724235_1280.jpg"),
         maxRaise: '100.0',
         raise: '75.3',
         investors: '3',
@@ -16,11 +38,11 @@ const data = [
     },
     {
         name: 'Blockstack',
-        symbol: 'STX',
+        symbol: 'BSK',
         description: "Blockstack is a new internet for decentralized apps where users own their data.",
         descriptionDetail: "Blockstack’s mission is to foster an open and decentralized Internet that establishes and protects privacy, security and freedom for all internet users.\n\n" +
             "Blockstack is a full-stack decentralized computing network that enables a new generation of applications where developers and users can interact fairly and securely. Blockstack’s core protocols and developer tools enable a fair and open Internet that returns digital rights to developers and consumers. Led by some of the world’s foremost experts on distributed systems, Blockstack allows users to own their own data that they can take with them from app to app in the ecosystem, along with their Blockstack ID that eliminates the need for password-based logins. The end result is privacy, security, and freedom.",
-        image: "https://images.squarespace-cdn.com/content/v1/5d7f7734637db72bb006eeb3/1580373722607-ZML9HQE1VXAPU5JIBN5N/ke17ZwdGBToddI8pDm48kC4e7zx5zOS9x7pNlqk4e1YUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcNojJjuwuh1gpGFyAkn4J2YPifbOB2_5VxDV9xnTJUCBjQCvako2FR0uJ8dhQ_yBg/STO.jpg?format=2500w",
+        localImage: require("@assets/sto/night-1450087_1280.jpg"),
         maxRaise: '120.0',
         raise: '80.3',
         investors: '3',

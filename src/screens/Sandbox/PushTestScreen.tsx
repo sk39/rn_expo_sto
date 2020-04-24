@@ -3,7 +3,7 @@ import {Clipboard, Share, StyleSheet, Text} from "react-native"
 import {Button, View} from "native-base";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
-import PushNotification from "@common/plugin/PushNotification";
+import PushNotification from "@common/plugins/PushNotification";
 
 @observer
 export default class PushTestScreen extends Component<NavigationProps> {
@@ -20,8 +20,12 @@ export default class PushTestScreen extends Component<NavigationProps> {
 
     async register() {
         this.status = "Start register...";
-        this.token = await PushNotification.register();
-        this.status = "Finish register!";
+        try {
+            this.token = await PushNotification.register();
+            this.status = "Finish register!";
+        } catch (e) {
+            this.status = e.toString();
+        }
     }
 
     setClipboard() {

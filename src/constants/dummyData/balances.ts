@@ -1,11 +1,11 @@
 const data = [
     {
-        name: 'DigiShares',
-        symbol: 'DSS',
+        name: 'WhiteShare',
+        symbol: 'WST',
         balance: 0.5
     },
     {
-        name: 'Blockstack',
+        name: 'Simplex',
         symbol: 'STX',
         balance: 10.3
     }

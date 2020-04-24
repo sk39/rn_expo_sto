@@ -1,6 +1,6 @@
 {
-  "name": "rn_expo_sto",
-  "version": "1.0.2",
+  "name": "rn_expo_sto_demo",
+  "version": "1.0.3",
   "description": "Example projects to trial React Native (Expo) and ecosystem.",
   "author": "sk39",
   "license": "MIT",
@@ -47,7 +47,8 @@
     "expo-permissions": "~8.0.0",
     "expo-barcode-scanner": "~8.0.0",
     "expo-location": "~8.0.0",
-    "expo-constants": "~8.0.0"
+    "expo-constants": "~8.0.0",
+    "expo-local-authentication": "~8.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.7.4",

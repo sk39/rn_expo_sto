@@ -9,6 +9,7 @@ import AppInfoScreen from "../../screens/Sandbox/AppInfoScreen";
 import PushTestScreen from "../../screens/Sandbox/PushTestScreen";
 import QRTestScreen from "../../screens/Sandbox/QRTestScreen";
 import LocationTestScreen from "../../screens/Sandbox/LocationTestScreen";
+import LocalAuthTestScreen from "../../screens/Sandbox/LocalAuthTestScreen";
 
 export const DisplayInTabScreens = {
     Home: Index,
@@ -20,6 +21,7 @@ export const OnlySideMenuScreens = {
     PushTest: PushTestScreen,
     QRTest: QRTestScreen,
     LocationTest: LocationTestScreen,
+    AuthTest: LocalAuthTestScreen,
     Lottie: LottieScreen,
     Chart: ChartScreen,
     InnerRouter: InnerRouterScreen,

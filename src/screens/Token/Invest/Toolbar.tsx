@@ -16,9 +16,16 @@ class Toolbar extends PureComponent<Props> {
             return null;
         }
 
-        return (
+        const {image, localImage} = item;
+        let imageSource;
+        if (image) {
+            imageSource = {uri: image}
+        } else {
+            imageSource = localImage
+        }
 
-            <ImageBackground source={{uri: item.image}} style={styles.container}>
+        return (
+            <ImageBackground source={imageSource} style={styles.container}>
                 <View style={styles.statusBar}/>
                 <View style={styles.mask}/>
                 <View style={{zIndex: 2}}>
@@ -47,6 +54,7 @@ class Toolbar extends PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         height: 255,
+        width: null,
         paddingTop: 36,
         paddingBottom: 24,
         // paddingTop: 12,

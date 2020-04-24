@@ -31,7 +31,13 @@ export default class ListItem extends Component<Props> {
 
     render() {
         const {item, detailMode, phase, isDetail, style, isHidden, animateOnDidMount} = this.props;
-        const {image} = item;
+        const {image, localImage} = item;
+        let imageSource;
+        if (image) {
+            imageSource = {uri: image}
+        } else {
+            imageSource = localImage
+        }
         return (
             <ScaleAndOpacity
                 isHidden={isHidden}
@@ -43,7 +49,7 @@ export default class ListItem extends Component<Props> {
                     <View>
                         <AnimatedCard
                             ref={node => (this.cardRef = node)}
-                            image={{uri: image}}
+                            image={imageSource}
                             detailMode={detailMode}
                             phase={phase}
                             scrollY={this.props.scrollY}

@@ -21,15 +21,15 @@ export default class PushNotification {
 
             if (finalStatus !== 'granted') {
                 console.warn("Not granted", finalStatus);
-                return;
+                throw Error(`Not granted. Status is ${finalStatus}`)
             }
 
-            console.log("register3");
             this.token = await Notifications.getExpoPushTokenAsync();
             console.log("Token", this.token);
             return this.token;
         } catch (e) {
             console.warn("Token Error", e);
+            throw Error(`Failed register token. ${e}`)
         }
     }
 
