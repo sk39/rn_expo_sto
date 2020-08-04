@@ -34,6 +34,7 @@ export default class InvestButton extends Component<Props> {
             easing: Easing.out(Easing.back()),
             toValue: 0,
             delay: 0,
+            useNativeDriver: true,
         }).start();
     }
 

@@ -43,12 +43,14 @@ export default class ShowInvestButton extends Component<Props> {
             Animated.parallel([
                 Animated.spring(this.height, {
                     toValue: Layout.window.height,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.backgroundNum, {
                     easing: Easing.in(Easing.back()),
                     toValue: 100,
                     duration: 250,
                     delay: 100,
+                    useNativeDriver: false,
                 })
             ]).start();
         } else if (prevProps.isInvestMode && !this.props.isInvestMode) {
@@ -58,12 +60,14 @@ export default class ShowInvestButton extends Component<Props> {
                     toValue: BTN_HEIGHT,
                     duration: 500,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.backgroundNum, {
                     easing: Easing.in(Easing.back()),
                     toValue: 0,
                     duration: 500,
                     delay: 350,
+                    useNativeDriver: false,
                 })
             ]).start();
         }
@@ -74,6 +78,7 @@ export default class ShowInvestButton extends Component<Props> {
             easing: Easing.out(Easing.back()),
             toValue: 0,
             delay: props.delay,
+            useNativeDriver: false,
         }).start();
     }
 
@@ -82,6 +87,7 @@ export default class ShowInvestButton extends Component<Props> {
             easing: Easing.in(Easing.back()),
             toValue: 112,
             delay: props.delay,
+            useNativeDriver: false,
         }).start();
     }
 

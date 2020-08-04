@@ -38,6 +38,7 @@ export default class AnimatedShow extends Component<Props> {
                 toValue: 1,
                 duration: duration || 700,
                 delay: delay || 0,
+                useNativeDriver: true,
             }),
         ]).start();
     }

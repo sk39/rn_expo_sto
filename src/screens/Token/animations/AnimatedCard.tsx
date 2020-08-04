@@ -33,6 +33,7 @@ export default class AnimatedCard extends Component<Props> {
             this.borderRadius.setValue(6);
             this.elevation.setValue(9);
             this.imageHeight.setValue(150);
+            1
             this.imageScrollHeight.setValue(150);
             Animated.parallel([
                 Animated.timing(this.marginTop, {
@@ -40,30 +41,35 @@ export default class AnimatedCard extends Component<Props> {
                     toValue: 0,
                     duration: 900,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.marginHorizontal, {
                     easing: Easing.in(Easing.back()),
                     toValue: 0,
                     duration: 900,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.borderRadius, {
                     easing: Easing.in(),
                     toValue: 0,
                     duration: 900,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.elevation, {
                     easing: Easing.in(),
                     toValue: 1,
                     duration: 900,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
                 Animated.timing(this.imageHeight, {
                     easing: Easing.in(Easing.back()),
                     toValue: 240,
                     duration: 900,
                     delay: 0,
+                    useNativeDriver: false,
                 }),
             ]).start();
         }

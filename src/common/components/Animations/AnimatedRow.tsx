@@ -22,12 +22,14 @@ export default class AnimatedRow extends Component<Props> {
                 toValue: 1,
                 duration: 700,
                 delay: this.props.delay,
+                useNativeDriver: true,
             }),
             Animated.timing(this.translateY, {
                 easing: Easing.out(Easing.back()),
                 toValue: 0,
                 duration: 700,
                 delay: this.props.delay,
+                useNativeDriver: true,
             }),
         ]).start();
     }

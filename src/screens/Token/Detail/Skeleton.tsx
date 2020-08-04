@@ -11,11 +11,11 @@ export default class Skeleton extends PureComponent<Props> {
     render() {
         let borders = [];
         for (let i = 0; i < this.props.line - 1; i++) {
-            borders.push(<View key={`Skeleton-${i}`} style={styles.border}/>)
+            borders.push(<View key={i} style={styles.border}/>)
         }
-        borders.push(<View style={[styles.border, {width: "62%"}]}/>)
+        borders.push(<View key="last" style={[styles.border, {width: "62%"}]}/>)
         return (
-            <View key="Skeleton-last" style={styles.container}>
+            <View style={styles.container}>
                 {borders}
             </View>
         )

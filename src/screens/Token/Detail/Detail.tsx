@@ -77,7 +77,7 @@ export default class Detail extends PureComponent<any, any> {
         let index = 1;
         return [
             (
-                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
                     <Text style={styles.descriptionDetail}>
                         This section is a example security token detail page.
                         You can move to the purchase screen from the button at the bottom of the page.
@@ -85,7 +85,7 @@ export default class Detail extends PureComponent<any, any> {
                 </TranslateYAndOpacity>
             ),
             (
-                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
                     <View style={styles.pieChartArea}>
                         <View style={{width: "35%"}}>
                             <DetailPieChart/>
@@ -95,7 +95,7 @@ export default class Detail extends PureComponent<any, any> {
                 </TranslateYAndOpacity>
             ),
             (
-                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
                     <Skeleton line={5}/>
                     <View style={styles.lineChartArea}>
                         <DetailLineChart/>
