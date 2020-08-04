@@ -1,71 +1,18 @@
-# rn_expo_sto
+# rn_expo_example
+Security token offering mobile application for demo.
 
-TODO:
-
-
-### React Native Elements
-* いくつか使えそう。他があれば
-  - Avatar
-  - Badge
-  - Overlay
-  - SocialIcon
-
-### UI Kitten
-* デザインの方向性が違う
-    
-### react-native-paper
-* Material Design
-* いくつか使えそう。他があれば
-  - Avatar
-  - Badge
-  - FAB
-  
-### react-native-progress
-* 採用
-
-### react-native-reanimated
+Expo + Typescript + Mobx.
 
 
+### Demo
+[Demo on Expo Client](https://expo.io/@sk39/rn_expo_sto_demo)
 
 
+### Screenshots
+<div>
+<img width="234" alt="list" src="https://user-images.githubusercontent.com/28267362/89296323-222ff800-d69d-11ea-8cfb-822458c50cd2.png">
 
-### NativeBase
+<img width="234" alt="detail" src="https://user-images.githubusercontent.com/28267362/89296334-265c1580-d69d-11ea-88d7-8aba9faf5819.png">
 
-
-### react-native-svg-charts
-
-
-### react-native-image-header-scroll-view
-
-
-### react-native-motion
-
-
-### react-navigation-fluid-transitions
-アニメーション開始にDelayがあり、使えない。
-https://github.com/fram-x/FluidTransitions/issues/44
-
-
-
-expo login
-expo publish
-
-npm i -g expo-cli@latest
-
-
-
-expo diagnostics
-
-https://github.com/GeekyAnts/NativeBase/issues/2947
-
-https://forums.expo.io/t/non-critical-errors-during-packaging-with-module-resolver/33191
-
-
-Android Push
-https://github.com/expo/expo/issues/7673
-
-Location
-https://github.com/expo/expo/issues/4304
-
-
-expo push:android:upload --api-key AAAA5HpPwJ4:APA91bHCsrTZenUPzhm6c29Ime6xP-ETdkbsXQjhY6udXMzK0QMoXj6SUyKk9jjhK76DaoxSUs3OinwauC1Tle8yujtDPhczFmwL1AWn540grpEeq30m6evKzRlwE2P4oguqzeiNFCf2
+<img width="234" alt="home" src="https://user-images.githubusercontent.com/28267362/89296336-26f4ac00-d69d-11ea-80bb-4fffb489a40e.png">
+</div>

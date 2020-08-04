@@ -63,11 +63,11 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps> {
                             style={styles.balanceValue}/>
                     </View>
                 </View>
-               <ScrollView>
-                   {this.renderItem(null, "Login")}
-                   {_.map(DisplayInTabScreens, this.renderItem)}
-                   {_.map(OnlySideMenuScreens, this.renderItem)}
-               </ScrollView>
+                <ScrollView>
+                    {this.renderItem(null, "Login")}
+                    {_.map(DisplayInTabScreens, this.renderItem)}
+                    {_.map(OnlySideMenuScreens, this.renderItem)}
+                </ScrollView>
             </ImageBackground>
         )
     }

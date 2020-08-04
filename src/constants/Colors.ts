@@ -16,6 +16,7 @@ export default {
     primaryColorDark,
     tintColor,
     labelFont: "#626473",
+    labelFontThin: "#85889a",
     unitFont: "#868da8",
     tabDefault: tintColor,
     tabSelected: primaryColor,
@@ -27,4 +28,6 @@ export default {
     disablesLayerDark: "rgba(11,10,25,0.83)",
     cardBackColor: '#fff',
     cardBorderColor: '#f1f1f1',
+    positiveColor: primaryColor,
+    negativeColor: "#f11561"
 };

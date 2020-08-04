@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Platform, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
-import {Button, Container, Icon, Text, View} from 'native-base';
+import {Container, Text, View} from 'native-base';
 import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import AssetImage from "./AssetImage";
 import BalanceList from "./BalanceList";
-import DividendList from "./DividendList";
+import CashflowList from "./CashflowList";
 import TotalBalance from "./TotalBalance";
 import HomeHeader from "./HomeHeader";
 
@@ -47,18 +47,6 @@ export default class Index extends Component<NavigationProps> {
                 </HomeHeader>
                 <View style={styles.body}>
                     <ScrollView style={styles.innerBody} onScroll={this.onScroll}>
-                        <View style={{padding: 16, paddingTop: 12}}>
-                            <Button block bordered iconLeft style={styles.btn}
-                                    onPress={() => navigation.navigate("Tokens")}>
-                                <Icon name='search' type="Feather" style={[styles.btnText, {fontSize: 18}]}/>
-                                <Text style={styles.btnText}>
-                                    Explorer Security Tokens
-                                </Text>
-                            </Button>
-                        </View>
-
-                        <View style={{height: 12}}/>
-
                         <View style={styles.areaCard}>
                             <View style={{alignSelf: "center"}}>
                                 <Text style={styles.headerText}>Balances</Text>
@@ -72,10 +60,10 @@ export default class Index extends Component<NavigationProps> {
 
                         <View style={styles.areaCard}>
                             <View style={{alignSelf: "center"}}>
-                                <Text style={styles.headerText}>Dividends</Text>
+                                <Text style={styles.headerText}>History</Text>
                             </View>
                             <View style={[styles.listWrapper]}>
-                                <DividendList navigation={navigation}/>
+                                <CashflowList navigation={navigation}/>
                             </View>
                         </View>
 
@@ -107,14 +95,14 @@ const styles = StyleSheet.create({
         paddingBottom: 56,
     },
     headerText: {
-        fontSize: 18,
+        fontSize: 20,
         color: Colors.primaryColorDark,
         opacity: 0.5,
         fontWeight: "700",
-        letterSpacing: 1,
+        letterSpacing: 2,
     },
     listWrapper: {
-        paddingVertical: 12
+        paddingVertical: 10
     },
     btn: {
         borderRadius: 30,

@@ -2,7 +2,7 @@ const data = [
     {
         name: 'WhiteShare',
         symbol: 'WST',
-        balance: 0.5
+        balance: 4.5
     },
     {
         name: 'Simplex',

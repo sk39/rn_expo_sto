@@ -8,6 +8,9 @@ import Colors from "@constants/Colors";
 import {observable} from "mobx";
 import {observer} from "mobx-react";
 import Invest from "../Invest";
+import DetailLineChart from "./DetailLineChart";
+import DetailPieChart from "./DetailPieChart";
+import Skeleton from "./Skeleton";
 
 @observer
 export default class Detail extends PureComponent<any, any> {
@@ -70,11 +73,37 @@ export default class Detail extends PureComponent<any, any> {
 
     renderItem = ({item}) => {
         const {phase} = this.props;
-        return (
-            <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={32}>
-                <Text style={styles.descriptionDetail}>{item.descriptionDetail}</Text>
-            </TranslateYAndOpacity>
-        );
+        const delayBase = 32;
+        let index = 1;
+        return [
+            (
+                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                    <Text style={styles.descriptionDetail}>
+                        This section is a example security token detail page.
+                        You can move to the purchase screen from the button at the bottom of the page.
+                    </Text>
+                </TranslateYAndOpacity>
+            ),
+            (
+                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                    <View style={styles.pieChartArea}>
+                        <View style={{width: "35%"}}>
+                            <DetailPieChart/>
+                        </View>
+                        <Skeleton line={3}/>
+                    </View>
+                </TranslateYAndOpacity>
+            ),
+            (
+                <TranslateYAndOpacity isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
+                    <Skeleton line={5}/>
+                    <View style={styles.lineChartArea}>
+                        <DetailLineChart/>
+                    </View>
+                    <Skeleton line={2}/>
+                </TranslateYAndOpacity>
+            ),
+        ];
     };
 
     render() {
@@ -191,5 +220,25 @@ const styles = StyleSheet.create({
         color: Colors.labelFont,
         fontSize: 14,
         lineHeight: 22
+    },
+    areaCard: {
+        padding: 12,
+        paddingTop: 6,
+    },
+    headerText: {
+        fontSize: 20,
+        color: Colors.primaryColorDark,
+        opacity: 0.5,
+        fontWeight: "700",
+        letterSpacing: 2,
+    },
+    pieChartArea: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 24,
+    },
+    lineChartArea: {
+        paddingVertical: 24,
     }
 });
