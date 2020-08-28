@@ -5,13 +5,12 @@ import Toolbar from './Toolbar';
 import ShowInvestButton from './ShowInvestButton';
 import {ListItem} from "../ListItem"
 import Colors from "@constants/Colors";
-import {observable} from "mobx";
-import {observer} from "mobx-react";
+import {computed, observable} from "mobx";
+import {inject, observer} from "mobx-react";
 import Invest from "../Invest";
-import DetailLineChart from "./DetailLineChart";
-import DetailPieChart from "./DetailPieChart";
-import Skeleton from "./Skeleton";
+import Skeleton from "@common/components/Skeleton";
 
+@inject('rootStore')
 @observer
 export default class Detail extends PureComponent<any, any> {
 
@@ -19,10 +18,16 @@ export default class Detail extends PureComponent<any, any> {
     private listItemRef: any;
     @observable scrollY = new Animated.Value(0);
     @observable isInvestMode = false;
+    @observable isWaitSignIn = false;
+
+    @computed
+    get loggedIn() {
+        const {auth} = this.props.rootStore;
+        return auth.loggedIn;
+    }
 
     constructor(props) {
         super(props);
-
         this.state = {
             opacityOfDestinationItem: 0,
 
@@ -30,6 +35,18 @@ export default class Detail extends PureComponent<any, any> {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
         this.startInvest = this.startInvest.bind(this);
         this.endInvest = this.endInvest.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.navigation.addListener(
+            'didFocus',
+            () => {
+                if (this.loggedIn && this.isWaitSignIn && this.props.phase === 'phase-2') {
+                    this.startInvest();
+                }
+                this.isWaitSignIn = false;
+            }
+        );
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -64,6 +81,11 @@ export default class Detail extends PureComponent<any, any> {
     };
 
     startInvest() {
+        if (!this.loggedIn) {
+            this.isWaitSignIn = true;
+            this.props.navigation.navigate("Login");
+            return;
+        }
         this.isInvestMode = true;
     }
 
@@ -87,9 +109,6 @@ export default class Detail extends PureComponent<any, any> {
             (
                 <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
                     <View style={styles.pieChartArea}>
-                        <View style={{width: "35%"}}>
-                            <DetailPieChart/>
-                        </View>
                         <Skeleton line={3}/>
                     </View>
                 </TranslateYAndOpacity>
@@ -97,9 +116,6 @@ export default class Detail extends PureComponent<any, any> {
             (
                 <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
                     <Skeleton line={5}/>
-                    <View style={styles.lineChartArea}>
-                        <DetailLineChart/>
-                    </View>
                     <Skeleton line={2}/>
                 </TranslateYAndOpacity>
             ),
@@ -174,10 +190,9 @@ export default class Detail extends PureComponent<any, any> {
                 </Animated.ScrollView>
                 <ShowInvestButton isHidden={phase === 'phase-3'}
                                   isInvestMode={this.isInvestMode}
+                                  label={this.loggedIn ? "Invest" : "Sign In & Invest"}
                                   onStart={this.startInvest}
-                                  onClose={this.endInvest}
-
-                >
+                                  onClose={this.endInvest}>
                     <Invest
                         onClose={this.endInvest}
                         item={selectedItem}

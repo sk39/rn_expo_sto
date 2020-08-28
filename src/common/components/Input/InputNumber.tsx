@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
         color: "#888",
         marginRight: 11,
         fontSize: 14,
-        // marginTop: 6,
-        // marginLeft: 2,
         textAlign: "center"
     }
 });

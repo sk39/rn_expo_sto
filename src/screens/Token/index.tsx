@@ -79,7 +79,7 @@ export default class Index extends Component<any, any> {
     };
 
     renderPage() {
-        const {selectedItem, position, detailItem, phase} = this.state;
+        const {selectedItem, phase} = this.state;
 
         return (
             <View style={{flex: 1}}>
@@ -90,6 +90,7 @@ export default class Index extends Component<any, any> {
                 />
                 <Detail
                     phase={phase}
+                    navigation={this.props.navigation}
                     selectedItem={selectedItem}
                     onBackPress={this.onBackPressed}
                     onSharedElementMovedToDestination={

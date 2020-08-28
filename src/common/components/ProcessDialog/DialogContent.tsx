@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native'
 import {Button, Text} from "native-base";
 import {observer} from "mobx-react";
 import AnimatedShow from "@common/components/Animations/AnimatedShow";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     show: boolean;
@@ -69,14 +70,7 @@ const
             padding: 16,
             flex: 1,
         },
-        btn: {
-            borderRadius: 0,
-            borderBottomRightRadius: 10,
-            borderBottomStartRadius: 10,
-            backgroundColor: "#afafaf",
-            flex: 1,
-            height: 44,
-        },
+        btn: commonStyles.modalBtn,
         btnText: {
             fontSize: 16,
             letterSpacing: 2
@@ -90,6 +84,5 @@ const
             backgroundColor: "#afafaf",
             flex: 1,
             marginHorizontal: 4,
-        },
-        cancelBtn: {}
+        }
     });

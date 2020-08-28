@@ -1,15 +1,25 @@
-import {action, observable} from "mobx";
+import AuthStore from "./AuthStore";
+import SettingsStore from "@store/SettingsStore";
+import BalanceStore from "@store/BalanceStore";
 
 /**
  * Global state.
  */
 export default class RootStore {
 
-    @observable hideTabBar: boolean = false;
+    settings = new SettingsStore();
+    auth = new AuthStore();
+    balance = new BalanceStore();
 
-    @action
-    setHideTabBar(hideTabBar) {
-        this.hideTabBar = hideTabBar;
+    async initialize() {
+        await this.settings.initialize();
+        await this.auth.initialize();
+        await this.balance.initialize(this.auth);
+    }
+
+    async clear() {
+        await this.settings.clear();
+        await this.auth.clear();
     }
 }
 

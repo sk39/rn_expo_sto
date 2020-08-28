@@ -7,7 +7,7 @@ import ProcessAnimation from "./ProcessAnimation";
 import DialogContent from "./DialogContent";
 import {observer} from "mobx-react";
 import {action, observable} from "mobx";
-import Layout from "@constants/Layout";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     model: ProcessDialogState;
@@ -122,10 +122,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     indicatorWrapper: {
+        ...commonStyles.modalContent,
         height: 360,
-        width: Layout.window.width - 56,
-        borderRadius: 10,
-        // paddingBottom:12,
         alignItems: "center",
         justifyContent: "flex-start",
         paddingTop: 98,

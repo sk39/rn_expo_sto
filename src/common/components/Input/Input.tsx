@@ -19,6 +19,7 @@ export default class Input extends PureComponent<Props> {
         const {inputState, label, secureTextEntry, leftIcon} = this.props;
         return (
             <ElInput inputStyle={styles.input}
+                     value={inputState.value}
                      label={label}
                      selectionColor={Colors.primaryColor}
                      leftIcon={leftIcon}

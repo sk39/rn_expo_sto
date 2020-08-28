@@ -31,4 +31,10 @@ export default class ViewUtils {
             ? Layout.bottomBtn.heightIPhoneX :
             Layout.bottomBtn.height
     }
+
+    static sleep(time) {
+        return new Promise(resolve => {
+            setTimeout(resolve, time);
+        });
+    }
 }

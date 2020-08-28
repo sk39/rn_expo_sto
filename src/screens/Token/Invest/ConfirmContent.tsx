@@ -1,21 +1,22 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native'
-import {observer} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import DialogContent from "@common/components/ProcessDialog/DialogContent";
 import Layout from "@constants/Layout";
 import {Icon} from "react-native-elements";
 import NumberLabel from "@common/components/Label/NumberLabel";
-import userData from "@constants/dummyData/userInfo";
 
 const offeringPrice = 200;
 
+@inject('rootStore')
 @observer
 export default class ConfirmContent extends PureComponent<any, any> {
 
     render() {
         const {onDone, onCancel, amount, amountUnit, item} = this.props;
         const token = Number(amount.value) / offeringPrice;
+        const {auth} = this.props.rootStore;
         return (
             <DialogContent
                 show
@@ -67,7 +68,7 @@ export default class ConfirmContent extends PureComponent<any, any> {
                             <Text style={styles.label}>Your Balance</Text>
                             <View style={styles.valWrapper}>
                                 <NumberLabel
-                                    value={userData.balance}
+                                    value={auth.balance}
                                     decimals={0}
                                     style={styles.valueText}/>
                                 <View style={styles.unitWrapper}>

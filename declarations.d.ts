@@ -5,5 +5,5 @@ declare module "*.svg" {
 }
 
 interface NavigationProps {
-    navigation: any, //TODO:
+    navigation?: any, //TODO:
 }

@@ -7,6 +7,7 @@ interface Props {
     loading?: boolean,
     indicatorColor?: string,
     indicatorUnfilledColor?: string,
+    disablesLayerColor?: string,
 }
 
 export default class BlockLoading extends Component<Props> {
@@ -15,16 +16,17 @@ export default class BlockLoading extends Component<Props> {
         loading: false,
         indicatorColor: Colors.primaryColor,
         indicatorUnfilledColor: Colors.primaryColorLight2,
+        disablesLayerColor: "rgba(255,255,255,0)"
     };
 
     render() {
-        const {loading, indicatorColor, indicatorUnfilledColor} = this.props;
+        const {loading, indicatorColor, indicatorUnfilledColor, disablesLayerColor} = this.props;
         if (!loading) {
             return null
         }
 
         return (
-            <View style={styles.disablesLayer}>
+            <View style={[styles.disablesLayer, {backgroundColor: disablesLayerColor}]}>
                 <View style={styles.indicatorWrapper}>
                     <Progress.Bar
                         indeterminate
@@ -47,8 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     indicatorWrapper: {
-        height: 40,
-        width: 40,
+        flex: 1,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: "center"

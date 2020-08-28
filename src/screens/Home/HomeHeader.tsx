@@ -4,8 +4,8 @@ import {observer} from "mobx-react";
 import ViewUtils from "@common/utils/ViewUtils";
 import {observable} from "mobx";
 
-const HEADER_HEIGHT = 184;
-const HEADER_MIN_HEIGHT = 130;
+const HEADER_HEIGHT = 168;
+const HEADER_MIN_HEIGHT = 120;
 
 @observer
 export default class HomeHeader extends Component {

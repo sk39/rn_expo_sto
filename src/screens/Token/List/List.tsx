@@ -5,14 +5,21 @@ import Toolbar from './Toolbar';
 import data from '@constants/dummyData/sto';
 import {ListItem} from "../ListItem";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import ViewUtils from "@common/utils/ViewUtils";
+import {observer} from "mobx-react";
+import {observable} from "mobx";
 
+@observer
 export default class List extends PureComponent<any, any> {
 
     sharedElementRefs: any;
 
+    @observable refreshing = false;
+
     constructor(props) {
         super(props);
 
+        this.onRefresh = this.onRefresh.bind(this);
         this.state = {opacityOfSelectedItem: 1, selectedItem: null};
         this.sharedElementRefs = {};
     }
@@ -77,6 +84,13 @@ export default class List extends PureComponent<any, any> {
         );
     };
 
+    async onRefresh() {
+        // TODO: dummy
+        this.refreshing = true;
+        await ViewUtils.sleep(1000);
+        this.refreshing = false;
+    }
+
     render() {
         const {opacityOfSelectedItem} = this.state;
         const {selectedItem, phase} = this.props;
@@ -91,6 +105,8 @@ export default class List extends PureComponent<any, any> {
                     data={data}
                     extraData={{phase, opacityOfSelectedItem}}
                     keyExtractor={item => item.name}
+                    refreshing={this.refreshing}
+                    onRefresh={this.onRefresh}
                     renderItem={this.renderItem}
                 />
             </View>

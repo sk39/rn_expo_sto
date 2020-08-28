@@ -2,26 +2,16 @@ import React, {Component} from 'react'
 import {Defs, LinearGradient, Stop} from 'react-native-svg'
 import {LineChart} from 'react-native-svg-charts'
 import * as shape from 'd3-shape';
+import CashflowCollection from "./CashflowCollection";
 
-const testData = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
+interface Props {
+    collection: CashflowCollection
+}
 
-export default class DetailLineChart extends Component<any, any> {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: testData.map(() => 0)
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({data: testData})
-        }, 200);
-    }
+export default class CashflowLineChart extends Component<Props, any> {
 
     render() {
-        const {data} = this.state;
+        const {chartData} = this.props.collection
         const Gradient = () => (
             <Defs key={'gradient'}>
                 <LinearGradient id={'gradient'} x1={'0'} y1={'0'} x2={'100%'} y2={'0%'}>
@@ -33,11 +23,11 @@ export default class DetailLineChart extends Component<any, any> {
 
         return (
             <LineChart
-                style={{height: 126}}
-                data={data}
+                style={{height: 66}}
+                data={chartData}
                 animate
                 curve={shape.curveNatural}
-                contentInset={{top: 20, bottom: 20}}
+                contentInset={{top: 6, bottom: 6}}
                 svg={{
                     strokeWidth: 3,
                     stroke: 'url(#gradient)',

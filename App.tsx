@@ -4,7 +4,7 @@ import {AppLoading} from "expo";
 import * as Font from 'expo-font';
 import {Feather, Ionicons} from '@expo/vector-icons';
 import {observable} from "mobx";
-import {observer, Provider} from "mobx-react";
+import {inject, observer, Provider} from "mobx-react";
 import RootStack from "./src/navigation/RootStack";
 import {createAppContainer} from "react-navigation";
 import RootStoreProvider from "./src/store/RootStoreProvider";
@@ -37,6 +37,8 @@ export default class App extends React.Component {
             ...Feather.font,
             ...Ionicons.font,
         });
+
+        await RootStoreProvider.rootStore.initialize();
         this.isReady = true;
     }
 

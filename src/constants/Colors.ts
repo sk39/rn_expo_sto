@@ -3,7 +3,9 @@ const primaryColor = '#7462ff';
 const primaryColor2 = '#7e6eda';
 const primaryColorLight = '#b8b7ff';
 const primaryColorLight2 = '#d1d1ff';
+const primaryColorLight3 = '#e6e6fa';
 const primaryColorDark = '#39307e';
+const secondColor = '#fd8418';
 
 export default {
     fontColor: "#201922",
@@ -11,9 +13,12 @@ export default {
     primaryColor,
     primaryColor2,
     primaryColorThin: "rgba(116,98,255,0.62)",
+    primaryColorThin2: "rgba(116,98,255,0.1)",
     primaryColorLight,
     primaryColorLight2,
+    primaryColorLight3,
     primaryColorDark,
+    secondColor,
     tintColor,
     labelFont: "#626473",
     labelFontThin: "#85889a",
@@ -24,10 +29,12 @@ export default {
     toolBar: '#f6f7ff',
     toolBarInverse: "#0f153c",
     linkColor: '#00f',
-    disablesLayer: "rgba(56,103,122,0.5)",
+    disablesLayer: "rgba(239,244,246,0.66)",
     disablesLayerDark: "rgba(11,10,25,0.83)",
     cardBackColor: '#fff',
     cardBorderColor: '#f1f1f1',
     positiveColor: primaryColor,
-    negativeColor: "#f11561"
+    negativeColor: "#f11561",
+    error: "#ff330f",
+    listBorderColor: "rgba(15,20,92,0.08)"
 };

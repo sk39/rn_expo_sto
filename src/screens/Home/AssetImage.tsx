@@ -11,10 +11,10 @@ export default class AssetImage extends Component {
         return (
             <View style={styles.logoWrapper}>
                 <View style={styles.logo1}>
-                    <Icon name='home' type="feather" color={Colors.primaryColorLight2} size={280}/>
+                    <Icon name='home' type="feather" color={Colors.primaryColorLight2} size={240}/>
                 </View>
                 <View style={styles.logo2}>
-                    <Icon name='home' type="feather" color={Colors.primaryColor} size={100}/>
+                    <Icon name='home' type="feather" color={Colors.primaryColor} size={80}/>
                 </View>
             </View>
         );
@@ -31,14 +31,14 @@ const styles = StyleSheet.create({
     logo1: {
         position: "absolute",
         top: 0,
-        right: -40,
+        right: -30,
         opacity: 0.09,
         zIndex: 2
     },
     logo2: {
         position: "absolute",
         top: 100,
-        right: 10,
+        right: 14,
         opacity: 0.52,
         zIndex: 2
     },

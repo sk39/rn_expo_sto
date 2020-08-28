@@ -13,7 +13,7 @@ import InvestButton from "./InvestButton";
 import Layout from "@constants/Layout";
 import Toolbar from "./Toolbar";
 import InputNumber from "@common/components/Input/InputNumber";
-import {observer} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import InputNumberState from "@common/components/Input/InputNumberState";
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
@@ -21,7 +21,6 @@ import ProcessDialogState from "@common/components/ProcessDialog/ProcessDialogSt
 import ProcessDialog from "@common/components/ProcessDialog";
 import ConfirmContent from "./ConfirmContent";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
-import userData from "@constants/dummyData/userInfo";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import ViewUtils from "@common/utils/ViewUtils";
 import SimpleList from "@common/components/SimpleList";
@@ -66,11 +65,11 @@ const FieldList = [
     {
         name: 'Your Balance',
         description: "TODO:description",
-        render: (item) => {
+        render: (item, amount, balance) => {
             return (
                 <View style={styles.valWrapper}>
                     <NumberLabel
-                        value={userData.balance}
+                        value={balance}
                         decimals={0}
                         style={styles.valueText}/>
                     <View style={styles.unitWrapper}>
@@ -107,6 +106,7 @@ const FieldList = [
     }
 ];
 
+@inject('rootStore')
 @observer
 export default class Invest extends PureComponent<any, any> {
 
@@ -127,6 +127,7 @@ export default class Invest extends PureComponent<any, any> {
         const fieldDef = item;
         const delay = 1000 + (index + 1) * 32;
         const selectedItem = this.props.item;
+        const {auth} = this.props.rootStore;
         return (
             <AnimatedRow key={fieldDef.name} delay={delay}>
                 <View style={styles.rowContainer}>
@@ -134,7 +135,7 @@ export default class Invest extends PureComponent<any, any> {
                         <Text style={styles.label}>{fieldDef.name}</Text>
                         <Text style={styles.rowDescriptionText}>{fieldDef.description}</Text>
                     </View>
-                    {fieldDef.render(selectedItem, this.amount)}
+                    {fieldDef.render(selectedItem, this.amount, auth.balance)}
                 </View>
             </AnimatedRow>
         );

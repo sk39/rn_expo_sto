@@ -1,24 +1,33 @@
 import React, {Component} from 'react';
-import {Platform, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {Platform, RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
-import {Container, Text, View} from 'native-base';
+import {Container, View} from 'native-base';
 import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import AssetImage from "./AssetImage";
 import BalanceList from "./BalanceList";
 import CashflowList from "./CashflowList";
-import TotalBalance from "./TotalBalance";
+import HomeHeaderContents from "./HomeHeaderContents";
 import HomeHeader from "./HomeHeader";
+import {RootStoreProps} from "@store/RootStoreProvider";
+import {observable} from "mobx";
+import ViewUtils from "@common/utils/ViewUtils";
 
 @observer
-export default class Index extends Component<NavigationProps> {
+export default class Home extends Component<NavigationProps & RootStoreProps> {
 
     private headerRef = React.createRef<HomeHeader>();
 
+    @observable refreshing = false;
+
+    refreshListeners = [];
+
     constructor(props) {
         super(props);
-        this.onScroll = this.onScroll.bind(this)
+        this.onScroll = this.onScroll.bind(this);
+        this.onRefresh = this.onRefresh.bind(this);
+        this.setRefreshListener = this.setRefreshListener.bind(this);
     }
 
     static navigationOptions = {
@@ -36,38 +45,46 @@ export default class Index extends Component<NavigationProps> {
         }
     }
 
+    setRefreshListener(listener: () => void) {
+        this.refreshListeners.push(listener)
+    }
+
+    async onRefresh() {
+        this.refreshing = true;
+        this.refreshListeners.forEach(listener => listener())
+        await ViewUtils.sleep(1000);
+        this.refreshing = false;
+    }
+
     render() {
         const {navigation} = this.props;
+
         return (
             <Container style={styles.back}>
                 <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
                 <HomeHeader ref={this.headerRef}>
-                    <TotalBalance/>
+                    <HomeHeaderContents navigation={navigation}/>
                     <AssetImage/>
                 </HomeHeader>
                 <View style={styles.body}>
-                    <ScrollView style={styles.innerBody} onScroll={this.onScroll}>
+                    <ScrollView
+                        refreshControl={
+                            <RefreshControl refreshing={this.refreshing} onRefresh={this.onRefresh}/>
+                        }
+                        onScroll={this.onScroll}>
                         <View style={styles.areaCard}>
-                            <View style={{alignSelf: "center"}}>
-                                <Text style={styles.headerText}>Balances</Text>
-                            </View>
-                            <View style={styles.listWrapper}>
-                                <BalanceList navigation={navigation}/>
-                            </View>
+                            <BalanceList navigation={navigation}
+                                         setRefreshListener={this.setRefreshListener}/>
                         </View>
 
-                        <View style={{height: 12}}/>
-
-                        <View style={styles.areaCard}>
-                            <View style={{alignSelf: "center"}}>
-                                <Text style={styles.headerText}>History</Text>
-                            </View>
-                            <View style={[styles.listWrapper]}>
-                                <CashflowList navigation={navigation}/>
-                            </View>
+                        <View style={styles.splitterWrapper}>
+                            <View style={styles.splitter}/>
                         </View>
 
-                        <View style={{height: 24}}/>
+                        <View style={styles.areaCard}>
+                            <CashflowList navigation={navigation}
+                                          setRefreshListener={this.setRefreshListener}/>
+                        </View>
                     </ScrollView>
                 </View>
             </Container>
@@ -88,33 +105,18 @@ const styles = StyleSheet.create({
         borderTopEndRadius: 32,
         ...getPlatformElevation(14)
     },
-    innerBody: {
-        // flex: 1,
-        padding: 24,
-        // paddingHorizontal: 16,
-        paddingBottom: 56,
-    },
-    headerText: {
-        fontSize: 20,
-        color: Colors.primaryColorDark,
-        opacity: 0.5,
-        fontWeight: "700",
-        letterSpacing: 2,
-    },
-    listWrapper: {
-        paddingVertical: 10
-    },
-    btn: {
-        borderRadius: 30,
-        borderColor: Colors.primaryColor
-    },
-    btnText: {
-        fontSize: 14,
-        fontWeight: "700",
-        color: Colors.primaryColor
-    },
     areaCard: {
-        padding: 12,
-        paddingTop: 6,
+        padding: 26,
+        paddingVertical: 20
+    },
+    splitterWrapper: {
+        paddingVertical: 8,
+    },
+    splitter: {
+        width: "100%",
+        height: 6,
+        borderRadius: 12,
+        backgroundColor: "#c9c9d2",
+        opacity: 0.16
     }
 });

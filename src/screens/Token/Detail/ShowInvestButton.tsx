@@ -7,6 +7,7 @@ import {observer} from "mobx-react";
 import ViewUtils from "@common/utils/ViewUtils";
 
 interface Props {
+    label: string;
     isHidden: boolean;
     isInvestMode: boolean;
     onStart: Function;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const BTN_HEIGHT = ViewUtils.getBottomBtnHeight();
+
 @observer
 export default class ShowInvestButton extends Component<Props> {
 
@@ -114,7 +116,7 @@ export default class ShowInvestButton extends Component<Props> {
 
         const child = this.props.isInvestMode
             ? this.props.children
-            : <Text style={styles.text}>Invest</Text>;
+            : <Text style={styles.text}>{this.props.label}</Text>;
 
         return (
             <View style={styles.container}>

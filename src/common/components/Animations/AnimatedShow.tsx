@@ -5,7 +5,6 @@ import {observable} from "mobx";
 
 interface Props {
     show: boolean,
-    // containerStyle?: any,
     duration?: number,
     delay?: number
 }
