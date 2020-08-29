@@ -7,47 +7,63 @@ import {ActionSheet, Icon} from "native-base";
 import SimpleList from "@common/components/SimpleList";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import BalancePieChart from "./BalancePieChart";
-import BalanceCollection from "./BalanceCollection";
+import BalanceState from "./BalanceState";
 import HomeChild from "../HomeChild";
 import Skeleton from "@common/components/Skeleton";
+import NoAuthMessage from "../NoAuthMessage";
+import BlockLoading from "@common/components/BlockLoading";
 
 @inject("rootStore")
 @observer
 export default class BalanceList extends HomeChild {
 
-    collection = new BalanceCollection();
+    balanceState: BalanceState;
 
     constructor(props) {
         super(props);
+        this.balanceState = new BalanceState(props.rootStore.balance);
         this.renderItem = this.renderItem.bind(this);
     }
 
-    async loadData() {
-        const {balance} = this.props.rootStore;
-        try {
-            this.processing = true;
-            this.collection.clear();
-            await balance.loadData();
-            this.collection.setData(balance.balances, balance.totalBalance);
-        } catch (e) {
-        } finally {
-            this.processing = false;
-        }
+    loadData() {
+        this.balanceState.loadData();
+    }
+
+    clear() {
+        this.balanceState.clear();
+    }
+
+    showDetail(item) {
+        this.props.navigation.navigate("TokenDetail", {symbol: item.symbol})
+    }
+
+    showInvest(item) {
+        this.props.navigation.navigate("InvestToken", {symbol: item.symbol})
     }
 
     onSelect(item, index) {
-        const BUTTONS = (!item.symbol)
-            ? ["Deposit", "Withdraw", "Cancel"]
-            : ["Show Detail", "Invest", "Cancel"];
-        const CANCEL_INDEX = BUTTONS.length - 1;
+        let actions = [];
+        if (!item.symbol) {
+            actions.push({label: "Deposit", method: () => alert("TODO:")})
+            actions.push({label: "Withdraw", method: () => alert("TODO:")})
+        } else {
+            actions.push({label: "Show Detail", method: this.showDetail.bind(this)})
+            actions.push({label: "Invest", method: this.showInvest.bind(this)})
+        }
+
+        actions.push({label: "Cancel"});
+        const CANCEL_INDEX = actions.length - 1;
         ActionSheet.show(
             {
-                options: BUTTONS,
+                options: actions.map(a => a.label),
                 cancelButtonIndex: CANCEL_INDEX,
                 title: `${item.name} Actions`
             },
             buttonIndex => {
-                // this.setState({clicked: BUTTONS[buttonIndex]});
+                const action = actions[buttonIndex];
+                if (action && action.method) {
+                    action.method(item)
+                }
             }
         )
     }
@@ -75,7 +91,6 @@ export default class BalanceList extends HomeChild {
                         suffix={item.symbol}
                         suffixStyle={styles.unit}
                     />
-                    {/*<View style={{height: 2}}/>*/}
                     <NumberLabel
                         value={item.balanceBaseCurrency}
                         decimals={0}
@@ -105,19 +120,20 @@ export default class BalanceList extends HomeChild {
 
     renderList() {
         const {auth} = this.props.rootStore;
-        if (!auth.loggedIn || this.processing) {
+        if (!auth.loggedIn || this.balanceState.processing) {
             return (
                 <Skeleton line={3}/>
             )
         }
         return (
             <SimpleList
-                data={this.collection.list}
+                data={this.balanceState.list}
                 renderItem={this.renderItem}/>
         )
     }
 
     render() {
+        const {balanceState} = this;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -128,7 +144,7 @@ export default class BalanceList extends HomeChild {
                                 Total
                             </Text>
                             <NumberLabel
-                                value={this.collection.total}
+                                value={balanceState.total}
                                 decimals={0}
                                 prefix={"$"}
                                 style={styles.totalBalance}/>
@@ -136,13 +152,16 @@ export default class BalanceList extends HomeChild {
                     </View>
                     <View style={styles.chartWrapper}>
                         <BalancePieChart
-                            collection={this.collection}/>
+                            balanceState={balanceState}/>
                     </View>
                 </View>
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
-                {this.renderLoading()}
+                <NoAuthMessage/>
+                <BlockLoading
+                    loading={balanceState.processing}
+                    disablesLayerColor="rgba(247,246,255,0.66)"/>
             </View>
         )
     }
@@ -183,9 +202,9 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
     },
     totalBalanceLabel: {
-        color: Colors.primaryColorDark,
+        color: Colors.labelFont,
         fontSize: 12,
-        opacity: 0.36,
+        opacity: 0.6,
         fontWeight: "700",
         marginRight: 16,
         ...Platform.select({

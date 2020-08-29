@@ -1,40 +1,36 @@
 import React, {PureComponent} from 'react';
-import {Animated, BackHandler, Easing, StyleSheet, Text, View} from 'react-native'
-import {SharedElement, TranslateYAndOpacity} from '../animations';
+import {Animated, BackHandler, Easing, StyleSheet, View} from 'react-native'
+import {SharedElement} from '../animations';
 import Toolbar from './Toolbar';
-import ShowInvestButton from './ShowInvestButton';
 import {ListItem} from "../ListItem"
 import Colors from "@constants/Colors";
 import {computed, observable} from "mobx";
-import {inject, observer} from "mobx-react";
+import {observer} from "mobx-react";
 import Invest from "../Invest";
-import Skeleton from "@common/components/Skeleton";
+import PageBottomBtn from "@common/components/PageBottomBtn";
+import DetailContents from "./DetailContents";
 
-@inject('rootStore')
 @observer
 export default class Detail extends PureComponent<any, any> {
 
     private sharedElementRef: any;
     private listItemRef: any;
     @observable scrollY = new Animated.Value(0);
-    @observable isInvestMode = false;
     @observable isWaitSignIn = false;
 
     @computed
     get loggedIn() {
-        const {auth} = this.props.rootStore;
-        return auth.loggedIn;
+        const {tokenState} = this.props;
+        return tokenState.loggedIn;
     }
 
     constructor(props) {
         super(props);
         this.state = {
             opacityOfDestinationItem: 0,
-
         };
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
         this.startInvest = this.startInvest.bind(this);
-        this.endInvest = this.endInvest.bind(this);
     }
 
     componentDidMount() {
@@ -63,11 +59,7 @@ export default class Detail extends PureComponent<any, any> {
     }
 
     handleBackButtonClick() {
-        if (this.isInvestMode) {
-            this.endInvest();
-        } else {
-            this.props.onBackPress();
-        }
+        this.props.onBackPress();
         return true;
     }
 
@@ -86,41 +78,11 @@ export default class Detail extends PureComponent<any, any> {
             this.props.navigation.navigate("Login");
             return;
         }
-        this.isInvestMode = true;
+
+        const {selectedItem} = this.props;
+        this.props.navigation.navigate("InvestToken", {symbol: selectedItem.symbol})
     }
 
-    endInvest() {
-        this.isInvestMode = false;
-    }
-
-    renderItem = ({item}) => {
-        const {phase} = this.props;
-        const delayBase = 32;
-        let index = 1;
-        return [
-            (
-                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
-                    <Text style={styles.descriptionDetail}>
-                        This section is a example security token detail page.
-                        You can move to the purchase screen from the button at the bottom of the page.
-                    </Text>
-                </TranslateYAndOpacity>
-            ),
-            (
-                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
-                    <View style={styles.pieChartArea}>
-                        <Skeleton line={3}/>
-                    </View>
-                </TranslateYAndOpacity>
-            ),
-            (
-                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={delayBase * (index++)}>
-                    <Skeleton line={5}/>
-                    <Skeleton line={2}/>
-                </TranslateYAndOpacity>
-            ),
-        ];
-    };
 
     render() {
         const {
@@ -140,7 +102,9 @@ export default class Detail extends PureComponent<any, any> {
 
         return (
             <View style={styles.container}>
-                <Toolbar isHidden={phase === 'phase-3' || this.isInvestMode} onBackPress={onBackPress}/>
+                <Toolbar isHidden={phase === 'phase-3'}
+                         item={selectedItem}
+                         onBackPress={onBackPress}/>
                 <Animated.ScrollView
                     scrollEventThrottle={16}
                     onScroll={
@@ -172,8 +136,6 @@ export default class Detail extends PureComponent<any, any> {
                             <ListItem
                                 ref={node => (this.listItemRef = node)}
                                 item={selectedItem}
-                                onPress={() => {
-                                }}
                                 animateOnDidMount={false}
                                 detailMode={true}
                                 phase={phase}
@@ -183,21 +145,17 @@ export default class Detail extends PureComponent<any, any> {
                             />
                         </View>
                     </SharedElement>
-                    <View style={{padding: 12}}>
-                        {this.renderItem({item: selectedItem})}
-                    </View>
-                    <View style={{paddingBottom: 56}}/>
+                    <DetailContents phase={phase}
+                                    selectedItem={selectedItem}/>
                 </Animated.ScrollView>
-                <ShowInvestButton isHidden={phase === 'phase-3'}
-                                  isInvestMode={this.isInvestMode}
-                                  label={this.loggedIn ? "Invest" : "Sign In & Invest"}
-                                  onStart={this.startInvest}
-                                  onClose={this.endInvest}>
-                    <Invest
-                        onClose={this.endInvest}
-                        item={selectedItem}
-                        isInvestMode={this.isInvestMode}/>
-                </ShowInvestButton>
+                <PageBottomBtn
+                    onPress={this.startInvest}
+                    text={this.loggedIn ? "Invest" : "Sign In & Invest"}
+                    loading={false}
+                    hidden={phase !== 'phase-2'}
+                    animation
+                    animationDelay={500}
+                />
             </View>
         );
     }
@@ -246,14 +204,5 @@ const styles = StyleSheet.create({
         opacity: 0.5,
         fontWeight: "700",
         letterSpacing: 2,
-    },
-    pieChartArea: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 24,
-    },
-    lineChartArea: {
-        paddingVertical: 24,
     }
 });

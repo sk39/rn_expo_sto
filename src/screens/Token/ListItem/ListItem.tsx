@@ -11,7 +11,6 @@ interface Props {
     onPress?: Function;
     item: any;
     isDetail?: boolean;
-    style?: any;
     detailMode?: boolean;
     phase?: string;
     isHidden?: boolean;
@@ -26,11 +25,13 @@ export default class ListItem extends Component<Props> {
 
     onPressed = event => {
         const {onPress, item} = this.props;
-        onPress(item, event.nativeEvent);
+        if (onPress) {
+            onPress(item, event.nativeEvent);
+        }
     };
 
     render() {
-        const {item, detailMode, phase, isDetail, style, isHidden, animateOnDidMount} = this.props;
+        const {item, detailMode, phase, isDetail, isHidden, animateOnDidMount} = this.props;
         const {image, localImage} = item;
         let imageSource;
         if (image) {
@@ -42,7 +43,6 @@ export default class ListItem extends Component<Props> {
             <ScaleAndOpacity
                 isHidden={isHidden}
                 animateOnDidMount={animateOnDidMount}
-
                 duration={360}
             >
                 <TouchableWithoutFeedback onPress={this.onPressed}>

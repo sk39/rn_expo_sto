@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import {PieChart} from 'react-native-svg-charts'
-import BalanceCollection from "./BalanceCollection";
+import BalanceState from "./BalanceState";
 import {observer} from "mobx-react";
 
 interface Props {
-    collection: BalanceCollection
+    balanceState: BalanceState
 }
 
 @observer
 export default class BalancePieChart extends Component<Props> {
 
     render() {
-        const {chartData} = this.props.collection
+        const {chartData} = this.props.balanceState
         return (
             <PieChart style={{height: 120}}
                       valueAccessor={({item}) => item.amount}

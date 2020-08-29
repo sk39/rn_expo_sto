@@ -67,15 +67,24 @@ export default class NumberLabel extends Component<Props> {
         const {value, decimals, style, sign} = this.props;
         const stylesArr: any[] = [styles.text];
         let formattedVal;
+        if (value == null) {
+            return (
+                <View style={{paddingRight: 24}}>
+                    <Text style={stylesArr}>
+                        -
+                    </Text>
+                </View>
+            )
+        }
         if (sign && Number(value) < 0) {
             formattedVal = ViewUtils.numberFormat((Number(value) * -1), decimals);
         } else {
             formattedVal = ViewUtils.numberFormat(value, decimals);
         }
 
-        if (Platform.OS === "ios" && s.contains(formattedVal, ",")) {
-            stylesArr.push({marginBottom: -5})
-        }
+        // if (Platform.OS === "ios" && s.contains(formattedVal, ",")) {
+        //     stylesArr.push({marginBottom: -5})
+        // }
         stylesArr.push(style);
 
         return (
@@ -93,7 +102,8 @@ export default class NumberLabel extends Component<Props> {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 18
+        fontSize: 18,
+        // fontFamily: "Roboto",
     },
     prefix: {},
     suffix: {}

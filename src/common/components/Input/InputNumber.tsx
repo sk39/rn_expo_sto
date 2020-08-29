@@ -20,6 +20,7 @@ export default class InputNumber extends PureComponent<Props> {
             <ElInput inputStyle={styles.input}
                      label={label}
                      keyboardType='numeric'
+                     returnKeyType='done'
                 // selectionColor={Colors.primaryColor}
                      leftIcon={leftIcon}
                      rightIcon={<Text style={styles.unit}>{inputState.unit}</Text>}
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
         marginBottom: 8
     },
     containerStyle: {
-        width: 240,
+        width: "100%",
         paddingBottom: 24,
     },
     inputContainerStyle: {
-        borderWidth: 1,
-        borderColor: Colors.primaryColorLight,
-        backgroundColor: "#f6f7ff",
-        borderRadius: 8,
+        borderBottomWidth: 2,
+        borderBottomColor: Colors.primaryColor,
+        // backgroundColor: "#f6f7ff",
+        // borderRadius: 8,
     },
     inputError: {
         position: "absolute",
@@ -66,9 +67,12 @@ const styles = StyleSheet.create({
         color: "orangered"
     },
     unit: {
-        color: "#888",
-        marginRight: 11,
-        fontSize: 14,
+        color: Colors.labelFontThin,
+        marginRight: 6,
+        marginLeft: 8,
+        marginTop: 6,
+        fontSize: 16,
+        opacity: 0.7,
         textAlign: "center"
     }
 });

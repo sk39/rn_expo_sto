@@ -106,7 +106,6 @@ export default class AuthStore {
         this.setUpOtp = true;
         await this.refresh();
         await this.saveStorage();
-
         return "OK"
     }
 }

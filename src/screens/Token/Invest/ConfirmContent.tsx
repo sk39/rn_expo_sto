@@ -1,22 +1,27 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native'
-import {inject, observer} from "mobx-react";
+import {observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import DialogContent from "@common/components/ProcessDialog/DialogContent";
 import Layout from "@constants/Layout";
 import {Icon} from "react-native-elements";
 import NumberLabel from "@common/components/Label/NumberLabel";
+import InvestTokenState from "./InvestTokenState";
 
-const offeringPrice = 200;
 
-@inject('rootStore')
+interface Props {
+    tokenState: InvestTokenState;
+    onDone: () => void;
+    onCancel: () => void;
+}
+
 @observer
-export default class ConfirmContent extends PureComponent<any, any> {
+export default class ConfirmContent extends PureComponent<Props> {
 
     render() {
-        const {onDone, onCancel, amount, amountUnit, item} = this.props;
-        const token = Number(amount.value) / offeringPrice;
-        const {auth} = this.props.rootStore;
+        const {onDone, onCancel, tokenState} = this.props;
+        const item = tokenState.selectedItem;
+        const amount = tokenState.amount;
         return (
             <DialogContent
                 show
@@ -42,42 +47,32 @@ export default class ConfirmContent extends PureComponent<any, any> {
                     <View style={styles.dataWrapper}>
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Amount</Text>
-                            <View style={styles.valWrapper}>
-                                <NumberLabel
-                                    value={amount.value}
-                                    decimals={0}
-                                    style={styles.valueText}/>
-                                <View style={styles.unitWrapper}>
-                                    <Text style={styles.unit}>{amountUnit}</Text>
-                                </View>
-                            </View>
+                            <NumberLabel
+                                value={amount.value}
+                                decimals={0}
+                                suffix="USD"
+                                suffixStyle={styles.unit}
+                                style={styles.valueText}/>
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Buy Token Qty</Text>
-                            <View style={styles.valWrapper}>
-                                <NumberLabel
-                                    value={token}
-                                    decimals={2}
-                                    style={styles.valueText}/>
-                                <View style={styles.unitWrapper}>
-                                    <Text style={styles.unit}>{item.symbol}</Text>
-                                </View>
-                            </View>
+                            <NumberLabel
+                                value={tokenState.buyToken}
+                                decimals={2}
+                                suffix={item.symbol}
+                                suffixStyle={styles.unit}
+                                style={styles.valueText}/>
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={styles.label}>Your Balance</Text>
-                            <View style={styles.valWrapper}>
-                                <NumberLabel
-                                    value={auth.balance}
-                                    decimals={0}
-                                    style={styles.valueText}/>
-                                <View style={styles.unitWrapper}>
-                                    <Text style={styles.unit}>{"USD"}</Text>
-                                </View>
-                            </View>
+                            <NumberLabel
+                                value={tokenState.userDeposit}
+                                decimals={0}
+                                suffix={"USD"}
+                                suffixStyle={styles.unit}
+                                style={styles.valueText}/>
                         </View>
                     </View>
-
                 </View>
             </DialogContent>
         );
@@ -113,16 +108,13 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingLeft: 6,
         borderBottomWidth: 1,
-        borderBottomColor: "#e1e1e1",
+        borderBottomColor: Colors.listBorderColor,
+        minHeight: 40
     },
     label: {
         color: Colors.labelFont,
         fontSize: 14,
         fontWeight: "500",
-    },
-    valWrapper: {
-        flexDirection: "row",
-        alignItems: 'center',
     },
     valueText: {
         fontSize: 18,
@@ -130,13 +122,11 @@ const styles = StyleSheet.create({
         color: Colors.primaryColor,
         letterSpacing: 1,
     },
-    unitWrapper: {
-        marginLeft: 6
-    },
     unit: {
-        width: 40,
+        width: 44,
         color: Colors.unitFont,
         marginBottom: 1,
+        marginLeft: 8,
         fontSize: 12,
     },
     dataWrapper: {

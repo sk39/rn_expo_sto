@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import {Defs, LinearGradient, Stop} from 'react-native-svg'
 import {LineChart} from 'react-native-svg-charts'
 import * as shape from 'd3-shape';
-import CashflowCollection from "./CashflowCollection";
+import CashflowState from "./CashflowState";
 
 interface Props {
-    collection: CashflowCollection
+    cashflowState: CashflowState
 }
 
 export default class CashflowLineChart extends Component<Props, any> {
 
     render() {
-        const {chartData} = this.props.collection
+        const {chartData} = this.props.cashflowState
         const Gradient = () => (
             <Defs key={'gradient'}>
                 <LinearGradient id={'gradient'} x1={'0'} y1={'0'} x2={'100%'} y2={'0%'}>

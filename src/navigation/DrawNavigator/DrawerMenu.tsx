@@ -1,12 +1,9 @@
 import React, {Component} from "react";
-import {ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {DrawerContentComponentProps} from "react-navigation-drawer/src/types";
-import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
-import _ from "lodash";
 import {ScreenIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {Avatar, Button} from 'react-native-elements';
-import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {RootStoreProps} from "@store/RootStoreProvider";
@@ -19,6 +16,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
     constructor(props) {
         super(props);
         this.renderItem = this.renderItem.bind(this);
+        this.renderItemDev = this.renderItemDev.bind(this)
         this.signOut = this.signOut.bind(this);
     }
 
@@ -35,12 +33,27 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
         (navigation as any).closeDrawer();
     }
 
-    renderItem(component, key) {
+    renderItem(key) {
         return (
             <TouchableOpacity key={key}
                               style={styles.item}
                               onPress={() => this.jump(key)}>
-                <ScreenIcon screenName={key} color={Colors.fontColor} size={22}/>
+                <View style={{width: 36}}>
+                    <ScreenIcon screenName={key} color={Colors.primaryColor} size={24}/>
+                </View>
+                <Text style={styles.itemText}>{key}</Text>
+            </TouchableOpacity>
+        )
+    }
+
+    renderItemDev(key) {
+        return (
+            <TouchableOpacity key={key}
+                              style={styles.item}
+                              onPress={() => this.jump(key)}>
+                <View style={{width: 16}}>
+                    <ScreenIcon screenName={key} color={Colors.primaryColor} size={16}/>
+                </View>
                 <Text style={styles.itemText}>{key}</Text>
             </TouchableOpacity>
         )
@@ -48,13 +61,14 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
 
     renderHeaderNoAuth() {
         return (
-            <View style={styles.headerNoAuth}>
+            <View style={styles.header}>
                 <View style={styles.logo}>
                     <Text style={styles.logoText}>STO Platform Demo</Text>
                 </View>
-                <View style={styles.userArea}>
+                <View style={styles.btnWrapper}>
                     <Button title='Sign In'
                             buttonStyle={styles.authButton}
+                            raised
                             onPress={() => this.jump("Login")}
                     />
                 </View>
@@ -70,7 +84,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
 
         return (
             <View style={styles.header}>
-                <View style={styles.userArea}>
+                <View style={styles.userHeader}>
                     <Avatar
                         rounded
                         size="large"
@@ -78,12 +92,10 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                             uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                         }}
                     />
-                    <Text style={styles.username}>{auth.username}</Text>
-                    <Button title='Sign Out'
-                            buttonStyle={styles.authButton}
-                            onPress={this.signOut}
-                    />
-                    <View style={styles.balanceArea}>
+                    <View style={{paddingLeft: 24}}>
+                        <Text style={styles.username}>
+                            {auth.username}
+                        </Text>
                         <Text style={styles.balanceLabel}>
                             Balance
                         </Text>
@@ -94,37 +106,72 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                             style={styles.balanceValue}/>
                     </View>
                 </View>
+                <View style={styles.btnWrapper}>
+                    <Button title='Sign Out'
+                            raised
+                            buttonStyle={styles.authButton}
+                            onPress={this.signOut}
+                    />
+                </View>
+
             </View>
         )
     }
 
     render() {
         return (
-            <ImageBackground source={require("@assets/sideMenu.png")}
-                             style={styles.menu}>
+            <View style={{flex: 1}}>
                 {this.renderHeader()}
                 <ScrollView>
-                    {_.map(DisplayInTabScreens, this.renderItem)}
-                    {_.map(OnlySideMenuScreens, this.renderItem)}
+                    <View style={{paddingVertical: 12}}>
+                        {["Home", "Tokens", "Settings"].map(this.renderItem)}
+                    </View>
+                    <View style={styles.devWrapper}>
+                        <Text style={styles.devTitle}>Development</Text>
+                        {[
+                            "Sandbox", "PushTest", "QRTest",
+                            "LocationTest", "AuthTest", "Lottie",
+                            "InnerRouter", "AppInfo"
+                        ].map(this.renderItemDev)}
+                    </View>
                 </ScrollView>
-            </ImageBackground>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    menu: {
-        width: '100%',
-        height: '100%'
-    },
     header: {
-        paddingTop: ViewUtils.isIphoneX() ? 52 : 28,
-        backgroundColor: "rgba(255,255,255,0.73)",
-        marginBottom: 8
+        paddingTop: ViewUtils.isIphoneX() ? 60 : 34,
+        alignItems: "center",
+        paddingBottom: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.listBorderColor,
+        backgroundColor: Colors.listBorderColor
     },
-    headerNoAuth: {
-        paddingTop: ViewUtils.isIphoneX() ? 64 : 40,
-        paddingBottom: 16,
+    userHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 12,
+        paddingBottom: 8,
+    },
+    username: {
+        fontSize: 18,
+        fontWeight: "700",
+        color: Colors.primaryColorDark,
+        marginBottom: 12,
+    },
+    balanceLabel: {
+        color: Colors.labelFont,
+        fontSize: 12,
+        opacity: 0.8,
+        // fontWeight: "700"
+    },
+    balanceValue: {
+        color: Colors.primaryColor,
+        fontSize: 20,
+        fontWeight: "700",
+        letterSpacing: 1,
     },
     logo: {
         paddingBottom: 12,
@@ -148,47 +195,25 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         paddingBottom: 2
     },
-    icon: {
-        color: Colors.tabSelected
-    },
-    userArea: {
-        paddingTop: 12,
-        alignItems: "center",
-        justifyContent: "center",
-        width: '100%',
-    },
-    username: {
-        fontSize: 16,
-        paddingTop: 12,
-        paddingBottom: 8,
-        color: Colors.primaryColorDark
-    },
-    balanceArea: {
-        marginTop: 12,
-        width: '100%',
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "white",
-        ...getPlatformElevation(2)
-    },
-    balanceLabel: {
-        color: Colors.labelFont,
-        fontSize: 16,
-        fontWeight: "700"
-    },
-    balanceValue: {
-        paddingRight: 15,
-        color: Colors.primaryColor,
-        fontSize: 22,
-        fontWeight: "700",
-        letterSpacing: 1,
+    btnWrapper: {
+        paddingVertical: 16,
+        width: 150,
     },
     authButton: {
         backgroundColor: Colors.primaryColor2,
-        width: 120,
-        marginVertical: 6,
-    }
+        borderRadius: 0
+    },
+    devWrapper: {
+        borderTopWidth: 1,
+        borderTopColor: Colors.listBorderColor,
+        paddingLeft: 12,
+        paddingVertical: 24,
+    },
+    devTitle: {
+        fontSize: 16,
+        fontWeight: "700",
+        opacity: 0.4,
+        marginLeft: 16,
+        marginBottom: 12,
+    },
 });

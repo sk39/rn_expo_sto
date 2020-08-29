@@ -6,8 +6,8 @@ import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import AssetImage from "./AssetImage";
-import BalanceList from "./BalanceList";
-import CashflowList from "./CashflowList";
+import Balance from "./Balance";
+import Cashflow from "./Cashflow";
 import HomeHeaderContents from "./HomeHeaderContents";
 import HomeHeader from "./HomeHeader";
 import {RootStoreProps} from "@store/RootStoreProvider";
@@ -73,8 +73,8 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
                         }
                         onScroll={this.onScroll}>
                         <View style={styles.areaCard}>
-                            <BalanceList navigation={navigation}
-                                         setRefreshListener={this.setRefreshListener}/>
+                            <Balance navigation={navigation}
+                                     setRefreshListener={this.setRefreshListener}/>
                         </View>
 
                         <View style={styles.splitterWrapper}>
@@ -82,8 +82,8 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
                         </View>
 
                         <View style={styles.areaCard}>
-                            <CashflowList navigation={navigation}
-                                          setRefreshListener={this.setRefreshListener}/>
+                            <Cashflow navigation={navigation}
+                                      setRefreshListener={this.setRefreshListener}/>
                         </View>
                     </ScrollView>
                 </View>

@@ -6,9 +6,14 @@ import Detail from './Detail/Detail';
 import ToolbarBackground from './Detail/ToolbarBackground';
 import Colors from "@constants/Colors";
 import {TabBarIcon} from "@common/components/ScreenIcon";
+import TokenState from "./TokenState";
+import {inject, observer} from "mobx-react";
 
-
+@inject("rootStore")
+@observer
 export default class Index extends Component<any, any> {
+
+    tokenState: TokenState;
 
     static navigationOptions = ({navigation}) => {
         const {state} = navigation;
@@ -23,27 +28,12 @@ export default class Index extends Component<any, any> {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            tabBarVisible: true,
             selectedItem: null,
-            // phase of animation
-            // phase-0:
-            // default
-            //
-            // phase-1:
-            // hide list toolbar, hide list bottom bar, show toolbar background and move item
-            //
-            // phase-2:
-            // show detail toolbar, show detail bottom bar, show details of item
-            //
-            // phase-3
-            // hide details of item
-            //
-            // phase-4
-            // hide detail toolbar, hide detail bootom bar, move item back to scrool view
             phase: 'phase-0',
         };
+        this.tokenState = new TokenState(props.navigation, props.rootStore)
+        this.tokenState.loadData(true)
     }
 
     onItemPressed = item => {
@@ -84,11 +74,13 @@ export default class Index extends Component<any, any> {
         return (
             <View style={{flex: 1}}>
                 <List
+                    tokenState={this.tokenState}
                     selectedItem={selectedItem}
                     onItemPress={this.onItemPressed}
                     phase={phase}
                 />
                 <Detail
+                    tokenState={this.tokenState}
                     phase={phase}
                     navigation={this.props.navigation}
                     selectedItem={selectedItem}
@@ -105,10 +97,6 @@ export default class Index extends Component<any, any> {
     render() {
         const {
             selectedItem,
-            goToDetail,
-            position,
-            detailItem,
-            goBackRequested,
             phase,
         } = this.state;
 

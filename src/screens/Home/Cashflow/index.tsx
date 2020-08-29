@@ -1,58 +1,36 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {inject, observer} from "mobx-react";
-import data from '@constants/dummyData/cashflow';
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import SimpleList from "@common/components/SimpleList";
 import CashflowLineChart from "./CashflowLineChart";
 import HomeChild from "../HomeChild";
-import CashflowCollection from "./CashflowCollection";
-import ViewUtils from "@common/utils/ViewUtils";
+import CashflowState from "./CashflowState";
 import Skeleton from "@common/components/Skeleton";
+import NoAuthMessage from "../NoAuthMessage";
+import BlockLoading from "@common/components/BlockLoading";
 
 @inject('rootStore')
 @observer
 export default class CashflowList extends HomeChild {
 
-    collection = new CashflowCollection();
+    cashflowState: CashflowState;
 
     constructor(props) {
         super(props);
+        const {auth, balance} = this.props.rootStore;
+        this.cashflowState = new CashflowState(auth, balance);
         this.renderItem = this.renderItem.bind(this);
     }
 
-    async loadData() {
-        const {auth, balance} = this.props.rootStore;
-        if (!auth.loggedIn) {
-            return;
-        }
-        try {
-            this.processing = true;
-            this.collection.setData([]);
-            await ViewUtils.sleep(1200);
-            let total = Number(balance.deposit);
-            const list = data.map(item => {
-                const totalBalance = total;
-                total = total - Number(item.cashBalance);
-                return Object.assign({}, item, {totalBalance})
-            });
-            if (total > 0) {
-                list.push({
-                    name: 'Deposit',
-                    date: "2017-01-01",
-                    cashBalance: String(total),
-                    totalBalance: total
-                })
-            }
+    loadData() {
+        this.cashflowState.loadData();
+    }
 
-            this.collection.setData(list);
-        } catch (e) {
-
-        } finally {
-            this.processing = false;
-        }
+    clear() {
+        this.cashflowState.clear();
     }
 
     renderItem({item, index}) {
@@ -87,14 +65,14 @@ export default class CashflowList extends HomeChild {
 
     renderList() {
         const {auth} = this.props.rootStore;
-        if (!auth.loggedIn || this.processing) {
+        if (!auth.loggedIn || this.cashflowState.processing) {
             return (
                 <Skeleton line={8}/>
             )
         }
         return (
             <SimpleList
-                data={this.collection.list}
+                data={this.cashflowState.list}
                 renderItem={this.renderItem}
             />
         )
@@ -108,13 +86,16 @@ export default class CashflowList extends HomeChild {
                         <Text style={styles.title}>Cashflow</Text>
                     </View>
                     <View style={styles.chartWrapper}>
-                        <CashflowLineChart collection={this.collection}/>
+                        <CashflowLineChart cashflowState={this.cashflowState}/>
                     </View>
                 </View>
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
-                {this.renderLoading()}
+                <NoAuthMessage/>
+                <BlockLoading
+                    loading={this.cashflowState.processing}
+                    disablesLayerColor="rgba(247,246,255,0.66)"/>
             </View>
         )
     }
@@ -144,13 +125,10 @@ const styles = StyleSheet.create({
     },
     chartWrapper: {
         flex: 1,
-        // paddingTop: 16,
         paddingLeft: 22,
-        // paddingBottom: 8,
     },
     listWrapper: {
         minHeight: 80,
-        // paddingLeft: 12,
     },
     row: {
         // flex: 1,

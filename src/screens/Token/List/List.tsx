@@ -2,12 +2,11 @@ import React, {PureComponent} from 'react';
 import {Easing, FlatList, StatusBar, StyleSheet, View} from 'react-native';
 import {SharedElement} from '../animations';
 import Toolbar from './Toolbar';
-import data from '@constants/dummyData/sto';
 import {ListItem} from "../ListItem";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
-import ViewUtils from "@common/utils/ViewUtils";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
+import BlockLoading from "@common/components/BlockLoading";
 
 @observer
 export default class List extends PureComponent<any, any> {
@@ -24,12 +23,19 @@ export default class List extends PureComponent<any, any> {
         this.sharedElementRefs = {};
     }
 
+    componentDidMount() {
+        this.props.tokenState.navigation.addListener(
+            'didFocus',
+            () => {
+                this.props.tokenState.loadData(true);
+            }
+        );
+    }
+
     onListItemPressed = item => {
         const {onItemPress} = this.props;
         this.setState({selectedItem: item});
-
         onItemPress(item);
-
         this.sharedElementRefs[item.name].moveToDestination();
     };
     onMoveToDestinationWillStart = () => {
@@ -50,9 +56,7 @@ export default class List extends PureComponent<any, any> {
     renderItem = ({item, index}) => {
         const {opacityOfSelectedItem} = this.state;
         const {selectedItem} = this.props;
-
         const isHidden = selectedItem && selectedItem.name !== item.name;
-        const isSelected = selectedItem && selectedItem.name === item.name;
         const id = item.name;
 
         return (
@@ -85,24 +89,25 @@ export default class List extends PureComponent<any, any> {
     };
 
     async onRefresh() {
-        // TODO: dummy
+        const {tokenState} = this.props;
         this.refreshing = true;
-        await ViewUtils.sleep(1000);
+        await tokenState.loadData();
         this.refreshing = false;
     }
 
     render() {
         const {opacityOfSelectedItem} = this.state;
-        const {selectedItem, phase} = this.props;
-
+        const {phase, tokenState} = this.props;
+        const {list, processing} = tokenState;
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
                 <Toolbar
                     isHidden={phase !== 'phase-0'}
                 />
+                <BlockLoading loading={processing}/>
                 <FlatList
-                    data={data}
+                    data={list}
                     extraData={{phase, opacityOfSelectedItem}}
                     keyExtractor={item => item.name}
                     refreshing={this.refreshing}

@@ -1,4 +1,5 @@
 import {action, computed, observable} from "mobx";
+import {Balance} from "@common/model/domainModel";
 
 const Colors = [
     'rgb(255,169,0)',
@@ -6,18 +7,34 @@ const Colors = [
     'rgb(185,112,252)'
 ];
 
-export interface Balance {
-    name: string;
-    symbol: string;
-    balance: number;
-    balanceBaseCurrency: number;
+export interface BalanceVM extends Balance {
     color: string;
 }
 
-export default class BalanceCollection {
+export default class BalanceState {
 
-    @observable list: Balance[] = [];
+    @observable processing = false;
+    @observable list: BalanceVM[] = [];
     @observable total: number = null;
+
+    balancesStore;
+
+    constructor(balancesStore) {
+        this.balancesStore = balancesStore;
+    }
+
+    async loadData(): Promise<BalanceVM[]> {
+        const store = this.balancesStore;
+        try {
+            this.processing = true;
+            await store.loadData();
+            this.setData(store.balances, store.totalBalance);
+            return this.list;
+        } catch (e) {
+        } finally {
+            this.processing = false;
+        }
+    }
 
     @action
     setData(list, total) {
@@ -62,6 +79,3 @@ export default class BalanceCollection {
         });
     }
 }
-
-
-

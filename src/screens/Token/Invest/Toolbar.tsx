@@ -2,16 +2,17 @@ import React, {PureComponent} from 'react';
 import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Colors from "@constants/Colors";
+import {STO} from "@common/model/domainModel";
+import Layout from "@constants/Layout";
 
 interface Props {
     onBackPress: (e?: any) => void,
-    item: any
+    item: STO
 }
 
 class Toolbar extends PureComponent<Props> {
     render() {
         const {onBackPress, item} = this.props;
-
         if (!item) {
             return null;
         }
@@ -35,15 +36,10 @@ class Toolbar extends PureComponent<Props> {
                             <Text style={styles.titleBackText}>Back</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.titleWrapper}>
-                        <View>
-                            <Text style={styles.titleText}>Invest</Text>
-                        </View>
-                        <View style={styles.nameWrapper}>
-                            <Text style={styles.titleNameText}>{item.name}</Text>
-                            <Text style={styles.titleSymbolText}>{item.symbol}</Text>
-                        </View>
-                    </View>
+                </View>
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.titleText}>Invest</Text>
+                    <Text style={styles.titleNameText}>{item.name}</Text>
                 </View>
             </ImageBackground>
 
@@ -53,7 +49,7 @@ class Toolbar extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        height: 255,
+        height: Layout.window.height - 400,
         width: null,
         paddingTop: 36,
         paddingBottom: 24,
@@ -63,7 +59,7 @@ const styles = StyleSheet.create({
     mask: {
         zIndex: 1,
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: "rgba(0,0,0,0.58)"
+        backgroundColor: "rgba(0,0,0,0.4)"
     },
     statusBar: {
         height: 24
@@ -72,17 +68,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         flexDirection: "row",
+        zIndex: 2
     },
     titleBackText: {
         color: "white",
         marginLeft: 8,
     },
     titleWrapper: {
-        flexDirection: "row",
-        paddingHorizontal: 32,
-        // paddingTop: 24,
-        justifyContent: "space-between",
-        alignItems: "flex-end"
+        position: "absolute",
+        left: 36,
+        bottom: 36,
+        zIndex:2,
     },
     nameWrapper: {
         paddingTop: 4,
@@ -91,23 +87,16 @@ const styles = StyleSheet.create({
         alignItems: "flex-end"
     },
     titleText: {
-        fontSize: 24,
-        color: "rgb(224,211,255)",
+        fontSize: 18,
+        color: Colors.primaryColorLight,
         fontWeight: "700",
-        letterSpacing: 4,
+        letterSpacing: 2,
     },
     titleNameText: {
         color: "white",
-        fontSize: 32,
+        fontSize: 26,
         fontWeight: "700",
         letterSpacing: 3
-    },
-    titleSymbolText: {
-        fontSize: 24,
-        marginTop: 10,
-        fontWeight: "700",
-        letterSpacing: 1,
-        color: Colors.primaryColorLight,
     },
     backContainer: {
         paddingVertical: 8,

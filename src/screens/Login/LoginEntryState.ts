@@ -2,7 +2,7 @@ import {action, computed, observable} from "mobx";
 import InputState from "@common/components/Input/InputState";
 import s from "underscore.string";
 
-export default class LoginEntryStore {
+export default class LoginEntryState {
     @observable initializing: boolean = false;
     @observable processing: boolean = false;
     @observable errorMessage: string = null;
@@ -34,8 +34,6 @@ export default class LoginEntryStore {
     error(errorMessage: string) {
         this.errorMessage = errorMessage;
     }
-
-
 }
 
 

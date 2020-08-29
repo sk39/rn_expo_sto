@@ -26,14 +26,19 @@ export default class AnimatedCard extends Component<Props> {
 
     componentDidMount() {
         const {detailMode, isDetail, phase} = this.props;
-
-        if (detailMode && isDetail && phase === "phase-1") {
+        if (detailMode && isDetail && phase === "phase-x") {
+            this.marginTop.setValue(0);
+            this.marginHorizontal.setValue(0);
+            this.borderRadius.setValue(0);
+            this.elevation.setValue(1);
+            this.imageHeight.setValue(240);
+        } else if (detailMode && isDetail && phase === "phase-1") {
             this.marginTop.setValue(12);
             this.marginHorizontal.setValue(16);
             this.borderRadius.setValue(6);
             this.elevation.setValue(9);
             this.imageHeight.setValue(150);
-            1
+
             this.imageScrollHeight.setValue(150);
             Animated.parallel([
                 Animated.timing(this.marginTop, {

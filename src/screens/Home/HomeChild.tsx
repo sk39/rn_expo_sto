@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {RootStoreProps} from "@store/RootStoreProvider";
-import BlockLoading from "@common/components/BlockLoading";
-import {observable} from "mobx";
-import NoAuthMessage from "./NoAuthMessage";
+import {reaction} from "mobx";
 
 interface Props {
     setRefreshListener: Function;
@@ -10,7 +8,7 @@ interface Props {
 
 export default class HomeChild extends Component<Props & NavigationProps & RootStoreProps> {
 
-    @observable processing = false;
+    disposer;
 
     constructor(props) {
         super(props);
@@ -19,24 +17,35 @@ export default class HomeChild extends Component<Props & NavigationProps & RootS
     }
 
     componentDidMount() {
-        this.props.navigation.addListener(
-            'didFocus',
-            () => {
-                this.loadData();
+        // this.props.navigation.addListener(
+        //     'didFocus',
+        //     () => {
+        //         this.loadData();
+        //     }
+        // );
+        this.loadData();
+        const {auth} = this.props.rootStore;
+        this.disposer = reaction(
+            () => auth.loggedIn,
+            (loggedIn) => {
+                if (loggedIn) {
+                    this.loadData();
+                } else {
+                    this.clear();
+                }
             }
-        );
+        )
+    }
+
+    componentWillUnmount() {
+        this.disposer();
     }
 
     loadData() {
         throw Error("Please override");
     }
 
-    renderLoading() {
-        return [
-            <NoAuthMessage key="noauth"/>,
-            <BlockLoading key="loading"
-                          loading={this.processing}
-                          disablesLayerColor="rgba(247,246,255,0.66)"/>
-        ]
+    clear() {
+
     }
 }

@@ -3,7 +3,7 @@ import {StatusBar, StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {Button, Icon} from "react-native-elements";
-import LoginEntryStore from "./LoginEntryStore";
+import LoginEntryState from "./LoginEntryState";
 import PageLoading from '@common/components/PageLoading';
 import Input from "@common/components/Input/Input";
 import Colors from "@constants/Colors";
@@ -19,7 +19,7 @@ import DisableLayer from "@common/components/DisableLayer";
 @observer
 export default class LoginEntryScreen extends Component<NavigationProps & RootStoreProps> {
 
-    store: LoginEntryStore = new LoginEntryStore();
+    loginState = new LoginEntryState();
     @observable enableBiometrics = false;
 
     constructor(props) {
@@ -34,9 +34,9 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
         const {auth, settings} = this.props.rootStore;
         const {userId, password} = auth;
         if (!s.isBlank(userId) && !s.isBlank(password)) {
-            this.store.setUserId(userId);
+            this.loginState.setUserId(userId);
             if (settings.enableLocalAuth) {
-                this.store.initializing = true;
+                this.loginState.initializing = true;
                 setTimeout(() => this.localAuth(userId, password), 300);
             }
         }
@@ -50,33 +50,33 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
             }
             const res = await LocalAuthentication.authenticateAsync({promptMessage: "Sign In"});
             if (res.success) {
-                this.store.setUserId(userId);
-                this.store.setPassword(password);
+                this.loginState.setUserId(userId);
+                this.loginState.setPassword(password);
                 await this.handleLogin();
             }
         } catch (e) {
             console.warn(e);
         } finally {
-            this.store.initializing = false;
+            this.loginState.initializing = false;
         }
     }
 
     async handleLogin() {
         const {auth} = this.props.rootStore;
         const {navigate} = this.props.navigation;
-        if (!this.store.validate()) {
+        if (!this.loginState.validate()) {
             return;
         }
         try {
-            this.store.processing = true;
-            const {userId, password} = this.store;
+            this.loginState.processing = true;
+            const {userId, password} = this.loginState;
             await auth.signIn(userId.value, password.value)
             auth.setUpOtp ? navigate('VerifyMfa') : navigate('SetupMfa');
         } catch (e) {
             // TODO:error handle
-            this.store.error(e);
+            this.loginState.error(e);
         } finally {
-            this.store.processing = false;
+            this.loginState.processing = false;
         }
     }
 
@@ -97,21 +97,21 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
         return (
             <Container>
                 <StatusBar barStyle="dark-content" backgroundColor={Colors.backColor}/>
-                <PageLoading loading={this.store.processing}/>
-                <DisableLayer show={this.store.initializing}/>
+                <PageLoading loading={this.loginState.processing}/>
+                <DisableLayer show={this.loginState.initializing}/>
                 <View style={styles.back}>
                     <View style={styles.headerArea}>
                         <Text style={styles.title}>Welcome Back</Text>
                         <Text style={styles.subTitle}>Sign in to STO Demo</Text>
                     </View>
                     <View style={styles.form}>
-                        <Input inputState={this.store.userId}
+                        <Input inputState={this.loginState.userId}
                                label="User Id"
                                leftIcon={
                                    <Icon name='user' type="feather" color='#a376c2' size={16}/>
                                }
                         />
-                        <Input inputState={this.store.password}
+                        <Input inputState={this.loginState.password}
                                label="Password"
                                secureTextEntry
                                leftIcon={
@@ -145,11 +145,11 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                         />
                     </View>
                 </View>
-                <Dialog show={this.store.hasError}
+                <Dialog show={this.loginState.hasError}
                         btnText="Close"
                         error
-                        message={this.store.errorMessage}
-                        onPress={() => this.store.error(null)}/>
+                        message={this.loginState.errorMessage}
+                        onPress={() => this.loginState.error(null)}/>
             </Container>
         );
     }
