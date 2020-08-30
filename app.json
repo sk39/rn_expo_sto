@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#130F3C"
+      "backgroundColor": "#fff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -31,12 +31,12 @@
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/android/foreground.png",
-        "backgroundColor": "#130f3c"
+        "backgroundColor": "#fff"
       }
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#fff",
+      "backgroundColor": "#130f3c",
       "translucent": true
     },
     "packagerOpts": {

@@ -26,11 +26,7 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         settings.enableLocalAuth = val
         await settings.saveStorage();
     }
-
-    toast(type: string, msg: string) {
-
-    }
-
+    
     async clear() {
         const {rootStore} = this.props;
         try {
