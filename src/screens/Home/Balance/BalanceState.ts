@@ -1,11 +1,6 @@
 import {action, computed, observable} from "mobx";
 import {Balance} from "@common/model/domainModel";
-
-const Colors = [
-    'rgb(255,169,0)',
-    'rgb(253,110,125)',
-    'rgb(185,112,252)'
-];
+import {PieChartColor} from "@constants/Colors";
 
 export interface BalanceVM extends Balance {
     color: string;
@@ -44,7 +39,7 @@ export default class BalanceState {
                 symbol: d.symbol,
                 balance: d.balance,
                 balanceBaseCurrency: d.balanceBaseCurrency,
-                color: Colors[i]
+                color: PieChartColor[i] || "#ccc"
             }
         });
         this.total = total;
@@ -64,7 +59,7 @@ export default class BalanceState {
                 defaultDataList.push({
                     key: i + 1,
                     amount: 10,
-                    svg: {fill: Colors[i]},
+                    svg: {fill: PieChartColor[i] || "#ccc"},
                 })
             }
             return defaultDataList;

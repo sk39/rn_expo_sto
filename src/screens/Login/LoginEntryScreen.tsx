@@ -102,7 +102,7 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                 <View style={styles.back}>
                     <View style={styles.headerArea}>
                         <Text style={styles.title}>Welcome Back</Text>
-                        <Text style={styles.subTitle}>Sign in to STO Demo</Text>
+                        <Text style={styles.subTitle}>Sign in to Digital Security</Text>
                     </View>
                     <View style={styles.form}>
                         <Input inputState={this.loginState.userId}
@@ -140,6 +140,7 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                         <Button buttonStyle={styles.bottomBtn}
                                 title='Sign Up'
                                 type='clear'
+                            // icon={<Logo size={28} />}
                                 titleStyle={styles.bottomBtnPrimaryText}
                                 onPress={this.linkSignUp}
                         />
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
     form: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 80
+        paddingBottom: 60
     },
     btn: {
         marginTop: 24,
@@ -202,7 +203,6 @@ const styles = StyleSheet.create({
         color: Colors.labelFontThin
     },
     bottomArea: {
-        // backgroundColor: Colors.primaryColorThin2,
         borderTopWidth: 1,
         borderTopColor: Colors.primaryColorThin2,
         width: "100%",

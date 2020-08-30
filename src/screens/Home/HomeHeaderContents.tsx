@@ -42,9 +42,7 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
         const {auth} = this.props.rootStore;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>
-                    STO Platform Demo
-                </Text>
+                <Text style={styles.title}>Digital Security</Text>
                 {auth.loggedIn ? this.renderContentsAuth(auth) : this.renderContentsNoAuth()}
             </View>
         )
@@ -64,7 +62,8 @@ const styles = StyleSheet.create({
         color: Colors.primaryColorLight,
         fontSize: 20,
         fontWeight: "700",
-        opacity: 0.65
+        letterSpacing: 2,
+        opacity: 0.42
     },
     authButton: {
         backgroundColor: Colors.primaryColor2,
@@ -74,8 +73,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: 12,
-        paddingLeft: 16,
+        paddingTop: 16,
+        paddingLeft: 8,
     },
     username: {
         marginLeft: 16,
@@ -84,7 +83,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     noAuth: {
-        paddingTop: 16,
-        // paddingLeft: 16,
+        paddingTop: 24
     }
 });

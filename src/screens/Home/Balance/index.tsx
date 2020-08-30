@@ -122,7 +122,7 @@ export default class BalanceList extends HomeChild {
         const {auth} = this.props.rootStore;
         if (!auth.loggedIn || this.balanceState.processing) {
             return (
-                <Skeleton line={3}/>
+                <Skeleton line={4}/>
             )
         }
         return (

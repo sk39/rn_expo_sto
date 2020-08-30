@@ -8,6 +8,7 @@ import ViewUtils from "@common/utils/ViewUtils";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {inject, observer} from "mobx-react";
+import Logo from "@common/components/Logo";
 
 @inject('rootStore')
 @observer
@@ -62,8 +63,9 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
     renderHeaderNoAuth() {
         return (
             <View style={styles.header}>
-                <View style={styles.logo}>
-                    <Text style={styles.logoText}>STO Platform Demo</Text>
+                <View style={styles.logoWrapper}>
+                    <Logo/>
+                    <Text style={styles.logoText}>Digital Security</Text>
                 </View>
                 <View style={styles.btnWrapper}>
                     <Button title='Sign In'
@@ -173,14 +175,18 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing: 1,
     },
-    logo: {
-        paddingBottom: 12,
+    logoWrapper: {
+        marginTop: -6,
+        paddingBottom: 6,
         alignItems: "center",
     },
     logoText: {
+        marginTop: 2,
         color: Colors.labelFont,
+        opacity: 0.8,
         fontWeight: "700",
         fontSize: 18,
+        letterSpacing: 2,
     },
     item: {
         paddingLeft: 22,

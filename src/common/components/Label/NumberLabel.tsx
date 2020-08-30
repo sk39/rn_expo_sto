@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {Text} from "native-base";
-import {Platform, StyleProp, StyleSheet, TextStyle, View} from "react-native";
+import {StyleProp, StyleSheet, TextStyle, View} from "react-native";
 import ViewUtils from "@common/utils/ViewUtils";
-import s from "underscore.string";
 import {Icon} from "react-native-elements";
 import Colors from "@constants/Colors";
 

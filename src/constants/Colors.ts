@@ -7,6 +7,7 @@ const primaryColorLight3 = '#e6e6fa';
 const primaryColorDark = '#39307e';
 const secondColor = '#fd8418';
 
+
 export default {
     fontColor: "#201922",
     backColor: "#f6f7ff",
@@ -27,8 +28,8 @@ export default {
     tabSelected: primaryColor,
     tabBar: '#f6f7ff',
     toolBar: '#f6f7ff',
-    toolBarInverse: "#0f153c",
-    linkColor: '#00f',
+    toolBarInverse: "#130f3c",
+    linkColor: '#0000ff',
     disablesLayer: "rgba(239,244,246,0.66)",
     disablesLayerDark: "rgba(11,10,25,0.83)",
     cardBackColor: '#fff',
@@ -38,3 +39,19 @@ export default {
     error: "#ff330f",
     listBorderColor: "rgba(15,20,92,0.08)"
 };
+
+export const ChartColor = [
+    '#f15073',
+    '#ff7557',
+    '#ffab47',
+    '#ca4fd9',
+    '#9559FA',
+];
+
+export const PieChartColor = [
+    'rgb(255,169,0)',
+    'rgb(253,110,125)',
+    'rgb(185,112,252)',
+    'rgb(67,114,255)',
+    'rgb(187,252,112)',
+];

@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 36,
         bottom: 36,
-        zIndex:2,
+        zIndex: 2,
     },
     nameWrapper: {
         paddingTop: 4,
