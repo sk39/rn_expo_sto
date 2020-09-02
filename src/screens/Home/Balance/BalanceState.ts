@@ -63,6 +63,14 @@ export default class BalanceState {
                 })
             }
             return defaultDataList;
+        } else if (this.list.length === 1) {
+            if (this.list[0].balanceBaseCurrency === 0) {
+                return [{
+                    key: 1,
+                    amount: 10,
+                    svg: {fill: PieChartColor[0] || "#ccc"},
+                }];
+            }
         }
 
         return this.list.map((d, i) => {

@@ -1,0 +1,77 @@
+{
+  "btn": {
+    "ok": "OK",
+    "ng": "NG",
+    "cancel": "Cancel",
+    "close": "Close",
+    "detail": "Detail",
+    "invest": "Invest",
+    "verify": "Verify",
+    "sign-in": "Sign In",
+    "sign-out": "Sign Out",
+    "sign-up": "Sign Up"
+  },
+  "label": {
+  },
+  "msg": {
+    "noData": "No Data",
+    "canAfterAuthed": "Enabled after Sign in"
+  },
+  "error": {
+    "input": {
+      "required": "This field is required. Please enter."
+    }
+  },
+  "navigation": {
+    "menu": {
+      "Home": "Home",
+      "Tokens": "Tokens",
+      "Settings": "Settings"
+    },
+    "tab": {
+      "Home": "Home",
+      "Tokens": "Tokens",
+      "More": "More"
+    }
+  },
+  "screen": {
+    "login": {
+      "title": "Welcome Back",
+      "subTitle": "Sign in to Digital Security",
+      "userId": "User Id",
+      "password": "Password",
+      "skip": "Skip",
+      "forgotPassword": "Forgot Password?"
+    },
+    "2fa": {
+      "pageTitle": "2FA Authentication",
+      "title": "Verify Code",
+      "subTitle": "Enter your OTP code here",
+      "launchAuthApp": "Launch authentication app"
+    },
+    "setup2fa": {
+      "pageTitle": "Setup 2FA",
+      "explanationRegister": "Please register the following account to the authentication application.",
+      "explanationVerify": "After registering the account, enter the verification code displayed on the verification application.",
+      "registerAuthApp": "Register to authentication app",
+      "registerOther": "Register other device"
+    },
+    "settings": {
+      "pageTitle": "Settings",
+      "biometric": {
+        "title": "Biometric",
+        "subTitle": "Enable Biometric. FaceID and TouchID (iOS) or the Biometric Prompt (Android)."
+      },
+      "initialize": {
+        "title": "Initialize",
+        "subTitle": "Initialize all settings. Remove all storage app data.",
+        "done": "Initialize",
+        "message": {
+          "success": "Initialization has completed!",
+          "error": "Failed Initialize!"
+        }
+      }
+    }
+  }
+}
+

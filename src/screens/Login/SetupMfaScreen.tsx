@@ -92,16 +92,16 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
                     <View style={styles.dispArea}>
                         <Text style={styles.numText}>1. </Text>
                         <Text style={styles.title}>
-                            Please register the following account to the authentication application.
+                            {t("screen.setup2fa.explanationRegister")}
                         </Text>
                     </View>
                     <Button buttonStyle={styles.btn}
-                            title='Register to authentication app'
+                            title={t("screen.setup2fa.registerAuthApp")}
                             titleStyle={styles.btnText}
                             onPress={this.launchApp}
                     />
                     <Button buttonStyle={styles.link}
-                            title='Register other device'
+                            title={t("screen.setup2fa.registerOther")}
                             type='clear'
                             titleStyle={styles.linkText}
                             onPress={() => this.showQRCode = true}
@@ -111,14 +111,13 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
                     <View style={styles.dispArea}>
                         <Text style={styles.numText}>2. </Text>
                         <Text style={styles.title}>
-                            After registering the account, enter the verification code displayed
-                            on the verification application.
+                            {t("screen.setup2fa.explanationVerify")}
                         </Text>
                     </View>
                     <View style={styles.form}>
                         <InputCode inputState={this.code}/>
                         <Button buttonStyle={styles.btn}
-                                title='Verify'
+                                title={t("btn.verify")}
                                 disabled={this.code.value.length !== 6}
                                 titleStyle={styles.btnText}
                                 onPress={this.handleVerify}
@@ -126,7 +125,7 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
                     </View>
                 </View>
                 <Dialog show={this.showQRCode}
-                        btnText="Close"
+                        btnText={t("btn.close")}
                         onPress={() => this.showQRCode = false}>
                     <OTPQRCode otpauth={auth.otpauth}/>
                 </Dialog>

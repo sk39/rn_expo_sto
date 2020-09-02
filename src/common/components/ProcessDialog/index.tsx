@@ -58,7 +58,7 @@ export default class ProcessDialog extends Component<Props> {
         const {showConfirm, processing, isFinish, isError, errorMsg} = model;
         if (isFinish) {
             return (
-                <DialogContent show={this.finAnimation} btnText="Close" onPress={this.onClose}>
+                <DialogContent show={this.finAnimation} btnText={t("btn.close")} onPress={this.onClose}>
                     <View style={styles.textWrapper}>
                         <Text style={[styles.msg, styles.successMsg]}>Success!</Text>
                     </View>
@@ -66,7 +66,7 @@ export default class ProcessDialog extends Component<Props> {
             )
         } else if (isError) {
             return (
-                <DialogContent show={this.finAnimation} btnText="Close" onPress={this.onError}>
+                <DialogContent show={this.finAnimation} btnText={t("btn.close")} onPress={this.onError}>
                     <View style={styles.textWrapper}>
                         <Text style={[styles.msg, styles.errorMsg]}>{errorMsg}</Text>
                     </View>
@@ -90,7 +90,7 @@ export default class ProcessDialog extends Component<Props> {
         const {showDialog, processing, isFinish, isError} = model;
         return (
             <Modal transparent
-                   animationType="none"
+                   animationType="fade"
                    visible={showDialog}
                    onRequestClose={() => null}>
                 <View style={[

@@ -10,8 +10,7 @@ import BalancePieChart from "./BalancePieChart";
 import BalanceState from "./BalanceState";
 import HomeChild from "../HomeChild";
 import Skeleton from "@common/components/Skeleton";
-import NoAuthMessage from "../NoAuthMessage";
-import BlockLoading from "@common/components/BlockLoading";
+import HomeListSupport from "../HomeListSupport";
 
 @inject("rootStore")
 @observer
@@ -51,7 +50,7 @@ export default class BalanceList extends HomeChild {
             actions.push({label: "Invest", method: this.showInvest.bind(this)})
         }
 
-        actions.push({label: "Cancel"});
+        actions.push({label: t("btn.cancel")});
         const CANCEL_INDEX = actions.length - 1;
         ActionSheet.show(
             {
@@ -120,7 +119,7 @@ export default class BalanceList extends HomeChild {
 
     renderList() {
         const {auth} = this.props.rootStore;
-        if (!auth.loggedIn || this.balanceState.processing) {
+        if (!auth.loggedIn || this.balanceState.list.length === 0) {
             return (
                 <Skeleton line={4}/>
             )
@@ -138,7 +137,9 @@ export default class BalanceList extends HomeChild {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={{flex: 1}}>
-                        <Text style={styles.title}>Your Balances</Text>
+                        <View style={styles.titleWrapper}>
+                            <Text style={styles.title}>Your Balances</Text>
+                        </View>
                         <View style={styles.totalBalanceArea}>
                             <Text style={styles.totalBalanceLabel}>
                                 Total
@@ -158,10 +159,8 @@ export default class BalanceList extends HomeChild {
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
-                <NoAuthMessage/>
-                <BlockLoading
-                    loading={balanceState.processing}
-                    disablesLayerColor="rgba(247,246,255,0.66)"/>
+                <HomeListSupport processing={this.balanceState.processing}
+                                 list={this.balanceState.list}/>
             </View>
         )
     }
@@ -176,6 +175,10 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
         justifyContent: "space-between",
         flexDirection: "row",
+    },
+    titleWrapper: {
+        zIndex: 1,
+        flexWrap: "nowrap"
     },
     title: {
         marginTop: 8,
@@ -194,12 +197,10 @@ const styles = StyleSheet.create({
     listWrapper: {
         minHeight: 40,
         paddingTop: 12,
-        // paddingLeft: 12,
     },
     totalBalanceArea: {
         paddingTop: 20,
         paddingLeft: 24,
-        alignItems: "flex-start",
     },
     totalBalanceLabel: {
         color: Colors.labelFont,

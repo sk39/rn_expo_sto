@@ -85,19 +85,19 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
                 <PageLoading loading={this.processing}/>
                 <View style={styles.back}>
                     <View style={styles.headerArea}>
-                        <Text style={styles.title}>Verify Code</Text>
-                        <Text style={styles.subTitle}>Enter your OTP code here</Text>
+                        <Text style={styles.title}>{t("screen.2fa.title")}</Text>
+                        <Text style={styles.subTitle}>{t("screen.2fa.subTitle")}</Text>
                     </View>
                     <View style={styles.form}>
                         <InputCode inputState={this.code}/>
                         <Button buttonStyle={styles.btn}
-                                title='Verify'
+                                title={t("btn.verify")}
                                 disabled={this.code.value.length !== 6}
                                 titleStyle={styles.btnText}
                                 onPress={this.handleVerify}
                         />
                         <Button buttonStyle={styles.link}
-                                title='Launch authentication app'
+                                title={t("screen.2fa.launchAuthApp")}
                                 type='clear'
                                 titleStyle={styles.linkText}
                                 onPress={this.launchApp}
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
     },
     headerArea: {
         paddingBottom: 56,
-        paddingLeft: 50,
-        width: "100%",
+        paddingHorizontal: 50,
+        // width: "100%",
         justifyContent: "flex-start",
         alignItems: "flex-start",
     },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         color: Colors.labelFontThin
     },
     subTitle: {
-        marginTop: 4,
-        color: Colors.labelFontThin
+        marginTop: 6,
+        color: Colors.labelFontThin,
     }
 });

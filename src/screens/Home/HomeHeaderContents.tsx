@@ -30,7 +30,7 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
     renderContentsNoAuth() {
         return (
             <View style={styles.noAuth}>
-                <Button title='Sign In'
+                <Button title={t("btn.sign-in")}
                         buttonStyle={styles.authButton}
                         onPress={() => this.props.navigation.navigate("Login")}
                 />

@@ -6,7 +6,7 @@ import {ListItem} from "../ListItem";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
-import BlockLoading from "@common/components/BlockLoading";
+import ListPageSupport from "@common/components/ListPageSupport";
 
 @observer
 export default class List extends PureComponent<any, any> {
@@ -105,7 +105,6 @@ export default class List extends PureComponent<any, any> {
                 <Toolbar
                     isHidden={phase !== 'phase-0'}
                 />
-                <BlockLoading loading={processing}/>
                 <FlatList
                     data={list}
                     extraData={{phase, opacityOfSelectedItem}}
@@ -114,6 +113,7 @@ export default class List extends PureComponent<any, any> {
                     onRefresh={this.onRefresh}
                     renderItem={this.renderItem}
                 />
+                <ListPageSupport processing={processing} list={list}/>
             </View>
         );
     }

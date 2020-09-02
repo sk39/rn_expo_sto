@@ -10,12 +10,11 @@ import Balance from "./Balance";
 import Cashflow from "./Cashflow";
 import HomeHeaderContents from "./HomeHeaderContents";
 import HomeHeader from "./HomeHeader";
-import {RootStoreProps} from "@store/RootStoreProvider";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
 
 @observer
-export default class Home extends Component<NavigationProps & RootStoreProps> {
+export default class Home extends Component<NavigationProps> {
 
     private headerRef = React.createRef<HomeHeader>();
 
@@ -31,7 +30,7 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
     }
 
     static navigationOptions = {
-        tabBarLabel: "Home",
+        tabBarLabel: t("navigation.tab.Home"),
         tabBarIcon: ({focused}) => (
             <TabBarIcon screenName="Home" focused={focused}/>
         )

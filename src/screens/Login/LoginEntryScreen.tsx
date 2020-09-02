@@ -9,7 +9,6 @@ import Input from "@common/components/Input/Input";
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {observable} from "mobx";
-import s from "underscore.string";
 import * as LocalAuthentication from 'expo-local-authentication';
 import Layout from "@constants/Layout";
 import Dialog from "@common/components/Dialog";
@@ -48,7 +47,7 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
             if (!hasHardware) {
                 return;
             }
-            const res = await LocalAuthentication.authenticateAsync({promptMessage: "Sign In"});
+            const res = await LocalAuthentication.authenticateAsync({promptMessage: t("btn.sign-in")});
             if (res.success) {
                 this.loginState.setUserId(userId);
                 this.loginState.setPassword(password);
@@ -101,30 +100,30 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                 <DisableLayer show={this.loginState.initializing}/>
                 <View style={styles.back}>
                     <View style={styles.headerArea}>
-                        <Text style={styles.title}>Welcome Back</Text>
-                        <Text style={styles.subTitle}>Sign in to Digital Security</Text>
+                        <Text style={styles.title}>{t("screen.login.title")}</Text>
+                        <Text style={styles.subTitle}>{t("screen.login.subTitle")}</Text>
                     </View>
                     <View style={styles.form}>
                         <Input inputState={this.loginState.userId}
-                               label="User Id"
+                               label={t("screen.login.userId")}
                                leftIcon={
                                    <Icon name='user' type="feather" color='#a376c2' size={16}/>
                                }
                         />
                         <Input inputState={this.loginState.password}
-                               label="Password"
+                               label={t("screen.login.password")}
                                secureTextEntry
                                leftIcon={
                                    <Icon name='lock' type="feather" color='#a376c2' size={16}/>
                                }
                         />
                         <Button buttonStyle={styles.btn}
-                                title='Sign In'
+                                title={t("btn.sign-in")}
                                 titleStyle={styles.btnText}
                                 onPress={this.handleLogin}
                         />
                         <Button buttonStyle={styles.forgotPassword}
-                                title='Forgot Password?'
+                                title={t("screen.login.forgotPassword")}
                                 type='clear'
                                 titleStyle={styles.forgotPasswordText}
                                 onPress={this.linkForgotPassword}
@@ -132,22 +131,21 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                     </View>
                     <View style={styles.bottomArea}>
                         <Button buttonStyle={styles.bottomBtn}
-                                title='Skip'
+                                title={t("screen.login.skip")}
                                 type='clear'
                                 titleStyle={styles.bottomBtnText}
                                 onPress={this.skip}
                         />
                         <Button buttonStyle={styles.bottomBtn}
-                                title='Sign Up'
+                                title={t("btn.sign-up")}
                                 type='clear'
-                            // icon={<Logo size={28} />}
                                 titleStyle={styles.bottomBtnPrimaryText}
                                 onPress={this.linkSignUp}
                         />
                     </View>
                 </View>
                 <Dialog show={this.loginState.hasError}
-                        btnText="Close"
+                        btnText={t("btn.close")}
                         error
                         message={this.loginState.errorMessage}
                         onPress={() => this.loginState.error(null)}/>

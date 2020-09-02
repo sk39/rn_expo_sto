@@ -26,22 +26,22 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         settings.enableLocalAuth = val
         await settings.saveStorage();
     }
-    
+
     async clear() {
         const {rootStore} = this.props;
         try {
             this.initializing = true;
             await rootStore.clear();
             Toast.show({
-                text: "Initialization has completed!",
-                buttonText: "Okay",
+                text: t("screen.settings.initialize.message.success"),
+                buttonText: t("btn.close"),
                 duration: 2000,
                 type: "success"
             })
         } catch (e) {
             Toast.show({
-                text: "Failed Initialize!",
-                buttonText: "Okay",
+                text: t("screen.settings.initialize.message.error"),
+                buttonText: t("btn.close"),
                 duration: 2000,
                 type: "danger"
             })
@@ -56,14 +56,12 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
             <Container style={styles.container}>
                 <View style={styles.statusBar}/>
                 {/*<StatusBar barStyle="light-content" translucent backgroundColor={Colors.toolBarInverse}/>*/}
-                <PageHeader title="Settings"/>
+                <PageHeader title={t("screen.settings.pageTitle")}/>
                 <View style={styles.row}>
                     <View style={styles.header}>
                         <View style={{flex: 1}}>
-                            <Text style={styles.title}>Enable Biometric</Text>
-                            <Text style={styles.subTitle}>
-                                FaceID and TouchID (iOS) or the Biometric Prompt (Android)
-                            </Text>
+                            <Text style={styles.title}>{t("screen.settings.biometric.title")}</Text>
+                            <Text style={styles.subTitle}>{t("screen.settings.biometric.subTitle")}</Text>
                         </View>
                         <Switch value={settings.enableLocalAuth}
                                 onValueChange={this.changeEnableBiometric}/>
@@ -72,12 +70,12 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
                 <View style={styles.row}>
                     <View style={styles.header}>
                         <View style={{flex: 1}}>
-                            <Text style={styles.title}>Initialize</Text>
-                            <Text style={styles.subTitle}>Initialize all settings. Remove all storage app data.</Text>
+                            <Text style={styles.title}>{t("screen.settings.initialize.title")}</Text>
+                            <Text style={styles.subTitle}>{t("screen.settings.initialize.subTitle")}</Text>
                         </View>
                     </View>
                     <View style={styles.body}>
-                        <Button title='Initialize'
+                        <Button title={t("screen.settings.initialize.done")}
                                 loading={this.initializing}
                                 buttonStyle={styles.initBtn}
                                 raised

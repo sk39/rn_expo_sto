@@ -50,7 +50,7 @@ export default class Dialog extends Component<Props> {
         const {show, disablesLayerBackgroundColor, onPress, btnText, btnStyle, btnTextStyle} = this.props;
         return (
             <Modal transparent
-                // animationType="slide"
+                   animationType="fade"
                    visible={show}
                    onRequestClose={() => null}>
                 <View style={[

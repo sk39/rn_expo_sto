@@ -19,7 +19,7 @@ export default class Index extends Component<any, any> {
         const {state} = navigation;
         return {
             tabBarVisible: state.params ? state.params.tabBarVisible : true,
-            tabBarLabel: "Tokens",
+            tabBarLabel: t("navigation.tab.Tokens"),
             tabBarIcon: ({focused}) => (
                 <TabBarIcon screenName="Tokens" focused={focused}/>
             )

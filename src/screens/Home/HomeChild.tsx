@@ -17,12 +17,6 @@ export default class HomeChild extends Component<Props & NavigationProps & RootS
     }
 
     componentDidMount() {
-        // this.props.navigation.addListener(
-        //     'didFocus',
-        //     () => {
-        //         this.loadData();
-        //     }
-        // );
         this.loadData();
         const {auth} = this.props.rootStore;
         this.disposer = reaction(

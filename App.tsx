@@ -1,4 +1,5 @@
 import React from 'react';
+import "@common/plugins"
 import 'react-native-gesture-handler';
 import {AppLoading} from "expo";
 import * as Font from 'expo-font';
@@ -10,6 +11,7 @@ import {createAppContainer} from "react-navigation";
 import RootStoreProvider from "./src/store/RootStoreProvider";
 import {EasingFunction} from "react-native";
 import {Root} from 'native-base';
+
 
 const AppContainer = createAppContainer(RootStack);
 

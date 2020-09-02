@@ -19,7 +19,7 @@ export default class InputState {
 
     validateEmpty() {
         if (this.isEmpty()) {
-            this.error("This field is required. Please enter.");
+            this.error(t("error.input.required"));
             return false;
         }
 

@@ -1,0 +1,71 @@
+{
+  "btn": {
+    "ok": "はい",
+    "ng": "いいえ",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "detail": "詳細",
+    "invest": "購入する",
+    "verify": "検証",
+    "sign-in": "ログイン",
+    "sign-out": "ログアウト",
+    "sign-up": "口座開設"
+  },
+  "label": {
+  },
+  "msg": {
+  },
+  "error": {
+  },
+  "navigation": {
+    "menu": {
+      "Home": "ホーム",
+      "Tokens": "トークンを探す",
+      "Settings": "設定"
+    },
+    "tab": {
+      "Home": "ホーム",
+      "Tokens": "探す",
+      "More": "メニュー"
+    }
+  },
+  "screen": {
+    "login": {
+      "title": "Welcome Back",
+      "subTitle": "Sign in to Digital Security",
+      "userId": "ユーザID",
+      "password": "パスワード",
+      "skip": "スキップ",
+      "forgotPassword": "パスワードを忘れた方はこちら"
+    },
+    "2fa": {
+      "pageTitle": "2段階認証",
+      "title": "2段階認証",
+      "subTitle": "認証アプリに表示された6桁の認証コードを入力して下さい",
+      "launchAuthApp": "認証アプリを起動する"
+    },
+    "setup2fa": {
+      "pageTitle": "2段階認証設定",
+      "explanationRegister": "認証アプリを起動して、本アプリのアカウントキーを登録して下さい",
+      "explanationVerify": "認証アプリに表示された6桁の認証コードを入力して下さい",
+      "registerAuthApp": "認証アプリを起動する",
+      "registerOther": "別のデバイスに登録する"
+    },
+    "settings": {
+      "pageTitle": "設定",
+      "biometric": {
+        "title": "生体認証",
+        "subTitle": "生体認証を有効にします。"
+      },
+      "initialize": {
+        "title": "データの初期化",
+        "subTitle": "全ての設定を初期化します。本アプリがストレージに保存している全てのデータを削除します。",
+        "done": "初期化",
+        "message": {
+          "success": "Initialization has completed!",
+          "error": "Failed Initialize!"
+        }
+      }
+    }
+  }
+}

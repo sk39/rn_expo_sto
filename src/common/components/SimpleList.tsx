@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {View} from "react-native";
-import _ from "lodash";
 
 interface Props {
     data?: any[],

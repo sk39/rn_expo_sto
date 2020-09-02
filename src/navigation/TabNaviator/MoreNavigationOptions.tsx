@@ -2,7 +2,7 @@ import React from "react";
 import {TabBarIcon} from "@common/components/ScreenIcon";
 
 const MoreNavigationOptions = ({navigation}) => ({
-    tabBarLabel: "More",
+    tabBarLabel: t("navigation.tab.More"),
     tabBarIcon: ({focused}) => (
         <TabBarIcon screenName="More" focused={focused}/>
     ),

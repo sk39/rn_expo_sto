@@ -42,7 +42,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                 <View style={{width: 36}}>
                     <ScreenIcon screenName={key} color={Colors.primaryColor} size={24}/>
                 </View>
-                <Text style={styles.itemText}>{key}</Text>
+                <Text style={styles.itemText}>{t(`navigation.menu.${key}`)}</Text>
             </TouchableOpacity>
         )
     }
@@ -68,7 +68,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                     <Text style={styles.logoText}>Digital Security</Text>
                 </View>
                 <View style={styles.btnWrapper}>
-                    <Button title='Sign In'
+                    <Button title={t("btn.sign-in")}
                             buttonStyle={styles.authButton}
                             raised
                             onPress={() => this.jump("Login")}
@@ -109,7 +109,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                     </View>
                 </View>
                 <View style={styles.btnWrapper}>
-                    <Button title='Sign Out'
+                    <Button title={t("btn.sign-out")}
                             raised
                             buttonStyle={styles.authButton}
                             onPress={this.signOut}

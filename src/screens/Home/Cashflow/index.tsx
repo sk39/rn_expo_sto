@@ -9,8 +9,7 @@ import CashflowLineChart from "./CashflowLineChart";
 import HomeChild from "../HomeChild";
 import CashflowState from "./CashflowState";
 import Skeleton from "@common/components/Skeleton";
-import NoAuthMessage from "../NoAuthMessage";
-import BlockLoading from "@common/components/BlockLoading";
+import HomeListSupport from "../HomeListSupport";
 
 @inject('rootStore')
 @observer
@@ -65,7 +64,7 @@ export default class CashflowList extends HomeChild {
 
     renderList() {
         const {auth} = this.props.rootStore;
-        if (!auth.loggedIn || this.cashflowState.processing) {
+        if (!auth.loggedIn || this.cashflowState.list.length === 0) {
             return (
                 <Skeleton line={8}/>
             )
@@ -92,10 +91,8 @@ export default class CashflowList extends HomeChild {
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
-                <NoAuthMessage/>
-                <BlockLoading
-                    loading={this.cashflowState.processing}
-                    disablesLayerColor="rgba(247,246,255,0.66)"/>
+                <HomeListSupport processing={this.cashflowState.processing}
+                                 list={this.cashflowState.list}/>
             </View>
         )
     }
