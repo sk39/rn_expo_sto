@@ -4,15 +4,15 @@ import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {Button, Icon} from "react-native-elements";
 import LoginEntryState from "./LoginEntryState";
-import PageLoading from '@common/components/PageLoading';
+import PageLoading from '@common/components/PageSupport/PageLoading';
 import Input from "@common/components/Input/Input";
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {observable} from "mobx";
 import * as LocalAuthentication from 'expo-local-authentication';
 import Layout from "@constants/Layout";
-import Dialog from "@common/components/Dialog";
-import DisableLayer from "@common/components/DisableLayer";
+import Dialog from "@common/components/Modal/Dialog";
+import DisableLayer from "@common/components/Modal/DisableLayer";
 
 @inject('rootStore')
 @observer
@@ -145,7 +145,6 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                     </View>
                 </View>
                 <Dialog show={this.loginState.hasError}
-                        btnText={t("btn.close")}
                         error
                         message={this.loginState.errorMessage}
                         onPress={() => this.loginState.error(null)}/>

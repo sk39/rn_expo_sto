@@ -5,12 +5,13 @@ import {AppLoading} from "expo";
 import * as Font from 'expo-font';
 import {Feather, Ionicons} from '@expo/vector-icons';
 import {observable} from "mobx";
-import {inject, observer, Provider} from "mobx-react";
+import {observer, Provider} from "mobx-react";
 import RootStack from "./src/navigation/RootStack";
 import {createAppContainer} from "react-navigation";
 import RootStoreProvider from "./src/store/RootStoreProvider";
 import {EasingFunction} from "react-native";
 import {Root} from 'native-base';
+import {Host} from "react-native-portalize";
 
 
 const AppContainer = createAppContainer(RootStack);
@@ -51,9 +52,11 @@ export default class App extends React.Component {
 
         return (
             <Root>
-                <Provider rootStore={RootStoreProvider.rootStore}>
-                    <AppContainer/>
-                </Provider>
+                <Host>
+                    <Provider rootStore={RootStoreProvider.rootStore}>
+                        <AppContainer/>
+                    </Provider>
+                </Host>
             </Root>
         )
     }

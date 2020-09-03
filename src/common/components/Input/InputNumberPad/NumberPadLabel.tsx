@@ -57,8 +57,7 @@ export default class NumberPadLabel extends Component<Props> {
                 titleStyle={styles.title}
                 disabledStyle={styles.input}
                 disabledTitleStyle={styles.title}
-                onPress={() => {
-                }}
+                onPress={() => null}
             />
         )
     }

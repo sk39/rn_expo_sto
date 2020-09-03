@@ -8,8 +8,8 @@ import ViewUtils from "@common/utils/ViewUtils";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {inject, observer} from "mobx-react";
-import Logo from "@common/components/Logo";
-import LoginUserAvatar from "@common/components/LoginUserAvatar";
+import Logo from "@common/components/Image/Logo";
+import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 
 @inject('rootStore')
 @observer
@@ -126,7 +126,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                     <View style={styles.devWrapper}>
                         <Text style={styles.devTitle}>Development</Text>
                         {[
-                            "Sandbox", "PushTest", "QRTest",
+                            "Sandbox", "ProcessAnimation", "PushTest", "QRTest",
                             "LocationTest", "AuthTest", "Lottie",
                             "InnerRouter", "AppInfo"
                         ].map(this.renderItemDev)}

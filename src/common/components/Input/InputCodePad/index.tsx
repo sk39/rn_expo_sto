@@ -2,8 +2,8 @@ import React, {PureComponent, RefObject} from "react";
 import {View} from "react-native";
 import {observer} from "mobx-react";
 import InputNumberState from "@common/components/Input/InputNumberState";
-import NumberPadLabel from "./NumberPadLabel";
-import NumberPad from "./NumberPad";
+import CodePadLabel from "./CodePadLabel";
+import CodePad from "./CodePad";
 import BottomModal from "@common/components/Modal/BottomModal";
 
 interface Props {
@@ -11,11 +11,11 @@ interface Props {
 }
 
 @observer
-export default class InputNumberPad extends PureComponent<Props> {
+export default class InputCodePad extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
-    padRef: RefObject<NumberPad>;
-    height = 380;
+    padRef: RefObject<CodePad>;
+    height = 438;
 
     constructor(props) {
         super(props);
@@ -36,15 +36,12 @@ export default class InputNumberPad extends PureComponent<Props> {
         const {inputState} = this.props;
         return (
             <View>
-                <View style={{width: 240, paddingTop: 8}}>
-                    <NumberPadLabel value={inputState.value}
-                                    unit={inputState.unit}
-                                    onPress={this.open}/>
-                </View>
+                <CodePadLabel value={inputState.value}
+                              onPress={this.open}/>
                 <BottomModal
                     ref={this.modalRef}
                     height={this.height}>
-                    <NumberPad
+                    <CodePad
                         ref={this.padRef}
                         inputState={inputState}
                         onClose={this.close}/>

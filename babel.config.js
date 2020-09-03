@@ -9,6 +9,7 @@ module.exports = function (api) {
             }],
             ["module-resolver", {
                 "root": ["./"],
+                extensions: ['.ts', '.tsx', '.ios.ts', '.android.ts', '.ios.tsx', '.android.tsx', '.json'],
                 "alias": {
                     "@assets": path.resolve("assets"),
                     "@common": path.resolve("src/common"),

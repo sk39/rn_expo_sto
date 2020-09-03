@@ -1,94 +1,33 @@
 import React, {Component} from 'react';
-import {AppState, StatusBar, StyleSheet, Text} from 'react-native';
+import {StatusBar, StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {Button} from "react-native-elements";
-import PageLoading from '@common/components/PageLoading';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
-import {action, observable} from "mobx";
-import InputCodePad from "./InputCodePad";
+import {observable} from "mobx";
 import * as Linking from 'expo-linking';
 import OTPQRCode from "./OTPQRCode";
-import Dialog from "@common/components/Dialog";
-import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
-import InputNumberState from "@common/components/Input/InputNumberState";
+import Dialog from "@common/components/Modal/Dialog";
+import VerifyMfaForm from "./VerifyMfaForm";
 
 @inject("rootStore")
 @observer
 export default class SetupMfaScreen extends Component<NavigationProps & RootStoreProps> {
 
-    @observable appState: string = "";
-    @observable processing: boolean = false;
-    @observable errorMessage: string = null;
     @observable showQRCode: boolean = false;
 
-    codeState: InputNumberState;
-
-    constructor(props) {
-        super(props);
-        this.handleVerify = this.handleVerify.bind(this);
-        this.launchApp = this.launchApp.bind(this);
-        this.handleAppStateChange = this.handleAppStateChange.bind(this)
-        this.codeState = new InputNumberState();
-        this.codeState.maxLength = 6;
-    }
-
-    componentDidMount() {
-        AppState.addEventListener('change', this.handleAppStateChange);
-    }
-
-    componentWillUnmount() {
-        AppState.removeEventListener('change', this.handleAppStateChange);
-    }
-
-    @action
-    async handleAppStateChange(nextAppState) {
-        if (this.appState.match(/inactive|background/) && nextAppState === 'active') {
-            try {
-                const content = await ClipboardAccessor.getNumber();
-                if (content && content.length === 6) {
-                    this.codeState.setValue(content);
-                }
-            } catch (e) {
-            }
-        }
-        this.appState = nextAppState;
-    };
-
-    validate() {
-        const code = this.codeState.value;
-        return code && code.length === 6 && !isNaN(Number(code));
-    }
-
-    launchApp() {
+    launchApp = () => {
         const {auth} = this.props.rootStore;
         Linking.openURL(auth.otpauth);
     }
 
-    async handleVerify() {
-        const {auth} = this.props.rootStore;
-        const {navigate} = this.props.navigation;
-        if (!this.validate()) {
-            return;
-        }
-        this.processing = true;
-        try {
-            await auth.verify2FA(this.codeState.value)
-            navigate('Main');
-        } catch (e) {
-            // TODO:error handle
-        } finally {
-            this.processing = false;
-        }
-    }
-
     render() {
         const {auth} = this.props.rootStore;
+        const {navigate} = this.props.navigation;
         return (
             <Container>
                 <StatusBar barStyle="dark-content" backgroundColor={Colors.backColor}/>
-                <PageLoading loading={this.processing}/>
                 <View style={styles.back}>
                     <View style={styles.dispArea}>
                         <Text style={styles.numText}>1. </Text>
@@ -116,15 +55,7 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
                             {t("screen.setup2fa.explanationVerify")}
                         </Text>
                     </View>
-                    <View style={styles.form}>
-                        <InputCodePad inputState={this.codeState}/>
-                        <Button buttonStyle={styles.btn}
-                                title={t("btn.verify")}
-                                disabled={this.codeState.value.length !== 6}
-                                titleStyle={styles.btnText}
-                                onPress={this.handleVerify}
-                        />
-                    </View>
+                    <VerifyMfaForm auth={auth} navigate={navigate}/>
                 </View>
                 <Dialog show={this.showQRCode}
                         btnText={t("btn.close")}
@@ -146,10 +77,6 @@ const styles = StyleSheet.create({
     back: {
         paddingTop: 8,
         paddingHorizontal: 24,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    form: {
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -7,7 +7,7 @@ import Colors from "@constants/Colors";
 import {computed, observable} from "mobx";
 import {observer} from "mobx-react";
 import Invest from "../Invest";
-import PageBottomBtn from "@common/components/PageBottomBtn";
+import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import DetailContents from "./DetailContents";
 
 @observer

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, StyleSheet, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import Colors from "@constants/Colors";
 import {Text} from "native-base";
 import ProcessDialogState from "./ProcessDialogState";
@@ -8,6 +8,8 @@ import DialogContent from "./DialogContent";
 import {observer} from "mobx-react";
 import {action, observable} from "mobx";
 import commonStyles from "@common/utils/commonStyle";
+import DisableLayer from "@common/components/Modal/DisableLayer";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 
 interface Props {
     model: ProcessDialogState;
@@ -89,14 +91,10 @@ export default class ProcessDialog extends Component<Props> {
         const {model, disablesLayerBackgroundColor, indicatorBackgroundColor} = this.props;
         const {showDialog, processing, isFinish, isError} = model;
         return (
-            <Modal transparent
-                   animationType="fade"
-                   visible={showDialog}
-                   onRequestClose={() => null}>
-                <View style={[
-                    styles.disablesLayer,
-                    {backgroundColor: disablesLayerBackgroundColor}
-                ]}>
+            <DisableLayer show={showDialog}
+                          disablesLayerBackgroundColor={disablesLayerBackgroundColor}
+                          close={this.onClose}>
+                <AnimatedRow delay={0} duration={300} moveDistance={200}>
                     <View style={[
                         styles.indicatorWrapper,
                         {backgroundColor: indicatorBackgroundColor}
@@ -109,18 +107,13 @@ export default class ProcessDialog extends Component<Props> {
                         />
                         {this.renderContents()}
                     </View>
-                </View>
-            </Modal>
+                </AnimatedRow>
+            </DisableLayer>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    disablesLayer: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    },
     indicatorWrapper: {
         ...commonStyles.modalContent,
         height: 360,

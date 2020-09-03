@@ -3,10 +3,10 @@ import {Easing, FlatList, StatusBar, StyleSheet, View} from 'react-native';
 import {SharedElement} from '../animations';
 import Toolbar from './Toolbar';
 import {ListItem} from "../ListItem";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
-import ListPageSupport from "@common/components/ListPageSupport";
+import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
 
 @observer
 export default class List extends PureComponent<any, any> {

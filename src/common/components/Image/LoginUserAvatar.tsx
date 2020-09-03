@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {inject, observer} from "mobx-react";
 import {observable} from "mobx";
-import Avatar from "@common/components/Avatar";
+import Avatar from "./Avatar";
 import {RootStoreProps} from "@store/RootStoreProvider";
 
 interface Props {

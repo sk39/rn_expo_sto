@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native'
 import {observer} from "mobx-react";
 import Colors from "@constants/Colors";
-import DialogContent from "@common/components/ProcessDialog/DialogContent";
+import DialogContent from "@common/components/Modal/ProcessDialog/DialogContent";
 import Layout from "@constants/Layout";
 import {Icon} from "react-native-elements";
 import NumberLabel from "@common/components/Label/NumberLabel";

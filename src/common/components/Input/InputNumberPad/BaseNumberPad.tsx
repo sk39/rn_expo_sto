@@ -5,44 +5,25 @@ import {Button} from "react-native-elements";
 import NumberPadState from "./NumberPadState";
 import NumberPadLabel from "./NumberPadLabel";
 import Colors from "@constants/Colors";
-import BottomModal from "@common/components/BottomModal";
 import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
 import {KeyBtn, KeyIconBtn} from "@common/components/Input/InputNumberPad/KeyBtn";
-import {reaction} from "mobx";
 import Layout from "@constants/Layout";
 
 interface Props {
     inputState: InputNumberState,
-    show: boolean;
     onClose: () => void;
 }
 
 export default class BaseNumberPad extends Component<Props> {
 
     numberPadState: NumberPadState;
-    disposer;
 
     constructor(props) {
         super(props);
         this.numberPadState = new NumberPadState(props.inputState)
     }
 
-    componentDidMount(): void {
-        this.disposer = reaction(
-            () => this.props.show,
-            (show) => {
-                if (show) {
-                    this.onShow()
-                }
-            }
-        )
-    }
-
-    componentWillUnmount() {
-        this.disposer();
-    }
-
-    onShow() {
+    onOpen() {
         this.numberPadState.start()
     }
 
@@ -148,15 +129,14 @@ export default class BaseNumberPad extends Component<Props> {
     }
 
     render() {
-        const {show, onClose} = this.props;
         return (
-            <BottomModal show={show} onClose={onClose}>
+            <View>
                 {this.renderHeader()}
                 <View style={styles.body}>
                     {this.renderPad()}
                 </View>
                 {this.renderFooter()}
-            </BottomModal>
+            </View>
         )
     }
 }
@@ -184,7 +164,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical: 8,
+        // paddingVertical: 8,
         // paddingHorizontal: 32,
         borderTopWidth: 1,
         borderTopColor: Colors.listBorderColor
@@ -195,6 +175,7 @@ const styles = StyleSheet.create({
     },
     bottomBtn: {
         // width: 80,
+        height: 56,
         width: (Layout.window.width) / 3,
     }
 });

@@ -3,7 +3,7 @@ import {Platform, StyleSheet, View} from "react-native";
 import {Button, Text} from "native-base";
 import LottieView from "lottie-react-native";
 import Colors from "@constants/Colors";
-import ExternalLink from "@common/components/ExternalLink";
+import ExternalLink from "@common/components/Button/ExternalLink";
 
 interface Props {
     source: string | { uri: string };

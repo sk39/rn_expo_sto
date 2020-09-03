@@ -14,14 +14,14 @@ import Toolbar from "./Toolbar";
 import InputNumberPad from "@common/components/Input/InputNumberPad";
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
-import ProcessDialog from "@common/components/ProcessDialog";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
+import ProcessDialog from "@common/components/Modal/ProcessDialog";
 import ConfirmContent from "./ConfirmContent";
 import ViewUtils from "@common/utils/ViewUtils";
 import InvestInfo from "./InvestInfo";
 import InvestTokenState from "./InvestTokenState";
-import PageBottomBtn from "@common/components/PageBottomBtn";
-import BlockLoading from "@common/components/BlockLoading";
+import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
+import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
 
 @inject('rootStore')

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {StyleSheet, Text, View} from "react-native";
 import {inject, observer} from "mobx-react";
-import BlockLoading from "@common/components/BlockLoading";
+import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
 
 interface Props {

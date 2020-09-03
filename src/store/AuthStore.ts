@@ -109,7 +109,10 @@ export default class AuthStore {
 
     async verify2FA(code: string) {
         // TODO: server login request
+
         await ViewUtils.sleep(500);
+        // return Promise.reject("Invalid Code")
+
         this.refreshToken = "hoge"
         this.setUpOtp = true;
         await this.refresh();

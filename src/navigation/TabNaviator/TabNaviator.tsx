@@ -1,15 +1,15 @@
 import React from "react";
 import {createBottomTabNavigator} from "react-navigation-tabs";
-import {DisplayInTabScreens, OnlySideMenuScreens} from "../Routes";
+import Screens, {TabScreens} from "../Routes";
 import MoreNavigationOptions from "./MoreNavigationOptions";
 import {createSwitchNavigator} from "react-navigation";
 import Colors from "@constants/Colors";
 
 const TabNavigator = createBottomTabNavigator(
     {
-        ...DisplayInTabScreens,
+        ...TabScreens,
         More: {
-            screen: createSwitchNavigator(OnlySideMenuScreens, {
+            screen: createSwitchNavigator(Screens, {
                 defaultNavigationOptions: {
                     headerShown: true
                 }

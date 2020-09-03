@@ -4,7 +4,7 @@ import Colors from "@constants/Colors";
 import ViewUtils from "@common/utils/ViewUtils";
 import {Button} from "react-native-elements";
 import {observer} from "mobx-react";
-import AnimatedSlideUp from "@common/components/Animations/AnimatedSlideUp";
+import AnimatedSlideUp from "@common/components/Animation/AnimatedSlideUp";
 import {observable} from "mobx";
 
 interface Props {

@@ -11,15 +11,17 @@ import PushTestScreen from "../../screens/Sandbox/PushTestScreen";
 import QRTestScreen from "../../screens/Sandbox/QRTestScreen";
 import LocationTestScreen from "../../screens/Sandbox/LocationTestScreen";
 import LocalAuthTestScreen from "../../screens/Sandbox/LocalAuthTestScreen";
+import ProcessAnimationExample from "../../screens/Sandbox/ProcessAnimationExample";
 
-export const DisplayInTabScreens = {
+export const TabScreens = {
     Home: Home,
     Tokens: Token,
 };
 
-export const OnlySideMenuScreens = {
+const Screens = {
     Settings: Settings,
     Sandbox: Sandbox,
+    ProcessAnimation: ProcessAnimationExample,
     PushTest: PushTestScreen,
     QRTest: QRTestScreen,
     LocationTest: LocationTestScreen,
@@ -29,3 +31,6 @@ export const OnlySideMenuScreens = {
     InnerRouter: InnerRouterScreen,
     AppInfo: AppInfoScreen,
 };
+
+export default Screens;
+

@@ -4,23 +4,32 @@ import {observer} from "mobx-react";
 import {observable} from "mobx";
 
 interface Props {
-    delay: number
+    delay: number;
+    duration?: number;
+    easing?: (value: number) => number;
+    moveDistance?: number;
 }
 
 @observer
 export default class AnimatedSlideUp extends Component<Props> {
 
-    // @observable opacity = new Animated.Value(0);
     @observable translateY = new Animated.Value(56);
 
+    static defaultProps = {
+        duration: 400,
+        easing: Easing.out(Easing.back()),
+        moveDistance: 56,
+    };
+
     componentDidMount() {
-        this.translateY.setValue(56);
+        const {delay, duration, easing, moveDistance} = this.props;
+        this.translateY.setValue(moveDistance);
         Animated.parallel([
             Animated.timing(this.translateY, {
-                easing: Easing.out(Easing.back()),
+                easing,
                 toValue: 0,
-                duration: 400,
-                delay: this.props.delay,
+                duration,
+                delay,
                 useNativeDriver: true,
             }),
         ]).start();

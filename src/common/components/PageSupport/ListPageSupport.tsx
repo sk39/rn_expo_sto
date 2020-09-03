@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {StyleSheet, Text, View} from "react-native";
 import {observer} from "mobx-react";
-import BlockLoading from "@common/components/BlockLoading";
+import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {Icon} from "react-native-elements";
 import Colors from "@constants/Colors";
 

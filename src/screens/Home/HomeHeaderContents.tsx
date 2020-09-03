@@ -5,7 +5,7 @@ import {Text, View} from 'native-base';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {Button} from "react-native-elements";
-import LoginUserAvatar from "@common/components/LoginUserAvatar";
+import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 
 @inject('rootStore')
 @observer

@@ -2,8 +2,8 @@ import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native'
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
-import Skeleton from "@common/components/Skeleton";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import Skeleton from "@common/components/PageSupport/Skeleton";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {STO} from "@common/model/domainModel";
 import {TranslateYAndOpacity} from "../animations";
 

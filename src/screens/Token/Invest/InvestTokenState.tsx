@@ -1,7 +1,7 @@
 import RootStore from "@store/RootStore";
 import TokenState from "../TokenState";
 import InputNumberState from "@common/components/Input/InputNumberState";
-import ProcessDialogState from "@common/components/ProcessDialog/ProcessDialogState";
+import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
 import ViewUtils from "@common/utils/ViewUtils";
 import {computed, observable} from "mobx";
 

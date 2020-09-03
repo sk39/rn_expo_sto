@@ -1,49 +1,75 @@
 import React, {Component} from 'react';
-import {Text} from "react-native"
-import {Button, View} from "native-base";
-import ProcessDialogState from "@common/components/ProcessDialog/ProcessDialogState";
-import ProcessAnimation from "@common/components/ProcessDialog/ProcessAnimation";
+import {StyleSheet, Text, View} from "react-native";
 import {observer} from "mobx-react";
+import {observable} from "mobx";
+import {Button} from "react-native-elements";
+import Dialog from "@common/components/Modal/Dialog";
+import BottomModal from "@common/components/Modal/BottomModal";
 
 @observer
 export default class Sandbox extends Component {
 
-    processState: ProcessDialogState = new ProcessDialogState();
+    @observable showDialog = false;
+    @observable showErrorDialog = false;
 
-    onAnimationFinish() {
-        console.log("Sandbox#onAnimationFinish");
+
+    sheetRef;
+
+    constructor(props) {
+        super(props);
+        this.sheetRef = React.createRef();
     }
 
     render() {
-        const {processState} = this;
+        const contents = (
+            <View style={{height: 300, justifyContent: "center", alignItems: "center"}}>
+                <Text>Hoge</Text>
+            </View>
+        );
+
         return (
-            <View style={{flex: 1, paddingTop: 44}}>
-                <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-                    <ProcessAnimation
-                        processing={processState.processing}
-                        finish={processState.isFinish}
-                        error={processState.isError}
-                        onAnimationFinish={this.onAnimationFinish.bind(this)}
-                    />
-                </View>
-                <View style={{padding: 32}}>
-                    <Button block light onPress={() => {
-                        processState.clear();
-                        setTimeout(() => processState.startProcessing(), 0)
-                    }}>
-                        <Text>Start Loading</Text>
-                    </Button>
-                    <View style={{marginBottom: 16}}/>
-                    <Button block light onPress={() => processState.success()}>
-                        <Text>Finish !</Text>
-                    </Button>
-                    <View style={{marginBottom: 16}}/>
-                    <Button block light onPress={() => processState.error("Dummy error message.")}>
-                        <Text>Error</Text>
-                    </Button>
-                </View>
+            <View style={styles.back}>
+                <Button title="showDialog"
+                        buttonStyle={styles.btn}
+                        onPress={() => this.showDialog = true}
+                />
+                <Dialog show={this.showDialog}
+                        cancelable
+                        onPress={() => this.showDialog = false}>
+                    {contents}
+                </Dialog>
+
+                <Button title="showErrorDialog"
+                        buttonStyle={styles.btn}
+                        onPress={() => this.showErrorDialog = true}
+                />
+                <Dialog show={this.showErrorDialog}
+                        message={"Error message"}
+                        error
+                        cancelable
+                        onPress={() => this.showErrorDialog = false}/>
+
+                <Button title="showBottom"
+                        buttonStyle={styles.btn}
+                        onPress={() => this.sheetRef.current.open()}
+                />
+
+                <BottomModal ref={this.sheetRef} height={400}>
+                    {contents}
+                </BottomModal>
 
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    back: {
+        flex: 1,
+        backgroundColor: "#ccc",
+        justifyContent: "center"
+    },
+    btn: {
+        margin: 12
+    }
+});

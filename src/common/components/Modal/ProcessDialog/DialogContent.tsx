@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {StyleSheet, View} from 'react-native'
 import {Button, Text} from "native-base";
 import {observer} from "mobx-react";
-import AnimatedShow from "@common/components/Animations/AnimatedShow";
+import AnimatedShow from "@common/components/Animation/AnimatedShow";
 import commonStyles from "@common/utils/commonStyle";
 
 interface Props {

@@ -2,14 +2,14 @@ import React from 'react';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {ActionSheet, Icon} from "native-base";
-import SimpleList from "@common/components/SimpleList";
+import SimpleList from "@common/components/List/SimpleList";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import BalancePieChart from "./BalancePieChart";
 import BalanceState from "./BalanceState";
 import HomeChild from "../HomeChild";
-import Skeleton from "@common/components/Skeleton";
+import Skeleton from "@common/components/PageSupport/Skeleton";
 import HomeListSupport from "../HomeListSupport";
 
 @inject("rootStore")

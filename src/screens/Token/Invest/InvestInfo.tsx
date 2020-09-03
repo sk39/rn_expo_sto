@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native'
 import Colors from "@constants/Colors";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {observer} from "mobx-react";
 import {RootStoreProps} from "@store/RootStoreProvider";

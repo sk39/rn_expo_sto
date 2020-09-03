@@ -4,7 +4,7 @@ import {inject, observer} from "mobx-react";
 import {Container, Toast} from 'native-base';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
-import PageHeader from "@common/components/PageHeader";
+import PageHeader from "@common/components/PageSupport/PageHeader";
 import {Button} from "react-native-elements";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";

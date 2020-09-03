@@ -1,29 +1,32 @@
 import React, {Component} from "react";
-import {Modal, StyleSheet, TouchableOpacity, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
 import {Button, Text} from "native-base";
 import commonStyles from "@common/utils/commonStyle";
-import ErrorAnimation from "@common/components/Dialog/ErrorAnimation";
+import ErrorAnimation from "@common/components/Animation/ErrorAnimation";
+import DisableLayer from "@common/components/Modal/DisableLayer";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 
 interface Props {
     show: boolean;
+    disablesLayerBackgroundColor?: string;
+    cancelable?: boolean;
+    onPress: () => void;
     error?: boolean;
     message?: string;
-    cancelable?: boolean;
     style?: any,
     btnStyle?: any;
     btnTextStyle?: any;
     btnText?: string;
-    onPress?: (e?) => void;
-    disablesLayerBackgroundColor?: string,
 }
 
 @observer
 export default class Dialog extends Component<Props> {
 
     static defaultProps = {
-        disablesLayerBackgroundColor: Colors.disablesLayerDark
+        disablesLayerBackgroundColor: Colors.disablesLayerDark,
+        btnText: t("btn.close")
     };
 
     renderContents() {
@@ -47,15 +50,15 @@ export default class Dialog extends Component<Props> {
     }
 
     render() {
-        const {show, disablesLayerBackgroundColor, onPress, btnText, cancelable, btnStyle, btnTextStyle} = this.props;
+        const {show, disablesLayerBackgroundColor, cancelable, onPress} = this.props;
+        const {btnText, btnStyle, btnTextStyle} = this.props;
+
         return (
-            <Modal transparent
-                   animationType="fade"
-                   visible={show}
-                   onRequestClose={() => null}>
-                <View style={styles.root}>
-                    <TouchableOpacity style={[styles.disablesLayer, {backgroundColor: disablesLayerBackgroundColor}]}
-                                      disabled={!cancelable} onPress={onPress}/>
+            <DisableLayer show={show}
+                          disablesLayerBackgroundColor={disablesLayerBackgroundColor}
+                          cancelable={cancelable}
+                          close={onPress}>
+                <AnimatedRow delay={0} duration={300} moveDistance={200}>
                     <View style={styles.contentWrapper}>
                         <View>
                             {this.renderContents()}
@@ -64,26 +67,13 @@ export default class Dialog extends Component<Props> {
                             <Text style={[styles.btnText, btnTextStyle]}>{btnText}</Text>
                         </Button>
                     </View>
-                </View>
-            </Modal>
+                </AnimatedRow>
+            </DisableLayer>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    disablesLayer: {
-        position: "absolute",
-        top: 0,
-        right: 0,
-        left: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0,0,0,0.65)"
-    },
     contentWrapper: {
         ...commonStyles.modalContent,
         alignItems: "center",

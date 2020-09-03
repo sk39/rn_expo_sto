@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
-import AnimatedRow from "@common/components/Animations/AnimatedRow";
+import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
-import SimpleList from "@common/components/SimpleList";
+import SimpleList from "@common/components/List/SimpleList";
 import CashflowLineChart from "./CashflowLineChart";
 import HomeChild from "../HomeChild";
 import CashflowState from "./CashflowState";
-import Skeleton from "@common/components/Skeleton";
+import Skeleton from "@common/components/PageSupport/Skeleton";
 import HomeListSupport from "../HomeListSupport";
 
 @inject('rootStore')
