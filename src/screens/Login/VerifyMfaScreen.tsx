@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppState, Clipboard, StatusBar, StyleSheet, Text} from 'react-native';
+import {AppState, StatusBar, StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {Button} from "react-native-elements";
@@ -7,10 +7,10 @@ import PageLoading from '@common/components/PageLoading';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {action, observable} from "mobx";
-import InputState from "@common/components/Input/InputState";
-import InputCode from "./InputCode";
+import InputCodePad from "./InputCodePad";
 import * as Linking from 'expo-linking';
-import ViewUtils from "@common/utils/ViewUtils";
+import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
+import InputNumberState from "@common/components/Input/InputNumberState";
 
 @inject("rootStore")
 @observer
@@ -19,13 +19,15 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
     @observable appState: string = "";
     @observable processing: boolean = false;
     @observable errorMessage: string = null;
-    code: InputState = new InputState();
+    codeState: InputNumberState;
 
     constructor(props) {
         super(props);
         this.handleVerify = this.handleVerify.bind(this);
         this.launchApp = this.launchApp.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this)
+        this.codeState = new InputNumberState();
+        this.codeState.maxLength = 6;
     }
 
     componentDidMount() {
@@ -40,11 +42,9 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
     async handleAppStateChange(nextAppState) {
         if (this.appState.match(/inactive|background/) && nextAppState === 'active') {
             try {
-                await ViewUtils.sleep(500);
-                const content: any = await Clipboard.getString();
-                console.log(`Clipboard#getString data=${content}`)
-                if (content && content.length === 6 && !isNaN(content)) {
-                    this.code.setValue(content);
+                const content = await ClipboardAccessor.getNumber();
+                if (content && content.length === 6) {
+                    this.codeState.setValue(content);
                 }
             } catch (e) {
             }
@@ -53,7 +53,7 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
     };
 
     validateCode() {
-        const code = this.code.value;
+        const code = this.codeState.value;
         return code && code.length === 6 && !isNaN(Number(code));
     }
 
@@ -69,7 +69,7 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
         }
         this.processing = true;
         try {
-            await auth.verify2FA(this.code.value)
+            await auth.verify2FA(this.codeState.value)
             navigate('Main');
         } catch (e) {
             // TODO:error handle
@@ -89,10 +89,10 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
                         <Text style={styles.subTitle}>{t("screen.2fa.subTitle")}</Text>
                     </View>
                     <View style={styles.form}>
-                        <InputCode inputState={this.code}/>
+                        <InputCodePad inputState={this.codeState}/>
                         <Button buttonStyle={styles.btn}
                                 title={t("btn.verify")}
-                                disabled={this.code.value.length !== 6}
+                                disabled={this.codeState.value.length !== 6}
                                 titleStyle={styles.btnText}
                                 onPress={this.handleVerify}
                         />
@@ -123,9 +123,10 @@ const styles = StyleSheet.create({
     form: {
         alignItems: 'center',
         justifyContent: 'center',
+        // paddingTop: 8,
     },
     btn: {
-        marginTop: 24,
+        marginTop: 36,
         backgroundColor: Colors.primaryColor,
         borderRadius: 26,
         paddingHorizontal: 24,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
         color: Colors.primaryColor
     },
     headerArea: {
-        paddingBottom: 56,
+        paddingBottom: 26,
         paddingHorizontal: 50,
         // width: "100%",
         justifyContent: "flex-start",

@@ -4,7 +4,8 @@ import {inject, observer} from "mobx-react";
 import {Text, View} from 'native-base';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
-import {Avatar, Button} from "react-native-elements";
+import {Button} from "react-native-elements";
+import LoginUserAvatar from "@common/components/LoginUserAvatar";
 
 @inject('rootStore')
 @observer
@@ -13,13 +14,7 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
     renderContentsAuth(auth) {
         return (
             <View style={styles.auth}>
-                <Avatar
-                    rounded
-                    size="medium"
-                    source={{
-                        uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                    }}
-                />
+                <LoginUserAvatar size={50}/>
                 <Text style={styles.username}>
                     {auth.username}
                 </Text>

@@ -32,7 +32,7 @@ class Toolbar extends PureComponent<Props> {
                 <View style={{zIndex: 2}}>
                     <View style={styles.toolbarContainer}>
                         <TouchableOpacity style={styles.backContainer} onPress={onBackPress}>
-                            <Ionicons name="ios-arrow-back" size={24} color="white"/>
+                            <Ionicons name="ios-arrow-back" size={22} color="white"/>
                             <Text style={styles.titleBackText}>Back</Text>
                         </TouchableOpacity>
                     </View>

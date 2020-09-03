@@ -23,6 +23,7 @@ export default {
     tintColor,
     labelFont: "#626473",
     labelFontThin: "#85889a",
+    inputBorder: "#626473",
     unitFont: "#868da8",
     tabDefault: tintColor,
     tabSelected: primaryColor,
@@ -31,13 +32,14 @@ export default {
     toolBarInverse: "#130f3c",
     linkColor: '#0000ff',
     disablesLayer: "rgba(239,244,246,0.66)",
-    disablesLayerDark: "rgba(11,10,25,0.83)",
+    disablesLayerDark: "rgba(11,10,25,0.72)",
     cardBackColor: '#fff',
     cardBorderColor: '#f1f1f1',
     positiveColor: primaryColor,
     negativeColor: "#f11561",
     error: "#ff330f",
-    listBorderColor: "rgba(15,20,92,0.08)"
+    listBorderColor: "rgba(15,20,92,0.08)",
+    listBorderColorDark: "rgba(15,20,92,0.2)"
 };
 
 export const ChartColor = [

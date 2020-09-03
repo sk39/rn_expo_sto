@@ -1,0 +1,116 @@
+import React, {Component} from "react";
+import {StyleSheet, Text, View} from "react-native";
+import {observer} from "mobx-react";
+import {computed} from "mobx";
+import ViewUtils from "@common/utils/ViewUtils";
+import {Button} from "react-native-elements";
+import Colors from "@constants/Colors";
+import InputCursor from "@common/components/Input/InputNumberPad/InputCursor";
+
+interface Props {
+    value: string,
+    unit?: string;
+    modal?: boolean;
+    onPress?: () => void;
+}
+
+@observer
+export default class NumberPadLabel extends Component<Props> {
+
+    @computed
+    get displayVal(): string {
+        if (!this.props.value) {
+            return "";
+        }
+
+        return ViewUtils.numberFormat(this.props.value)
+    }
+
+    render() {
+        const {onPress, unit, modal} = this.props;
+        const props: any = {}
+        const styles = modal ? stylesModal : stylesNormal;
+        if (modal) {
+            props.disabled = true;
+            if (unit) {
+                props.icon = (
+                    <View style={styles.iconWrapper}>
+                        <InputCursor/>
+                        <Text style={styles.unit}>{unit}</Text>
+                    </View>
+                );
+                props.iconRight = true;
+            }
+        } else {
+            props.onPressIn = onPress;
+            if (unit) {
+                props.icon = <Text style={styles.unit}>{unit}</Text>;
+                props.iconRight = true;
+            }
+        }
+
+        return (
+            <Button
+                {...props}
+                title={this.displayVal}
+                buttonStyle={styles.input}
+                titleStyle={styles.title}
+                disabledStyle={styles.input}
+                disabledTitleStyle={styles.title}
+                onPress={() => {
+                }}
+            />
+        )
+    }
+}
+
+const stylesNormal = StyleSheet.create({
+    input: {
+        height: 44,
+        width: "100%",
+        justifyContent: "flex-end",
+        backgroundColor: Colors.primaryColorThin2,
+        borderWidth: 0
+    },
+    title: {
+        fontSize: 20,
+        color: Colors.primaryColor,
+        letterSpacing: 1,
+    },
+    unit: {
+        marginLeft: 8,
+        marginTop: 6,
+        marginRight: 8,
+        opacity: 0.5
+    },
+    iconWrapper: {}
+});
+
+const stylesModal = StyleSheet.create({
+    input: {
+        height: 50,
+        paddingHorizontal: 16,
+        width: "100%",
+        justifyContent: "flex-end",
+        backgroundColor: Colors.primaryColorThin2,
+        borderWidth: 0
+        // backgroundColor: "rgba(0,0,0,0)",
+        // borderBottomWidth: 1,
+        // borderBottomColor: Colors.listBorderColor
+    },
+    title: {
+        marginRight: 2,
+        fontSize: 24,
+        letterSpacing: 2,
+        color: Colors.primaryColor
+    },
+    unit: {
+        marginLeft: 8,
+        marginTop: 6,
+        marginRight: 8,
+        opacity: 0.5
+    },
+    iconWrapper: {
+        flexDirection: "row"
+    }
+});

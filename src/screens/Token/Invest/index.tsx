@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import Layout from "@constants/Layout";
 import Toolbar from "./Toolbar";
-import InputNumber from "@common/components/Input/InputNumber";
+import InputNumberPad from "@common/components/Input/InputNumberPad";
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animations/AnimatedRow";
@@ -94,7 +94,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                                 behavior={Platform.OS == "ios" ? "padding" : "height"}>
                                 <Text style={styles.description}>How many tokens do you want to buy?</Text>
                                 <View style={styles.rowInputContainer}>
-                                    <InputNumber inputState={amount}/>
+                                    <InputNumberPad inputState={amount}/>
                                 </View>
                             </KeyboardAvoidingView>
                         </AnimatedRow>

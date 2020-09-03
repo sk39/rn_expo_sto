@@ -4,7 +4,10 @@ import {observer} from "mobx-react";
 import {observable} from "mobx";
 
 interface Props {
-    delay: number
+    delay: number;
+    duration?: number;
+    easing?: (value: number) => number;
+    moveDistance?: number;
 }
 
 @observer
@@ -13,22 +16,29 @@ export default class AnimatedRow extends Component<Props> {
     @observable opacity = new Animated.Value(0);
     @observable translateY = new Animated.Value(16);
 
+    static defaultProps = {
+        duration: 700,
+        easing: Easing.out(Easing.back()),
+        moveDistance: 16,
+    };
+
     componentDidMount() {
+        const {delay, duration, easing, moveDistance} = this.props;
         this.opacity.setValue(0);
-        this.translateY.setValue(16);
+        this.translateY.setValue(moveDistance);
         Animated.parallel([
             Animated.timing(this.opacity, {
-                easing: Easing.out(Easing.back()),
+                easing,
                 toValue: 1,
-                duration: 700,
-                delay: this.props.delay,
+                duration,
+                delay,
                 useNativeDriver: true,
             }),
             Animated.timing(this.translateY, {
-                easing: Easing.out(Easing.back()),
+                easing,
                 toValue: 0,
-                duration: 700,
-                delay: this.props.delay,
+                duration,
+                delay,
                 useNativeDriver: true,
             }),
         ]).start();

@@ -3,12 +3,13 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native
 import {DrawerContentComponentProps} from "react-navigation-drawer/src/types";
 import {ScreenIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
-import {Avatar, Button} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import ViewUtils from "@common/utils/ViewUtils";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {inject, observer} from "mobx-react";
 import Logo from "@common/components/Logo";
+import LoginUserAvatar from "@common/components/LoginUserAvatar";
 
 @inject('rootStore')
 @observer
@@ -87,13 +88,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
         return (
             <View style={styles.header}>
                 <View style={styles.userHeader}>
-                    <Avatar
-                        rounded
-                        size="large"
-                        source={{
-                            uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                        }}
-                    />
+                    <LoginUserAvatar size={76}/>
                     <View style={{paddingLeft: 24}}>
                         <Text style={styles.username}>
                             {auth.username}

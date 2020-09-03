@@ -12,6 +12,8 @@ export default class AuthStore {
     @observable userId: string = null;
     @observable username: string = null;
     @observable password: string = null;
+    @observable email: string = "";
+    @observable shortName: string = "";
     @observable accessToken: string = null;
     @observable refreshToken: string = null;
     @observable otpauth: string = null;
@@ -54,6 +56,8 @@ export default class AuthStore {
             this.userId = null
             this.password = null
             this.username = null
+            this.email = null
+            this.shortName = null
             this.accessToken = null
             this.refreshToken = null
             this.otpauth = null;
@@ -79,6 +83,8 @@ export default class AuthStore {
     @action
     signOut() {
         this.username = null
+        this.email = null
+        this.shortName = null
         this.accessToken = null
         this.refreshToken = null
         this.saveStorage().then();
@@ -93,6 +99,8 @@ export default class AuthStore {
         return new Promise((resolve => {
             runInAction(() => {
                 this.username = "Test User"
+                this.email = s.include(this.userId, "@") ? this.userId : ""
+                this.shortName = "TU"
                 this.accessToken = "hoge"
             });
             resolve();

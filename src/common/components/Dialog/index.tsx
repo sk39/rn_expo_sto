@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, StyleSheet, View} from "react-native";
+import {Modal, StyleSheet, TouchableOpacity, View} from "react-native";
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
 import {Button, Text} from "native-base";
@@ -47,16 +47,15 @@ export default class Dialog extends Component<Props> {
     }
 
     render() {
-        const {show, disablesLayerBackgroundColor, onPress, btnText, btnStyle, btnTextStyle} = this.props;
+        const {show, disablesLayerBackgroundColor, onPress, btnText, cancelable, btnStyle, btnTextStyle} = this.props;
         return (
             <Modal transparent
                    animationType="fade"
                    visible={show}
                    onRequestClose={() => null}>
-                <View style={[
-                    styles.disablesLayer,
-                    {backgroundColor: disablesLayerBackgroundColor}
-                ]}>
+                <View style={styles.root}>
+                    <TouchableOpacity style={[styles.disablesLayer, {backgroundColor: disablesLayerBackgroundColor}]}
+                                      disabled={!cancelable} onPress={onPress}/>
                     <View style={styles.contentWrapper}>
                         <View>
                             {this.renderContents()}
@@ -72,10 +71,18 @@ export default class Dialog extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-    disablesLayer: {
+    root: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+    disablesLayer: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0,0,0,0.65)"
     },
     contentWrapper: {
         ...commonStyles.modalContent,
