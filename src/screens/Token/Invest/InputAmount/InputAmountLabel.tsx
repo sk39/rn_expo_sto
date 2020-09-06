@@ -54,10 +54,9 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         justifyContent: "center",
         width: "100%",
-        height: 28,
-        padding: 6,
+        height: 36,
         paddingTop: 12,
-        paddingRight: 24,
+        paddingRight: 22,
     },
     label: {
         fontSize: 14,

@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         color: Colors.labelFontThin,
         textAlign: "center",
         fontSize: 14,
-        fontWeight:"700",
+        fontWeight: "700",
     }
 });
 

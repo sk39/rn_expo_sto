@@ -48,12 +48,14 @@ export default class CardWithModal extends Component<Props> {
     @observable pressItemHeight = null;
     cardRef;
     cardModalModeRef;
+    scrollRef;
     disposer;
 
     constructor(props) {
         super(props);
         this.cardRef = React.createRef();
         this.cardModalModeRef = React.createRef();
+        this.scrollRef = React.createRef();
         this.disposer = reaction(
             () => this.props.modal,
             modal => modal ? this.openModal() : this.closeModal()
@@ -93,6 +95,8 @@ export default class CardWithModal extends Component<Props> {
     }
 
     async closeModal() {
+        if (this.scrollRef.current)
+            this.scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
         if (this.cardModalModeRef.current)
             this.cardModalModeRef.current.close(duration.phase2);
 
@@ -182,6 +186,7 @@ export default class CardWithModal extends Component<Props> {
                         {renderModalHeader()}
                     </AnimatedCardHeader>
                     <Animated.ScrollView
+                        ref={this.scrollRef}
                         scrollEventThrottle={16}
                         onScroll={
                             Animated.event([
