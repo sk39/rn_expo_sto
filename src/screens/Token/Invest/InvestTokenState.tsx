@@ -11,10 +11,10 @@ export default class InvestTokenState extends TokenState {
     processState: ProcessDialogState = new ProcessDialogState();
     @observable confirming: boolean = false;
 
-    constructor(navigation, rootStore: RootStore) {
+    constructor(symbol: string, navigation, rootStore: RootStore) {
         super(navigation, rootStore);
         this.amount = new InputNumberState();
-        this.amount.setUnit("USD")
+        this.amount.setUnit(symbol)
     }
 
     @computed
@@ -23,19 +23,43 @@ export default class InvestTokenState extends TokenState {
     }
 
     @computed
-    get userDeposit() {
-        return this.balanceStore.deposit
+    get minBuyToken() {
+        return 1
     }
 
     @computed
-    get buyToken() {
+    get maxBuyToken() {
+        return 10000
+    }
+
+    @computed
+    get amountBaseCcy() {
         const {amount, offeringPrice} = this;
         if (!amount.value || amount.value.length === 0) {
             return null;
         }
 
-        const token = Number(amount.value) / offeringPrice;
-        return token;
+        return Number(amount.value) * offeringPrice;
+    }
+
+    @computed
+    get userDeposit() {
+        return this.balanceStore.deposit
+    }
+
+    @computed
+    get afterUserDeposit() {
+        return this.balanceStore.deposit - this.amountBaseCcy;
+    }
+
+    @computed
+    get userTokens() {
+        return 0
+    }
+
+    @computed
+    get afterUserTokens() {
+        return 0 + this.amount.value;
     }
 
     async confirm() {

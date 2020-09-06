@@ -1,7 +1,7 @@
 import {createStackNavigator} from "react-navigation-stack";
 import DrawNavigator from "./DrawNavigator";
 import LoginScreen from "../screens/Login/LoginScreen";
-import DirectDetail from "../screens/Token/DirectDetail";
+import DirectDetail from "../screens/Token/Detail/DirectDetail";
 import InvestToken from "../screens/Token/Invest";
 
 const RootStack = createStackNavigator(

@@ -3,10 +3,9 @@ import {StyleSheet, Text, View} from 'react-native'
 import {observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import DialogContent from "@common/components/Modal/ProcessDialog/DialogContent";
-import Layout from "@constants/Layout";
 import {Icon} from "react-native-elements";
-import NumberLabel from "@common/components/Label/NumberLabel";
 import InvestTokenState from "./InvestTokenState";
+import InvestInfo from "./InvestInfo";
 
 
 interface Props {
@@ -45,33 +44,7 @@ export default class ConfirmContent extends PureComponent<Props> {
                         </View>
                     </View>
                     <View style={styles.dataWrapper}>
-                        <View style={styles.rowContainer}>
-                            <Text style={styles.label}>Amount</Text>
-                            <NumberLabel
-                                value={amount.value}
-                                decimals={0}
-                                suffix="USD"
-                                suffixStyle={styles.unit}
-                                style={styles.valueText}/>
-                        </View>
-                        <View style={styles.rowContainer}>
-                            <Text style={styles.label}>Buy Token Qty</Text>
-                            <NumberLabel
-                                value={tokenState.buyToken}
-                                decimals={2}
-                                suffix={item.symbol}
-                                suffixStyle={styles.unit}
-                                style={styles.valueText}/>
-                        </View>
-                        <View style={styles.rowContainer}>
-                            <Text style={styles.label}>Your Balance</Text>
-                            <NumberLabel
-                                value={tokenState.userDeposit}
-                                decimals={0}
-                                suffix={"USD"}
-                                suffixStyle={styles.unit}
-                                style={styles.valueText}/>
-                        </View>
+                        <InvestInfo tokenState={tokenState} showAmount/>
                     </View>
                 </View>
             </DialogContent>
@@ -85,7 +58,7 @@ const styles = StyleSheet.create({
         // height: 180,
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
     },
     title: {
         fontSize: 18,
@@ -101,38 +74,9 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "700"
     },
-    rowContainer: {
-        flexDirection: "row",
-        alignItems: 'center',
-        justifyContent: "space-between",
-        paddingTop: 8,
-        paddingLeft: 6,
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.listBorderColor,
-        minHeight: 40
-    },
-    label: {
-        color: Colors.labelFont,
-        fontSize: 14,
-        fontWeight: "500",
-    },
-    valueText: {
-        fontSize: 18,
-        fontWeight: "700",
-        color: Colors.primaryColor,
-        letterSpacing: 1,
-    },
-    unit: {
-        width: 44,
-        color: Colors.unitFont,
-        marginBottom: 1,
-        marginLeft: 8,
-        fontSize: 12,
-    },
     dataWrapper: {
-        paddingHorizontal: 24,
-        paddingTop: 8,
-        width: Layout.window.width - 64,
+        width: "100%",
+        paddingTop: 14
     },
     summaryWrapper: {
         flexDirection: "row",

@@ -16,5 +16,9 @@ export default {
         height: 48,
         heightIPhoneX: 66,
     },
+    card: {
+        imageHeight: 150,
+        imageHeightLarge: 280
+    },
     isSmallDevice: width < 375,
 };

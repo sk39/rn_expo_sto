@@ -2,17 +2,19 @@ import React, {PureComponent} from 'react';
 import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Colors from "@constants/Colors";
-import {STO} from "@common/model/domainModel";
 import Layout from "@constants/Layout";
+import InvestTokenState from "./InvestTokenState";
+import InvestStaticInfo from "./InvestStaticInfo";
 
 interface Props {
     onBackPress: (e?: any) => void,
-    item: STO
+    tokenState: InvestTokenState
 }
 
 class Toolbar extends PureComponent<Props> {
     render() {
-        const {onBackPress, item} = this.props;
+        const {onBackPress, tokenState} = this.props;
+        const item = tokenState.selectedItem;
         if (!item) {
             return null;
         }
@@ -37,10 +39,18 @@ class Toolbar extends PureComponent<Props> {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.titleText}>Invest</Text>
-                    <Text style={styles.titleNameText}>{item.name}</Text>
+                <View style={styles.infoArea}>
+                    <View style={styles.titleWrapper}>
+                        <Text style={styles.titleText}>Invest in</Text>
+                        <Text style={styles.titleNameText}>{item.name}</Text>
+                    </View>
+                    <View style={styles.dataWrapper}>
+                        <View style={{width: "65%"}}>
+                            <InvestStaticInfo tokenState={tokenState}/>
+                        </View>
+                    </View>
                 </View>
+
             </ImageBackground>
 
         );
@@ -49,17 +59,12 @@ class Toolbar extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        height: Layout.window.height - 400,
-        width: null,
-        paddingTop: 36,
-        paddingBottom: 24,
-        // paddingTop: 12,
-        top: -25
+        height: Layout.card.imageHeightLarge,
     },
     mask: {
         zIndex: 1,
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: "rgba(0,0,0,0.4)"
+        backgroundColor: "rgba(0,0,0,0.8)"
     },
     statusBar: {
         height: 24
@@ -70,36 +75,47 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         zIndex: 2
     },
+    infoArea: {
+        zIndex: 2,
+        flex: 1,
+    },
     titleBackText: {
         color: "white",
         marginLeft: 8,
     },
     titleWrapper: {
-        position: "absolute",
-        left: 36,
-        bottom: 36,
+        paddingTop: 6,
+        paddingLeft: 24,
+        // flexDirection: "row",
+        // alignItems: "flex-end",
         zIndex: 2,
     },
     nameWrapper: {
-        paddingTop: 4,
-        paddingLeft: 24,
         justifyContent: "flex-end",
         alignItems: "flex-end"
     },
+    dataWrapper: {
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
+        flex: 1,
+        paddingBottom: 24,
+        paddingRight: 16
+    },
     titleText: {
-        fontSize: 18,
-        color: Colors.primaryColorLight,
+        fontSize: 16,
+        color: Colors.primaryColorLight2,
         fontWeight: "700",
-        letterSpacing: 2,
+        letterSpacing: 1,
+        marginRight: 12,
     },
     titleNameText: {
         color: "white",
-        fontSize: 26,
+        fontSize: 22,
         fontWeight: "700",
         letterSpacing: 3
     },
     backContainer: {
-        paddingVertical: 8,
+        paddingVertical: 12,
         paddingRight: 44,
         alignItems: 'center',
         flexDirection: "row"

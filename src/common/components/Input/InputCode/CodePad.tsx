@@ -3,11 +3,11 @@ import {StyleSheet, Text, View} from "react-native";
 import {observer} from "mobx-react";
 import CodePadLabel from "./CodePadLabel";
 import Colors from "@constants/Colors";
-import BaseNumberPad from "@common/components/Input/InputNumberPad/BaseNumberPad";
-import {KeyIconBtn} from "@common/components/Input/InputNumberPad/KeyBtn";
+import BaseNumberPad from "@common/components/Input/InputNumber/BaseNumberPad";
+import {KeyIconBtn} from "@common/components/Input/InputNumber/KeyBtn";
 
 @observer
-export default class CodePad extends BaseNumberPad {
+export default class CodePad extends BaseNumberPad<{}> {
 
     renderHeader() {
         return (

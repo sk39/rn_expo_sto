@@ -16,20 +16,20 @@ export default class InputCursor extends Component<Props> {
         this.opacity.setValue(0);
         Animated.loop(
             Animated.sequence([
-                Animated.delay(400),
                 Animated.timing(this.opacity, {
                     toValue: 1,
-                    duration: 500,
+                    duration: 200,
                     easing: Easing.linear,
                     useNativeDriver: true
                 }),
-                Animated.delay(400),
+                Animated.delay(300),
                 Animated.timing(this.opacity, {
                     toValue: 0,
-                    duration: 100,
+                    duration: 200,
                     easing: Easing.linear,
                     useNativeDriver: true
                 }),
+                Animated.delay(200),
             ])
         ).start();
     }

@@ -3,9 +3,7 @@ import {StyleSheet, Text, View} from 'react-native'
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
 import Skeleton from "@common/components/PageSupport/Skeleton";
-import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {STO} from "@common/model/domainModel";
-import {TranslateYAndOpacity} from "../animations";
 
 interface Props {
     selectedItem: STO
@@ -15,65 +13,6 @@ interface Props {
 @observer
 export default class DetailContents extends PureComponent<Props> {
 
-    renderItem({content, index}) {
-        const {phase} = this.props;
-        const delayBase = 56;
-        if (phase) {
-            return (
-                <TranslateYAndOpacity key={index} isHidden={phase !== 'phase-2'} delay={100 + delayBase * index}>
-                    {content}
-                </TranslateYAndOpacity>
-            )
-        } else {
-            return (
-                <AnimatedRow key={index} delay={300 + delayBase * index}>
-                    {content}
-                </AnimatedRow>
-            )
-        }
-    }
-
-    renderList() {
-        let index = 0;
-        return [
-            this.renderItem({
-                content: (
-                    <View style={{paddingBottom: 8}}>
-                        <Text style={styles.descriptionDetail}>
-                            This section is a example security token detail page.
-                            You can move to the purchase screen from the button at the bottom of the page.
-                        </Text>
-                    </View>
-                ),
-                index: index++
-            }),
-            this.renderItem({
-                content: (
-                    <View>
-                        <Skeleton line={3}/>
-                    </View>
-                ),
-                index: index++
-            }),
-            this.renderItem({
-                content: (
-                    <View>
-                        <Skeleton line={5}/>
-                    </View>
-                ),
-                index: index++
-            }),
-            this.renderItem({
-                content: (
-                    <View>
-                        <Skeleton line={2}/>
-                    </View>
-                ),
-                index: index++
-            }),
-        ]
-    }
-
     render() {
         const {selectedItem} = this.props;
         if (!selectedItem) {
@@ -82,7 +21,15 @@ export default class DetailContents extends PureComponent<Props> {
 
         return (
             <View style={{padding: 16, paddingBottom: 56}}>
-                {this.renderList()}
+                <View style={{paddingBottom: 8}}>
+                    <Text style={styles.descriptionDetail}>
+                        This section is a example security token detail page.
+                        You can move to the purchase screen from the button at the bottom of the page.
+                    </Text>
+                </View>
+                <Skeleton line={3}/>
+                <Skeleton line={2}/>
+                <Skeleton line={50}/>
             </View>
         );
     }

@@ -58,31 +58,30 @@ export default class DialogContent extends PureComponent<Props> {
     }
 }
 
-const
-    styles = StyleSheet.create({
-        content: {
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0
-        },
-        body: {
-            padding: 16,
-            flex: 1,
-        },
-        btn: commonStyles.modalBtn,
-        btnText: {
-            fontSize: 16,
-            letterSpacing: 2
-        },
-        bottomBtnWrapper: {
-            flexDirection: "row",
-            paddingHorizontal: 12,
-            paddingVertical: 16,
-        },
-        btnConfirm: {
-            backgroundColor: "#afafaf",
-            flex: 1,
-            marginHorizontal: 4,
-        }
-    });
+const styles = StyleSheet.create({
+    content: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+    },
+    body: {
+        padding: 16,
+        flex: 1,
+    },
+    btn: commonStyles.modalBtn,
+    btnText: {
+        fontSize: 16,
+        letterSpacing: 2
+    },
+    bottomBtnWrapper: {
+        flexDirection: "row",
+        paddingHorizontal: 12,
+        paddingVertical: 16,
+    },
+    btnConfirm: {
+        backgroundColor: "#afafaf",
+        flex: 1,
+        marginHorizontal: 4,
+    }
+});

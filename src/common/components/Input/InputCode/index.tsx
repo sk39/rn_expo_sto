@@ -15,7 +15,7 @@ export default class InputCodePad extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
     padRef: RefObject<CodePad>;
-    height = 438;
+    height = 448;
 
     constructor(props) {
         super(props);

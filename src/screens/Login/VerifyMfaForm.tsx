@@ -5,7 +5,7 @@ import {View} from 'native-base';
 import {Button} from "react-native-elements";
 import Colors from "@constants/Colors";
 import {action, observable} from "mobx";
-import InputCodePad from "@common/components/Input/InputCodePad";
+import InputCode from "@common/components/Input/InputCode";
 import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
 import InputNumberState from "@common/components/Input/InputNumberState";
 import AuthStore from "@store/AuthStore";
@@ -80,7 +80,7 @@ export default class VerifyMfaForm extends Component<Props> {
     render() {
         return (
             <View style={styles.form}>
-                <InputCodePad inputState={this.codeState}/>
+                <InputCode inputState={this.codeState}/>
                 <Button buttonStyle={styles.btn}
                         title={t("btn.verify")}
                         loading={this.processing}

@@ -5,7 +5,7 @@ import {computed} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
 import {Button} from "react-native-elements";
 import Colors from "@constants/Colors";
-import InputCursor from "@common/components/Input/InputNumberPad/InputCursor";
+import InputCursor from "@common/components/Input/InputNumber/InputCursor";
 
 interface Props {
     value: string,

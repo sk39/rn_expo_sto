@@ -6,7 +6,7 @@ import NumberPadState from "./NumberPadState";
 import NumberPadLabel from "./NumberPadLabel";
 import Colors from "@constants/Colors";
 import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
-import {KeyBtn, KeyIconBtn} from "@common/components/Input/InputNumberPad/KeyBtn";
+import {KeyBtn, KeyIconBtn} from "@common/components/Input/InputNumber/KeyBtn";
 import Layout from "@constants/Layout";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
     onClose: () => void;
 }
 
-export default class BaseNumberPad extends Component<Props> {
+export default class BaseNumberPad<T> extends Component<Props & T> {
 
     numberPadState: NumberPadState;
 
@@ -130,7 +130,7 @@ export default class BaseNumberPad extends Component<Props> {
 
     render() {
         return (
-            <View>
+            <View style={styles.back}>
                 {this.renderHeader()}
                 <View style={styles.body}>
                     {this.renderPad()}
@@ -142,6 +142,9 @@ export default class BaseNumberPad extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+    back: {
+        // backgroundColor: Colors.backColor
+    },
     header: {
         paddingTop: 10,
     },

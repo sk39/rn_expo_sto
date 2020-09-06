@@ -2,15 +2,10 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import * as Progress from 'react-native-progress';
 import Colors from "@constants/Colors";
+import {STO} from "@common/model/domainModel";
 
 interface Props {
-    isDetail: boolean,
-    item: {
-        symbol: string;
-        raise: string;
-        maxRaise: string;
-        closeDate: string;
-    };
+    item: STO;
 }
 
 export default class Content extends Component<Props> {
@@ -53,6 +48,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: "white"
     },
     leftContainer: {
         padding: 8,

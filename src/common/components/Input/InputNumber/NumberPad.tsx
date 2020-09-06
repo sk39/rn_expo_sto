@@ -3,5 +3,5 @@ import {observer} from "mobx-react";
 import BaseNumberPad from "./BaseNumberPad";
 
 @observer
-export default class NumberPad extends BaseNumberPad {
+export default class NumberPad extends BaseNumberPad<{}> {
 }

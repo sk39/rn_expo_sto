@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, View} from "react-native";
+import {Easing, StyleSheet, View} from "react-native";
 import Colors from "@constants/Colors";
 import {Text} from "native-base";
 import ProcessDialogState from "./ProcessDialogState";
@@ -94,7 +94,10 @@ export default class ProcessDialog extends Component<Props> {
             <DisableLayer show={showDialog}
                           disablesLayerBackgroundColor={disablesLayerBackgroundColor}
                           close={this.onClose}>
-                <AnimatedRow delay={0} duration={300} moveDistance={200}>
+                <AnimatedRow delay={0}
+                             duration={200}
+                             easing={Easing.ease}
+                             moveDistance={20}>
                     <View style={[
                         styles.indicatorWrapper,
                         {backgroundColor: indicatorBackgroundColor}
@@ -116,7 +119,7 @@ export default class ProcessDialog extends Component<Props> {
 const styles = StyleSheet.create({
     indicatorWrapper: {
         ...commonStyles.modalContent,
-        height: 360,
+        height: 420,
         alignItems: "center",
         justifyContent: "flex-start",
         paddingTop: 98,
@@ -144,7 +147,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: Colors.labelFont,
     },
-    successMsg: {},
+    successMsg: {
+        fontSize: 32,
+        color: Colors.primaryColor,
+        letterSpacing: 2
+    },
     errorMsg: {
         color: "#ca1a41",
         fontSize: 16,

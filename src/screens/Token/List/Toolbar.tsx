@@ -1,11 +1,10 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View,} from 'react-native';
-import TranslateAndOpacity from '../animations/TranslateAndOpacity';
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
 
-class Toolbar extends PureComponent<any, any> {
+export default class Toolbar extends PureComponent {
 
     render() {
         return (
@@ -70,5 +69,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
-export default TranslateAndOpacity(Toolbar);

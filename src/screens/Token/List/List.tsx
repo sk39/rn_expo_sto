@@ -1,26 +1,26 @@
 import React, {PureComponent} from 'react';
-import {Easing, FlatList, StatusBar, StyleSheet, View} from 'react-native';
-import {SharedElement} from '../animations';
+import {FlatList, StatusBar, StyleSheet, View} from 'react-native';
 import Toolbar from './Toolbar';
 import {ListItem} from "../ListItem";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
 import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
+import TokenState from "../TokenState";
+import Colors from "@constants/Colors";
+
+interface Props {
+    tokenState: TokenState;
+}
 
 @observer
-export default class List extends PureComponent<any, any> {
-
-    sharedElementRefs: any;
+export default class List extends PureComponent<Props> {
 
     @observable refreshing = false;
 
     constructor(props) {
         super(props);
-
         this.onRefresh = this.onRefresh.bind(this);
-        this.state = {opacityOfSelectedItem: 1, selectedItem: null};
-        this.sharedElementRefs = {};
     }
 
     componentDidMount() {
@@ -33,58 +33,24 @@ export default class List extends PureComponent<any, any> {
     }
 
     onListItemPressed = item => {
-        const {onItemPress} = this.props;
-        this.setState({selectedItem: item});
-        onItemPress(item);
-        this.sharedElementRefs[item.name].moveToDestination();
+        const {tokenState} = this.props
+        tokenState.navigation.setParams({tabBarVisible: item == null})
+        tokenState.selectItem(item);
     };
-    onMoveToDestinationWillStart = () => {
-        this.setState({opacityOfSelectedItem: 0});
-    };
-    onMoveToSourceDidFinish = () => {
-        this.setState({opacityOfSelectedItem: 1});
-    };
-    getSharedNode = props => {
-        const {item} = props;
 
-        return (
-            <View style={{backgroundColor: 'transparent'}}>
-                <ListItem item={item} animateOnDidMount={false} isHidden={false}/>
-            </View>
-        );
-    };
     renderItem = ({item, index}) => {
-        const {opacityOfSelectedItem} = this.state;
-        const {selectedItem} = this.props;
-        const isHidden = selectedItem && selectedItem.name !== item.name;
-        const id = item.name;
-
+        const {tokenState} = this.props;
         return (
-            <SharedElement
-                // @ts-ignore
-                easing={Easing.in(Easing.back())}
-                ref={node => (this.sharedElementRefs[id] = node)}
-                id={id}
-                onMoveToDestinationWillStart={this.onMoveToDestinationWillStart}
-                onMoveToSourceDidFinish={this.onMoveToSourceDidFinish}
-                getNode={this.getSharedNode}
-                item={item}
-            >
-                <View
-                    style={{
-                        opacity: opacityOfSelectedItem,
-                        backgroundColor: 'transparent',
-                    }}
-                >
-                    <AnimatedRow delay={(index + 1) * 200}>
-                        <ListItem
-                            item={item}
-                            onPress={this.onListItemPressed}
-                            isHidden={isHidden}
-                        />
-                    </AnimatedRow>
-                </View>
-            </SharedElement>
+            <View key={item.name}
+                  style={[styles.cardWrapper, {paddingTop: index === 0 ? 12 : 0}]}>
+                <AnimatedRow delay={(index + 1) * 200}>
+                    <ListItem
+                        item={item}
+                        tokenState={tokenState}
+                        onPress={this.onListItemPressed}
+                    />
+                </AnimatedRow>
+            </View>
         );
     };
 
@@ -96,24 +62,20 @@ export default class List extends PureComponent<any, any> {
     }
 
     render() {
-        const {opacityOfSelectedItem} = this.state;
-        const {phase, tokenState} = this.props;
+        const {tokenState} = this.props;
         const {list, processing} = tokenState;
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
-                <Toolbar
-                    isHidden={phase !== 'phase-0'}
-                />
+                <Toolbar/>
                 <FlatList
                     data={list}
-                    extraData={{phase, opacityOfSelectedItem}}
                     keyExtractor={item => item.name}
                     refreshing={this.refreshing}
                     onRefresh={this.onRefresh}
                     renderItem={this.renderItem}
                 />
-                <ListPageSupport processing={processing} list={list}/>
+                <ListPageSupport processing={processing && list.length === 0} list={list}/>
             </View>
         );
     }
@@ -121,6 +83,11 @@ export default class List extends PureComponent<any, any> {
 
 const styles = StyleSheet.create({
     container: {
-        ...StyleSheet.absoluteFillObject,
+        flex: 1,
+        backgroundColor: Colors.backColor
     },
+    cardWrapper: {
+        paddingHorizontal: 12,
+        paddingBottom: 12,
+    }
 });

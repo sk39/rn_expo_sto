@@ -1,14 +1,10 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
+import {STO} from "@common/model/domainModel";
 
 interface Props {
-    isDetail: boolean,
-    item: {
-        name: string,
-        symbol: string,
-        description: string;
-    };
+    item: STO;
 }
 
 export default class Header extends PureComponent<Props> {
@@ -33,6 +29,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         paddingBottom: 6,
+        backgroundColor: "white"
     },
     nameContainer: {
         paddingTop: 8,

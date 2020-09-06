@@ -1,37 +1,62 @@
 import React, {Component} from 'react';
-import {Animated, TouchableWithoutFeedback, View} from 'react-native';
 import {Divider} from "react-native-elements";
 import Header from './Header';
 import Content from './Content';
 import {observer} from "mobx-react";
-import AnimatedCard from "../animations/AnimatedCard";
-import {ScaleAndOpacity} from "../animations";
+import CardWithModal from "@common/components/CardWithModal/CardWithModal";
+import {STO} from "@common/model/domainModel";
+import TokenState from "../TokenState";
+import DetailContents from "../Detail/DetailContents";
+import DetailHeader from "../Detail/DetailHeader";
+import DetailFooter from "../Detail/DetailFooter";
 
 interface Props {
     onPress?: Function;
-    item: any;
-    isDetail?: boolean;
-    detailMode?: boolean;
-    phase?: string;
-    isHidden?: boolean;
-    animateOnDidMount?: boolean;
-    scrollY?: Animated.Value;
+    tokenState: TokenState;
+    item: STO;
 }
 
 @observer
 export default class ListItem extends Component<Props> {
 
-    private cardRef;
-
-    onPressed = event => {
+    onPressed = () => {
         const {onPress, item} = this.props;
         if (onPress) {
-            onPress(item, event.nativeEvent);
+            onPress(item);
         }
     };
 
+    onBack = () => {
+        const {onPress} = this.props;
+        if (onPress) {
+            onPress(null);
+        }
+    };
+
+    renderModal = () => {
+        return (
+            <DetailContents selectedItem={this.props.item}/>
+        )
+    }
+
+    renderModalHeader = () => {
+        return (
+            <DetailHeader item={this.props.item}
+                          onBackPress={this.onBack}/>
+        )
+    }
+
+    renderModalFooter = () => {
+        return (
+            <DetailFooter selectedItem={this.props.item}
+                          tokenState={this.props.tokenState}
+                          onBackPress={this.onBack}
+                          hardwareBackPress/>
+        )
+    }
+
     render() {
-        const {item, detailMode, phase, isDetail, isHidden, animateOnDidMount} = this.props;
+        const {item, tokenState} = this.props;
         const {image, localImage} = item;
         let imageSource;
         if (image) {
@@ -39,29 +64,25 @@ export default class ListItem extends Component<Props> {
         } else {
             imageSource = localImage
         }
+
+        let selected = false;
+        if (tokenState && tokenState.selectedItem) {
+            selected = item.symbol === tokenState.selectedItem.symbol;
+        }
+
         return (
-            <ScaleAndOpacity
-                isHidden={isHidden}
-                animateOnDidMount={animateOnDidMount}
-                duration={360}
+            <CardWithModal
+                image={imageSource}
+                modal={selected}
+                onPressed={this.onPressed}
+                renderModalHeader={this.renderModalHeader}
+                renderModal={this.renderModal}
+                renderModalFooter={this.renderModalFooter}
             >
-                <TouchableWithoutFeedback onPress={this.onPressed}>
-                    <View>
-                        <AnimatedCard
-                            ref={node => (this.cardRef = node)}
-                            image={imageSource}
-                            detailMode={detailMode}
-                            phase={phase}
-                            scrollY={this.props.scrollY}
-                            isDetail={isDetail}
-                            isHidden={isHidden}>
-                            <Header isDetail={isDetail} item={item}/>
-                            <Divider/>
-                            <Content isDetail={isDetail} item={item}/>
-                        </AnimatedCard>
-                    </View>
-                </TouchableWithoutFeedback>
-            </ScaleAndOpacity>
+                <Header item={item}/>
+                <Divider/>
+                <Content item={item}/>
+            </CardWithModal>
         );
     }
 }

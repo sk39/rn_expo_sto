@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, View} from "react-native";
+import {Easing, StyleSheet, View} from "react-native";
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
 import {Button, Text} from "native-base";
@@ -50,7 +50,7 @@ export default class Dialog extends Component<Props> {
     }
 
     render() {
-        const {show, disablesLayerBackgroundColor, cancelable, onPress} = this.props;
+        const {show, disablesLayerBackgroundColor, error, cancelable, onPress} = this.props;
         const {btnText, btnStyle, btnTextStyle} = this.props;
 
         return (
@@ -58,7 +58,10 @@ export default class Dialog extends Component<Props> {
                           disablesLayerBackgroundColor={disablesLayerBackgroundColor}
                           cancelable={cancelable}
                           close={onPress}>
-                <AnimatedRow delay={0} duration={300} moveDistance={200}>
+                <AnimatedRow delay={0}
+                             duration={200}
+                             easing={error ? Easing.out(Easing.back()) : Easing.ease}
+                             moveDistance={error ? 80 : 20}>
                     <View style={styles.contentWrapper}>
                         <View>
                             {this.renderContents()}
@@ -96,9 +99,11 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 32,
         paddingHorizontal: 24,
+        alignItems: "center",
+        justifyContent: "center",
     },
     errorMsg: {
         color: "#ca1a41",
-        fontSize: 16,
+        fontSize: 18,
     }
 });

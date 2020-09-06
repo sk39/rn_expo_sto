@@ -1,17 +1,7 @@
 import React, {PureComponent} from 'react';
-import {
-    Keyboard,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableWithoutFeedback,
-    View
-} from 'react-native'
+import {Keyboard, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native'
 import Layout from "@constants/Layout";
 import Toolbar from "./Toolbar";
-import InputNumberPad from "@common/components/Input/InputNumberPad";
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
@@ -23,6 +13,7 @@ import InvestTokenState from "./InvestTokenState";
 import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
+import InputAmount from "./InputAmount";
 
 @inject('rootStore')
 @observer
@@ -37,8 +28,9 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
         this.onDone = this.onDone.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.tokenState = new InvestTokenState(props.navigation, props.rootStore);
         this.symbol = this.props.navigation.state.params.symbol;
+        this.tokenState = new InvestTokenState(this.symbol, props.navigation, props.rootStore);
+
         this.loadData().then();
     }
 
@@ -77,7 +69,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
-                    <Toolbar item={selectedItem}
+                    <Toolbar tokenState={this.tokenState}
                              onBackPress={this.onClose}/>
                     <ProcessDialog
                         model={processState}
@@ -89,24 +81,23 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                     </ProcessDialog>
                     <View style={{flex: 1, zIndex: 2}}>
                         <AnimatedRow key="description-row" delay={200}>
-                            <KeyboardAvoidingView
-                                style={{alignItems: "flex-start", paddingHorizontal: 24}}
-                                behavior={Platform.OS == "ios" ? "padding" : "height"}>
+                            <View style={styles.titleContainer}>
                                 <Text style={styles.description}>How many tokens do you want to buy?</Text>
-                                <View style={styles.rowInputContainer}>
-                                    <InputNumberPad inputState={amount}/>
-                                </View>
-                            </KeyboardAvoidingView>
+                            </View>
                         </AnimatedRow>
 
                         <View style={{flex: 1}}>
                             <ScrollView>
-                                <TouchableWithoutFeedback>
-                                    <View style={{padding: 12, paddingHorizontal: 24}}>
-                                        <InvestInfo tokenState={this.tokenState}/>
-                                        <View style={{height: ViewUtils.getBottomBtnHeight()}}/>
+                                <View style={{paddingHorizontal: 24}}>
+                                    <View style={styles.rowInputContainer}>
+                                        <View style={styles.labelContainer}>
+                                            <Text style={styles.label}>Amount</Text>
+                                        </View>
+                                        <InputAmount tokenState={this.tokenState}/>
                                     </View>
-                                </TouchableWithoutFeedback>
+                                    <InvestInfo tokenState={this.tokenState}/>
+                                    <View style={{height: ViewUtils.getBottomBtnHeight()}}/>
+                                </View>
                             </ScrollView>
                         </View>
                     </View>
@@ -116,7 +107,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                         loading={confirming}
                         disabled={amount.value.length === 0}
                         animation
-                        animationDelay={500}
+                        animationDelay={200}
                     />
                 </View>
             </TouchableWithoutFeedback>
@@ -130,16 +121,33 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
     },
     rowInputContainer: {
-        alignItems: 'flex-end',
-        paddingLeft: 48,
-        paddingRight: 24,
+        flexDirection: "row",
+        alignItems: 'flex-start',
+        justifyContent: "space-between",
         width: "100%",
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.listBorderColor,
+        paddingBottom: 12,
+        // backgroundColor:"red"
+    },
+    titleContainer: {
+        padding: 16,
+        alignItems: 'flex-start',
+    },
+    labelContainer: {
+        paddingTop: 18,
+        paddingLeft: 7
+    },
+    label: {
+        fontSize: 14,
+        fontWeight: "500",
+        color: Colors.labelFontThin
     },
     description: {
         color: Colors.labelFontThin,
         textAlign: "center",
-        fontSize: 18,
-        marginBottom: 8,
+        fontSize: 14,
+        fontWeight:"700",
     }
 });
 

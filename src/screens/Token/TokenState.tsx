@@ -4,7 +4,7 @@ import RootStore from "@store/RootStore";
 
 export default class TokenState {
 
-    @observable selectedItem = null;
+    @observable selectedItem: STO = null;
 
     navigation;
     stoStore;
