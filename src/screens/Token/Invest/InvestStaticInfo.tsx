@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     unit: {
-        // width: 44,
         color: Colors.unitFont,
         fontSize: 10,
         marginLeft: 10

@@ -20,7 +20,6 @@ export default class ConfirmContent extends PureComponent<Props> {
     render() {
         const {onDone, onCancel, tokenState} = this.props;
         const item = tokenState.selectedItem;
-        const amount = tokenState.amount;
         return (
             <DialogContent
                 show
@@ -55,7 +54,6 @@ export default class ConfirmContent extends PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // height: 180,
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-start",
@@ -88,7 +86,6 @@ const styles = StyleSheet.create({
     summaryItem: {
         borderWidth: 3,
         borderColor: Colors.primaryColor2,
-        // padding: 32,
         height: 60,
         width: 60,
         alignItems: "center",

@@ -81,9 +81,6 @@ export default class NumberLabel extends Component<Props> {
             formattedVal = ViewUtils.numberFormat(value, decimals);
         }
 
-        // if (Platform.OS === "ios" && s.contains(formattedVal, ",")) {
-        //     stylesArr.push({marginBottom: -5})
-        // }
         stylesArr.push(style);
 
         return (

@@ -24,13 +24,8 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
 
     constructor(props) {
         super(props);
-        this.onPress = this.onPress.bind(this);
-        this.onDone = this.onDone.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.onClose = this.onClose.bind(this);
         this.symbol = this.props.navigation.state.params.symbol;
         this.tokenState = new InvestTokenState(this.symbol, props.navigation, props.rootStore);
-
         this.loadData().then();
     }
 
@@ -39,19 +34,19 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
         this.tokenState.selectItem(item);
     }
 
-    onPress() {
+    onPress = () => {
         this.tokenState.confirm();
     }
 
-    onDone() {
+    onDone = () => {
         this.tokenState.invest();
     }
 
-    onCancel() {
+    onCancel = () => {
         this.tokenState.cancelConfirm();
     }
 
-    onClose() {
+    onClose = () => {
         this.tokenState.cancelConfirm();
         this.props.navigation.goBack();
     }

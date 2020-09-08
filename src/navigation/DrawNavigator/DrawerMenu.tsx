@@ -15,27 +15,20 @@ import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 @observer
 export default class DrawerMenu extends Component<DrawerContentComponentProps & RootStoreProps> {
 
-    constructor(props) {
-        super(props);
-        this.renderItem = this.renderItem.bind(this);
-        this.renderItemDev = this.renderItemDev.bind(this)
-        this.signOut = this.signOut.bind(this);
-    }
-
     jump(routeName) {
         const {navigation} = this.props;
         navigation.navigate(routeName);
         (navigation as any).closeDrawer();
     }
 
-    signOut() {
+    signOut = () => {
         const {auth} = this.props.rootStore;
         auth.signOut();
         const {navigation} = this.props;
         (navigation as any).closeDrawer();
     }
 
-    renderItem(key) {
+    renderItem = (key) => {
         return (
             <TouchableOpacity key={key}
                               style={styles.item}
@@ -48,7 +41,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
         )
     }
 
-    renderItemDev(key) {
+    renderItemDev = (key) => {
         return (
             <TouchableOpacity key={key}
                               style={styles.item}

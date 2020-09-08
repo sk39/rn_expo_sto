@@ -23,13 +23,13 @@ interface Props {
 @observer
 export default class ProcessDialog extends Component<Props> {
 
-    @observable finAnimation: boolean = false;
-
     static defaultProps = {
         indicatorColor: Colors.primaryColor,
         indicatorBackgroundColor: "#fff",
         disablesLayerBackgroundColor: Colors.disablesLayerDark
     };
+
+    @observable finAnimation: boolean = false;
 
     constructor(props) {
         super(props);

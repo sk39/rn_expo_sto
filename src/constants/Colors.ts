@@ -4,9 +4,8 @@ const primaryColor2 = '#7e6eda';
 const primaryColorLight = '#b8b7ff';
 const primaryColorLight2 = '#d1d1ff';
 const primaryColorLight3 = '#e6e6fa';
-const primaryColorDark = '#39307e';
+const primaryColorDark = '#3f358d';
 const secondColor = '#fd8418';
-
 
 export default {
     fontColor: "#201922",
@@ -21,6 +20,7 @@ export default {
     primaryColorLight3,
     primaryColorDark,
     secondColor,
+    secondColorAlpha:
     tintColor,
     labelFont: "#626473",
     labelFontThin: "#85889a",
@@ -29,6 +29,7 @@ export default {
     tabDefault: tintColor,
     tabSelected: primaryColor,
     tabBar: '#f6f7ff',
+    tabBorderColor: "#c2c2c9",
     toolBar: '#f6f7ff',
     toolBarInverse: "#130f3c",
     linkColor: '#0000ff',

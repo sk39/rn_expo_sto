@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
-import {Container, View} from 'native-base';
+import {View} from 'native-base';
 import {Button, Icon} from "react-native-elements";
 import LoginEntryState from "./LoginEntryState";
 import PageLoading from '@common/components/PageSupport/PageLoading';
@@ -11,7 +11,6 @@ import {RootStoreProps} from "@store/RootStoreProvider";
 import {observable} from "mobx";
 import * as LocalAuthentication from 'expo-local-authentication';
 import Layout from "@constants/Layout";
-import Dialog from "@common/components/Modal/Dialog";
 import DisableLayer from "@common/components/Modal/DisableLayer";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 
@@ -21,14 +20,6 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
 
     loginState = new LoginEntryState();
     @observable enableBiometrics = false;
-
-    constructor(props) {
-        super(props);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.linkForgotPassword = this.linkForgotPassword.bind(this);
-        this.linkSignUp = this.linkSignUp.bind(this);
-        this.skip = this.skip.bind(this);
-    }
 
     componentDidMount() {
         const {auth, settings} = this.props.rootStore;
@@ -61,7 +52,7 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
         }
     }
 
-    async handleLogin() {
+    handleLogin = async () => {
         const {auth} = this.props.rootStore;
         const {navigate} = this.props.navigation;
         if (!this.loginState.validate()) {
@@ -80,15 +71,15 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
         }
     }
 
-    linkForgotPassword() {
+    linkForgotPassword = () => {
         alert("TODO: Jump forgot password.")
     }
 
-    linkSignUp() {
+    linkSignUp = () => {
         alert("TODO: Jump SignUp.")
     }
 
-    skip() {
+    skip = () => {
         const {navigate} = this.props.navigation;
         navigate('Main');
     }
@@ -96,73 +87,59 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
     render() {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <Container>
-                    <MyStatusBar dark={false} transparent/>
-                    <PageLoading loading={this.loginState.processing}/>
-                    <DisableLayer show={this.loginState.initializing}/>
-                    <View style={styles.back}>
-                        <View style={styles.headerArea}>
-                            <Text style={styles.title}>{t("screen.login.title")}</Text>
-                            <Text style={styles.subTitle}>{t("screen.login.subTitle")}</Text>
-                        </View>
-                        <View style={styles.form}>
-                            <Input inputState={this.loginState.userId}
-                                   label={t("screen.login.userId")}
-                                   leftIcon={
-                                       <Icon name='user' type="feather" color='#a376c2' size={16}/>
-                                   }
-                            />
-                            <Input inputState={this.loginState.password}
-                                   label={t("screen.login.password")}
-                                   secureTextEntry
-                                   leftIcon={
-                                       <Icon name='lock' type="feather" color='#a376c2' size={16}/>
-                                   }
-                            />
-                            <Button buttonStyle={styles.btn}
-                                    title={t("btn.sign-in")}
-                                    titleStyle={styles.btnText}
-                                    onPress={this.handleLogin}
-                            />
-                            <Button buttonStyle={styles.forgotPassword}
-                                    title={t("screen.login.forgotPassword")}
-                                    type='clear'
-                                    titleStyle={styles.forgotPasswordText}
-                                    onPress={this.linkForgotPassword}
-                            />
-                        </View>
-                        <View style={styles.bottomArea}>
-                            <Button buttonStyle={styles.bottomBtn}
-                                    title={t("screen.login.skip")}
-                                    type='clear'
-                                    titleStyle={styles.bottomBtnText}
-                                    onPress={this.skip}
-                            />
-                            <Button buttonStyle={styles.bottomBtn}
-                                    title={t("btn.sign-up")}
-                                    type='clear'
-                                    titleStyle={styles.bottomBtnPrimaryText}
-                                    onPress={this.linkSignUp}
-                            />
-                        </View>
-                    </View>
-                    <Dialog show={this.loginState.hasError}
-                            error
-                            message={this.loginState.errorMessage}
-                            onPress={() => this.loginState.error(null)}/>
-                </Container>
+                <MyStatusBar dark={false} transparent/>
+                <PageLoading loading={this.loginState.processing}/>
+                <DisableLayer show={this.loginState.initializing}/>
+                <View style={styles.headerArea}>
+                    <Text style={styles.title}>{t("screen.login.title")}</Text>
+                    <Text style={styles.subTitle}>{t("screen.login.subTitle")}</Text>
+                </View>
+                <View style={styles.form}>
+                    <Input inputState={this.loginState.userId}
+                           label={t("screen.login.userId")}
+                           leftIcon={
+                               <Icon name='user' type="feather" color={Colors.primaryColor} size={16}/>
+                           }
+                    />
+                    <Input inputState={this.loginState.password}
+                           label={t("screen.login.password")}
+                           secureTextEntry
+                           leftIcon={
+                               <Icon name='lock' type="feather" color={Colors.primaryColor} size={16}/>
+                           }
+                    />
+                    <Button buttonStyle={styles.btn}
+                            title={t("btn.sign-in")}
+                            titleStyle={styles.btnText}
+                            onPress={this.handleLogin}
+                    />
+                    <Button buttonStyle={styles.forgotPassword}
+                            title={t("screen.login.forgotPassword")}
+                            type='clear'
+                            titleStyle={styles.forgotPasswordText}
+                            onPress={this.linkForgotPassword}
+                    />
+                </View>
+                <View style={styles.bottomArea}>
+                    <Button buttonStyle={styles.bottomBtn}
+                            title={t("screen.login.skip")}
+                            type='clear'
+                            titleStyle={styles.bottomBtnText}
+                            onPress={this.skip}
+                    />
+                    <Button buttonStyle={styles.bottomBtn}
+                            title={t("btn.sign-up")}
+                            type='clear'
+                            titleStyle={styles.bottomBtnPrimaryText}
+                            onPress={this.linkSignUp}
+                    />
+                </View>
             </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    back: {
-        backgroundColor: Colors.backColor,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     safeArea: {
         flex: 1,
         backgroundColor: Colors.backColor
@@ -170,7 +147,8 @@ const styles = StyleSheet.create({
     form: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 60
+        paddingBottom: 68,
+        width: Layout.window.width
     },
     btn: {
         marginTop: 24,

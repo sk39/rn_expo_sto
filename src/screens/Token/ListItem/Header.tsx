@@ -8,6 +8,7 @@ interface Props {
 }
 
 export default class Header extends PureComponent<Props> {
+
     render() {
         const {name, symbol, description} = this.props.item;
         return (

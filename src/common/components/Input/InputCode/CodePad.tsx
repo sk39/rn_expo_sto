@@ -11,7 +11,7 @@ export default class CodePad extends BaseNumberPad<{}> {
 
     renderHeader() {
         return (
-            <View style={styles.header}>
+            <View>
                 <View style={styles.titleArea}>
                     <Text style={styles.title}>{t("screen.2fa.subTitle")}</Text>
                     <KeyIconBtn
@@ -32,9 +32,6 @@ export default class CodePad extends BaseNumberPad<{}> {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        // paddingTop: 12,
-    },
     titleArea: {
         paddingHorizontal: 12,
         flexDirection: "row",

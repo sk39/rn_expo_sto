@@ -1,10 +1,12 @@
 import React, {PureComponent} from 'react';
-import {Share, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Share, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {observer} from "mobx-react";
 import {STO} from "@common/model/domainModel";
-import {Feather, Ionicons} from "@expo/vector-icons";
+import {Feather} from "@expo/vector-icons";
 import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
+import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import BackButton from "@common/components/Button/BackButton";
 
 interface Props {
     item: STO,
@@ -43,10 +45,8 @@ export default class DetailHeader extends PureComponent<Props> {
     render() {
         return (
             <View style={styles.header}>
-                <TouchableOpacity style={styles.backContainer} onPress={this.onBackPress}>
-                    <Ionicons name="ios-arrow-back" size={22} color="white"/>
-                    <Text style={styles.titleBackText}>Back</Text>
-                </TouchableOpacity>
+                <MyStatusBar dark={true} transparent/>
+                <BackButton onPress={this.onBackPress}/>
                 <TouchableOpacity style={styles.menuIconContainer} onPress={this.share}>
                     <Feather name="share-2" size={22} color="white"/>
                 </TouchableOpacity>
@@ -63,21 +63,11 @@ const styles = StyleSheet.create({
         paddingTop: ViewUtils.getPagePaddingTop(),
         flexDirection: "row"
     },
-    titleBackText: {
-        color: 'white',
-        marginLeft: 8,
-    },
-    backContainer: {
-        alignItems: 'center',
-        flexDirection: "row",
-        paddingVertical: 8,
-        paddingRight: 44,
-    },
     menuIconContainer: {
         marginLeft: "auto",
         width: 48,
         height: 48,
         alignItems: 'center',
         justifyContent: 'center',
-    },
+    }
 });

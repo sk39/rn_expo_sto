@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, View} from "react-native";
 import gravatarApi from "gravatar-api";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
+import Colors from "@constants/Colors";
 
 interface Props {
     size?: number,
@@ -16,11 +17,11 @@ const demoUri = "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/12
 @observer
 export default class Avatar extends Component<Props> {
 
-    @observable notSet;
-
     static defaultProps = {
         size: 60,
     };
+
+    @observable notSet;
 
     render() {
         const {email, size, demo, title} = this.props;
@@ -52,12 +53,11 @@ export default class Avatar extends Component<Props> {
     }
 }
 
-
 const styles = StyleSheet.create({
     imageWrapper: {},
     image: {
-        // borderWidth: 1,
-        // borderColor: 'white',
+        borderWidth: 2,
+        borderColor: "white",
         borderRadius: 50
     },
     titleCircle: {

@@ -12,7 +12,6 @@ export default class Logo extends Component<Props> {
         size: 92,
     };
 
-
     render() {
         const {size, gray} = this.props;
         const style = {height: size, width: size};

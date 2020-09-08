@@ -18,11 +18,6 @@ export default class List extends PureComponent<Props> {
 
     @observable refreshing = false;
 
-    constructor(props) {
-        super(props);
-        this.onRefresh = this.onRefresh.bind(this);
-    }
-
     componentDidMount() {
         this.props.tokenState.navigation.addListener(
             'didFocus',
@@ -54,7 +49,7 @@ export default class List extends PureComponent<Props> {
         );
     };
 
-    async onRefresh() {
+    onRefresh = async () => {
         const {tokenState} = this.props;
         this.refreshing = true;
         await tokenState.loadData();

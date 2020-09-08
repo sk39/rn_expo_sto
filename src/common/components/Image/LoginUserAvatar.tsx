@@ -12,11 +12,11 @@ interface Props {
 @observer
 export default class LoginUserAvatar extends Component<Props & RootStoreProps> {
 
-    @observable notSet;
-
     static defaultProps = {
         size: 60,
     };
+
+    @observable notSet;
 
     render() {
         const {size, rootStore} = this.props;

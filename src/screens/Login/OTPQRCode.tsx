@@ -47,7 +47,6 @@ export default class OTPQRCode extends Component<Props> {
     }
 }
 
-
 const styles = StyleSheet.create({
     container: {
         padding: 24,
@@ -89,5 +88,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 8,
     }
-
 });

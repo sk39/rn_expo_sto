@@ -1,6 +1,5 @@
 import Layout from "../../constants/Layout";
 import {Platform, StatusBar} from "react-native";
-import s from "underscore.string";
 
 export default class ViewUtils {
 
@@ -38,11 +37,6 @@ export default class ViewUtils {
 
     static getBottomBtnPaddingBottom() {
         return this.isIphoneX() ? 16 : 0
-    }
-
-    static getCardImageHeight(large?: boolean) {
-        return (large ? Layout.card.imageHeightLarge : Layout.card.imageHeight)
-            + (this.isIphoneX() ? 66 : 0);
     }
 
     static sleep(time) {

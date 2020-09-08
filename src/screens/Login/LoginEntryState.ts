@@ -1,6 +1,5 @@
 import {action, computed, observable} from "mobx";
 import InputState from "@common/components/Input/InputState";
-import s from "underscore.string";
 
 export default class LoginEntryState {
     @observable initializing: boolean = false;

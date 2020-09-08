@@ -11,15 +11,13 @@ export function KeyBtn(props) {
             <Button
                 title={title}
                 type={mini ? "clear" : "solid"}
-                containerStyle={styles.container}
                 buttonStyle={mini ? styles.keyMini : styles.key}
                 titleStyle={styles.keyText}
                 disabledStyle={styles.keyDisable}
                 disabledTitleStyle={styles.keyDisableText}
                 disabled={disabled}
                 onPressIn={onPress}
-                onPress={() => {
-                }}
+                onPress={() => null}
             />
         </View>
     )
@@ -45,8 +43,7 @@ export function KeyIconBtn(props) {
                 disabledTitleStyle={styles.keyDisableText}
                 disabled={disabled}
                 onPressIn={onPress}
-                onPress={() => {
-                }}
+                onPress={() => null}
             />
         </View>
     )
@@ -59,9 +56,6 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(227,227,248,0.1)",
         borderWidth: 1,
         borderColor: "rgba(227,227,248,0.7)"
-    },
-    container: {
-        // ...getPlatformElevation(1)
     },
     keyIcon: {
         width: (Layout.window.width - 24) / 3,
@@ -76,7 +70,6 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     keyDisable: {
-        // opacity: 0.2,
         backgroundColor: "rgba(227,227,248,0)",
     },
     keyDisableText: {

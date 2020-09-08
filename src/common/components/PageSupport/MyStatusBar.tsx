@@ -13,10 +13,11 @@ interface Props {
 @observer
 export default class MyStatusBar extends Component<Props> {
 
+    static lastBackIsDark = null;
+
     @observable refreshNum = 0;
 
     ref;
-    static lastBackIsDark = null;
 
     constructor(props) {
         super(props);
@@ -30,7 +31,7 @@ export default class MyStatusBar extends Component<Props> {
                 const {dark} = this.props;
                 if (MyStatusBar.lastBackIsDark != null
                     && MyStatusBar.lastBackIsDark != dark) {
-                    console.log("SET1")
+                    console.log("StatusBar.pushStackEntry")
                     StatusBar.pushStackEntry({
                         barStyle: dark ? "light-content" : "dark-content",
                         animated: true

@@ -3,6 +3,9 @@ import {StyleSheet, Text, View} from "react-native";
 import {inject, observer} from "mobx-react";
 import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
+import Colors from "@constants/Colors";
+import Layout from "@constants/Layout";
+import {Icon} from "react-native-elements";
 
 interface Props {
     processing: boolean;
@@ -17,7 +20,16 @@ export default class HomeListSupport extends Component<Props & RootStoreProps> {
         return (
             <View style={styles.disablesLayer}>
                 <View style={styles.messageAreaWrapper}>
+                    <View style={styles.border}/>
                     <View style={styles.messageBlock}>
+                        <View style={styles.iconWrapper}>
+                            <View style={styles.iconCircle}>
+                                <Icon name={"lock"}
+                                      type="feather"
+                                      color={"white"}
+                                      size={18}/>
+                            </View>
+                        </View>
                         <Text style={styles.message}>
                             {message}
                         </Text>
@@ -54,27 +66,40 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: "rgba(247,246,255,0.7)",
-        paddingTop: 56,
+        backgroundColor: "rgba(247,246,255,0.8)",
+        paddingTop: 46,
     },
     messageAreaWrapper: {
-        padding: 16,
-        paddingHorizontal: 24,
-        backgroundColor: "rgba(247,246,255,0.4)",
-        // borderColor: "rgba(77,75,88,0.3)",
-        // borderWidth: 1,
-        borderRadius: 12,
+        paddingVertical: 26,
+        width: Layout.window.width,
     },
     messageBlock: {
-        padding: 12,
-        paddingHorizontal: 24,
-        minWidth: "70%",
         alignItems: "center",
     },
     message: {
-        color: "rgba(77,75,88,0.9)",
+        color: Colors.secondColor,
         fontSize: 16,
+        opacity: 0.6,
         fontWeight: "700",
-        opacity: 0.63
+    },
+    iconWrapper: {
+        marginBottom: 12,
+        backgroundColor: 'rgb(250,231,214)',
+        borderRadius: 50,
+        padding: 4,
+    },
+    iconCircle: {
+        backgroundColor: Colors.secondColor,
+        borderRadius: 50,
+        padding: 8,
+    },
+    border: {
+        position: "absolute",
+        height: 2,
+        left: 0,
+        right: 0,
+        top: 48,
+        zIndex: 0,
+        backgroundColor: 'rgb(250,231,214)',
     }
 });

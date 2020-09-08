@@ -40,12 +40,8 @@ export default class BottomModal extends PureComponent<Props> {
             <Portal>
                 <Modalize ref={this.sheetRef}
                           closeOnOverlayTap={cancelable}
-                    // scrollViewProps={{showsVerticalScrollIndicator: false}}
                           modalHeight={height}
-                    // adjustToContentHeight
-                    //       snapPoint={350}
-                          onClosed={this.onClose}
-                >
+                          onClosed={this.onClose}>
                     {this.props.children}
                 </Modalize>
             </Portal>

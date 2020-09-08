@@ -21,7 +21,6 @@ export default class CashflowList extends HomeChild {
         super(props);
         const {auth, balance} = this.props.rootStore;
         this.cashflowState = new CashflowState(auth, balance);
-        this.renderItem = this.renderItem.bind(this);
     }
 
     loadData() {
@@ -32,7 +31,7 @@ export default class CashflowList extends HomeChild {
         this.cashflowState.clear();
     }
 
-    renderItem({item, index}) {
+    renderItem = ({item, index}) => {
         return (
             <AnimatedRow key={index} delay={32 * index}>
                 <View style={styles.row}>
@@ -66,7 +65,7 @@ export default class CashflowList extends HomeChild {
         const {auth} = this.props.rootStore;
         if (!auth.loggedIn || this.cashflowState.list.length === 0) {
             return (
-                <Skeleton line={8}/>
+                <Skeleton line={6}/>
             )
         }
         return (
@@ -114,9 +113,9 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 4,
-        fontSize: 18,
-        color: Colors.primaryColorDark,
-        opacity: 0.52,
+        fontSize: 16,
+        color: Colors.toolBarInverse,
+        opacity: 0.5,
         fontWeight: "700",
         letterSpacing: 1,
     },

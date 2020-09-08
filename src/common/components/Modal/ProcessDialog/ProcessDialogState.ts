@@ -7,7 +7,6 @@ export default class ProcessDialogState {
     @observable isError: boolean = false;
     @observable errorMsg: string = "false";
 
-    // @ts-ignore
     @computed get showDialog(): boolean {
         return this.showConfirm
             || this.processing

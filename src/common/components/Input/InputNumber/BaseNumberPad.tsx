@@ -130,7 +130,7 @@ export default class BaseNumberPad<T> extends Component<Props & T> {
 
     render() {
         return (
-            <View style={styles.back}>
+            <View>
                 {this.renderHeader()}
                 <View style={styles.body}>
                     {this.renderPad()}
@@ -142,9 +142,6 @@ export default class BaseNumberPad<T> extends Component<Props & T> {
 }
 
 const styles = StyleSheet.create({
-    back: {
-        // backgroundColor: Colors.backColor
-    },
     header: {
         paddingTop: 10,
     },
@@ -167,8 +164,6 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        // paddingVertical: 8,
-        // paddingHorizontal: 32,
         borderTopWidth: 1,
         borderTopColor: Colors.listBorderColor
     },
@@ -177,7 +172,6 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     bottomBtn: {
-        // width: 80,
         height: 56,
         width: (Layout.window.width) / 3,
     }

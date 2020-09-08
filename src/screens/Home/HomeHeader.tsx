@@ -1,41 +1,30 @@
 import React, {Component} from 'react';
-import {Animated, StyleSheet} from 'react-native';
-import {observer} from "mobx-react";
+import {Animated, StyleSheet, View} from 'react-native';
 import ViewUtils from "@common/utils/ViewUtils";
-import {observable} from "mobx";
+import HomeHeaderContents from "./HomeHeaderContents";
+import HomeHeaderImage from "./HomeHeaderImage";
 
-const HEADER_HEIGHT = 168 + ViewUtils.getPagePaddingTop();
-const HEADER_MIN_HEIGHT = 120;
+interface Props {
+    scroll: Animated.Value
+    navigation: Navigation
+}
 
-@observer
-export default class HomeHeader extends Component {
-
-    @observable headerHeight = new Animated.Value(HEADER_HEIGHT);
-
-    constructor(props) {
-        super(props);
-        this.onScroll = this.onScroll.bind(this)
-    }
-
-    onScroll(scrollY) {
-        this.headerHeight.setValue(Math.max(HEADER_HEIGHT - scrollY / 4, HEADER_MIN_HEIGHT))
-    }
+export default class HomeHeader extends Component<Props> {
 
     render() {
-        const headAniStyle = {
-            height: this.headerHeight,
-        };
-
+        const {scroll, navigation} = this.props;
         return (
-            <Animated.View style={[styles.header, headAniStyle]}>
-                {this.props.children}
-            </Animated.View>
+            <View style={styles.header}>
+                <HomeHeaderContents navigation={navigation}/>
+                <HomeHeaderImage scroll={scroll}/>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     header: {
-        paddingTop: ViewUtils.getStatusBarHeight()
+        paddingTop: ViewUtils.getStatusBarHeight(),
+        height: 136 + ViewUtils.getPagePaddingTop()
     }
 });

@@ -271,6 +271,7 @@ export default class CardWithModal extends Component<Props> {
         )
     }
 }
+
 const styles = StyleSheet.create({
     cardWrapper: {
         ...Platform.select({

@@ -14,19 +14,13 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
 
     @observable initializing = false;
 
-    constructor(props) {
-        super(props);
-        this.changeEnableBiometric = this.changeEnableBiometric.bind(this)
-        this.clear = this.clear.bind(this)
-    }
-
-    async changeEnableBiometric(val) {
+    changeEnableBiometric = async (val) => {
         const {settings} = this.props.rootStore;
         settings.enableLocalAuth = val
         await settings.saveStorage();
     }
 
-    async clear() {
+    clear = async () => {
         const {rootStore} = this.props;
         try {
             this.initializing = true;

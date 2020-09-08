@@ -115,13 +115,11 @@ const styles = StyleSheet.create({
         padding: 7,
         borderBottomWidth: 1,
         borderBottomColor: Colors.listBorderColor,
-        // minHeight: 40,
     },
     titleContainer: {},
     valueContainer: {
         alignItems: 'flex-end',
         justifyContent: "flex-end",
-        // flexDirection: "row",
         paddingLeft: 16
     },
     label: {
@@ -142,7 +140,6 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     unit: {
-        // width: 44,
         color: Colors.unitFont,
         fontSize: 12,
         marginLeft: 8

@@ -13,14 +13,14 @@ interface Props {
 @observer
 export default class AnimatedRow extends Component<Props> {
 
-    @observable opacity = new Animated.Value(0);
-    @observable translateY = new Animated.Value(16);
-
     static defaultProps = {
         duration: 700,
         easing: Easing.out(Easing.back()),
         moveDistance: 16,
     };
+
+    @observable opacity = new Animated.Value(0);
+    @observable translateY = new Animated.Value(16);
 
     componentDidMount() {
         const {delay, duration, easing, moveDistance} = this.props;

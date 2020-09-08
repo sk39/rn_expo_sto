@@ -93,9 +93,6 @@ const stylesModal = StyleSheet.create({
         justifyContent: "flex-end",
         backgroundColor: Colors.primaryColorThin2,
         borderWidth: 0
-        // backgroundColor: "rgba(0,0,0,0)",
-        // borderBottomWidth: 1,
-        // borderBottomColor: Colors.listBorderColor
     },
     title: {
         marginRight: 2,

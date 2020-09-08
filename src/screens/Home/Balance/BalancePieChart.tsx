@@ -23,5 +23,4 @@ export default class BalancePieChart extends Component<Props> {
             />
         )
     }
-
 }

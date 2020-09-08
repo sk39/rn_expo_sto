@@ -13,18 +13,13 @@ interface Props {
 @observer
 export default class ProcessAnimation extends Component<Props> {
 
-    private lottieRef = React.createRef<any>();
+    private lottieRef = React.createRef<LottieView>();
 
     @observable loop = false;
     @observable speed = 1.7;
     waitFinish = false;
     waitError = false;
     waitLastAnimation = false;
-
-    constructor(props) {
-        super(props);
-        this.onAnimationFinish = this.onAnimationFinish.bind(this)
-    }
 
     componentDidMount() {
         if (this.props.processing) {
@@ -80,7 +75,7 @@ export default class ProcessAnimation extends Component<Props> {
         this.lottieRef.current.play(0, 120);
     }
 
-    onAnimationFinish() {
+    onAnimationFinish = () => {
         const {finish, error, processing} = this.props;
         if (this.waitLastAnimation) {
             this.props.onAnimationFinish(finish, error);
@@ -104,10 +99,10 @@ export default class ProcessAnimation extends Component<Props> {
         }
         return (
             <LottieView
+                ref={this.lottieRef}
                 loop={false}
                 speed={this.speed}
                 autoSize
-                ref={this.lottieRef}
                 onAnimationFinish={this.onAnimationFinish}
                 source={require("@assets/lottie/lf30_editor_woKRBL.json")}
             />

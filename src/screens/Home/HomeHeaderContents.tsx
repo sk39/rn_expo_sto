@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
-import {Text, View} from 'native-base';
+import {View} from 'native-base';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {Button} from "react-native-elements";
@@ -11,13 +11,10 @@ import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 @observer
 export default class HomeHeaderContents extends Component<NavigationProps & RootStoreProps> {
 
-    renderContentsAuth(auth) {
+    renderContentsAuth() {
         return (
             <View style={styles.auth}>
-                <LoginUserAvatar size={50}/>
-                <Text style={styles.username}>
-                    {auth.username}
-                </Text>
+                <LoginUserAvatar size={60}/>
             </View>
         )
     }
@@ -26,6 +23,7 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
         return (
             <View style={styles.noAuth}>
                 <Button title={t("btn.sign-in")}
+                        raised
                         buttonStyle={styles.authButton}
                         onPress={() => this.props.navigation.navigate("Login")}
                 />
@@ -37,8 +35,13 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
         const {auth} = this.props.rootStore;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Digital Security</Text>
-                {auth.loggedIn ? this.renderContentsAuth(auth) : this.renderContentsNoAuth()}
+                <View>
+                    <Text style={styles.title}>Digital</Text>
+                    <Text style={styles.title}>Security</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                    {auth.loggedIn ? this.renderContentsAuth() : this.renderContentsNoAuth()}
+                </View>
             </View>
         )
     }
@@ -47,36 +50,32 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingLeft: 28,
-        // height: 140,
-        justifyContent: "center",
-        alignItems: "flex-start",
+        paddingHorizontal: 28,
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexDirection: "row",
+        zIndex: 3
     },
     title: {
-        color: Colors.primaryColorLight,
-        fontSize: 20,
+        color: Colors.toolBarInverse,
+        fontSize: 24,
         fontWeight: "700",
-        letterSpacing: 2,
-        opacity: 0.42
+        letterSpacing: 4,
+        opacity: 0.58
     },
+    rightContainer: {},
     authButton: {
-        backgroundColor: Colors.primaryColor2,
-        width: 120,
+        backgroundColor: Colors.toolBarInverse,
+        width: 110,
+        borderRadius: 0
     },
     auth: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: 16,
-        paddingLeft: 8,
-    },
-    username: {
-        marginLeft: 16,
-        color: Colors.primaryColorLight,
-        fontWeight: "700",
-        fontSize: 18,
+        paddingRight: 12,
     },
     noAuth: {
-        paddingTop: 24
+        // paddingTop: 24/
     }
 });

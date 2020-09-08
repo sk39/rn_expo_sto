@@ -36,7 +36,7 @@ export default class Input extends PureComponent<Props> {
 const styles = StyleSheet.create({
     input: {
         color: Colors.fontColor,
-        paddingLeft: 16
+        paddingLeft: 8
     },
     inputContainer: {
         width: Layout.input.width,

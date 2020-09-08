@@ -13,13 +13,13 @@ interface Props {
 @observer
 export default class AnimatedSlideUp extends Component<Props> {
 
-    @observable translateY = new Animated.Value(56);
-
     static defaultProps = {
         duration: 400,
         easing: Easing.out(Easing.back()),
         moveDistance: 56,
     };
+
+    @observable translateY = new Animated.Value(56);
 
     componentDidMount() {
         const {delay, duration, easing, moveDistance} = this.props;

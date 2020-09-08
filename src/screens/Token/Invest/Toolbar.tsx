@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
 import Layout from "@constants/Layout";
 import InvestTokenState from "./InvestTokenState";
 import InvestStaticInfo from "./InvestStaticInfo";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import BackButton from "@common/components/Button/BackButton";
 
 interface Props {
     onBackPress: (e?: any) => void,
@@ -14,6 +14,7 @@ interface Props {
 }
 
 class Toolbar extends PureComponent<Props> {
+
     render() {
         const {onBackPress, tokenState} = this.props;
         const item = tokenState.selectedItem;
@@ -36,10 +37,7 @@ class Toolbar extends PureComponent<Props> {
                 <View style={styles.mask}/>
                 <View style={{zIndex: 2}}>
                     <View style={styles.toolbarContainer}>
-                        <TouchableOpacity style={styles.backContainer} onPress={onBackPress}>
-                            <Ionicons name="ios-arrow-back" size={22} color="white"/>
-                            <Text style={styles.titleBackText}>Back</Text>
-                        </TouchableOpacity>
+                        <BackButton onPress={onBackPress}/>
                     </View>
                 </View>
                 <View style={styles.infoArea}>
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.8)"
     },
     statusBar: {
-        height: 24
+        height: ViewUtils.getStatusBarHeight()
     },
     toolbarContainer: {
         alignItems: 'center',
@@ -83,15 +81,9 @@ const styles = StyleSheet.create({
         zIndex: 2,
         flex: 1,
     },
-    titleBackText: {
-        color: "white",
-        marginLeft: 8,
-    },
     titleWrapper: {
         paddingTop: 6,
         paddingLeft: 24,
-        // flexDirection: "row",
-        // alignItems: "flex-end",
         zIndex: 2,
     },
     nameWrapper: {
@@ -117,12 +109,6 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: "700",
         letterSpacing: 3
-    },
-    backContainer: {
-        paddingVertical: 12,
-        paddingRight: 44,
-        alignItems: 'center',
-        flexDirection: "row"
     }
 });
 

@@ -21,7 +21,6 @@ export default class BalanceList extends HomeChild {
     constructor(props) {
         super(props);
         this.balanceState = new BalanceState(props.rootStore.balance);
-        this.renderItem = this.renderItem.bind(this);
     }
 
     loadData() {
@@ -67,7 +66,7 @@ export default class BalanceList extends HomeChild {
         )
     }
 
-    renderItem({item, index}) {
+    renderItem = ({item, index}) => {
         let valEL;
         if (!item.symbol) {
             valEL = (
@@ -182,9 +181,9 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 8,
-        fontSize: 18,
-        color: Colors.primaryColorDark,
-        opacity: 0.52,
+        fontSize: 16,
+        color: Colors.toolBarInverse,
+        opacity: 0.5,
         fontWeight: "700",
         letterSpacing: 1,
     },

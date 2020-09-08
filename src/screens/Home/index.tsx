@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import {Platform, RefreshControl, ScrollView, StyleSheet} from 'react-native';
+import {Animated, RefreshControl, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
-import AssetImage from "./AssetImage";
 import Balance from "./Balance";
 import Cashflow from "./Cashflow";
-import HomeHeaderContents from "./HomeHeaderContents";
 import HomeHeader from "./HomeHeader";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
@@ -17,19 +15,6 @@ import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 @observer
 export default class Home extends Component<NavigationProps> {
 
-    private headerRef = React.createRef<HomeHeader>();
-
-    @observable refreshing = false;
-
-    refreshListeners = [];
-
-    constructor(props) {
-        super(props);
-        this.onScroll = this.onScroll.bind(this);
-        this.onRefresh = this.onRefresh.bind(this);
-        this.setRefreshListener = this.setRefreshListener.bind(this);
-    }
-
     static navigationOptions = {
         tabBarLabel: t("navigation.tab.Home"),
         tabBarIcon: ({focused}) => (
@@ -37,22 +22,18 @@ export default class Home extends Component<NavigationProps> {
         )
     };
 
-    onScroll(e) {
-        if (Platform.OS === 'android') {
-            const scrollY = e.nativeEvent.contentOffset.y;
-            if (this.headerRef.current)
-                this.headerRef.current.onScroll(scrollY);
-        }
-    }
+    @observable scroll = new Animated.Value(0);
+    @observable refreshing = false;
+    refreshListeners = [];
 
-    setRefreshListener(listener: () => void) {
+    setRefreshListener = (listener: () => void) => {
         this.refreshListeners.push(listener)
     }
 
-    async onRefresh() {
+    onRefresh = async () => {
         this.refreshing = true;
         this.refreshListeners.forEach(listener => listener())
-        await ViewUtils.sleep(1000);
+        await ViewUtils.sleep(800);
         this.refreshing = false;
     }
 
@@ -61,31 +42,39 @@ export default class Home extends Component<NavigationProps> {
 
         return (
             <Container style={styles.back}>
-                <MyStatusBar dark={true} transparent navigation={navigation}/>
-                <HomeHeader ref={this.headerRef}>
-                    <HomeHeaderContents navigation={navigation}/>
-                    <AssetImage/>
-                </HomeHeader>
+                <MyStatusBar dark={false} transparent navigation={navigation}/>
+                <HomeHeader scroll={this.scroll} navigation={navigation}/>
                 <View style={styles.body}>
-                    <ScrollView
+                    <Animated.ScrollView
                         refreshControl={
-                            <RefreshControl refreshing={this.refreshing} onRefresh={this.onRefresh}/>
+                            <RefreshControl refreshing={this.refreshing}
+                                            onRefresh={this.onRefresh}/>
                         }
-                        onScroll={this.onScroll}>
+                        scrollEventThrottle={16}
+                        onScroll={
+                            Animated.event([
+                                    {
+                                        nativeEvent: {
+                                            contentOffset: {
+                                                y: this.scroll,
+                                            },
+                                        },
+                                    },
+                                ],
+                                {useNativeDriver: true})
+                        }>
                         <View style={styles.areaCard}>
                             <Balance navigation={navigation}
                                      setRefreshListener={this.setRefreshListener}/>
                         </View>
 
-                        <View style={styles.splitterWrapper}>
-                            <View style={styles.splitter}/>
-                        </View>
+                        <View style={styles.splitter}/>
 
                         <View style={styles.areaCard}>
                             <Cashflow navigation={navigation}
                                       setRefreshListener={this.setRefreshListener}/>
                         </View>
-                    </ScrollView>
+                    </Animated.ScrollView>
                 </View>
             </Container>
         );
@@ -95,7 +84,7 @@ export default class Home extends Component<NavigationProps> {
 const styles = StyleSheet.create({
     back: {
         flex: 1,
-        backgroundColor: Colors.toolBarInverse,
+        backgroundColor: Colors.backColor2,
         flexDirection: "column",
     },
     body: {
@@ -109,14 +98,8 @@ const styles = StyleSheet.create({
         padding: 26,
         paddingVertical: 20
     },
-    splitterWrapper: {
-        paddingVertical: 8,
-    },
     splitter: {
         width: "100%",
-        height: 6,
-        borderRadius: 12,
-        backgroundColor: "#c9c9d2",
-        opacity: 0.16
+        height: 8,
     }
 });

@@ -10,12 +10,7 @@ interface Props {
 
 export default class ExternalLink extends Component<Props> {
 
-    constructor(props) {
-        super(props);
-        this.handlePress = this.handlePress.bind(this);
-    }
-
-    handlePress() {
+    handlePress = () => {
         const {url} = this.props;
         WebBrowser.openBrowserAsync(url);
     }

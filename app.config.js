@@ -29,14 +29,15 @@ export default {
     android: {
         package: "com.sk39.sto.demo",
         googleServicesFile: "./google-services.json",
+        softwareKeyboardLayoutMode: "pan",
         adaptiveIcon: {
             foregroundImage: "./assets/android/foreground.png",
             backgroundColor: "#fff"
         }
     },
     androidStatusBar: {
-        barStyle: "light-content",
-        backgroundColor: "#130f3c",
+        barStyle: "dark-content",
+        backgroundColor: "#fff",
         translucent: true
     },
     packagerOpts: {
