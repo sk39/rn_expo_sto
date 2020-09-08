@@ -7,12 +7,13 @@ import {RootStoreProps} from "@store/RootStoreProvider";
 import PageHeader from "@common/components/PageSupport/PageHeader";
 import {Button} from "react-native-elements";
 import {observable} from "mobx";
+import {CacheManager} from "react-native-expo-image-cache";
 
 @inject('rootStore')
 @observer
 export default class Settings extends Component<NavigationProps & RootStoreProps> {
 
-    @observable initializing = false;
+    @observable processing = "";
 
     changeEnableBiometric = async (val) => {
         const {settings} = this.props.rootStore;
@@ -20,27 +21,47 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         await settings.saveStorage();
     }
 
-    clear = async () => {
-        const {rootStore} = this.props;
+    async exec(processName: string, process: () => Promise<any>) {
         try {
-            this.initializing = true;
-            await rootStore.clear();
+            this.processing = processName;
+            await process();
             Toast.show({
-                text: t("screen.settings.initialize.message.success"),
+                text: t(`screen.settings.${processName}.message.success`),
                 buttonText: t("btn.close"),
                 duration: 2000,
                 type: "success"
             })
         } catch (e) {
             Toast.show({
-                text: t("screen.settings.initialize.message.error"),
+                text: t(`screen.settings.${processName}.message.error`),
                 buttonText: t("btn.close"),
                 duration: 2000,
                 type: "danger"
             })
         } finally {
-            this.initializing = false;
+            this.processing = "";
         }
+    }
+
+    clearImageCache = async () => {
+        await CacheManager.clearCache();
+    }
+
+
+    clearSTOCache = () => {
+        const {rootStore} = this.props;
+        this.exec("clearSto", async () => {
+            await this.clearImageCache();
+            await rootStore.sto.clear();
+        })
+    }
+
+    clear = () => {
+        const {rootStore} = this.props;
+        this.exec("initialize", async () => {
+            await this.clearImageCache();
+            await rootStore.clear();
+        })
     }
 
     render() {
@@ -61,13 +82,29 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
                 <View style={styles.row}>
                     <View style={styles.header}>
                         <View style={{flex: 1}}>
+                            <Text style={styles.title}>{t("screen.settings.clearSto.title")}</Text>
+                            <Text style={styles.subTitle}>{t("screen.settings.clearSto.subTitle")}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.body}>
+                        <Button title={t("screen.settings.clearSto.done")}
+                                loading={this.processing === "clearSto"}
+                                buttonStyle={styles.btn}
+                                raised
+                                onPress={this.clearSTOCache}
+                        />
+                    </View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.header}>
+                        <View style={{flex: 1}}>
                             <Text style={styles.title}>{t("screen.settings.initialize.title")}</Text>
                             <Text style={styles.subTitle}>{t("screen.settings.initialize.subTitle")}</Text>
                         </View>
                     </View>
                     <View style={styles.body}>
                         <Button title={t("screen.settings.initialize.done")}
-                                loading={this.initializing}
+                                loading={this.processing === "initialize"}
                                 buttonStyle={styles.initBtn}
                                 raised
                                 onPress={this.clear}
@@ -121,8 +158,12 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         marginRight: 24,
     },
+    btn: {
+        width: 120,
+        backgroundColor: Colors.primaryColorDark
+    },
     initBtn: {
-        width: 140,
+        width: 120,
         backgroundColor: Colors.error
     },
     initBtnText: {

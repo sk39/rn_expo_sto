@@ -58,13 +58,22 @@
         "title": "生体認証",
         "subTitle": "生体認証を有効にします。"
       },
+      "clearSto": {
+        "title": "STOキャッシュ",
+        "subTitle": "STO情報と画像のキャッシュをクリアします。",
+        "done": "クリア",
+        "message": {
+          "success": "クリアしました",
+          "error": "クリアに失敗しました"
+        }
+      },
       "initialize": {
         "title": "データの初期化",
         "subTitle": "全ての設定を初期化します。本アプリがストレージに保存している全てのデータを削除します。",
         "done": "初期化",
         "message": {
-          "success": "Initialization has completed!",
-          "error": "Failed Initialize!"
+          "success": "初期化しました",
+          "error": "初期化に失敗しました"
         }
       }
     }

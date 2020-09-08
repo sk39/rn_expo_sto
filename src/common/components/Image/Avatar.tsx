@@ -3,7 +3,6 @@ import {Image, StyleSheet, Text, View} from "react-native";
 import gravatarApi from "gravatar-api";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
-import Colors from "@constants/Colors";
 
 interface Props {
     size?: number,

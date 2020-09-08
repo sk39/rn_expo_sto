@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
 import Layout from "@constants/Layout";
 import InvestTokenState from "./InvestTokenState";
@@ -7,6 +7,7 @@ import InvestStaticInfo from "./InvestStaticInfo";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 import BackButton from "@common/components/Button/BackButton";
+import CashImage from "@common/components/Image/CashImage";
 
 interface Props {
     onBackPress: (e?: any) => void,
@@ -31,7 +32,8 @@ class Toolbar extends PureComponent<Props> {
         }
 
         return (
-            <ImageBackground source={imageSource} style={styles.container}>
+            <View style={styles.container}>
+                <CashImage source={imageSource}/>
                 <MyStatusBar dark={true} transparent/>
                 <View style={styles.statusBar}/>
                 <View style={styles.mask}/>
@@ -52,7 +54,7 @@ class Toolbar extends PureComponent<Props> {
                     </View>
                 </View>
 
-            </ImageBackground>
+            </View>
 
         );
     }
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     container: {
         height: Layout.card.imageHeightLarge,
         paddingTop: ViewUtils.getPagePaddingTop(),
+        position: "relative"
     },
     mask: {
         zIndex: 1,

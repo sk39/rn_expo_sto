@@ -1,7 +1,6 @@
 import {
     Animated,
     Easing,
-    Image,
     ImageSourcePropType,
     Platform,
     StyleSheet,
@@ -18,6 +17,7 @@ import AnimatedCard from "./AnimatedCard";
 import Colors from "@constants/Colors";
 import AnimatedCardHeader from "@common/components/CardWithModal/AnimatedCardHeader";
 import AnimatedCardContents from "@common/components/CardWithModal/AnimatedCardContents";
+import CashImage from "@common/components/Image/CashImage";
 
 interface Props {
     image: ImageSourcePropType;
@@ -208,10 +208,7 @@ export default class CardWithModal extends Component<Props> {
                                 imageWrapperStyle={styles.imageWrapper}
                                 scrollY={this.scrollY}
                             >
-                                <Image
-                                    style={styles.image}
-                                    source={image}
-                                />
+                                <CashImage source={image}/>
                                 <View>
                                     {this.props.children}
                                 </View>
@@ -254,10 +251,7 @@ export default class CardWithModal extends Component<Props> {
                         <View style={styles.cardWrapper}>
                             <Animated.View ref={this.cardRef} style={[styles.card, ani.card]}>
                                 <Animated.View style={[styles.imageWrapper]}>
-                                    <Image
-                                        style={styles.image}
-                                        source={image}
-                                    />
+                                    <CashImage source={image}/>
                                 </Animated.View>
                                 <View>
                                     {this.props.children}
@@ -292,15 +286,10 @@ const styles = StyleSheet.create({
     },
     imageWrapper: {
         overflow: 'hidden',
-        backgroundColor: "#0f153c",
+        backgroundColor: "#c1c1c1",
         padding: 0,
         width: "100%",
         height: Layout.card.imageHeight,
-    },
-    image: {
-        ...StyleSheet.absoluteFillObject,
-        width: null,
-        height: null
     },
     modal: {
         width: Layout.window.width,
