@@ -5,6 +5,7 @@ import InputNumberState from "@common/components/Input/InputNumberState";
 import CodePadLabel from "./CodePadLabel";
 import CodePad from "./CodePad";
 import BottomModal from "@common/components/Modal/BottomModal";
+import ViewUtils from "@common/utils/ViewUtils";
 
 interface Props {
     inputState: InputNumberState,
@@ -15,7 +16,7 @@ export default class InputCodePad extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
     padRef: RefObject<CodePad>;
-    height = 448;
+    height = 443 + ViewUtils.getBottomBtnPaddingBottom();
 
     constructor(props) {
         super(props);

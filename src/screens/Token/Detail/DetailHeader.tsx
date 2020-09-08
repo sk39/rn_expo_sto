@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {STO} from "@common/model/domainModel";
 import {Feather, Ionicons} from "@expo/vector-icons";
 import Layout from "@constants/Layout";
+import ViewUtils from "@common/utils/ViewUtils";
 
 interface Props {
     item: STO,
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
         alignItems: 'center',
         paddingHorizontal: 16,
+        paddingTop: ViewUtils.getPagePaddingTop(),
         flexDirection: "row"
     },
     titleBackText: {

@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {View} from "native-base";
 import {Icon} from "react-native-elements";
 import Colors from "@constants/Colors";
+import ViewUtils from "@common/utils/ViewUtils";
 
 @observer
 export default class AssetImage extends Component {
@@ -25,8 +26,8 @@ export default class AssetImage extends Component {
 const styles = StyleSheet.create({
     logoWrapper: {
         position: "absolute",
-        top: 0,
-        right: 0
+        top: ViewUtils.getPagePaddingTop(),
+        right: 0,
     },
     logo1: {
         position: "absolute",

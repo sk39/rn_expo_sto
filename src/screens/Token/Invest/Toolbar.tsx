@@ -5,6 +5,8 @@ import Colors from "@constants/Colors";
 import Layout from "@constants/Layout";
 import InvestTokenState from "./InvestTokenState";
 import InvestStaticInfo from "./InvestStaticInfo";
+import ViewUtils from "@common/utils/ViewUtils";
+import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 
 interface Props {
     onBackPress: (e?: any) => void,
@@ -29,6 +31,7 @@ class Toolbar extends PureComponent<Props> {
 
         return (
             <ImageBackground source={imageSource} style={styles.container}>
+                <MyStatusBar dark={true} transparent/>
                 <View style={styles.statusBar}/>
                 <View style={styles.mask}/>
                 <View style={{zIndex: 2}}>
@@ -60,6 +63,7 @@ class Toolbar extends PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         height: Layout.card.imageHeightLarge,
+        paddingTop: ViewUtils.getPagePaddingTop(),
     },
     mask: {
         zIndex: 1,

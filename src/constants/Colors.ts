@@ -11,6 +11,7 @@ const secondColor = '#fd8418';
 export default {
     fontColor: "#201922",
     backColor: "#f6f7ff",
+    backColor2: "#e2e3ef",
     primaryColor,
     primaryColor2,
     primaryColorThin: "rgba(116,98,255,0.62)",

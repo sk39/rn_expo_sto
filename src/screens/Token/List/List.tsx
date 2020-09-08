@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
-import {FlatList, StatusBar, StyleSheet, View} from 'react-native';
-import Toolbar from './Toolbar';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {ListItem} from "../ListItem";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {observer} from "mobx-react";
@@ -8,6 +7,7 @@ import {observable} from "mobx";
 import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
 import TokenState from "../TokenState";
 import Colors from "@constants/Colors";
+import PageHeader from "@common/components/PageSupport/PageHeader";
 
 interface Props {
     tokenState: TokenState;
@@ -66,8 +66,12 @@ export default class List extends PureComponent<Props> {
         const {list, processing} = tokenState;
         return (
             <View style={styles.container}>
-                <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
-                <Toolbar/>
+                <PageHeader title="Browse Security Tokens"
+                            navigation={tokenState.navigation}>
+                    {/*<View style={styles.menuIconContainer}>*/}
+                    {/*    <Icon name='search' type="feather" color={Colors.tabDefault} size={24}/>*/}
+                    {/*</View>*/}
+                </PageHeader>
                 <FlatList
                     data={list}
                     keyExtractor={item => item.name}
@@ -89,5 +93,11 @@ const styles = StyleSheet.create({
     cardWrapper: {
         paddingHorizontal: 12,
         paddingBottom: 12,
-    }
+    },
+    menuIconContainer: {
+        width: 40,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

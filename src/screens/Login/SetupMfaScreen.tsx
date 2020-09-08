@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StatusBar, StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {Button} from "react-native-elements";
@@ -10,6 +10,7 @@ import * as Linking from 'expo-linking';
 import OTPQRCode from "./OTPQRCode";
 import Dialog from "@common/components/Modal/Dialog";
 import VerifyMfaForm from "./VerifyMfaForm";
+import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 
 @inject("rootStore")
 @observer
@@ -27,7 +28,7 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
         const {navigate} = this.props.navigation;
         return (
             <Container>
-                <StatusBar barStyle="dark-content" backgroundColor={Colors.backColor}/>
+                <MyStatusBar dark={false} transparent/>
                 <View style={styles.back}>
                     <View style={styles.dispArea}>
                         <Text style={styles.numText}>1. </Text>

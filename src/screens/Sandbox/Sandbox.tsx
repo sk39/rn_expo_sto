@@ -5,6 +5,7 @@ import {observable} from "mobx";
 import {Button} from "react-native-elements";
 import Dialog from "@common/components/Modal/Dialog";
 import BottomModal from "@common/components/Modal/BottomModal";
+import Layout from "@constants/Layout";
 
 @observer
 export default class Sandbox extends Component {
@@ -54,6 +55,7 @@ export default class Sandbox extends Component {
                         onPress={() => this.sheetRef.current.open()}
                 />
 
+                <Text>{Layout.window.height}</Text>
                 <BottomModal ref={this.sheetRef} height={400}>
                     {contents}
                 </BottomModal>

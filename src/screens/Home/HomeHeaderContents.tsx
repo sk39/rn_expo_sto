@@ -47,9 +47,8 @@ export default class HomeHeaderContents extends Component<NavigationProps & Root
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 12,
         paddingLeft: 28,
-        height: 140,
+        // height: 140,
         justifyContent: "center",
         alignItems: "flex-start",
     },

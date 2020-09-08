@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.primaryColorDark,
+        ...ViewUtils.ifIphoneXStyle({
+            paddingBottom: ViewUtils.getBottomBtnPaddingBottom()
+        })
     },
     text: {
         color: Colors.primaryColorLight,

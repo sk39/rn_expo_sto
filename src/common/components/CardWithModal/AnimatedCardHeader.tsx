@@ -20,7 +20,7 @@ export default class AnimatedCardHeader extends Component<Props> {
                     {
                         translateY: phase.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [-60, 0],
+                            outputRange: [-(60 + ViewUtils.getPagePaddingTop()), 0],
                         })
                     },
                 ]

@@ -32,9 +32,26 @@ export default class ViewUtils {
             Layout.bottomBtn.height
     }
 
+    static getPagePaddingTop() {
+        return this.isIphoneX() ? 16 : 0
+    }
+
+    static getBottomBtnPaddingBottom() {
+        return this.isIphoneX() ? 16 : 0
+    }
+
+    static getCardImageHeight(large?: boolean) {
+        return (large ? Layout.card.imageHeightLarge : Layout.card.imageHeight)
+            + (this.isIphoneX() ? 66 : 0);
+    }
+
     static sleep(time) {
         return new Promise(resolve => {
             setTimeout(resolve, time);
         });
+    }
+
+    static ifIphoneXStyle(style: any) {
+        return this.isIphoneX() ? style : {}
     }
 }

@@ -54,15 +54,15 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: "rgba(247,246,255,0.78)",
+        backgroundColor: "rgba(247,246,255,0.7)",
         paddingTop: 56,
     },
     messageAreaWrapper: {
         padding: 16,
         paddingHorizontal: 24,
-        backgroundColor: "rgba(247,246,255,0.86)",
-        borderColor: "rgba(77,75,88,0.3)",
-        borderWidth: 1,
+        backgroundColor: "rgba(247,246,255,0.4)",
+        // borderColor: "rgba(77,75,88,0.3)",
+        // borderWidth: 1,
         borderRadius: 12,
     },
     messageBlock: {
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     message: {
-        color: "rgba(77,75,88,0.7)",
-        fontSize: 18,
+        color: "rgba(77,75,88,0.9)",
+        fontSize: 16,
         fontWeight: "700",
         opacity: 0.63
     }

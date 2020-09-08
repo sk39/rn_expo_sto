@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {Platform, RefreshControl, ScrollView, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {TabBarIcon} from "@common/components/ScreenIcon";
@@ -12,6 +12,7 @@ import HomeHeaderContents from "./HomeHeaderContents";
 import HomeHeader from "./HomeHeader";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
+import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 
 @observer
 export default class Home extends Component<NavigationProps> {
@@ -60,7 +61,7 @@ export default class Home extends Component<NavigationProps> {
 
         return (
             <Container style={styles.back}>
-                <StatusBar barStyle="light-content" translucent backgroundColor={"rgba(0,0,0,0)"}/>
+                <MyStatusBar dark={true} transparent navigation={navigation}/>
                 <HomeHeader ref={this.headerRef}>
                     <HomeHeaderContents navigation={navigation}/>
                     <AssetImage/>

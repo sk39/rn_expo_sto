@@ -7,7 +7,6 @@ import {RootStoreProps} from "@store/RootStoreProvider";
 import PageHeader from "@common/components/PageSupport/PageHeader";
 import {Button} from "react-native-elements";
 import {observable} from "mobx";
-import ViewUtils from "@common/utils/ViewUtils";
 
 @inject('rootStore')
 @observer
@@ -54,9 +53,7 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         const {settings} = this.props.rootStore;
         return (
             <Container style={styles.container}>
-                <View style={styles.statusBar}/>
-                {/*<StatusBar barStyle="light-content" translucent backgroundColor={Colors.toolBarInverse}/>*/}
-                <PageHeader title={t("screen.settings.pageTitle")}/>
+                <PageHeader title={t("screen.settings.pageTitle")} navigation={this.props.navigation}/>
                 <View style={styles.row}>
                     <View style={styles.header}>
                         <View style={{flex: 1}}>
@@ -91,7 +88,7 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.primaryColorThin2,
+        backgroundColor: Colors.backColor2,
     },
     row: {
         backgroundColor: Colors.backColor,
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
     },
     body: {
         padding: 16,
@@ -136,10 +133,6 @@ const styles = StyleSheet.create({
     },
     initBtnText: {
         color: "white"
-    },
-    statusBar: {
-        height: 24,
-        backgroundColor: ViewUtils.isIphoneX() ? Colors.toolBar : Colors.toolBarInverse,
     },
 });
 

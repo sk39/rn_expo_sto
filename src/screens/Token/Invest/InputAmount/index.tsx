@@ -5,6 +5,7 @@ import InputAmountPad from "./InputAmountPad";
 import BottomModal from "@common/components/Modal/BottomModal";
 import InvestTokenState from "../InvestTokenState";
 import InputAmountLabel from "./InputAmountLabel";
+import ViewUtils from "@common/utils/ViewUtils";
 
 interface Props {
     tokenState: InvestTokenState,
@@ -15,7 +16,7 @@ export default class InputAmount extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
     padRef: RefObject<InputAmountPad>;
-    height = 410;
+    height = 416 + ViewUtils.getBottomBtnPaddingBottom();
 
     constructor(props) {
         super(props);
