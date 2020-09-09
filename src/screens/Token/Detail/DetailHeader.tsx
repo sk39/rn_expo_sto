@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     header: {
         width: Layout.window.width,
         alignItems: 'center',
-        paddingHorizontal: 16,
+        paddingHorizontal: 6,
         paddingTop: ViewUtils.getPagePaddingTop(),
         flexDirection: "row",
     },

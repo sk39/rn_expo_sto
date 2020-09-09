@@ -14,6 +14,7 @@ import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import InputAmount from "./InputAmount";
+import Agreement from "./Agreement";
 
 @inject('rootStore')
 @observer
@@ -81,7 +82,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                             </View>
                         </AnimatedRow>
 
-                        <View style={{flex: 1}}>
+                        <View style={{flex: 1, paddingBottom: ViewUtils.getBottomBtnHeight()}}>
                             <ScrollView>
                                 <View style={{paddingHorizontal: 24}}>
                                     <View style={styles.rowInputContainer}>
@@ -94,13 +95,17 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                                     <View style={{height: ViewUtils.getBottomBtnHeight()}}/>
                                 </View>
                             </ScrollView>
+                            <AnimatedRow delay={140}>
+                                <Agreement tokenState={this.tokenState}/>
+                            </AnimatedRow>
                         </View>
                     </View>
+
                     <PageBottomBtn
                         onPress={this.onPress}
                         text="Confirm"
                         loading={confirming}
-                        disabled={amount.value.length === 0}
+                        disabled={amount.value.length === 0 || !this.tokenState.agreed}
                         animation
                         animationDelay={200}
                     />

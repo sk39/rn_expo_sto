@@ -35,7 +35,8 @@ export default {
     disablesLayer: "rgba(239,244,246,0.6)",
     disablesLayerDark: "rgba(11,10,25,0.7)",
     cardBack: '#fff',
-    positive: primary,
+    positive: 'rgb(75,210,16)',
+    positiveLight: 'rgb(187,252,112)',
     negative: red1,
     error: red2,
     listBorder: "rgba(15,20,92,0.08)",
@@ -44,7 +45,9 @@ export default {
     btnPrimaryLight: primary,
     btnPrimary: primaryDark,
     btnPrimaryText: primaryLight,
-    btnDark: "#706f7d",
+    btnDark: inverseBack,
+    inputBack: "rgba(215,215,238,0.3)",
+    inputBorder: "rgba(215,215,238,0.9)"
 };
 
 export const ChartColor = [

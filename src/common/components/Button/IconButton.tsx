@@ -7,6 +7,7 @@ interface Props {
     type: string;
     containerStyle?: StyleProp<ViewStyle>;
     color?: string;
+    shadowColor?: string;
     size?: number;
     onPress: () => void;
 }
@@ -15,17 +16,18 @@ export default class IconButton extends Component<Props> {
 
     static defaultProps = {
         color: "white",
+        shadowColor: "rgba(0,0,0,0.3)",
         size: 24,
     };
 
     render() {
-        const {name, type, containerStyle, color, size, onPress} = this.props;
+        const {name, type, containerStyle, color, shadowColor, size, onPress} = this.props;
         return (
             <TouchableOpacity style={[styles.container, containerStyle]} onPress={onPress}>
                 <View style={styles.shadow}>
                     <Icon name={name}
                           type={type}
-                          color={"rgba(0,0,0,0.3)"}
+                          color={shadowColor}
                           size={size}/>
                 </View>
                 <Icon name={name}
@@ -42,10 +44,8 @@ const styles = StyleSheet.create({
     container: {
         width: size,
         height: size,
-        // borderRadius: size,
         alignItems: 'center',
-        justifyContent: 'center',
-        // backgroundColor: "rgba(100,100,100,0.2)"
+        justifyContent: 'center'
     },
     shadow: {
         position: "absolute",

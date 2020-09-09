@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         padding: 4,
         borderBottomWidth: 1,
-        borderBottomColor: "rgba(255,255,255,0.36)",
-        minHeight: 34,
+        borderBottomColor: "rgba(255,255,255,0.26)",
+        minHeight: 30,
     },
     label: {
         fontSize: 12,
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         color: "white",
     },
     valueText: {
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: "700",
         color: "white",
         letterSpacing: 1,

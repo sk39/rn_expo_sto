@@ -3,7 +3,7 @@ import {Easing, StyleSheet, View} from "react-native";
 import Colors from "@constants/Colors";
 import {Text} from "native-base";
 import ProcessDialogState from "./ProcessDialogState";
-import ProcessAnimation from "./ProcessAnimation";
+import ProcessAnimation from "../../Animation/ProcessAnimation";
 import DialogContent from "./DialogContent";
 import {observer} from "mobx-react";
 import {action, observable} from "mobx";
@@ -31,26 +31,19 @@ export default class ProcessDialog extends Component<Props> {
 
     @observable finAnimation: boolean = false;
 
-    constructor(props) {
-        super(props);
-        this.onAnimationFinish = this.onAnimationFinish.bind(this);
-        this.onClose = this.onClose.bind(this);
-        this.onError = this.onError.bind(this);
-    }
-
     @action
-    onAnimationFinish(finish, error) {
+    onAnimationFinish = (finish, error) => {
         this.finAnimation = finish || error;
     }
 
     @action
-    onClose() {
+    onClose = () => {
         this.finAnimation = false;
         this.props.onClose();
     }
 
     @action
-    onError() {
+    onError = () => {
         this.finAnimation = false;
         this.props.onError();
     }
@@ -62,7 +55,8 @@ export default class ProcessDialog extends Component<Props> {
             return (
                 <DialogContent show={this.finAnimation} btnText={t("btn.close")} onPress={this.onClose}>
                     <View style={styles.textWrapper}>
-                        <Text style={[styles.msg, styles.successMsg]}>Success!</Text>
+                        <Text style={[styles.successMsg]}>Success!</Text>
+                        <Text style={[styles.successSubMsg]}>Invest Security Token</Text>
                     </View>
                 </DialogContent>
             )
@@ -137,7 +131,7 @@ const styles = StyleSheet.create({
         right: 0
     },
     textWrapper: {
-        height: 120,
+        height: 140,
         padding: 12,
         alignItems: "center",
         justifyContent: "flex-start"
@@ -148,9 +142,19 @@ const styles = StyleSheet.create({
         color: Colors.labelFont,
     },
     successMsg: {
-        fontSize: 32,
+        fontSize: 26,
+        fontWeight: "700",
+        marginVertical: 6,
         color: Colors.primary,
-        letterSpacing: 2
+        letterSpacing: 2,
+    },
+    successSubMsg: {
+        fontSize: 16,
+        fontWeight: "700",
+        marginVertical: 6,
+        marginBottom: 24,
+        color: Colors.font,
+        letterSpacing: 1,
     },
     errorMsg: {
         color: Colors.error,

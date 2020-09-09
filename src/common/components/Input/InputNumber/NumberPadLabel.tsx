@@ -68,8 +68,9 @@ const stylesNormal = StyleSheet.create({
         height: 44,
         width: "100%",
         justifyContent: "flex-end",
-        backgroundColor: Colors.primaryThin,
-        borderWidth: 0
+        backgroundColor: Colors.inputBack,
+        borderColor:Colors.inputBorder,
+        borderWidth: 1
     },
     title: {
         fontSize: 20,
@@ -91,7 +92,7 @@ const stylesModal = StyleSheet.create({
         paddingHorizontal: 16,
         width: "100%",
         justifyContent: "flex-end",
-        backgroundColor: Colors.primaryThin,
+        backgroundColor: Colors.inputBack,
         borderWidth: 0
     },
     title: {

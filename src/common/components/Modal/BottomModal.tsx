@@ -39,6 +39,7 @@ export default class BottomModal extends PureComponent<Props> {
         return (
             <Portal>
                 <Modalize ref={this.sheetRef}
+                          closeSnapPointStraightEnabled={cancelable}
                           closeOnOverlayTap={cancelable}
                           modalHeight={height}
                           onClosed={this.onClose}>

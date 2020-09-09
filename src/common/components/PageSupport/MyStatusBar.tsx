@@ -7,6 +7,7 @@ import {observable} from "mobx";
 interface Props {
     dark: boolean,
     transparent?: boolean;
+    hidden?: boolean;
     navigation?: Navigation
 }
 
@@ -43,7 +44,7 @@ export default class MyStatusBar extends Component<Props> {
     }
 
     render() {
-        const {dark, transparent, navigation} = this.props;
+        const {dark, transparent, hidden, navigation} = this.props;
         if (navigation) MyStatusBar.lastBackIsDark = dark;
 
         if (dark) {
@@ -52,6 +53,7 @@ export default class MyStatusBar extends Component<Props> {
                 <StatusBar ref={this.ref}
                            barStyle="light-content"
                            translucent={transparent}
+                           hidden={hidden}
                            backgroundColor={backColor}/>
             )
         } else {
@@ -60,6 +62,7 @@ export default class MyStatusBar extends Component<Props> {
                 <StatusBar ref={this.ref}
                            barStyle="dark-content"
                            translucent={transparent}
+                           hidden={hidden}
                            backgroundColor={backColor}/>
             )
         }

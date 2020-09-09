@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text} from "react-native"
 import {Button, View} from "native-base";
 import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
-import ProcessAnimation from "@common/components/Modal/ProcessDialog/ProcessAnimation";
+import ProcessAnimation from "@common/components/Animation/ProcessAnimation";
 import {observer} from "mobx-react";
 
 @observer

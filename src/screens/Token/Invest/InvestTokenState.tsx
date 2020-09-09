@@ -3,18 +3,24 @@ import TokenState from "../TokenState";
 import InputNumberState from "@common/components/Input/InputNumberState";
 import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
 import ViewUtils from "@common/utils/ViewUtils";
-import {computed, observable} from "mobx";
+import {action, computed, observable} from "mobx";
 
 export default class InvestTokenState extends TokenState {
 
     amount: InputNumberState;
     processState: ProcessDialogState = new ProcessDialogState();
     @observable confirming: boolean = false;
+    @observable agreed: boolean = false;
 
     constructor(symbol: string, navigation, rootStore: RootStore) {
         super(navigation, rootStore);
         this.amount = new InputNumberState();
         this.amount.setUnit(symbol)
+    }
+
+    @action
+    setAgreed(flag: boolean) {
+        this.agreed = flag;
     }
 
     @computed
