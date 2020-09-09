@@ -68,12 +68,12 @@ const stylesNormal = StyleSheet.create({
         height: 44,
         width: "100%",
         justifyContent: "flex-end",
-        backgroundColor: Colors.primaryColorThin2,
+        backgroundColor: Colors.primaryThin,
         borderWidth: 0
     },
     title: {
         fontSize: 20,
-        color: Colors.primaryColor,
+        color: Colors.primary,
         letterSpacing: 1,
     },
     unit: {
@@ -91,14 +91,14 @@ const stylesModal = StyleSheet.create({
         paddingHorizontal: 16,
         width: "100%",
         justifyContent: "flex-end",
-        backgroundColor: Colors.primaryColorThin2,
+        backgroundColor: Colors.primaryThin,
         borderWidth: 0
     },
     title: {
         marginRight: 2,
         fontSize: 24,
         letterSpacing: 2,
-        color: Colors.primaryColor
+        color: Colors.primary
     },
     unit: {
         marginLeft: 8,

@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         padding: 7,
         borderBottomWidth: 1,
-        borderBottomColor: Colors.listBorderColor,
+        borderBottomColor: Colors.listBorder,
     },
     titleContainer: {},
     valueContainer: {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     valueText: {
         fontSize: 16,
         fontWeight: "700",
-        color: Colors.primaryColor,
+        color: Colors.primary,
         letterSpacing: 1,
     },
     beforeText: {

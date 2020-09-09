@@ -83,7 +83,7 @@ export default class List extends PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     cardWrapper: {
         paddingHorizontal: 12,

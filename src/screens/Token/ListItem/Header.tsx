@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12
     },
     title: {
-        color: Colors.fontColor,
+        color: Colors.font,
         fontSize: 16,
         fontWeight: "700"
     },
     symbol: {
-        color: Colors.primaryColor,
+        color: Colors.primary,
         fontSize: 14,
         marginLeft: 12,
         fontWeight: "700"

@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     },
     card: {
         overflow: 'hidden',
-        backgroundColor: Colors.cardBackColor,
+        backgroundColor: Colors.cardBack,
         borderRadius: 10,
         ...Platform.select({
             android: {
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
         height: Layout.window.height
     },
     modalBack: {
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
         flex: 1,
         ...StyleSheet.absoluteFillObject
     }

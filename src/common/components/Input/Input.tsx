@@ -21,7 +21,7 @@ export default class Input extends PureComponent<Props> {
             <ElInput inputStyle={styles.input}
                      value={inputState.value}
                      label={label}
-                     selectionColor={Colors.primaryColor}
+                     selectionColor={Colors.primary}
                      leftIcon={leftIcon}
                      containerStyle={styles.inputContainer}
                      secureTextEntry={secureTextEntry}
@@ -35,7 +35,7 @@ export default class Input extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
     input: {
-        color: Colors.fontColor,
+        color: Colors.font,
         paddingLeft: 8
     },
     inputContainer: {

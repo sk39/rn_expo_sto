@@ -21,7 +21,7 @@ const TabNavigator = createBottomTabNavigator(
         tabBarOptions: {
             activeTintColor: Colors.tabSelected,
             style: {
-                borderTopColor: Colors.tabBorderColor,
+                borderTopColor: Colors.tabBorder,
                 backgroundColor: Colors.tabBar,
             }
         }

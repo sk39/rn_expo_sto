@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         borderBottomWidth: 1,
-        borderBottomColor: Colors.listBorderColor,
+        borderBottomColor: Colors.listBorder,
     },
     dateLabel: {
         color: Colors.labelFontThin,

@@ -84,11 +84,11 @@ export default class Home extends Component<NavigationProps> {
 const styles = StyleSheet.create({
     back: {
         flex: 1,
-        backgroundColor: Colors.backColor2,
+        backgroundColor: Colors.back2,
         flexDirection: "column",
     },
     body: {
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
         flex: 1,
         borderTopStartRadius: 32,
         borderTopEndRadius: 32,

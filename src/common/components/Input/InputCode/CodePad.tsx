@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         borderBottomWidth: 1,
-        borderColor: Colors.listBorderColor
+        borderColor: Colors.listBorder
     },
     title: {
         fontSize: 12,

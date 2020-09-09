@@ -30,9 +30,9 @@ export default class Content extends Component<Props> {
                         <Progress.Bar progress={raisePer}
                                       width={200}
                                       height={3}
-                                      color={Colors.primaryColor}
+                                      color={Colors.primary}
                                       borderColor={"rgba(0,0,0,0)"}
-                                      unfilledColor={Colors.primaryColorLight2}/>
+                                      unfilledColor={Colors.primaryLight}/>
                     </View>
                 </View>
                 <View style={styles.rightContainer}>
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         fontSize: 14,
         fontWeight: '700',
-        color: Colors.primaryColor
+        color: Colors.primary
     },
     dateText: {
         paddingTop: 2,
         fontSize: 14,
         fontWeight: '500',
-        color: Colors.primaryColor
+        color: Colors.primary
     },
     bigText: {
         fontSize: 20,

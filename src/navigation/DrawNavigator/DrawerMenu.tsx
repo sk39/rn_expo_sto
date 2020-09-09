@@ -34,7 +34,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                               style={styles.item}
                               onPress={() => this.jump(key)}>
                 <View style={{width: 36}}>
-                    <ScreenIcon screenName={key} color={Colors.primaryColor} size={24}/>
+                    <ScreenIcon screenName={key} color={Colors.primary} size={24}/>
                 </View>
                 <Text style={styles.itemText}>{t(`navigation.menu.${key}`)}</Text>
             </TouchableOpacity>
@@ -47,7 +47,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                               style={styles.item}
                               onPress={() => this.jump(key)}>
                 <View style={{width: 16}}>
-                    <ScreenIcon screenName={key} color={Colors.primaryColor} size={16}/>
+                    <ScreenIcon screenName={key} color={Colors.primary} size={16}/>
                 </View>
                 <Text style={styles.itemText}>{key}</Text>
             </TouchableOpacity>
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingBottom: 8,
         borderBottomWidth: 1,
-        borderBottomColor: Colors.listBorderColor,
-        backgroundColor: Colors.listBorderColor
+        borderBottomColor: Colors.listBorder,
+        backgroundColor: Colors.listBorder
     },
     userHeader: {
         flexDirection: "row",
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     username: {
         fontSize: 18,
         fontWeight: "700",
-        color: Colors.primaryColorDark,
+        color: Colors.primaryDark,
         marginBottom: 12,
     },
     balanceLabel: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         // fontWeight: "700"
     },
     balanceValue: {
-        color: Colors.primaryColor,
+        color: Colors.primary,
         fontSize: 20,
         fontWeight: "700",
         letterSpacing: 1,
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     itemText: {
-        color: Colors.fontColor,
+        color: Colors.font,
         fontSize: 16,
         marginLeft: 16,
         paddingBottom: 2
@@ -194,12 +194,12 @@ const styles = StyleSheet.create({
         width: 150,
     },
     authButton: {
-        backgroundColor: Colors.primaryColor2,
+        backgroundColor: Colors.btnPrimaryLight,
         borderRadius: 0
     },
     devWrapper: {
         borderTopWidth: 1,
-        borderTopColor: Colors.listBorderColor,
+        borderTopColor: Colors.listBorder,
         paddingLeft: 12,
         paddingVertical: 24,
     },

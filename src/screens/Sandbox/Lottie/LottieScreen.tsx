@@ -15,8 +15,8 @@ class LottieScreen extends Component {
 
     render() {
         return (
-            <Container style={{backgroundColor: Colors.backColor, paddingBottom: 30}}>
-                <Tabs tabBarUnderlineStyle={{backgroundColor: Colors.linkColor}}>
+            <Container style={{backgroundColor: Colors.back, paddingBottom: 30}}>
+                <Tabs tabBarUnderlineStyle={{backgroundColor: Colors.primary}}>
                     {[
                         require("assets/lottie/3738-blockchain-2.json"),
                         require("assets/lottie/5720-trustless.json"),
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.tabBar
     },
     activeTabText: {
-        color: Colors.linkColor
+        color: Colors.primary
     }
 });
 

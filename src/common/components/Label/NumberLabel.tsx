@@ -44,10 +44,10 @@ export default class NumberLabel extends Component<Props> {
 
         let color, iconName;
         if (Number(value) >= 0) {
-            color = Colors.positiveColor;
+            color = Colors.positive;
             iconName = 'plus';
         } else {
-            color = Colors.negativeColor;
+            color = Colors.negative;
             iconName = 'minus';
         }
 

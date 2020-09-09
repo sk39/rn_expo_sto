@@ -63,7 +63,7 @@ export default class LottieViewItem extends Component<Props> {
 
 const styles = StyleSheet.create({
     animationContainer: {
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     helpLinkText: {
-        color: Colors.linkColor,
+        color: Colors.primary,
     },
     btn: {
         alignItems: 'center',

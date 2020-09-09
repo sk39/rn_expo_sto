@@ -48,7 +48,7 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
                             onPress={() => this.showQRCode = true}
                     />
 
-                    <View style={{height: 12}}/>
+                    <View style={{height: 24}}/>
 
                     <View style={styles.dispArea}>
                         <Text style={styles.numText}>2. </Text>
@@ -73,7 +73,7 @@ export default class SetupMfaScreen extends Component<NavigationProps & RootStor
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     back: {
         paddingTop: 8,
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btn: {
-        marginTop: 24,
-        backgroundColor: Colors.primaryColor,
+        marginTop: 18,
+        backgroundColor: Colors.btnPrimary,
         borderRadius: 26,
         paddingHorizontal: 24,
         minWidth: 256,
@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
         color: "white",
     },
     link: {
-        marginTop: 24,
+        marginTop: 16,
     },
     linkText: {
         fontSize: 16,
-        color: Colors.linkColor
+        color: Colors.btnPrimary
     },
     dispArea: {
         padding: 24,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     numText: {
-        color: Colors.primaryColor,
+        color: Colors.primary,
         fontSize: 28,
         fontWeight: "700",
         marginTop: -6,
@@ -115,10 +115,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        color: Colors.labelFontThin
-    },
-    subTitle: {
-        marginTop: 4,
         color: Colors.labelFontThin
     }
 });

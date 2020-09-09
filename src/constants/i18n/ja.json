@@ -15,8 +15,13 @@
   "label": {
   },
   "msg": {
+    "noData": "データがありません",
+    "canAfterAuthed": "ログイン後に参照できます"
   },
   "error": {
+    "input": {
+      "required": "入力が必要です"
+    }
   },
   "navigation": {
     "menu": {

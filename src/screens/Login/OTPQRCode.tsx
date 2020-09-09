@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     value: {
         fontSize: 20,
         letterSpacing: 3,
-        color: Colors.primaryColorDark,
+        color: Colors.primaryDark,
     },
     valueWrapper: {
         width: "100%",
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     valueBack: {
         marginTop: 10,
-        backgroundColor: Colors.primaryColorThin2,
+        backgroundColor: Colors.primaryThin,
         opacity: 0.7,
         padding: 8,
         paddingHorizontal: 16,

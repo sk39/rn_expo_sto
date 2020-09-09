@@ -81,7 +81,7 @@ export default createStackNavigator({
     cardStyle: {backgroundColor: Colors.tabBar},
     defaultNavigationOptions: {
         headerTintColor: '#a0a1ba',
-        headerPressColorAndroid: Colors.primaryColor,
+        headerPressColorAndroid: Colors.primary,
         headerStyle: {backgroundColor: Colors.tabBar},
         headerTitleStyle: {color: '#a0a1ba'}
     }
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 6,
         paddingVertical: 24,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     row: {
         flexDirection: "row",

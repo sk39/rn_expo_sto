@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
         })
     },
     totalBalance: {
-        color: Colors.primaryColorDark,
+        color: Colors.primaryDark,
         opacity: 0.8,
         fontSize: 22,
         fontWeight: "700",
@@ -228,12 +228,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderBottomWidth: 1,
         minHeight: 48,
-        borderBottomColor: Colors.listBorderColor,
+        borderBottomColor: Colors.listBorder,
     },
     moreIcon: {
         fontSize: 16,
         marginLeft: 16,
-        color: Colors.primaryColor
+        color: Colors.primary
     },
     tokenName: {
         color: Colors.labelFont,
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     value: {
-        color: Colors.primaryColor,
+        color: Colors.primary,
         fontSize: 16,
         fontWeight: "700",
         letterSpacing: 1
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         marginLeft: 4,
     },
     balanceBaseCurrency: {
-        color: Colors.fontColor,
+        color: Colors.font,
         fontSize: 16,
         letterSpacing: 1,
     },

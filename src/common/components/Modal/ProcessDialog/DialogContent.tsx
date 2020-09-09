@@ -4,6 +4,7 @@ import {Button, Text} from "native-base";
 import {observer} from "mobx-react";
 import AnimatedShow from "@common/components/Animation/AnimatedShow";
 import commonStyles from "@common/utils/commonStyle";
+import Colors from "@constants/Colors";
 
 interface Props {
     show: boolean;
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
     },
     btnConfirm: {
-        backgroundColor: "#afafaf",
+        backgroundColor: Colors.btn,
         flex: 1,
         marginHorizontal: 4,
     }

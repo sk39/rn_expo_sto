@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop: 36,
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.btnPrimaryLight,
         borderRadius: 26,
         paddingHorizontal: 24,
         minWidth: 256,

@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 16,
-        color: Colors.primaryColorLight2,
+        color: Colors.primaryLight,
         fontWeight: "700",
         letterSpacing: 1,
         marginRight: 12,

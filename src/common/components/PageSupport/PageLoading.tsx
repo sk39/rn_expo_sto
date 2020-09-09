@@ -13,7 +13,7 @@ export default class PageLoading extends Component<Props> {
 
     static defaultProps = {
         loading: false,
-        indicatorColor: Colors.primaryColor,
+        indicatorColor: Colors.primary,
         indicatorBackgroundColor: "#fff",
         disablesLayerBackgroundColor: Colors.disablesLayer
     };

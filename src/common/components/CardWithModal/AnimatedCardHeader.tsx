@@ -27,7 +27,7 @@ export default class AnimatedCardHeader extends Component<Props> {
             },
             background: {
                 opacity: scrollY.interpolate({
-                    inputRange: [0, 50, Layout.card.imageHeightLarge - 30],
+                    inputRange: [0, Layout.card.imageHeightLarge / 2, Layout.card.imageHeightLarge - 30],
                     outputRange: [0, 0, 1],
                 })
             }

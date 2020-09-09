@@ -113,14 +113,14 @@ export default class BaseNumberPad<T> extends Component<Props & T> {
                 <Button
                     title="Clear"
                     type="clear"
-                    titleStyle={{color: Colors.fontColor, fontWeight: "700"}}
+                    titleStyle={{color: Colors.font, fontWeight: "700"}}
                     buttonStyle={styles.bottomBtn}
                     onPress={() => this.numberPadState.clear()}
                 />
                 <Button
                     title={t("btn.set")}
                     type="clear"
-                    titleStyle={{color: Colors.primaryColor, fontWeight: "700"}}
+                    titleStyle={{color: Colors.primary, fontWeight: "700"}}
                     buttonStyle={styles.bottomBtn}
                     onPress={this.enter}
                 />
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         borderTopWidth: 1,
-        borderTopColor: Colors.listBorderColor
+        borderTopColor: Colors.listBorder
     },
     row: {
         flexDirection: "row",

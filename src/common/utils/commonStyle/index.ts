@@ -1,11 +1,12 @@
 import Layout from "@constants/Layout";
+import Colors from "@constants/Colors";
 
 const commonStyles = {
     modalBtn: {
         borderRadius: 0,
         borderBottomRightRadius: 10,
         borderBottomStartRadius: 10,
-        backgroundColor: "#afafaf",
+        backgroundColor: Colors.btn,
         height: 44,
     },
     modalContent: {

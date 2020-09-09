@@ -98,14 +98,14 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                     <Input inputState={this.loginState.userId}
                            label={t("screen.login.userId")}
                            leftIcon={
-                               <Icon name='user' type="feather" color={Colors.primaryColor} size={16}/>
+                               <Icon name='user' type="feather" color={Colors.primary} size={16}/>
                            }
                     />
                     <Input inputState={this.loginState.password}
                            label={t("screen.login.password")}
                            secureTextEntry
                            leftIcon={
-                               <Icon name='lock' type="feather" color={Colors.primaryColor} size={16}/>
+                               <Icon name='lock' type="feather" color={Colors.primary} size={16}/>
                            }
                     />
                     <Button buttonStyle={styles.btn}
@@ -142,7 +142,7 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     form: {
         alignItems: 'center',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop: 24,
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.btnPrimaryLight,
         borderRadius: 26,
         width: 256,
         height: 48,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     },
     bottomArea: {
         borderTopWidth: 1,
-        borderTopColor: Colors.primaryColorThin2,
+        borderTopColor: Colors.primaryThin,
         width: "100%",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     bottomBtnPrimaryText: {
-        color: Colors.primaryColor,
+        color: Colors.primary,
         fontWeight: "700",
         fontSize: 16,
         letterSpacing: 1,

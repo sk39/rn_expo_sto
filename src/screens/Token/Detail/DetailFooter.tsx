@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 20,
-        color: Colors.primaryColorDark,
+        color: Colors.primaryDark,
         opacity: 0.5,
         fontWeight: "700",
         letterSpacing: 2,

@@ -14,8 +14,8 @@ export default class BlockLoading extends Component<Props> {
 
     static defaultProps = {
         loading: false,
-        indicatorColor: Colors.primaryColor,
-        indicatorUnfilledColor: Colors.primaryColorLight2,
+        indicatorColor: Colors.primary,
+        indicatorUnfilledColor: Colors.primaryLight,
         disablesLayerColor: "rgba(255,255,255,0)"
     };
 

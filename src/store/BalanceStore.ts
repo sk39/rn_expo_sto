@@ -45,7 +45,7 @@ export default class BalanceStore {
         this.processing = true;
 
         // TODO:
-        await ViewUtils.sleep(800)
+        await ViewUtils.sleep(600)
         this.processing = false;
         this.balances = data;
         this.deposit = data[0].balance;

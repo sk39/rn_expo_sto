@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 32,
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
     },
     chartRow: {
-        backgroundColor: Colors.cardBackColor,
+        backgroundColor: Colors.cardBack,
         borderRadius: 5,
-        borderColor: Colors.cardBorderColor,
+        borderColor: Colors.listBorder,
         padding: 0,
     },
     chartRowTitle: {

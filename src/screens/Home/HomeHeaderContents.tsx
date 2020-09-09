@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     rightContainer: {},
     authButton: {
-        backgroundColor: Colors.toolBarInverse,
+        backgroundColor: Colors.btnDark,
         width: 110,
         borderRadius: 0
     },

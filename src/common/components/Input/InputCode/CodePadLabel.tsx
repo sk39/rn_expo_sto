@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderBottomWidth: 1,
-        borderBottomColor: Colors.listBorderColorDark,
+        borderBottomColor: Colors.listBorderDark,
         width: 32,
         height: 52,
         marginHorizontal: 5,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     inputText: {
         fontSize: 40,
         fontFamily: "Roboto",
-        color: Colors.primaryColor,
+        color: Colors.primary,
     },
     cursorWrapper: {
         position: "absolute",

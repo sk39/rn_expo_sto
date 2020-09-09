@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, TouchableOpacity} from "react-native";
-import {Feather} from "@expo/vector-icons";
+import IconButton from "@common/components/Button/IconButton";
 
 interface Props {
     onPress: () => void;
@@ -10,23 +9,11 @@ export default class BackButton extends Component<Props> {
 
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
-                <Feather name="arrow-left" size={22} color="white"/>
-            </TouchableOpacity>
+            <IconButton name="arrow-left"
+                        type="feather"
+                        onPress={this.props.onPress}/>
         )
     }
 }
 
-const styles = StyleSheet.create({
-    titleBackText: {
-        color: 'white',
-        marginLeft: 8,
-    },
-    container: {
-        width: 48,
-        height: 48,
-        paddingRight: 12,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
+

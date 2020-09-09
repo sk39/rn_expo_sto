@@ -33,10 +33,10 @@ export default class ConfirmContent extends PureComponent<Props> {
                     <Text style={styles.title}>Do you really want to invest?</Text>
                     <View style={styles.summaryWrapper}>
                         <View style={styles.summaryItem}>
-                            <Icon name='dollar-sign' type="feather" color={Colors.primaryColor2} size={24}/>
+                            <Icon name='dollar-sign' type="feather" color={Colors.primary2} size={24}/>
                         </View>
                         <View style={{marginHorizontal: 6}}>
-                            <Icon name='arrow-right' type="feather" color={Colors.primaryColor2} size={24}/>
+                            <Icon name='arrow-right' type="feather" color={Colors.primary2} size={24}/>
                         </View>
                         <View style={styles.summaryItem}>
                             <Text style={styles.summaryItemText}>{item.symbol}</Text>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         marginBottom: 24
     },
     btnStyle: {
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.primary,
     },
     btnTextStyle: {
         color: "white",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     summaryItem: {
         borderWidth: 3,
-        borderColor: Colors.primaryColor2,
+        borderColor: Colors.primary2,
         height: 60,
         width: 60,
         alignItems: "center",
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     summaryItemText: {
-        color: Colors.primaryColor2,
+        color: Colors.primary2,
         fontWeight: "700",
         fontSize: 12,
     }

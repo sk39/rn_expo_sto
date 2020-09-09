@@ -1,47 +1,50 @@
-const tintColor = '#6f6f8c';
-const primaryColor = '#7462ff';
-const primaryColor2 = '#7e6eda';
-const primaryColorLight = '#b8b7ff';
-const primaryColorLight2 = '#d1d1ff';
-const primaryColorLight3 = '#e6e6fa';
-const primaryColorDark = '#3f358d';
-const secondColor = '#fd8418';
+const back = '#f6f7ff';
+const back2 = '#e2e3ef';
+const inverseBack = '#130f3c';
+const font = '#201922';
+const tint = '#6f6f8c';
+const tint2 = '#929ab6';
+const primary = '#7462ff';
+const primary2 = '#7e6eda';
+const primaryLight = '#d1d1ff';
+const primaryDark = '#3f358d';
+const second = '#fd8418';
+const red1 = '#f11561';
+const red2 = '#ff330f';
 
 export default {
-    fontColor: "#201922",
-    backColor: "#f6f7ff",
-    backColor2: "#e2e3ef",
-    primaryColor,
-    primaryColor2,
-    primaryColorThin: "rgba(116,98,255,0.62)",
-    primaryColorThin2: "rgba(116,98,255,0.1)",
-    primaryColorLight,
-    primaryColorLight2,
-    primaryColorLight3,
-    primaryColorDark,
-    secondColor,
-    secondColorAlpha:
-    tintColor,
-    labelFont: "#626473",
-    labelFontThin: "#85889a",
-    inputBorder: "#626473",
-    unitFont: "#868da8",
-    tabDefault: tintColor,
-    tabSelected: primaryColor,
-    tabBar: '#f6f7ff',
-    tabBorderColor: "#c2c2c9",
-    toolBar: '#f6f7ff',
-    toolBarInverse: "#130f3c",
-    linkColor: '#0000ff',
-    disablesLayer: "rgba(239,244,246,0.66)",
-    disablesLayerDark: "rgba(11,10,25,0.72)",
-    cardBackColor: '#fff',
-    cardBorderColor: '#f1f1f1',
-    positiveColor: primaryColor,
-    negativeColor: "#f11561",
-    error: "#ff330f",
-    listBorderColor: "rgba(15,20,92,0.08)",
-    listBorderColorDark: "rgba(15,20,92,0.2)"
+    font,
+    back,
+    back2,
+    primary,
+    primary2,
+    primaryThin: "rgba(116,98,255,0.1)",
+    primaryLight,
+    primaryDark,
+    second,
+    secondThin: 'rgb(250,231,214)',
+    labelFont: tint,
+    labelFontThin: tint2,
+    unitFont: tint2,
+    tabDefault: tint,
+    tabSelected: primary,
+    tabBar: back,
+    tabBorder: "#c2c2c9",
+    toolBar: back,
+    toolBarInverse: inverseBack,
+    disablesLayer: "rgba(239,244,246,0.6)",
+    disablesLayerDark: "rgba(11,10,25,0.7)",
+    cardBack: '#fff',
+    positive: primary,
+    negative: red1,
+    error: red2,
+    listBorder: "rgba(15,20,92,0.08)",
+    listBorderDark: "rgba(15,20,92,0.2)",
+    btn: "#afafaf",
+    btnPrimaryLight: primary,
+    btnPrimary: primaryDark,
+    btnPrimaryText: primaryLight,
+    btnDark: "#706f7d",
 };
 
 export const ChartColor = [

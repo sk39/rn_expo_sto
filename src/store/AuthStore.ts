@@ -76,7 +76,7 @@ export default class AuthStore {
                     this.otpauth = `otpauth://totp/sto-demo:${userId}?secret=XXXXXXXXX&issuer=sto-demo&algorithm=SHA1&digits=6&period=30`
                 });
                 resolve();
-            }, 500)
+            }, 400)
         }))
     }
 
@@ -110,7 +110,7 @@ export default class AuthStore {
     async verify2FA(code: string) {
         // TODO: server login request
 
-        await ViewUtils.sleep(500);
+        await ViewUtils.sleep(300);
         // return Promise.reject("Invalid Code")
 
         this.refreshToken = "hoge"

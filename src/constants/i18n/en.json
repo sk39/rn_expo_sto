@@ -65,7 +65,7 @@
       },
       "clearSto": {
         "title": "STO Cache",
-        "subTitle": "Clears STO information and image cache",
+        "subTitle": "Clear STO information and image cache",
         "done": "Clear",
         "message": {
           "success": "Clear has completed!",

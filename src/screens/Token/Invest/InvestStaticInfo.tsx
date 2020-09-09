@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     valueText: {
         fontSize: 14,
         fontWeight: "700",
-        color: Colors.primaryColorLight,
+        color: "white",
         letterSpacing: 1,
     },
     unit: {

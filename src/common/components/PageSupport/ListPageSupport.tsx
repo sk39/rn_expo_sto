@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     message: {
-        color: Colors.fontColor,
+        color: Colors.font,
         fontSize: 52,
         fontWeight: "700",
     },

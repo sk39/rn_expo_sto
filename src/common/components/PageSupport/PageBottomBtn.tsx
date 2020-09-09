@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primaryColorDark,
+        backgroundColor: Colors.btnPrimary,
         ...ViewUtils.ifIphoneXStyle({
             paddingBottom: ViewUtils.getBottomBtnPaddingBottom()
         })
     },
     text: {
-        color: Colors.primaryColorLight,
+        color: Colors.btnPrimaryText,
         fontSize: 16,
         fontWeight: "700",
         letterSpacing: 1

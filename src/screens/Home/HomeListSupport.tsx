@@ -77,19 +77,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     message: {
-        color: Colors.secondColor,
+        color: Colors.second,
         fontSize: 16,
         opacity: 0.6,
         fontWeight: "700",
     },
     iconWrapper: {
         marginBottom: 12,
-        backgroundColor: 'rgb(250,231,214)',
+        backgroundColor: Colors.secondThin,
         borderRadius: 50,
         padding: 4,
     },
     iconCircle: {
-        backgroundColor: Colors.secondColor,
+        backgroundColor: Colors.second,
         borderRadius: 50,
         padding: 8,
     },
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
         right: 0,
         top: 48,
         zIndex: 0,
-        backgroundColor: 'rgb(250,231,214)',
+        backgroundColor: Colors.secondThin,
     }
 });

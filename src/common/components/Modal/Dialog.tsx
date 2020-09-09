@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         ...commonStyles.modalContent,
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
     },
     btn: commonStyles.modalBtn,
     btnText: {

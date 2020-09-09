@@ -44,7 +44,7 @@ export default class VerifyMfaScreen extends Component<NavigationProps & RootSto
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     back: {
         flex: 1,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     linkText: {
         fontSize: 16,
-        color: Colors.primaryColor
+        color: Colors.primary
     },
     headerArea: {
         paddingBottom: 26,

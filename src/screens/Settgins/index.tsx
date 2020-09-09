@@ -119,10 +119,10 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backColor2,
+        backgroundColor: Colors.back2,
     },
     row: {
-        backgroundColor: Colors.backColor,
+        backgroundColor: Colors.back,
         marginTop: 16,
     },
     header: {
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         width: 120,
-        backgroundColor: Colors.primaryColorDark
+        backgroundColor: Colors.btnPrimary
     },
     initBtn: {
         width: 120,

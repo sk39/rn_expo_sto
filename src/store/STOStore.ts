@@ -26,7 +26,7 @@ export default class STOStore {
         // TODO:
         try {
             this.processing = true;
-            await ViewUtils.sleep(800)
+            await ViewUtils.sleep(500)
             this.list = data;
         } catch (e) {
 

@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import {Share, StyleSheet, TouchableOpacity, View} from 'react-native'
+import {Share, StyleSheet, View} from 'react-native'
 import {observer} from "mobx-react";
 import {STO} from "@common/model/domainModel";
-import {Feather} from "@expo/vector-icons";
 import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 import BackButton from "@common/components/Button/BackButton";
+import IconButton from "@common/components/Button/IconButton";
 
 interface Props {
     item: STO,
@@ -47,9 +47,11 @@ export default class DetailHeader extends PureComponent<Props> {
             <View style={styles.header}>
                 <MyStatusBar dark={true} transparent/>
                 <BackButton onPress={this.onBackPress}/>
-                <TouchableOpacity style={styles.menuIconContainer} onPress={this.share}>
-                    <Feather name="share-2" size={22} color="white"/>
-                </TouchableOpacity>
+                <IconButton name="share-2"
+                            type="feather"
+                            containerStyle={styles.shareContainer}
+                            onPress={this.share}
+                />
             </View>
         );
     }
@@ -61,13 +63,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingTop: ViewUtils.getPagePaddingTop(),
-        flexDirection: "row"
+        flexDirection: "row",
     },
-    menuIconContainer: {
+    shareContainer: {
         marginLeft: "auto",
-        width: 48,
-        height: 48,
-        alignItems: 'center',
-        justifyContent: 'center',
     }
 });

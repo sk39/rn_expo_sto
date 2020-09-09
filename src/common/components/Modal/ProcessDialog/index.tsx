@@ -24,7 +24,7 @@ interface Props {
 export default class ProcessDialog extends Component<Props> {
 
     static defaultProps = {
-        indicatorColor: Colors.primaryColor,
+        indicatorColor: Colors.primary,
         indicatorBackgroundColor: "#fff",
         disablesLayerBackgroundColor: Colors.disablesLayerDark
     };
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         borderBottomRightRadius: 10,
         borderBottomStartRadius: 10,
-        backgroundColor: "#ccc"
+        backgroundColor: Colors.btn
     },
     content: {
         position: "absolute",
@@ -149,11 +149,11 @@ const styles = StyleSheet.create({
     },
     successMsg: {
         fontSize: 32,
-        color: Colors.primaryColor,
+        color: Colors.primary,
         letterSpacing: 2
     },
     errorMsg: {
-        color: "#ca1a41",
+        color: Colors.error,
         fontSize: 16,
     }
 });

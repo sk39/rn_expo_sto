@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     valueText: {
         fontSize: 16,
         fontWeight: "700",
-        color: Colors.fontColor,
+        color: Colors.font,
         letterSpacing: 1,
     },
     unit: {

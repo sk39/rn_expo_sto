@@ -111,7 +111,7 @@ export default class DirectDetail extends PureComponent<NavigationProps & RootSt
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backColor
+        backgroundColor: Colors.back
     },
     header: {
         position: "absolute",
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     card: {
         // borderWidth: 0,
         overflow: 'hidden',
-        backgroundColor: Colors.cardBackColor,
+        backgroundColor: Colors.cardBack,
         ...Platform.select({
             android: {
                 ...getPlatformElevation(2)
