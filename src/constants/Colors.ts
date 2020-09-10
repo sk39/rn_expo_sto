@@ -39,6 +39,7 @@ export default {
     positiveLight: 'rgb(187,252,112)',
     negative: red1,
     error: red2,
+    errorThin: '#fcd6cf',
     listBorder: "rgba(15,20,92,0.08)",
     listBorderDark: "rgba(15,20,92,0.2)",
     btn: "#afafaf",

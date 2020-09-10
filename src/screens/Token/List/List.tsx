@@ -74,7 +74,9 @@ export default class List extends PureComponent<Props> {
                     onRefresh={this.onRefresh}
                     renderItem={this.renderItem}
                 />
-                <ListPageSupport processing={processing && list.length === 0} list={list}/>
+                <ListPageSupport processing={processing && list.length === 0}
+                                 list={list}
+                                 errorMessage={tokenState.stoStore.errorMessage}/>
             </View>
         );
     }

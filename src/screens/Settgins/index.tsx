@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
 import {inject, observer} from "mobx-react";
-import {Container, Toast} from 'native-base';
+import {Container} from 'native-base';
 import Colors from "@constants/Colors";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import PageHeader from "@common/components/PageSupport/PageHeader";
 import {Button} from "react-native-elements";
 import {observable} from "mobx";
 import {CacheManager} from "react-native-expo-image-cache";
+import MyToast from "@common/utils/MyToast";
 
 @inject('rootStore')
 @observer
@@ -25,19 +26,13 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         try {
             this.processing = processName;
             await process();
-            Toast.show({
-                text: t(`screen.settings.${processName}.message.success`),
-                buttonText: t("btn.close"),
-                duration: 2000,
-                type: "success"
-            })
+            MyToast.success(
+                t(`screen.settings.${processName}.message.success`),
+            )
         } catch (e) {
-            Toast.show({
-                text: t(`screen.settings.${processName}.message.error`),
-                buttonText: t("btn.close"),
-                duration: 2000,
-                type: "danger"
-            })
+            MyToast.error(
+                t(`screen.settings.${processName}.message.error`),
+            )
         } finally {
             this.processing = "";
         }
@@ -123,7 +118,7 @@ const styles = StyleSheet.create({
     },
     row: {
         backgroundColor: Colors.back,
-        marginTop: 16,
+        marginTop: 12,
     },
     header: {
         padding: 12,
@@ -134,7 +129,7 @@ const styles = StyleSheet.create({
     },
     body: {
         padding: 16,
-        paddingTop: 8,
+        paddingTop: 4,
         flexDirection: "row",
         justifyContent: "flex-end",
         alignItems: "center",

@@ -37,8 +37,8 @@
   },
   "screen": {
     "login": {
-      "title": "Welcome Back",
-      "subTitle": "Sign in to Digital Security",
+      "title": "Digital Security",
+      "subTitle": "",
       "userId": "ユーザID",
       "password": "パスワード",
       "skip": "スキップ",
@@ -64,8 +64,8 @@
         "subTitle": "生体認証を有効にします。"
       },
       "clearSto": {
-        "title": "STOキャッシュ",
-        "subTitle": "STO情報と画像のキャッシュをクリアします。",
+        "title": "STO画像キャッシュ",
+        "subTitle": "STO画像のキャッシュをクリアします。AndroidではHTTPキャッシュが有効なので再起動が必要です。",
         "done": "クリア",
         "message": {
           "success": "クリアしました",

@@ -1,39 +1,31 @@
 import React, {Component} from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {observer} from "mobx-react";
 import BlockLoading from "@common/components/PageSupport/BlockLoading";
-import {Icon} from "react-native-elements";
-import Colors from "@constants/Colors";
+import BlockErrorMessage from "@common/components/PageSupport/BlockErrorMessage";
 
 interface Props {
     processing: boolean;
     list: any[];
+    errorMessage?: string;
 }
 
 @observer
 export default class ListPageSupport extends Component<Props> {
 
-    renderNoData() {
+    renderMessage(type, message) {
         return (
             <View style={styles.disablesLayer} pointerEvents="none">
-                <View style={styles.messageAreaWrapper}>
-                    <View style={styles.messageBlock}>
-                        <View style={styles.iconWrapper}>
-                            <Icon name='smartphone'
-                                  type="feather"
-                                  size={200}/>
-                        </View>
-                        <Text style={styles.message}>
-                            {t("msg.noData")}
-                        </Text>
-                    </View>
-                </View>
+                <BlockErrorMessage type={type}
+                                   message={message}
+                                   large/>
+
             </View>
         )
     }
 
     render() {
-        const {processing, list} = this.props;
+        const {processing, list, errorMessage} = this.props;
         if (processing) {
             return (
                 <BlockLoading
@@ -43,7 +35,11 @@ export default class ListPageSupport extends Component<Props> {
         }
 
         if (!list || list.length === 0) {
-            return this.renderNoData()
+            if (!s.isBlank(errorMessage)) {
+                return this.renderMessage("error", errorMessage)
+            }
+
+            return this.renderMessage("empty", t("msg.noData"))
         }
         return null;
     }
@@ -52,22 +48,6 @@ export default class ListPageSupport extends Component<Props> {
 const styles = StyleSheet.create({
     disablesLayer: {
         ...StyleSheet.absoluteFillObject,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    messageAreaWrapper: {
-        opacity: 0.7,
-    },
-    messageBlock: {
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    message: {
-        color: Colors.font,
-        fontSize: 52,
-        fontWeight: "700",
-    },
-    iconWrapper: {
-        paddingBottom: 12
+        justifyContent: "center"
     }
 });

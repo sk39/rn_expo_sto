@@ -8,7 +8,7 @@ export interface Cashflow {
 
 export interface Balance {
     name: string;
-    symbol: string;
+    symbol?: string;
     balance: number;
     balanceBaseCurrency: number;
 }

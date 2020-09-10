@@ -1,13 +1,15 @@
 import {action, observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
 import {STO} from "@common/model/domainModel";
-import data from '@constants/dummyData/sto';
 import _ from "lodash";
+import data from "@constants/dummyData/sto";
+import MyToast from "@common/utils/MyToast";
 
 export default class STOStore {
 
     @observable processing: boolean = false;
     @observable list: STO[] = [];
+    @observable errorMessage: string = null;
 
     async initialize() {
     }
@@ -15,7 +17,8 @@ export default class STOStore {
     @action
     async clear() {
         this.processing = false;
-        this.list = []
+        this.list = [];
+        this.errorMessage = null;
     }
 
     async loadData(cacheOk?: boolean) {
@@ -25,11 +28,15 @@ export default class STOStore {
 
         // TODO:
         try {
+            this.errorMessage = null;
             this.processing = true;
             await ViewUtils.sleep(500)
             this.list = data;
         } catch (e) {
-
+            this.errorMessage = "Server error!";
+            MyToast.error(
+                this.errorMessage,
+            )
         } finally {
             this.processing = false;
         }

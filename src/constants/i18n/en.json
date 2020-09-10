@@ -64,8 +64,8 @@
         "subTitle": "Enable Biometric. FaceID and TouchID (iOS) or the Biometric Prompt (Android)."
       },
       "clearSto": {
-        "title": "STO Cache",
-        "subTitle": "Clear STO information and image cache",
+        "title": "STO Image Cache",
+        "subTitle": "Clear STO image cache. Android has http cache enabled, so restart is required.",
         "done": "Clear",
         "message": {
           "success": "Clear has completed!",

@@ -69,7 +69,7 @@ const stylesNormal = StyleSheet.create({
         width: "100%",
         justifyContent: "flex-end",
         backgroundColor: Colors.inputBack,
-        borderColor:Colors.inputBorder,
+        borderColor: Colors.inputBorder,
         borderWidth: 1
     },
     title: {

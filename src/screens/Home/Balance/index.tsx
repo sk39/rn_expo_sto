@@ -159,6 +159,7 @@ export default class BalanceList extends HomeChild {
                     {this.renderList()}
                 </View>
                 <HomeListSupport processing={this.balanceState.processing}
+                                 errorMessage={this.balanceState.balancesStore.errorMessage}
                                  list={this.balanceState.list}/>
             </View>
         )
