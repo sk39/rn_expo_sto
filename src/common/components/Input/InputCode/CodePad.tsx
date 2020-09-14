@@ -5,9 +5,15 @@ import CodePadLabel from "./CodePadLabel";
 import Colors from "@constants/Colors";
 import BaseNumberPad from "@common/components/Input/InputNumber/BaseNumberPad";
 import {KeyIconBtn} from "@common/components/Input/InputNumber/KeyBtn";
+import CodePadState from "@common/components/Input/InputCode/CodePadState";
 
 @observer
 export default class CodePad extends BaseNumberPad<{}> {
+
+    constructor(props) {
+        super(props);
+        this.numberPadState = new CodePadState(props.inputState)
+    }
 
     renderHeader() {
         return (
