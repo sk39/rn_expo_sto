@@ -51,7 +51,7 @@ export default class BalanceStore {
             this.errorMessage = null;
             this.processing = true;
 
-            await ViewUtils.sleep(600)
+            await ViewUtils.sleep(300)
             this.balances = data;
             this.deposit = data[0].balance;
             this.totalBalance = _.reduce(data, (sum, item) => {

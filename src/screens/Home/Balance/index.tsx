@@ -6,12 +6,12 @@ import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {ActionSheet, Icon} from "native-base";
 import SimpleList from "@common/components/List/SimpleList";
 import NumberLabel from "@common/components/Label/NumberLabel";
-import BalancePieChart from "./BalancePieChart";
-import BalanceState from "./BalanceState";
 import HomeChild from "../HomeChild";
 import Skeleton from "@common/components/PageSupport/Skeleton";
 import HomeListSupport from "../HomeListSupport";
 import HomeChildTitle from "../HomeChildTitle";
+import BalancePieChart from "../../Portfolio/Balance/BalancePieChart";
+import BalanceState from "../../Portfolio/Balance/BalanceState";
 
 @inject("rootStore")
 @observer
@@ -26,7 +26,7 @@ export default class BalanceList extends HomeChild {
 
     loadData(loggedIn) {
         if (loggedIn)
-            this.balanceState.loadData();
+            this.balanceState.loadData().then();
     }
 
     showDetail(item) {
@@ -69,37 +69,6 @@ export default class BalanceList extends HomeChild {
     }
 
     renderItem = ({item, index}) => {
-        let valEL;
-        if (!item.symbol) {
-            valEL = (
-                <View style={styles.valueWrapper}>
-                    <NumberLabel
-                        value={item.balanceBaseCurrency}
-                        decimals={0}
-                        prefix={"$"}
-                        style={styles.balanceBaseCurrency}
-                    />
-                </View>
-            )
-        } else {
-            valEL = (
-                <View style={styles.valueWrapper}>
-                    {/*<NumberLabel*/}
-                    {/*    value={item.balance}*/}
-                    {/*    decimals={1}*/}
-                    {/*    style={styles.value}*/}
-                    {/*    suffix={item.symbol}*/}
-                    {/*    suffixStyle={styles.unit}*/}
-                    {/*/>*/}
-                    <NumberLabel
-                        value={item.balanceBaseCurrency}
-                        decimals={0}
-                        prefix={"$"}
-                        style={styles.balanceBaseCurrency}
-                    />
-                </View>
-            );
-        }
         return (
             <TouchableOpacity key={item.symbol || "base"} onPress={() => this.onSelect(item, index)}>
                 <AnimatedRow delay={120 * index}>
@@ -109,7 +78,14 @@ export default class BalanceList extends HomeChild {
                             <Text style={styles.tokenName}>{item.name}</Text>
                         </View>
                         <View style={{flexDirection: "row", alignItems: "center"}}>
-                            {valEL}
+                            <View style={styles.valueWrapper}>
+                                <NumberLabel
+                                    value={item.balanceBaseCurrency}
+                                    decimals={0}
+                                    prefix={"$"}
+                                    style={styles.balanceBaseCurrency}
+                                />
+                            </View>
                             <Icon name='more-vertical' type="Feather" style={styles.moreIcon}/>
                         </View>
                     </View>
@@ -142,13 +118,19 @@ export default class BalanceList extends HomeChild {
                 />
                 <View style={styles.body}>
                     <View style={styles.chartWrapper}>
-                        <BalancePieChart
-                            balanceState={balanceState}/>
+                        <BalancePieChart balanceState={balanceState}>
+                            <Text style={styles.totalBalanceLabel}>
+                                Total
+                            </Text>
+                            <NumberLabel
+                                value={balanceState.total}
+                                decimals={0}
+                                prefix={"$"}
+                                style={styles.totalBalance}/>
+                        </BalancePieChart>
                     </View>
-                    <View style={{flex: 1}}>
-                        <View style={styles.listWrapper}>
-                            {this.renderList()}
-                        </View>
+                    <View style={styles.listWrapper}>
+                        {this.renderList()}
                     </View>
                 </View>
                 <HomeListSupport processing={this.balanceState.processing}
@@ -167,31 +149,24 @@ const styles = StyleSheet.create({
     body: {
         width: "100%",
         alignItems: "center",
-        // justifyContent: "space-between",
         flexDirection: "row",
         paddingRight: 8,
         paddingLeft: 24,
     },
     chartWrapper: {
-        width: 100,
-        // flex: 1,
-        // backgroundColor:"red",
-        // paddingLeft: 24,
+        width: 120,
     },
     listWrapper: {
-        // minHeight: 80,
+        flex: 1,
         paddingLeft: 16,
     },
-    totalBalanceArea: {
-        paddingTop: 12,
-        paddingLeft: 24,
-    },
     totalBalanceLabel: {
+        marginTop: -5,
         color: Colors.labelFont,
-        fontSize: 12,
+        fontSize: 10,
         opacity: 0.6,
         fontWeight: "700",
-        marginRight: 16,
+        letterSpacing: 1,
         ...Platform.select({
             ios: {
                 marginBottom: 2,
@@ -199,9 +174,9 @@ const styles = StyleSheet.create({
         })
     },
     totalBalance: {
-        color: Colors.primaryDark,
+        color: Colors.font,
         opacity: 0.8,
-        fontSize: 22,
+        fontSize: 12,
         fontWeight: "700",
         letterSpacing: 1,
     },
@@ -211,13 +186,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottomWidth: 1,
         minHeight: 36,
+        borderBottomWidth: 1,
         borderBottomColor: Colors.listBorder,
     },
     moreIcon: {
         fontSize: 16,
-        marginLeft: 2,
+        marginLeft: 8,
         color: Colors.labelFontThin
     },
     tokenName: {
@@ -240,11 +215,6 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing: 1,
     },
-    exchange: {
-        color: Colors.labelFont,
-        fontSize: 12,
-        letterSpacing: 1
-    },
     tokenNameWrapper: {
         flexDirection: "row",
         alignItems: "center"
@@ -252,7 +222,7 @@ const styles = StyleSheet.create({
     mark: {
         width: 8,
         height: 8,
-        borderRadius: 50,
-        marginRight: 10
+        // borderRadius: 50,
+        marginRight: 8
     }
 });

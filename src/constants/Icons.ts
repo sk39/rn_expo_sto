@@ -19,6 +19,10 @@ export default {
         name: `credit-card`,
         type: "feather"
     },
+    Cashflow: {
+        name: "file-text",
+        type: "feather"
+    },
     Settings: {
         name: "settings",
         type: "feather"

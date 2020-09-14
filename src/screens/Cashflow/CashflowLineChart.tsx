@@ -23,7 +23,7 @@ export default class CashflowLineChart extends Component<Props, any> {
 
         return (
             <LineChart
-                style={{height: 66}}
+                style={{height: 60}}
                 data={chartData}
                 animate
                 curve={shape.curveNatural}

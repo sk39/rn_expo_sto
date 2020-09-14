@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {Animated, RefreshControl, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {Container, View} from 'native-base';
-import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import Balance from "./Balance";
-import Cashflow from "./Cashflow";
 import PortfolioHeader from "./PortfolioHeader";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
@@ -13,13 +11,6 @@ import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 
 @observer
 export default class Portfolio extends Component<NavigationProps> {
-
-    static navigationOptions = {
-        tabBarLabel: t("navigation.tab.Home"),
-        tabBarIcon: ({focused}) => (
-            <TabBarIcon screenName="Home" focused={focused}/>
-        )
-    };
 
     @observable scroll = new Animated.Value(0);
     @observable refreshing = false;
@@ -42,7 +33,7 @@ export default class Portfolio extends Component<NavigationProps> {
         return (
             <Container style={styles.back}>
                 <MyStatusBar dark={true} transparent navigation={navigation}/>
-                <PortfolioHeader scroll={this.scroll} navigation={navigation}/>
+                <PortfolioHeader navigation={navigation}/>
                 <View style={styles.body}>
                     <Animated.ScrollView
                         refreshControl={
@@ -52,13 +43,6 @@ export default class Portfolio extends Component<NavigationProps> {
                         <View style={styles.areaCard}>
                             <Balance navigation={navigation}
                                      setRefreshListener={this.setRefreshListener}/>
-                        </View>
-
-                        <View style={styles.splitter}/>
-
-                        <View style={styles.areaCard}>
-                            <Cashflow navigation={navigation}
-                                      setRefreshListener={this.setRefreshListener}/>
                         </View>
                     </Animated.ScrollView>
                 </View>

@@ -79,17 +79,17 @@ export default class BalanceList extends PortfolioChild {
             valEL = (
                 <View style={styles.valueWrapper}>
                     <NumberLabel
+                        value={item.balanceBaseCurrency}
+                        decimals={0}
+                        prefix={"$"}
+                        style={styles.balanceBaseCurrency}
+                    />
+                    <NumberLabel
                         value={item.balance}
                         decimals={1}
                         style={styles.value}
                         suffix={item.symbol}
                         suffixStyle={styles.unit}
-                    />
-                    <NumberLabel
-                        value={item.balanceBaseCurrency}
-                        decimals={0}
-                        prefix={"$"}
-                        style={styles.exchange}
                     />
                 </View>
             );
@@ -130,27 +130,19 @@ export default class BalanceList extends PortfolioChild {
         const {balanceState} = this;
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <View style={{flex: 1}}>
-                        <View style={styles.titleWrapper}>
-                            <Text style={styles.title}>Your Balances</Text>
-                        </View>
-                        <View style={styles.totalBalanceArea}>
-                            <Text style={styles.totalBalanceLabel}>
-                                Total
-                            </Text>
-                            <NumberLabel
-                                value={balanceState.total}
-                                decimals={0}
-                                prefix={"$"}
-                                style={styles.totalBalance}/>
-                        </View>
-                    </View>
-                    <View style={styles.chartWrapper}>
-                        <BalancePieChart
-                            balanceState={balanceState}/>
-                    </View>
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.title}>Your Balances</Text>
                 </View>
+                <BalancePieChart balanceState={balanceState} height={174} innerRadius={"86"}>
+                    <Text style={styles.totalBalanceLabel}>
+                        Total
+                    </Text>
+                    <NumberLabel
+                        value={balanceState.total}
+                        decimals={0}
+                        prefix={"$"}
+                        style={styles.totalBalance}/>
+                </BalancePieChart>
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
@@ -163,18 +155,9 @@ export default class BalanceList extends PortfolioChild {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: "100%",
-    },
-    header: {
-        width: "100%",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        flexDirection: "row",
-    },
+    container: {},
     titleWrapper: {
-        zIndex: 1,
-        flexWrap: "nowrap"
+        paddingBottom: 16,
     },
     title: {
         marginTop: 8,
@@ -184,26 +167,17 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing: 1,
     },
-    chartWrapper: {
-        height: 112,
-        width: 100,
-        flex: 1,
-        paddingLeft: 24,
-    },
     listWrapper: {
         minHeight: 40,
         paddingTop: 12,
     },
-    totalBalanceArea: {
-        paddingTop: 20,
-        paddingLeft: 24,
-    },
     totalBalanceLabel: {
+        marginTop: -7,
         color: Colors.labelFont,
-        fontSize: 12,
+        fontSize: 14,
         opacity: 0.6,
         fontWeight: "700",
-        marginRight: 16,
+        letterSpacing: 1,
         ...Platform.select({
             ios: {
                 marginBottom: 2,
@@ -223,14 +197,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        minHeight: 60,
         borderBottomWidth: 1,
-        minHeight: 48,
         borderBottomColor: Colors.listBorder,
     },
     moreIcon: {
         fontSize: 16,
-        marginLeft: 16,
-        color: Colors.primary
+        marginLeft: 10,
+        color: Colors.labelFontThin
     },
     tokenName: {
         color: Colors.labelFont,
@@ -247,27 +221,24 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     value: {
+        marginTop: 2,
         color: Colors.primary,
         fontSize: 16,
         fontWeight: "700",
         letterSpacing: 1
     },
     unit: {
-        color: Colors.labelFont,
+        color: Colors.primary2,
         fontSize: 10,
         fontWeight: "700",
         lineHeight: 18,
+        marginTop: 4,
         marginLeft: 4,
     },
     balanceBaseCurrency: {
         color: Colors.font,
         fontSize: 16,
         letterSpacing: 1,
-    },
-    exchange: {
-        color: Colors.labelFont,
-        fontSize: 12,
-        letterSpacing: 1
     },
     tokenNameWrapper: {
         flexDirection: "row",
@@ -276,7 +247,7 @@ const styles = StyleSheet.create({
     mark: {
         width: 8,
         height: 8,
-        borderRadius: 50,
+        // borderRadius: 50,
         marginRight: 10
     }
 });

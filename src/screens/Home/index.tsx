@@ -82,7 +82,7 @@ export default class Home extends Component<NavigationProps> {
                                     <PickupTokens navigation={navigation}
                                                   setRefreshListener={this.setRefreshListener}/>
                                 </View>
-                                
+
                                 <View style={{height: 18}}/>
                                 <View style={styles.areaCard}>
                                     <Performance navigation={navigation}

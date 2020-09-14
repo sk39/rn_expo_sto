@@ -13,6 +13,7 @@ import LocationTestScreen from "../../screens/Sandbox/LocationTestScreen";
 import LocalAuthTestScreen from "../../screens/Sandbox/LocalAuthTestScreen";
 import ProcessAnimationExample from "../../screens/Sandbox/ProcessAnimationExample";
 import Portfolio from "../../screens/Portfolio";
+import Cashflow from "../../screens/Cashflow";
 
 export const TabScreens = {
     Home: Home,
@@ -21,6 +22,7 @@ export const TabScreens = {
 
 const Screens = {
     Portfolio: Portfolio,
+    Cashflow: Cashflow,
     Settings: Settings,
     Sandbox: Sandbox,
     ProcessAnimation: ProcessAnimationExample,
@@ -35,4 +37,3 @@ const Screens = {
 };
 
 export default Screens;
-

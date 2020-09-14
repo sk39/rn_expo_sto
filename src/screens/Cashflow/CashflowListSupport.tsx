@@ -13,7 +13,7 @@ interface Props {
 
 @inject("rootStore")
 @observer
-export default class PortfolioListSupport extends Component<Props & RootStoreProps> {
+export default class CashflowListSupport extends Component<Props & RootStoreProps> {
 
     renderMessage(type, message) {
         return (
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: "rgba(247,246,255,0.9)",
+        backgroundColor: "rgba(247,246,255,0.7)",
         paddingTop: 88,
     }
 });

@@ -38,9 +38,7 @@ export default class PortfolioHeaderContents extends Component<NavigationProps &
                 <View>
                     <Text style={styles.title}>Portfolio</Text>
                 </View>
-                <View style={styles.rightContainer}>
-                    {auth.loggedIn ? this.renderContentsAuth() : this.renderContentsNoAuth()}
-                </View>
+                {auth.loggedIn ? this.renderContentsAuth() : this.renderContentsNoAuth()}
             </View>
         )
     }
@@ -61,19 +59,15 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing: 2,
     },
-    rightContainer: {},
     authButton: {
         backgroundColor: Colors.btnPrimaryLight,
         width: 100,
         height: 36
     },
     auth: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
         paddingRight: 12,
     },
     noAuth: {
-        // paddingTop: 24/
+        // paddingTop: 24
     }
 });
