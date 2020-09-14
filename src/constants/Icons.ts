@@ -15,8 +15,8 @@ export default {
         name: `search`,
         type: "feather"
     },
-    Chart: {
-        name: "pie-chart",
+    Portfolio: {
+        name: `credit-card`,
         type: "feather"
     },
     Settings: {

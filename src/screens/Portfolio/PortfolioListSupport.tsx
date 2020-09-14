@@ -8,31 +8,23 @@ import BlockErrorMessage from "@common/components/PageSupport/BlockErrorMessage"
 interface Props {
     processing: boolean;
     list: any[];
-    needAuth?: boolean;
     errorMessage?: string;
-    paddingTop?: number;
 }
 
 @inject("rootStore")
 @observer
-export default class HomeListSupport extends Component<Props & RootStoreProps> {
-
-    static defaultProps = {
-        paddingTop: 46,
-        needAuth: false,
-    };
+export default class PortfolioListSupport extends Component<Props & RootStoreProps> {
 
     renderMessage(type, message) {
-        const {paddingTop} = this.props;
         return (
-            <View style={[styles.disablesLayer, {paddingTop}]}>
+            <View style={styles.disablesLayer}>
                 <BlockErrorMessage type={type} message={message}/>
             </View>
         )
     }
 
     render() {
-        const {processing, list, errorMessage, needAuth} = this.props;
+        const {processing, list, errorMessage} = this.props;
         if (processing) {
             return (
                 <BlockLoading
@@ -42,7 +34,7 @@ export default class HomeListSupport extends Component<Props & RootStoreProps> {
         }
 
         const {auth} = this.props.rootStore;
-        if (needAuth && !auth.loggedIn) {
+        if (!auth.loggedIn) {
             return this.renderMessage("lock", t("msg.canAfterAuthed"))
         }
 

@@ -6,14 +6,14 @@ import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import SimpleList from "@common/components/List/SimpleList";
 import CashflowLineChart from "./CashflowLineChart";
-import HomeChild from "../HomeChild";
+import PortfolioChild from "../PortfolioChild";
 import CashflowState from "./CashflowState";
 import Skeleton from "@common/components/PageSupport/Skeleton";
-import HomeListSupport from "../HomeListSupport";
+import PortfolioListSupport from "../PortfolioListSupport";
 
 @inject('rootStore')
 @observer
-export default class CashflowList extends HomeChild {
+export default class CashflowList extends PortfolioChild {
 
     cashflowState: CashflowState;
 
@@ -84,14 +84,16 @@ export default class CashflowList extends HomeChild {
                         <Text style={styles.title}>Cashflow</Text>
                     </View>
                     <View style={styles.chartWrapper}>
-                        <CashflowLineChart cashflowState={this.cashflowState}/>
+                        <CashflowLineChart
+                            cashflowState={this.cashflowState}/>
                     </View>
                 </View>
                 <View style={styles.listWrapper}>
                     {this.renderList()}
                 </View>
-                <HomeListSupport processing={this.cashflowState.processing}
-                                 list={this.cashflowState.list}/>
+                <PortfolioListSupport
+                    processing={this.cashflowState.processing}
+                    list={this.cashflowState.list}/>
             </View>
         )
     }
@@ -113,9 +115,9 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 4,
-        fontSize: 16,
+        fontSize: 18,
         color: Colors.toolBarInverse,
-        opacity: 0.5,
+        opacity: 0.7,
         fontWeight: "700",
         letterSpacing: 1,
     },

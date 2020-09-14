@@ -8,14 +8,13 @@ import SimpleList from "@common/components/List/SimpleList";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import BalancePieChart from "./BalancePieChart";
 import BalanceState from "./BalanceState";
-import HomeChild from "../HomeChild";
+import PortfolioChild from "../PortfolioChild";
 import Skeleton from "@common/components/PageSupport/Skeleton";
-import HomeListSupport from "../HomeListSupport";
-import HomeChildTitle from "../HomeChildTitle";
+import PortfolioListSupport from "../PortfolioListSupport";
 
 @inject("rootStore")
 @observer
-export default class BalanceList extends HomeChild {
+export default class BalanceList extends PortfolioChild {
 
     balanceState: BalanceState;
 
@@ -24,9 +23,8 @@ export default class BalanceList extends HomeChild {
         this.balanceState = new BalanceState(props.rootStore.balance);
     }
 
-    loadData(loggedIn) {
-        if (loggedIn)
-            this.balanceState.loadData();
+    loadData() {
+        this.balanceState.loadData();
     }
 
     showDetail(item) {
@@ -64,10 +62,6 @@ export default class BalanceList extends HomeChild {
         )
     }
 
-    onLinkPress = () => {
-        this.props.navigation.navigate("Portfolio")
-    }
-
     renderItem = ({item, index}) => {
         let valEL;
         if (!item.symbol) {
@@ -84,18 +78,18 @@ export default class BalanceList extends HomeChild {
         } else {
             valEL = (
                 <View style={styles.valueWrapper}>
-                    {/*<NumberLabel*/}
-                    {/*    value={item.balance}*/}
-                    {/*    decimals={1}*/}
-                    {/*    style={styles.value}*/}
-                    {/*    suffix={item.symbol}*/}
-                    {/*    suffixStyle={styles.unit}*/}
-                    {/*/>*/}
+                    <NumberLabel
+                        value={item.balance}
+                        decimals={1}
+                        style={styles.value}
+                        suffix={item.symbol}
+                        suffixStyle={styles.unit}
+                    />
                     <NumberLabel
                         value={item.balanceBaseCurrency}
                         decimals={0}
                         prefix={"$"}
-                        style={styles.balanceBaseCurrency}
+                        style={styles.exchange}
                     />
                 </View>
             );
@@ -136,25 +130,33 @@ export default class BalanceList extends HomeChild {
         const {balanceState} = this;
         return (
             <View style={styles.container}>
-                <HomeChildTitle title="Your Balances"
-                                linkTitle="Detail"
-                                onLinkPress={this.onLinkPress}
-                />
-                <View style={styles.body}>
+                <View style={styles.header}>
+                    <View style={{flex: 1}}>
+                        <View style={styles.titleWrapper}>
+                            <Text style={styles.title}>Your Balances</Text>
+                        </View>
+                        <View style={styles.totalBalanceArea}>
+                            <Text style={styles.totalBalanceLabel}>
+                                Total
+                            </Text>
+                            <NumberLabel
+                                value={balanceState.total}
+                                decimals={0}
+                                prefix={"$"}
+                                style={styles.totalBalance}/>
+                        </View>
+                    </View>
                     <View style={styles.chartWrapper}>
                         <BalancePieChart
                             balanceState={balanceState}/>
                     </View>
-                    <View style={{flex: 1}}>
-                        <View style={styles.listWrapper}>
-                            {this.renderList()}
-                        </View>
-                    </View>
                 </View>
-                <HomeListSupport processing={this.balanceState.processing}
-                                 needAuth
-                                 errorMessage={this.balanceState.balancesStore.errorMessage}
-                                 list={this.balanceState.list}/>
+                <View style={styles.listWrapper}>
+                    {this.renderList()}
+                </View>
+                <PortfolioListSupport processing={this.balanceState.processing}
+                                      errorMessage={this.balanceState.balancesStore.errorMessage}
+                                      list={this.balanceState.list}/>
             </View>
         )
     }
@@ -164,26 +166,36 @@ const styles = StyleSheet.create({
     container: {
         width: "100%",
     },
-    body: {
+    header: {
         width: "100%",
-        alignItems: "center",
-        // justifyContent: "space-between",
+        alignItems: "flex-start",
+        justifyContent: "space-between",
         flexDirection: "row",
-        paddingRight: 8,
-        paddingLeft: 24,
+    },
+    titleWrapper: {
+        zIndex: 1,
+        flexWrap: "nowrap"
+    },
+    title: {
+        marginTop: 8,
+        fontSize: 18,
+        color: Colors.toolBarInverse,
+        opacity: 0.7,
+        fontWeight: "700",
+        letterSpacing: 1,
     },
     chartWrapper: {
+        height: 112,
         width: 100,
-        // flex: 1,
-        // backgroundColor:"red",
-        // paddingLeft: 24,
+        flex: 1,
+        paddingLeft: 24,
     },
     listWrapper: {
-        // minHeight: 80,
-        paddingLeft: 16,
+        minHeight: 40,
+        paddingTop: 12,
     },
     totalBalanceArea: {
-        paddingTop: 12,
+        paddingTop: 20,
         paddingLeft: 24,
     },
     totalBalanceLabel: {
@@ -212,19 +224,19 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         borderBottomWidth: 1,
-        minHeight: 36,
+        minHeight: 48,
         borderBottomColor: Colors.listBorder,
     },
     moreIcon: {
         fontSize: 16,
-        marginLeft: 2,
-        color: Colors.labelFontThin
+        marginLeft: 16,
+        color: Colors.primary
     },
     tokenName: {
         color: Colors.labelFont,
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: "700",
-        letterSpacing: 1
+        letterSpacing: 2
     },
     label: {
         color: Colors.labelFont,
@@ -234,10 +246,22 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         justifyContent: "flex-end",
     },
+    value: {
+        color: Colors.primary,
+        fontSize: 16,
+        fontWeight: "700",
+        letterSpacing: 1
+    },
+    unit: {
+        color: Colors.labelFont,
+        fontSize: 10,
+        fontWeight: "700",
+        lineHeight: 18,
+        marginLeft: 4,
+    },
     balanceBaseCurrency: {
         color: Colors.font,
-        fontSize: 12,
-        fontWeight: "700",
+        fontSize: 16,
         letterSpacing: 1,
     },
     exchange: {

@@ -18,6 +18,7 @@ import Colors from "@constants/Colors";
 import AnimatedCardHeader from "@common/components/CardWithModal/AnimatedCardHeader";
 import AnimatedCardContents from "@common/components/CardWithModal/AnimatedCardContents";
 import CashImage from "@common/components/Image/CashImage";
+import {CardPosition} from "@common/components/CardWithModal/CardModels";
 
 interface Props {
     image: ImageSourcePropType;
@@ -26,6 +27,9 @@ interface Props {
     renderModalHeader: () => any;
     renderModal: () => any;
     renderModalFooter: () => any;
+    cardHeight?: number;
+    imageHeight?: number;
+    imageHeightLarge?: number;
 }
 
 const duration = {
@@ -37,6 +41,11 @@ const duration = {
 @observer
 export default class CardWithModal extends Component<Props> {
 
+    static defaultProps = {
+        imageHeight: Layout.card.imageHeight,
+        imageHeightLarge: Layout.card.imageHeightLarge,
+    };
+
     @observable openingModal = false;
     @observable closingModal = false;
     @observable active = new Animated.Value(0);
@@ -44,8 +53,9 @@ export default class CardWithModal extends Component<Props> {
     @observable phase2 = new Animated.Value(0);
     @observable phase3 = new Animated.Value(0);
     @observable scrollY = new Animated.Value(0);
-    @observable pressItemTop = null;
-    @observable pressItemHeight = null;
+    @observable pressItem: CardPosition = {
+        px: null, py: null, height: null, width: null
+    };
     cardRef;
     cardModalModeRef;
     scrollRef;
@@ -63,7 +73,8 @@ export default class CardWithModal extends Component<Props> {
     }
 
     componentWillUnmount() {
-        this.disposer();
+        if (this.disposer)
+            this.disposer();
     }
 
     openModal() {
@@ -125,9 +136,9 @@ export default class CardWithModal extends Component<Props> {
     onPressed = () => {
         this.cardRef.current.measure((fx, fy, width, height, px, py) => {
             runInAction(() => {
+                // console.log({fx, fy, width, height, px, py})
                 this.active.setValue(0);
-                this.pressItemTop = py;
-                this.pressItemHeight = height;
+                this.pressItem = {px, py, height, width};
                 if (this.props.onPressed)
                     this.props.onPressed()
             })
@@ -148,41 +159,24 @@ export default class CardWithModal extends Component<Props> {
             return null;
         }
 
-        const cardPos = {
-            position: "absolute",
-            top: this.pressItemTop,
-        }
-
         const ani = {
             modalBack: {
                 opacity: this.phase2.interpolate({
                     inputRange: [0, 1],
                     outputRange: [0, 1],
                 })
-            },
-            card: {
-                // opacity: this.phase2.interpolate({
-                //     inputRange: [0, 0.5, 1],
-                //     outputRange: [1, 0.5, 1],
-                // }),
-                transform: [
-                    {
-                        translateY: this.phase2.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [0, -(this.pressItemTop)],
-                        })
-                    },
-                ]
             }
         };
 
-        const {imageHeight, imageHeightLarge} = Layout.card;
-        const paddingTop = this.pressItemHeight + (imageHeightLarge - imageHeight);
+        const {imageHeight, imageHeightLarge, cardHeight} = this.props;
+        const paddingTop = (cardHeight ? cardHeight : this.pressItem.height) + (imageHeightLarge - imageHeight);
         return (
             <Portal>
                 <View style={styles.modal}>
                     <Animated.View style={[styles.modalBack, ani.modalBack]}/>
-                    <AnimatedCardHeader phase={this.phase3} scrollY={this.scrollY}>
+                    <AnimatedCardHeader phase={this.phase3}
+                                        scrollY={this.scrollY}
+                                        imageHeightLarge={imageHeightLarge}>
                         {renderModalHeader()}
                     </AnimatedCardHeader>
                     <Animated.ScrollView
@@ -201,19 +195,20 @@ export default class CardWithModal extends Component<Props> {
                                 {useNativeDriver: true})
                         }
                     >
-                        <Animated.View style={[cardPos, ani.card]}>
-                            <AnimatedCard
-                                ref={this.cardModalModeRef}
-                                style={styles.card}
-                                imageWrapperStyle={styles.imageWrapper}
-                                scrollY={this.scrollY}
-                            >
-                                <CashImage source={image}/>
-                                <View>
-                                    {this.props.children}
-                                </View>
-                            </AnimatedCard>
-                        </Animated.View>
+                        <AnimatedCard
+                            ref={this.cardModalModeRef}
+                            style={styles.card}
+                            imageWrapperStyle={[styles.imageWrapper, {height: imageHeight}]}
+                            pressItem={this.pressItem}
+                            scrollY={this.scrollY}
+                            imageHeight={imageHeight}
+                            imageHeightLarge={imageHeightLarge}
+                        >
+                            <CashImage source={image}/>
+                            <View>
+                                {this.props.children}
+                            </View>
+                        </AnimatedCard>
                         <AnimatedCardContents phase={this.phase3}>
                             <View style={{flex: 1, paddingTop: paddingTop, zIndex: 0}}>
                                 {renderModal()}
@@ -227,7 +222,7 @@ export default class CardWithModal extends Component<Props> {
     }
 
     render() {
-        const {image} = this.props;
+        const {image, imageHeight} = this.props;
         const ani = {
             card: {
                 opacity: this.phase1.interpolate({
@@ -250,7 +245,7 @@ export default class CardWithModal extends Component<Props> {
                     <Animated.View style={ani.touch}>
                         <View style={styles.cardWrapper}>
                             <Animated.View ref={this.cardRef} style={[styles.card, ani.card]}>
-                                <Animated.View style={[styles.imageWrapper]}>
+                                <Animated.View style={[styles.imageWrapper, {height: imageHeight}]}>
                                     <CashImage source={image}/>
                                 </Animated.View>
                                 <View>
@@ -288,8 +283,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         backgroundColor: "#c1c1c1",
         padding: 0,
-        width: "100%",
-        height: Layout.card.imageHeight,
+        width: "100%"
     },
     modal: {
         width: Layout.window.width,

@@ -6,26 +6,29 @@ interface Props {
     setRefreshListener: Function;
 }
 
-export default class HomeChild extends Component<Props & NavigationProps & RootStoreProps> {
+export default class PortfolioChild extends Component<Props & NavigationProps & RootStoreProps> {
 
     disposer;
 
     constructor(props) {
         super(props);
         this.loadData = this.loadData.bind(this);
-        props.setRefreshListener(() => {
-            const {auth} = this.props.rootStore;
-            this.loadData(auth.loggedIn)
-        });
+        props.setRefreshListener(this.loadData);
     }
 
     componentDidMount() {
+        this.loadData();
         const {auth} = this.props.rootStore;
         this.disposer = reaction(
             () => auth.loggedIn,
-            (loggedIn) => this.loadData(loggedIn)
+            (loggedIn) => {
+                if (loggedIn) {
+                    this.loadData();
+                } else {
+                    this.clear();
+                }
+            }
         )
-        this.loadData(auth.loggedIn);
     }
 
     componentWillUnmount() {
@@ -33,7 +36,11 @@ export default class HomeChild extends Component<Props & NavigationProps & RootS
             this.disposer();
     }
 
-    loadData(loggedIn) {
+    loadData() {
         throw Error("Please override");
+    }
+
+    clear() {
+
     }
 }

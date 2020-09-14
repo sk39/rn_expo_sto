@@ -15,7 +15,7 @@ export default class ViewUtils {
 
     static getStatusBarHeight(safe?: boolean) {
         return Platform.select({
-            ios: this.isIphoneX ? (safe ? 44 : 30) : 20,
+            ios: this.isIphoneX ? (safe ? 44 : 30) : 12,
             android: StatusBar.currentHeight,
             default: 0
         });

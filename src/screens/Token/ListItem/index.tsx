@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {Divider} from "react-native-elements";
-import Header from './Header';
-import Content from './Content';
+import ListItemContent from './ListItemContent';
 import {observer} from "mobx-react";
 import CardWithModal from "@common/components/CardWithModal/CardWithModal";
 import {STO} from "@common/model/domainModel";
@@ -79,9 +77,7 @@ export default class ListItem extends Component<Props> {
                 renderModal={this.renderModal}
                 renderModalFooter={this.renderModalFooter}
             >
-                <Header item={item}/>
-                <Divider/>
-                <Content item={item}/>
+                <ListItemContent item={item}/>
             </CardWithModal>
         );
     }

@@ -12,6 +12,7 @@ import QRTestScreen from "../../screens/Sandbox/QRTestScreen";
 import LocationTestScreen from "../../screens/Sandbox/LocationTestScreen";
 import LocalAuthTestScreen from "../../screens/Sandbox/LocalAuthTestScreen";
 import ProcessAnimationExample from "../../screens/Sandbox/ProcessAnimationExample";
+import Portfolio from "../../screens/Portfolio";
 
 export const TabScreens = {
     Home: Home,
@@ -19,6 +20,7 @@ export const TabScreens = {
 };
 
 const Screens = {
+    Portfolio: Portfolio,
     Settings: Settings,
     Sandbox: Sandbox,
     ProcessAnimation: ProcessAnimationExample,

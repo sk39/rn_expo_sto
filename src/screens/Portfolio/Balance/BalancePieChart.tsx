@@ -13,7 +13,7 @@ export default class BalancePieChart extends Component<Props> {
     render() {
         const {chartData} = this.props.balanceState
         return (
-            <PieChart style={{height: 100}}
+            <PieChart style={{height: 120}}
                       valueAccessor={({item}) => item.amount}
                       animate
                       data={chartData}

@@ -37,6 +37,11 @@ export default class TokenState {
         return this.stoStore.list;
     }
 
+    @computed
+    get pickupList() {
+        return this.stoStore.list.slice(0, 4);
+    }
+
     async get(symbol: string) {
         return this.stoStore.get(symbol);
     }

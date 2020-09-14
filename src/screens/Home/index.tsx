@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
-import {Animated, RefreshControl, StyleSheet} from 'react-native';
+import {Animated, Platform, RefreshControl, StyleSheet} from 'react-native';
 import {observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import {TabBarIcon} from "@common/components/ScreenIcon";
 import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import Balance from "./Balance";
-import Cashflow from "./Cashflow";
 import HomeHeader from "./HomeHeader";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import PickupTokens from "./PickupTokens";
+import Performance from "./Performance";
+import {Host} from "react-native-portalize";
 
 @observer
 export default class Home extends Component<NavigationProps> {
 
-    static navigationOptions = {
-        tabBarLabel: t("navigation.tab.Home"),
-        tabBarIcon: ({focused}) => (
-            <TabBarIcon screenName="Home" focused={focused}/>
-        )
-    };
+    static navigationOptions = ({navigation}) => {
+        const {state} = navigation;
+        return {
+            tabBarVisible: state.params ? state.params.tabBarVisible : true,
+            tabBarLabel: t("navigation.tab.Home"),
+            tabBarIcon: ({focused}) => (
+                <TabBarIcon screenName="Home" focused={focused}/>
+            )
+        }
+    }
+
 
     @observable scroll = new Animated.Value(0);
     @observable refreshing = false;
@@ -39,44 +46,54 @@ export default class Home extends Component<NavigationProps> {
 
     render() {
         const {navigation} = this.props;
-
         return (
-            <Container style={styles.back}>
-                <MyStatusBar dark={false} transparent navigation={navigation}/>
-                <HomeHeader scroll={this.scroll} navigation={navigation}/>
-                <View style={styles.body}>
-                    <Animated.ScrollView
-                        refreshControl={
-                            <RefreshControl refreshing={this.refreshing}
-                                            onRefresh={this.onRefresh}/>
-                        }
-                        scrollEventThrottle={16}
-                        onScroll={
-                            Animated.event([
-                                    {
-                                        nativeEvent: {
-                                            contentOffset: {
-                                                y: this.scroll,
+            <Host>
+                <Container style={styles.back}>
+                    <MyStatusBar dark={false} transparent navigation={navigation}/>
+                    <HomeHeader scroll={this.scroll} navigation={navigation}/>
+                    <View style={styles.bodyWrapper}>
+                        <View style={styles.body}>
+                            <Animated.ScrollView
+                                refreshControl={
+                                    <RefreshControl refreshing={this.refreshing}
+                                                    onRefresh={this.onRefresh}/>
+                                }
+                                scrollEventThrottle={16}
+                                onScroll={
+                                    Animated.event([
+                                            {
+                                                nativeEvent: {
+                                                    contentOffset: {
+                                                        y: this.scroll,
+                                                    },
+                                                },
                                             },
-                                        },
-                                    },
-                                ],
-                                {useNativeDriver: true})
-                        }>
-                        <View style={styles.areaCard}>
-                            <Balance navigation={navigation}
-                                     setRefreshListener={this.setRefreshListener}/>
-                        </View>
+                                        ],
+                                        {useNativeDriver: true})
+                                }>
 
-                        <View style={styles.splitter}/>
+                                <View style={{height: 14}}/>
+                                <View style={styles.areaCard}>
+                                    <Balance navigation={navigation}
+                                             setRefreshListener={this.setRefreshListener}/>
+                                </View>
 
-                        <View style={styles.areaCard}>
-                            <Cashflow navigation={navigation}
-                                      setRefreshListener={this.setRefreshListener}/>
+                                <View style={{height: 28}}/>
+                                <View style={styles.areaCard}>
+                                    <PickupTokens navigation={navigation}
+                                                  setRefreshListener={this.setRefreshListener}/>
+                                </View>
+
+                                <View style={{height: 18}}/>
+                                <View style={styles.areaCard}>
+                                    <Performance navigation={navigation}
+                                                 setRefreshListener={this.setRefreshListener}/>
+                                </View>
+                            </Animated.ScrollView>
                         </View>
-                    </Animated.ScrollView>
-                </View>
-            </Container>
+                    </View>
+                </Container>
+            </Host>
         );
     }
 }
@@ -87,19 +104,28 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.back2,
         flexDirection: "column",
     },
+    bodyWrapper: {
+        flex: 1,
+        ...Platform.select({
+            ios: {
+                ...getPlatformElevation(4)
+            }
+        })
+    },
     body: {
         backgroundColor: Colors.back,
-        flex: 1,
         borderTopStartRadius: 32,
         borderTopEndRadius: 32,
-        ...getPlatformElevation(14)
+        overflow: "hidden",
+        ...Platform.select({
+            android: {
+                ...getPlatformElevation(14)
+            }
+        })
     },
     areaCard: {
-        padding: 26,
-        paddingVertical: 20
-    },
-    splitter: {
-        width: "100%",
-        height: 8,
+        // padding: 26,
+        // paddingVertical: 12,
+        // paddingTop: 16,
     }
 });

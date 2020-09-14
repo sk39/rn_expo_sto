@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Animated, Image, Platform, StyleSheet, View} from 'react-native'
+import {Animated, Platform, StyleSheet, View} from 'react-native'
 import Colors from "@constants/Colors";
 import {observable} from "mobx";
 import {inject, observer} from "mobx-react";
@@ -13,9 +13,9 @@ import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import AnimatedCardHeader from "@common/components/CardWithModal/AnimatedCardHeader";
-import Header from "../ListItem/Header";
-import {Divider} from "react-native-elements";
-import Content from "../ListItem/Content";
+import ListItemContent from "../ListItem/ListItemContent";
+import CashImage from "@common/components/Image/CashImage";
+import ForDirectCard from "./ForDirectCard";
 
 @inject('rootStore')
 @observer
@@ -86,18 +86,17 @@ export default class DirectDetail extends PureComponent<NavigationProps & RootSt
                     }
                 >
                     <View style={styles.cardWrapper}>
-                        <View style={styles.card}>
-                            <View style={styles.imageWrapper}>
-                                <Image
-                                    style={styles.image}
-                                    source={imageSource}
-                                />
-                            </View>
-                            <Header item={item}/>
-                            <Divider/>
-                            <Content item={item}/>
-                        </View>
+                        <ForDirectCard style={styles.card}
+                                       imageWrapperStyle={styles.imageWrapper}
+                                       scrollY={this.scrollY}>
+                            <CashImage
+                                style={styles.image}
+                                source={imageSource}
+                            />
+                            <ListItemContent item={item}/>
+                        </ForDirectCard>
                     </View>
+
                     <DetailContents selectedItem={this.tokenState.selectedItem}/>
                 </Animated.ScrollView>
 

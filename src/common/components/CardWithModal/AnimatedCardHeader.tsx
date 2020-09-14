@@ -8,12 +8,18 @@ import ViewUtils from "@common/utils/ViewUtils";
 interface Props {
     phase: Animated.Value;
     scrollY: Animated.Value;
+    imageHeightLarge?: number;
 }
 
 @observer
 export default class AnimatedCardHeader extends Component<Props> {
+
+    static defaultProps = {
+        imageHeightLarge: Layout.card.imageHeightLarge,
+    };
+
     render() {
-        const {phase, scrollY} = this.props;
+        const {phase, scrollY, imageHeightLarge} = this.props;
         const ani = {
             header: {
                 transform: [
@@ -27,7 +33,7 @@ export default class AnimatedCardHeader extends Component<Props> {
             },
             background: {
                 opacity: scrollY.interpolate({
-                    inputRange: [0, Layout.card.imageHeightLarge / 2, Layout.card.imageHeightLarge - 30],
+                    inputRange: [0, imageHeightLarge / 2, imageHeightLarge - 30],
                     outputRange: [0, 0, 1],
                 })
             }

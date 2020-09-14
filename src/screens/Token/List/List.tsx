@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {ListItem} from "../ListItem";
+import ListItem from "../ListItem";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {observer} from "mobx-react";
 import {observable} from "mobx";

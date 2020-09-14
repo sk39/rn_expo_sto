@@ -1,14 +1,18 @@
-import {Animated, Easing} from "react-native";
+import {Animated, Easing, StyleProp, ViewStyle} from "react-native";
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import {observable} from "mobx";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
+import {CardPosition} from "@common/components/CardWithModal/CardModels";
 import Layout from "@constants/Layout";
 
 interface Props {
     style: any;
-    imageWrapperStyle: any;
+    imageWrapperStyle: StyleProp<ViewStyle>;
+    pressItem: CardPosition;
     scrollY?: Animated.Value;
+    imageHeight: number;
+    imageHeightLarge: number;
 }
 
 @observer
@@ -45,13 +49,22 @@ export default class AnimatedCard extends Component<Props> {
     }
 
     render() {
-        const {style, imageWrapperStyle} = this.props;
-        const CardLayout = Layout.card;
+        const {style, imageWrapperStyle, pressItem} = this.props;
+        const {imageHeight, imageHeightLarge} = this.props;
         const ani = {
             card: {
-                marginHorizontal: this.phase.interpolate({
+                position: "absolute",
+                top: this.phase.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [12, 0],
+                    outputRange: [pressItem.py, 0],
+                }),
+                left: this.phase.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [pressItem.px, 0],
+                }),
+                width: this.phase.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [pressItem.width, Layout.window.width],
                 }),
                 borderRadius: this.phase.interpolate({
                     inputRange: [0, 1],
@@ -62,7 +75,7 @@ export default class AnimatedCard extends Component<Props> {
             image: {
                 height: this.phase.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [CardLayout.imageHeight, CardLayout.imageHeightLarge],
+                    outputRange: [imageHeight, imageHeightLarge],
                 })
             },
             imageScale: {
@@ -88,6 +101,5 @@ export default class AnimatedCard extends Component<Props> {
             </Animated.View>
         )
     }
-
 }
 

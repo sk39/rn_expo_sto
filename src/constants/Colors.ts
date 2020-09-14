@@ -48,7 +48,8 @@ export default {
     btnPrimaryText: primaryLight,
     btnDark: inverseBack,
     inputBack: "rgba(215,215,238,0.3)",
-    inputBorder: "rgba(215,215,238,0.9)"
+    inputBorder: "rgba(215,215,238,0.9)",
+    link: "#208fd9"
 };
 
 export const ChartColor = [
@@ -61,8 +62,13 @@ export const ChartColor = [
 
 export const PieChartColor = [
     'rgb(255,169,0)',
-    'rgb(253,110,125)',
-    'rgb(185,112,252)',
+    'rgb(250,91,107)',
+    'rgb(165,90,232)',
     'rgb(67,114,255)',
-    'rgb(187,252,112)',
+    'rgb(40,205,255)',
+];
+
+export const BarChartColor = [
+    'rgb(255,169,0)',
+    'rgb(48,48,48)',
 ];

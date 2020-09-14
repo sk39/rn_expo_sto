@@ -9,6 +9,8 @@ import PieChartExample from "./examples/PieChartExample";
 import AreaChartExample from "./examples/AreaChartExample";
 import {Card} from "react-native-elements";
 import {TabBarIcon} from "@common/components/ScreenIcon";
+import BarChartExample from "./examples/BarChartExample";
+import StackedBarChartExample from "./examples/StackedBarChartExample";
 
 @observer
 export default class ChartScreen extends Component<NavigationProps> {
@@ -39,6 +41,14 @@ export default class ChartScreen extends Component<NavigationProps> {
                     <Card containerStyle={styles.chartRow}>
                         <Text style={styles.chartRowTitle}>Area Stack Chart</Text>
                         <AreaStackWithAxisExample/>
+                    </Card>
+                    <Card containerStyle={styles.chartRow}>
+                        <Text style={styles.chartRowTitle}>Bar Chart</Text>
+                        <BarChartExample/>
+                    </Card>
+                    <Card containerStyle={styles.chartRow}>
+                        <Text style={styles.chartRowTitle}>Stacked Bar Chart</Text>
+                        <StackedBarChartExample/>
                     </Card>
                     <View style={{paddingBottom: 24}}/>
                 </ScrollView>
