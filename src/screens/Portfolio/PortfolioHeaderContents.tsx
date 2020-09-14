@@ -24,8 +24,6 @@ export default class PortfolioHeaderContents extends Component<NavigationProps &
             <View style={styles.noAuth}>
                 <Button title={t("btn.sign-in")}
                         raised
-                        type="clear"
-                        titleStyle={{fontSize: 18, color: Colors.link}}
                         buttonStyle={styles.authButton}
                         onPress={() => this.props.navigation.navigate("Login")}
                 />
@@ -65,9 +63,9 @@ const styles = StyleSheet.create({
     },
     rightContainer: {},
     authButton: {
-        // backgroundColor: Colors.btnDark,
-        width: 110,
-        borderRadius: 0
+        backgroundColor: Colors.btnPrimaryLight,
+        width: 100,
+        height: 36
     },
     auth: {
         flexDirection: "row",

@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
     },
     rightContainer: {},
     authButton: {
-        backgroundColor: Colors.btnDark,
-        width: 110,
-        borderRadius: 0
+        backgroundColor: Colors.btnPrimaryLight,
+        width: 100,
+        height: 38
     },
     auth: {
         flexDirection: "row",
