@@ -8,19 +8,11 @@ import AreaStackWithAxisExample from "./examples/AreaStackWithAxisExample";
 import PieChartExample from "./examples/PieChartExample";
 import AreaChartExample from "./examples/AreaChartExample";
 import {Card} from "react-native-elements";
-import {TabBarIcon} from "@common/components/ScreenIcon";
 import BarChartExample from "./examples/BarChartExample";
 import StackedBarChartExample from "./examples/StackedBarChartExample";
 
 @observer
 export default class ChartScreen extends Component<NavigationProps> {
-
-    static navigationOptions = {
-        tabBarLabel: "Chart",
-        tabBarIcon: ({focused}) => (
-            <TabBarIcon screenName="Chart" focused={focused}/>
-        )
-    };
 
     render() {
         return (

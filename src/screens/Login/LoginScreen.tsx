@@ -7,7 +7,7 @@ import Colors from "@constants/Colors";
 
 // @ts-ignore
 LoginEntryScreen.navigationOptions = {
-    header: null
+    headerShown: false,
 }
 // @ts-ignore
 SetupMfaScreen.navigationOptions = {
@@ -23,5 +23,7 @@ export default createStackNavigator({
     SetupMfa: SetupMfaScreen,
     VerifyMfa: VerifyMfaScreen
 }, {
-    cardStyle: {backgroundColor: Colors.tabBar}
+    defaultNavigationOptions: {
+        cardStyle: {backgroundColor: Colors.tabBar}
+    }
 })

@@ -8,6 +8,7 @@ import PortfolioHeader from "./PortfolioHeader";
 import {observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
 
 @observer
 export default class Portfolio extends Component<NavigationProps> {
@@ -33,6 +34,7 @@ export default class Portfolio extends Component<NavigationProps> {
         return (
             <Container style={styles.back}>
                 <MyStatusBar dark={true} transparent navigation={navigation}/>
+                <BackButtonBehavior navigation={this.props.navigation}/>
                 <PortfolioHeader navigation={navigation}/>
                 <View style={styles.body}>
                     <Animated.ScrollView

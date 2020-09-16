@@ -9,6 +9,7 @@ import {Button} from "react-native-elements";
 import {observable} from "mobx";
 import {CacheManager} from "react-native-expo-image-cache";
 import MyToast from "@common/utils/MyToast";
+import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
 
 @inject('rootStore')
 @observer
@@ -63,6 +64,7 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         const {settings} = this.props.rootStore;
         return (
             <Container style={styles.container}>
+                <BackButtonBehavior navigation={this.props.navigation}/>
                 <PageHeader title={t("screen.settings.pageTitle")} navigation={this.props.navigation}/>
                 <View style={styles.row}>
                     <View style={styles.header}>

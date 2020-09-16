@@ -1,15 +1,21 @@
 import React from "react";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
-import {createSwitchNavigator} from "react-navigation";
 import Screens, {TabScreens} from "../Routes";
 import MoreNavigationOptions from "./MoreNavigationOptions";
 import Colors from "@constants/Colors";
+import {createStackNavigator} from "react-navigation-stack";
 
 const TabNavigator = createMaterialBottomTabNavigator(
     {
         ...TabScreens,
         More: {
-            screen: createSwitchNavigator(Screens),
+            // Avoid createSwitchNavigator because crash
+            screen: createStackNavigator(Screens, {
+                defaultNavigationOptions: {
+                    headerShown: false,
+                    animationEnabled: false
+                }
+            }),
             navigationOptions: MoreNavigationOptions
         }
     },

@@ -14,7 +14,7 @@ import SimpleList from "@common/components/List/SimpleList";
 import CashflowListSupport from "./CashflowListSupport";
 import Layout from "@constants/Layout";
 import PageHeader from "@common/components/PageSupport/PageHeader";
-import {getPlatformElevation} from "@common/utils/getPlatformElevation";
+import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
 
 @inject('rootStore')
 @observer
@@ -111,11 +111,10 @@ export default class CashflowScreen extends Component<NavigationProps & RootStor
     }
 
     render() {
-        const {navigation} = this.props;
-
         return (
             <Container style={styles.back}>
                 <PageHeader title={t("navigation.menu.Cashflow")} navigation={this.props.navigation}/>
+                <BackButtonBehavior navigation={this.props.navigation}/>
                 <View>
                     <Animated.ScrollView
                         refreshControl={
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
     },
     listWrapper: {
         paddingVertical: 10,
-        ...getPlatformElevation(2)
+        // ...getPlatformElevation(2)
     },
     row: {
         // backgroundColor: Colors.back,

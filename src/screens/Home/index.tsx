@@ -43,6 +43,56 @@ export default class Home extends Component<NavigationProps> {
         this.refreshing = false;
     }
 
+    renderContents() {
+        const {navigation} = this.props;
+        return (
+            <View>
+                <View style={{height: 14}}/>
+                <View style={styles.areaCard}>
+                    <Balance navigation={navigation}
+                             setRefreshListener={this.setRefreshListener}/>
+                </View>
+
+                <View style={{height: 28}}/>
+                <View style={styles.areaCard}>
+                    <PickupTokens navigation={navigation}
+                                  setRefreshListener={this.setRefreshListener}/>
+                </View>
+
+                <View style={{height: 18}}/>
+                <View style={styles.areaCard}>
+                    <Performance navigation={navigation}
+                                 setRefreshListener={this.setRefreshListener}/>
+                </View>
+            </View>
+        )
+    }
+
+    renderContentsNoAuth() {
+        const {navigation} = this.props;
+        return (
+            <View>
+                <View style={{height: 14}}/>
+                <View style={styles.areaCard}>
+                    <PickupTokens navigation={navigation}
+                                  setRefreshListener={this.setRefreshListener}/>
+                </View>
+
+                <View style={{height: 28}}/>
+                <View style={styles.areaCard}>
+                    <PickupTokens navigation={navigation}
+                                  setRefreshListener={this.setRefreshListener}/>
+                </View>
+
+                <View style={{height: 18}}/>
+                <View style={styles.areaCard}>
+                    <PickupTokens navigation={navigation}
+                                  setRefreshListener={this.setRefreshListener}/>
+                </View>
+            </View>
+        )
+    }
+
     render() {
         const {navigation} = this.props;
         return (
@@ -71,23 +121,7 @@ export default class Home extends Component<NavigationProps> {
                                         {useNativeDriver: true})
                                 }>
 
-                                <View style={{height: 14}}/>
-                                <View style={styles.areaCard}>
-                                    <Balance navigation={navigation}
-                                             setRefreshListener={this.setRefreshListener}/>
-                                </View>
-
-                                <View style={{height: 28}}/>
-                                <View style={styles.areaCard}>
-                                    <PickupTokens navigation={navigation}
-                                                  setRefreshListener={this.setRefreshListener}/>
-                                </View>
-
-                                <View style={{height: 18}}/>
-                                <View style={styles.areaCard}>
-                                    <Performance navigation={navigation}
-                                                 setRefreshListener={this.setRefreshListener}/>
-                                </View>
+                                {this.renderContents()}
                             </Animated.ScrollView>
                         </View>
                     </View>
