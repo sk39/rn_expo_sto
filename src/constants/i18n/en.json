@@ -5,6 +5,7 @@
     "cancel": "Cancel",
     "close": "Close",
     "set": "Done",
+    "done": "Done",
     "detail": "Detail",
     "invest": "Invest",
     "verify": "Verify",
@@ -58,6 +59,14 @@
       "explanationVerify": "After registering the account, enter the verification code displayed on the verification application.",
       "registerAuthApp": "Register to authentication app",
       "registerOther": "Register other device"
+    },
+    "tokens": {
+      "status": {
+        "offering": "Offering",
+        "waiting": "Waiting",
+        "closed": "Closed",
+        "all": "All"
+      }
     },
     "settings": {
       "pageTitle": "Settings",

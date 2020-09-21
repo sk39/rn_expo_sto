@@ -1,15 +1,15 @@
 import React, {PureComponent} from 'react';
 import {Share, StyleSheet, View} from 'react-native'
 import {observer} from "mobx-react";
-import {STO} from "@common/model/domainModel";
 import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 import BackButton from "@common/components/Button/BackButton";
 import IconButton from "@common/components/Button/IconButton";
+import StoVM from "@common/model/StoVM";
 
 interface Props {
-    item: STO,
+    item: StoVM,
     onBackPress: () => void;
 }
 
@@ -18,9 +18,9 @@ export default class DetailHeader extends PureComponent<Props> {
 
     share = async () => {
         try {
-            const {name, symbol, description, raise} = this.props.item;
+            const {name, symbol, summary, raise} = this.props.item;
             const result = await Share.share({
-                message: JSON.stringify({name, symbol, description, raise},),
+                message: JSON.stringify({name, symbol, summary, raise},),
             });
 
             if (result.action === Share.sharedAction) {

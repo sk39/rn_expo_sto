@@ -1,17 +1,18 @@
 import {action, observable} from "mobx";
 import ViewUtils from "@common/utils/ViewUtils";
-import {STO} from "@common/model/domainModel";
 import _ from "lodash";
 import data from "@constants/dummyData/sto";
 import MyToast from "@common/utils/MyToast";
+import StoVM from "@common/model/StoVM";
 
 export default class STOStore {
 
     @observable processing: boolean = false;
-    @observable list: STO[] = [];
+    @observable list: StoVM[] = [];
     @observable errorMessage: string = null;
 
     async initialize() {
+        await this.loadData(true);
     }
 
     @action
@@ -31,7 +32,7 @@ export default class STOStore {
             this.errorMessage = null;
             this.processing = true;
             await ViewUtils.sleep(500)
-            this.list = data;
+            this.list = data.map(m => new StoVM(m));
         } catch (e) {
             this.errorMessage = "Server error!";
             MyToast.error(
@@ -43,8 +44,13 @@ export default class STOStore {
         return this.list;
     }
 
-    async get(symbol: string) {
-        let list = await this.loadData(true);
+    async get(symbol: string): Promise<StoVM> {
+        const list = await this.loadData(true);
+        return _.find(list, t => t.symbol === symbol);
+    }
+
+    getSync(symbol: string): StoVM {
+        const {list} = this;
         return _.find(list, t => t.symbol === symbol);
     }
 }

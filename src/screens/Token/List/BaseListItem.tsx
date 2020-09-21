@@ -1,21 +1,28 @@
 import React, {Component} from 'react';
-import ListItemContent from './ListItemContent';
-import {observer} from "mobx-react";
-import CardWithModal from "@common/components/CardWithModal/CardWithModal";
-import {STO} from "@common/model/domainModel";
 import TokenState from "../TokenState";
 import DetailContents from "../Detail/DetailContents";
 import DetailHeader from "../Detail/DetailHeader";
 import DetailFooter from "../Detail/DetailFooter";
+import {computed} from "mobx";
+import StoVM from "@common/model/StoVM";
 
 interface Props {
     onPress?: Function;
     tokenState: TokenState;
-    item: STO;
+    item: StoVM;
 }
 
-@observer
-export default class ListItem extends Component<Props> {
+export default class BaseListItem extends Component<Props> {
+
+    @computed
+    get selected() {
+        const {item, tokenState} = this.props;
+        if (tokenState && tokenState.selectedItem) {
+            return item.symbol === tokenState.selectedItem.symbol;
+        }
+
+        return false;
+    }
 
     onPressed = () => {
         const {onPress, item} = this.props;
@@ -51,34 +58,5 @@ export default class ListItem extends Component<Props> {
                           onBackPress={this.onBack}
                           hardwareBackPress/>
         )
-    }
-
-    render() {
-        const {item, tokenState} = this.props;
-        const {image, localImage} = item;
-        let imageSource;
-        if (image) {
-            imageSource = {uri: image}
-        } else {
-            imageSource = localImage
-        }
-
-        let selected = false;
-        if (tokenState && tokenState.selectedItem) {
-            selected = item.symbol === tokenState.selectedItem.symbol;
-        }
-
-        return (
-            <CardWithModal
-                image={imageSource}
-                modal={selected}
-                onPressed={this.onPressed}
-                renderModalHeader={this.renderModalHeader}
-                renderModal={this.renderModal}
-                renderModalFooter={this.renderModalFooter}
-            >
-                <ListItemContent item={item}/>
-            </CardWithModal>
-        );
     }
 }

@@ -1,5 +1,7 @@
 import Layout from "../../constants/Layout";
 import {Platform, StatusBar} from "react-native";
+import moment from "moment";
+import Format from "@constants/Format";
 
 export default class ViewUtils {
 
@@ -25,6 +27,10 @@ export default class ViewUtils {
         return s.numberFormat(Number(num), decimals);
     }
 
+    static dateFormat(date: string) {
+        return moment(date).format(Format.dateFormat);
+    }
+
     static getBottomBtnHeight() {
         return this.isIphoneX()
             ? Layout.bottomBtn.heightIPhoneX :
@@ -37,6 +43,14 @@ export default class ViewUtils {
 
     static getBottomBtnPaddingBottom() {
         return this.isIphoneX() ? 16 : 0
+    }
+
+    static getFloatPageHeaderHeight() {
+        return this.isIphoneX() ? 84 : 70
+    }
+
+    static getFloatPageHeaderTabHeight() {
+        return this.isIphoneX() ? 124 : 100
     }
 
     static sleep(time) {

@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
     },
     forgotPasswordText: {
-        color: Colors.labelFontThin,
+        color: Colors.link,
         fontSize: 16,
     },
     headerArea: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         height: 48,
     },
     bottomBtnText: {
-        color: Colors.labelFontThin,
+        color: Colors.link,
         fontSize: 16,
         letterSpacing: 1,
     },

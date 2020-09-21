@@ -28,7 +28,6 @@ export default class Skeleton extends PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        flex: 1,
         padding: 8,
     },
     bar: {

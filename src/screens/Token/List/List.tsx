@@ -1,80 +1,86 @@
-import React, {PureComponent} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import ListItem from "../ListItem";
+import React, {PureComponent, RefObject} from 'react';
+import {StyleSheet, View} from 'react-native';
+import ListItem from "./ListItem";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
 import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
 import TokenState from "../TokenState";
 import Colors from "@constants/Colors";
-import PageHeader from "@common/components/PageSupport/PageHeader";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
+import SimpleList from "@common/components/List/SimpleList";
 
 interface Props {
-    tokenState: TokenState;
+    navigation: any;
+    rootStore: any;
+    showStatus: string;
 }
 
 @observer
 export default class List extends PureComponent<Props> {
 
     @observable refreshing = false;
+    tokenState: TokenState;
+    scrollRef: RefObject<MyScrollView>;
 
-    componentDidMount() {
-        this.props.tokenState.navigation.addListener(
-            'didFocus',
-            () => {
-                this.props.tokenState.loadData(true);
-            }
-        );
+    constructor(props) {
+        super(props);
+        this.scrollRef = React.createRef();
+        const filter = []
+        if (props.showStatus && props.showStatus !== "all") {
+            filter.push(props.showStatus)
+        }
+
+        this.tokenState = new TokenState(props.navigation, props.rootStore, filter)
+    }
+
+    resetScroll(animated = true) {
+        this.scrollRef.current.resetScroll(animated);
     }
 
     onListItemPressed = item => {
-        const {tokenState} = this.props
+        const {tokenState} = this
         tokenState.navigation.setParams({tabBarVisible: item == null})
         tokenState.selectItem(item);
     };
 
     renderItem = ({item, index}) => {
-        const {tokenState} = this.props;
+        const {tokenState} = this;
         return (
             <View key={item.name}
                   style={[styles.cardWrapper, {paddingTop: index === 0 ? 12 : 0}]}>
                 <AnimatedRow delay={(index + 1) * 200}>
-                    <ListItem
-                        item={item}
-                        tokenState={tokenState}
-                        onPress={this.onListItemPressed}
-                    />
+                    <View style={styles.itemWrapper}>
+                        <ListItem
+                            item={item}
+                            tokenState={tokenState}
+                            onPress={this.onListItemPressed}
+                        />
+                    </View>
                 </AnimatedRow>
             </View>
         );
     };
 
     onRefresh = async () => {
-        const {tokenState} = this.props;
+        const {tokenState} = this;
         this.refreshing = true;
         await tokenState.loadData();
         this.refreshing = false;
     }
 
     render() {
-        const {tokenState} = this.props;
-        const {list, processing} = tokenState;
+        const {tokenState} = this;
+        const {processing} = tokenState;
+        const list = tokenState.filteredList
         return (
             <View style={styles.container}>
-                <PageHeader title="Browse Security Tokens"
-                            navigation={tokenState.navigation}>
-                    {/*<View style={styles.menuIconContainer}>*/}
-                    {/*    <Icon name='search' type="feather" color={Colors.tabDefault} size={24}/>*/}
-                    {/*</View>*/}
-                </PageHeader>
-                <FlatList
-                    data={list}
-                    keyExtractor={item => item.name}
-                    refreshing={this.refreshing}
-                    onRefresh={this.onRefresh}
-                    renderItem={this.renderItem}
-                />
-                <ListPageSupport processing={processing && list.length === 0}
+                <MyScrollView ref={this.scrollRef}
+                              onRefresh={this.onRefresh}>
+                    <SimpleList data={list}
+                                renderItem={this.renderItem}/>
+                </MyScrollView>
+                <ListPageSupport processing={processing}
                                  list={list}
                                  errorMessage={tokenState.stoStore.errorMessage}/>
             </View>
@@ -97,4 +103,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    itemWrapper: {
+        borderWidth: 1,
+        borderColor: Colors.listBorder
+    }
 });

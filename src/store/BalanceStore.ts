@@ -1,10 +1,10 @@
-import {observable, reaction} from "mobx";
+import {computed, observable, reaction} from "mobx";
 import AuthStore from "@store/AuthStore";
-import data from '@constants/dummyData/balances';
 import _ from "lodash";
 import ViewUtils from "@common/utils/ViewUtils";
 import {Balance} from "@common/model/domainModel";
 import MyToast from "@common/utils/MyToast";
+import {onOrderTokens, ownTokens, summary} from '@constants/dummyData/balances';
 
 /**
  * Balance state.
@@ -12,12 +12,24 @@ import MyToast from "@common/utils/MyToast";
 export default class BalanceStore {
 
     @observable processing: boolean = false;
-    @observable balances: Balance[] = [];
-    @observable deposit: number = null;
-    @observable totalBalance: number = null;
     @observable errorMessage: string = null;
+    @observable summary: Balance[] = [];
+    @observable ownTokens: Balance[] = [];
+    @observable onOrderTokens: Balance[] = [];
 
     auth: AuthStore = null;
+
+    @computed
+    get deposit() {
+        return this.summary[0].balanceBaseCurrency
+    }
+
+    @computed
+    get totalBalance() {
+        return _.reduce(this.summary, (sum, item) => {
+            return sum + item.balanceBaseCurrency;
+        }, 0);
+    }
 
     async initialize(auth: AuthStore) {
         this.auth = auth;
@@ -35,8 +47,9 @@ export default class BalanceStore {
 
     async clear() {
         this.processing = false;
-        this.balances = [];
-        this.totalBalance = null;
+        this.summary = [];
+        this.ownTokens = [];
+        this.onOrderTokens = [];
         this.errorMessage = null;
     }
 
@@ -50,14 +63,11 @@ export default class BalanceStore {
         try {
             this.errorMessage = null;
             this.processing = true;
-
             await ViewUtils.sleep(300)
-            this.balances = data;
-            this.deposit = data[0].balance;
-            this.totalBalance = _.reduce(data, (sum, item) => {
-                return sum + item.balanceBaseCurrency;
-            }, 0);
-            return this.balances;
+            this.summary = summary;
+            this.ownTokens = ownTokens;
+            this.onOrderTokens = onOrderTokens;
+            return this.summary;
         } catch (e) {
             this.errorMessage = "Server error!";
             MyToast.error(

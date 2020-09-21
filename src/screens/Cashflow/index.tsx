@@ -1,26 +1,23 @@
 import React, {Component} from 'react';
-import {Animated, RefreshControl, StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {Container, View} from 'native-base';
 import Colors from "@constants/Colors";
-import {observable, reaction} from "mobx";
-import ViewUtils from "@common/utils/ViewUtils";
+import {reaction} from "mobx";
 import CashflowState from "./CashflowState";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import NumberLabel from "@common/components/Label/NumberLabel";
-import Skeleton from "@common/components/PageSupport/Skeleton";
 import SimpleList from "@common/components/List/SimpleList";
-import CashflowListSupport from "./CashflowListSupport";
-import Layout from "@constants/Layout";
-import PageHeader from "@common/components/PageSupport/PageHeader";
 import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
+import PageHeader from "@common/components/PageSupport/PageHeader";
+import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
+import Format from "@constants/Format";
 
 @inject('rootStore')
 @observer
 export default class CashflowScreen extends Component<NavigationProps & RootStoreProps> {
-
-    @observable refreshing = false;
 
     cashflowState: CashflowState;
     disposer;
@@ -60,9 +57,7 @@ export default class CashflowScreen extends Component<NavigationProps & RootStor
     }
 
     onRefresh = async () => {
-        this.refreshing = true;
-        await ViewUtils.sleep(300);
-        this.refreshing = false;
+        return await this.cashflowState.loadData();
     }
 
     renderItem = ({item, index}) => {
@@ -77,12 +72,12 @@ export default class CashflowScreen extends Component<NavigationProps & RootStor
                         <NumberLabel
                             value={item.cashBalance}
                             decimals={0}
-                            prefix={"$"}
+                            prefix={Format.baseCcySymbol}
                             style={styles.value}
                             prefixStyle={styles.unit}
                             sign
                         />
-                        <View style={{height: 2}}/>
+                        <View style={{height: 4}}/>
                         <NumberLabel
                             value={item.totalBalance}
                             decimals={0}
@@ -96,42 +91,28 @@ export default class CashflowScreen extends Component<NavigationProps & RootStor
     }
 
     renderList() {
-        const {auth} = this.props.rootStore;
-        if (!auth.loggedIn || this.cashflowState.list.length === 0) {
-            return (
-                <Skeleton line={15} barStyle={styles.skeleton}/>
-            )
-        }
+        const {list} = this.cashflowState;
         return (
-            <SimpleList
-                data={this.cashflowState.list}
-                renderItem={this.renderItem}
-            />
+            <SimpleList data={list} renderItem={this.renderItem}/>
         )
     }
 
     render() {
+        const {auth} = this.props.rootStore;
+        const {list, processing} = this.cashflowState;
         return (
             <Container style={styles.back}>
-                <PageHeader title={t("navigation.menu.Cashflow")} navigation={this.props.navigation}/>
+                <PageHeader title={t("navigation.menu.Cashflow")}
+                            navigation={this.props.navigation}/>
                 <BackButtonBehavior navigation={this.props.navigation}/>
-                <View>
-                    <Animated.ScrollView
-                        refreshControl={
-                            <RefreshControl refreshing={this.refreshing}
-                                            onRefresh={this.onRefresh}/>
-                        }>
-                        <View style={styles.listWrapper}>
-                            {this.renderList()}
-                        </View>
-                    </Animated.ScrollView>
-                    {/*<View style={styles.chartArea}>*/}
-                    {/*    <CashflowLineChart cashflowState={this.cashflowState}/>*/}
-                    {/*</View>*/}
-                    <CashflowListSupport
-                        processing={this.cashflowState.processing}
-                        list={this.cashflowState.list}/>
-                </View>
+                <MyScrollView onRefresh={this.onRefresh}>
+                    <View style={styles.listWrapper}>
+                        {this.renderList()}
+                    </View>
+                </MyScrollView>
+                <ListPageSupport auth={auth}
+                                 processing={processing}
+                                 list={list}/>
             </Container>
         );
     }
@@ -142,18 +123,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.back,
     },
-    chartArea: {
-        width: Layout.window.width,
-        // height: 50,
-        paddingVertical: 8,
-        // backgroundColor: Colors.secondThin
-    },
     listWrapper: {
-        paddingVertical: 10,
-        // ...getPlatformElevation(2)
+        paddingTop: 10,
+        paddingBottom: 24,
     },
     row: {
-        // backgroundColor: Colors.back,
         padding: 16,
         paddingVertical: 8,
         flexDirection: "row",
@@ -180,7 +154,8 @@ const styles = StyleSheet.create({
     },
     totalBalance: {
         color: Colors.labelFont,
-        fontSize: 10
+        fontSize: 12,
+        letterSpacing: 1,
     },
     skeleton: {
         height: 16,

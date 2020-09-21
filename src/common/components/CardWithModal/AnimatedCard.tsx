@@ -2,7 +2,6 @@ import {Animated, Easing, StyleProp, ViewStyle} from "react-native";
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import {observable} from "mobx";
-import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import {CardPosition} from "@common/components/CardWithModal/CardModels";
 import Layout from "@constants/Layout";
 
@@ -13,6 +12,9 @@ interface Props {
     scrollY?: Animated.Value;
     imageHeight: number;
     imageHeightLarge: number;
+    isChangeBodyHeight?: boolean;
+    bodyHeight?: number,
+    bodyHeightLarge?: number,
 }
 
 @observer
@@ -51,6 +53,7 @@ export default class AnimatedCard extends Component<Props> {
     render() {
         const {style, imageWrapperStyle, pressItem} = this.props;
         const {imageHeight, imageHeightLarge} = this.props;
+        const {isChangeBodyHeight, bodyHeight, bodyHeightLarge} = this.props;
         const ani = {
             card: {
                 position: "absolute",
@@ -66,11 +69,11 @@ export default class AnimatedCard extends Component<Props> {
                     inputRange: [0, 1],
                     outputRange: [pressItem.width, Layout.window.width],
                 }),
-                borderRadius: this.phase.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [10, 0],
-                }),
-                ...getPlatformElevation(2)
+                // borderRadius: this.phase.interpolate({
+                //     inputRange: [0, 1],
+                //     outputRange: [10, 0],
+                // }),
+                // ...getPlatformElevation(2)
             },
             image: {
                 height: this.phase.interpolate({
@@ -87,7 +90,17 @@ export default class AnimatedCard extends Component<Props> {
                         })
                     }
                 ]
-            }
+            },
+            body: isChangeBodyHeight ? {
+                opacity: this.phase.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                }),
+                height: this.phase.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [bodyHeight, bodyHeightLarge],
+                })
+            } : {}
         };
 
         return (
@@ -97,7 +110,9 @@ export default class AnimatedCard extends Component<Props> {
                         {this.props.children[0]}
                     </Animated.View>
                 </Animated.View>
-                {this.props.children[1]}
+                <Animated.View style={ani.body}>
+                    {this.props.children[1]}
+                </Animated.View>
             </Animated.View>
         )
     }

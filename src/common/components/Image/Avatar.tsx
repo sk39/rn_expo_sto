@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, View} from "react-native";
 import gravatarApi from "gravatar-api";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
+import Colors from "@constants/Colors";
 
 interface Props {
     size?: number,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     titleCircle: {
         // borderWidth: 1,
         // borderColor: 'white',
-        backgroundColor: "#7b7a95",
+        backgroundColor: Colors.link,
         borderRadius: 50,
         justifyContent: "center",
         alignItems: "center",

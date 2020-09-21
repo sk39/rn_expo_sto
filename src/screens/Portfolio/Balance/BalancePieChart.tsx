@@ -16,8 +16,8 @@ export default class BalancePieChart extends Component<Props> {
 
     static defaultProps = {
         height: 100,
-        outerRadius: "98",
-        innerRadius: "88"
+        outerRadius: "98%",
+        innerRadius: "88%"
     };
 
     render() {

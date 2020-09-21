@@ -78,7 +78,7 @@ export default createStackNavigator({
     InnerRouteSecond: SecondScreen,
     InnerRouteThird: ThirdScreen
 }, {
-    cardStyle: {backgroundColor: Colors.tabBar},
+
     defaultNavigationOptions: {
         headerTintColor: '#a0a1ba',
         headerPressColorAndroid: Colors.primary,

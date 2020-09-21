@@ -7,9 +7,9 @@ import {RootStoreProps} from "@store/RootStoreProvider";
 import PageHeader from "@common/components/PageSupport/PageHeader";
 import {Button} from "react-native-elements";
 import {observable} from "mobx";
-import {CacheManager} from "react-native-expo-image-cache";
 import MyToast from "@common/utils/MyToast";
 import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
 
 @inject('rootStore')
 @observer
@@ -39,15 +39,10 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
         }
     }
 
-    clearImageCache = async () => {
-        await CacheManager.clearCache();
-    }
-
-
     clearSTOCache = () => {
         const {rootStore} = this.props;
         this.exec("clearSto", async () => {
-            await this.clearImageCache();
+            await rootStore.image.clear();
             await rootStore.sto.clear();
         })
     }
@@ -55,7 +50,6 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
     clear = () => {
         const {rootStore} = this.props;
         this.exec("initialize", async () => {
-            await this.clearImageCache();
             await rootStore.clear();
         })
     }
@@ -66,48 +60,50 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
             <Container style={styles.container}>
                 <BackButtonBehavior navigation={this.props.navigation}/>
                 <PageHeader title={t("screen.settings.pageTitle")} navigation={this.props.navigation}/>
-                <View style={styles.row}>
-                    <View style={styles.header}>
-                        <View style={{flex: 1}}>
-                            <Text style={styles.title}>{t("screen.settings.biometric.title")}</Text>
-                            <Text style={styles.subTitle}>{t("screen.settings.biometric.subTitle")}</Text>
-                        </View>
-                        <Switch value={settings.enableLocalAuth}
-                                onValueChange={this.changeEnableBiometric}/>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.header}>
-                        <View style={{flex: 1}}>
-                            <Text style={styles.title}>{t("screen.settings.clearSto.title")}</Text>
-                            <Text style={styles.subTitle}>{t("screen.settings.clearSto.subTitle")}</Text>
+                <MyScrollView>
+                    <View style={styles.row}>
+                        <View style={styles.header}>
+                            <View style={{flex: 1}}>
+                                <Text style={styles.title}>{t("screen.settings.biometric.title")}</Text>
+                                <Text style={styles.subTitle}>{t("screen.settings.biometric.subTitle")}</Text>
+                            </View>
+                            <Switch value={settings.enableLocalAuth}
+                                    onValueChange={this.changeEnableBiometric}/>
                         </View>
                     </View>
-                    <View style={styles.body}>
-                        <Button title={t("screen.settings.clearSto.done")}
-                                loading={this.processing === "clearSto"}
-                                buttonStyle={styles.btn}
-                                raised
-                                onPress={this.clearSTOCache}
-                        />
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.header}>
-                        <View style={{flex: 1}}>
-                            <Text style={styles.title}>{t("screen.settings.initialize.title")}</Text>
-                            <Text style={styles.subTitle}>{t("screen.settings.initialize.subTitle")}</Text>
+                    <View style={styles.row}>
+                        <View style={styles.header}>
+                            <View style={{flex: 1}}>
+                                <Text style={styles.title}>{t("screen.settings.clearSto.title")}</Text>
+                                <Text style={styles.subTitle}>{t("screen.settings.clearSto.subTitle")}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.body}>
+                            <Button title={t("screen.settings.clearSto.done")}
+                                    loading={this.processing === "clearSto"}
+                                    buttonStyle={styles.btn}
+                                    raised
+                                    onPress={this.clearSTOCache}
+                            />
                         </View>
                     </View>
-                    <View style={styles.body}>
-                        <Button title={t("screen.settings.initialize.done")}
-                                loading={this.processing === "initialize"}
-                                buttonStyle={styles.initBtn}
-                                raised
-                                onPress={this.clear}
-                        />
+                    <View style={styles.row}>
+                        <View style={styles.header}>
+                            <View style={{flex: 1}}>
+                                <Text style={styles.title}>{t("screen.settings.initialize.title")}</Text>
+                                <Text style={styles.subTitle}>{t("screen.settings.initialize.subTitle")}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.body}>
+                            <Button title={t("screen.settings.initialize.done")}
+                                    loading={this.processing === "initialize"}
+                                    buttonStyle={styles.initBtn}
+                                    raised
+                                    onPress={this.clear}
+                            />
+                        </View>
                     </View>
-                </View>
+                </MyScrollView>
             </Container>
         );
     }

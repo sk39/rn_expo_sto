@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import {Easing, StyleSheet, View} from "react-native";
+import {BackHandler, Easing, StyleSheet, Text, View} from "react-native";
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
-import {Button, Text} from "native-base";
 import commonStyles from "@common/utils/commonStyle";
 import ErrorAnimation from "@common/components/Animation/ErrorAnimation";
 import DisableLayer from "@common/components/Modal/DisableLayer";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
+import ModalFooterBtn from "@common/components/Modal/ModalFooterBtn";
 
 interface Props {
     show: boolean;
@@ -27,6 +27,27 @@ export default class Dialog extends Component<Props> {
     static defaultProps = {
         disablesLayerBackgroundColor: Colors.disablesLayerDark,
         btnText: t("btn.close")
+    };
+
+    componentDidMount() {
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
+
+    handleBackButtonPressAndroid = () => {
+        if (this.props.show) {
+            this.props.onPress();
+            return true;
+        }
     };
 
     renderContents() {
@@ -51,7 +72,7 @@ export default class Dialog extends Component<Props> {
 
     render() {
         const {show, disablesLayerBackgroundColor, error, cancelable, onPress} = this.props;
-        const {btnText, btnStyle, btnTextStyle} = this.props;
+        const {btnText} = this.props;
 
         return (
             <DisableLayer show={show}
@@ -63,12 +84,8 @@ export default class Dialog extends Component<Props> {
                              easing={error ? Easing.out(Easing.back()) : Easing.ease}
                              moveDistance={error ? 80 : 20}>
                     <View style={styles.contentWrapper}>
-                        <View>
-                            {this.renderContents()}
-                        </View>
-                        <Button block style={[styles.btn, btnStyle]} onPress={onPress}>
-                            <Text style={[styles.btnText, btnTextStyle]}>{btnText}</Text>
-                        </Button>
+                        {this.renderContents()}
+                        <ModalFooterBtn title={btnText} onPress={onPress}/>
                     </View>
                 </AnimatedRow>
             </DisableLayer>
@@ -79,8 +96,8 @@ export default class Dialog extends Component<Props> {
 const styles = StyleSheet.create({
     contentWrapper: {
         ...commonStyles.modalContent,
-        alignItems: "center",
-        justifyContent: "flex-start",
+        flexDirection: "column",
+        justifyContent: "space-between",
         backgroundColor: Colors.back,
     },
     btn: commonStyles.modalBtn,

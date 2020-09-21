@@ -1,9 +1,9 @@
 import RootStore from "@store/RootStore";
 import TokenState from "../TokenState";
 import InputNumberState from "@common/components/Input/InputNumberState";
-import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
 import ViewUtils from "@common/utils/ViewUtils";
 import {action, computed, observable} from "mobx";
+import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
 
 export default class InvestTokenState extends TokenState {
 
@@ -25,7 +25,7 @@ export default class InvestTokenState extends TokenState {
 
     @computed
     get offeringPrice() {
-        return 200
+        return this.selectedItem.offeringPrice;
     }
 
     @computed
@@ -85,8 +85,8 @@ export default class InvestTokenState extends TokenState {
         try {
             // TODO: invest request
             this.processState.startProcessing();
-            await ViewUtils.sleep(1000);
-            this.processState.success();
+            await ViewUtils.sleep(1500);
+            this.processState.success("Token investment application accepted.");
         } catch (e) {
             //TODO:
             this.processState.error("Amount must be more than zero.");

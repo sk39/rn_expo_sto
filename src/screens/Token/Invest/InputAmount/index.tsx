@@ -16,7 +16,7 @@ export default class InputAmount extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
     padRef: RefObject<InputAmountPad>;
-    height = 416 + ViewUtils.getBottomBtnPaddingBottom();
+    height = 386 + ViewUtils.getBottomBtnPaddingBottom();
 
     constructor(props) {
         super(props);
@@ -37,7 +37,7 @@ export default class InputAmount extends PureComponent<Props> {
         const {tokenState} = this.props;
         return (
             <View>
-                <View style={{width: 240, paddingTop: 8}}>
+                <View style={{width: 200, paddingRight: 12}}>
                     <InputAmountLabel value={tokenState.amount.value}
                                       unit={tokenState.amount.unit}
                                       offeringPrice={tokenState.offeringPrice}

@@ -16,7 +16,7 @@ export default class InputNumberPad extends PureComponent<Props> {
 
     modalRef: RefObject<BottomModal>;
     padRef: RefObject<NumberPad>;
-    height = 380 + ViewUtils.getBottomBtnPaddingBottom();
+    height = 372 + ViewUtils.getBottomBtnPaddingBottom();
 
     constructor(props) {
         super(props);

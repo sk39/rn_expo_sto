@@ -1,5 +1,6 @@
 const back = '#f6f7ff';
 const back2 = '#e2e3ef';
+const back3 = '#e9eaf8';
 const inverseBack = '#130f3c';
 const font = '#201922';
 const tint = '#6f6f8c';
@@ -16,6 +17,7 @@ export default {
     font,
     back,
     back2,
+    back3,
     primary,
     primary2,
     primaryThin: "rgba(116,98,255,0.1)",
@@ -47,9 +49,10 @@ export default {
     btnPrimary: primaryDark,
     btnPrimaryText: primaryLight,
     btnDark: inverseBack,
-    inputBack: "rgba(215,215,238,0.3)",
-    inputBorder: "rgba(215,215,238,0.9)",
-    link: "#208fd9"
+    inputBack: "#fff",
+    inputBorder: "rgba(15,20,92,0.1)",
+    inputPadBack: "#e8ebf1",
+    link: "#6f7499"
 };
 
 export const ChartColor = [

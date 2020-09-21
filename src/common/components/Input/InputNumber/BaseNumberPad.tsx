@@ -11,12 +11,17 @@ import Layout from "@constants/Layout";
 
 interface Props {
     inputState: InputNumberState,
+    backgroundColor?: string;
     onClose: () => void;
 }
 
 export default class BaseNumberPad<T> extends Component<Props & T> {
 
     numberPadState: NumberPadState;
+
+    static defaultProps = {
+        backgroundColor: Colors.inputPadBack
+    };
 
     constructor(props) {
         super(props);
@@ -129,8 +134,9 @@ export default class BaseNumberPad<T> extends Component<Props & T> {
     }
 
     render() {
+        const {backgroundColor} = this.props;
         return (
-            <View>
+            <View style={[styles.back, {backgroundColor}]}>
                 {this.renderHeader()}
                 <View style={styles.body}>
                     {this.renderPad()}
@@ -142,8 +148,13 @@ export default class BaseNumberPad<T> extends Component<Props & T> {
 }
 
 const styles = StyleSheet.create({
+    back: {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        overflow: "hidden"
+    },
     header: {
-        paddingTop: 10,
+        paddingTop: 10
     },
     titleArea: {
         paddingHorizontal: 12,
@@ -158,21 +169,22 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        paddingVertical: 16,
+        paddingTop: 10,
+        paddingBottom: 16,
         width: "100%"
     },
     footer: {
         flexDirection: "row",
         justifyContent: "space-between",
         borderTopWidth: 1,
-        borderTopColor: Colors.listBorder
+        borderTopColor: Colors.listBorderDark
     },
     row: {
         flexDirection: "row",
         width: "100%",
     },
     bottomBtn: {
-        height: 56,
+        height: 48,
         width: (Layout.window.width) / 3,
     }
 });

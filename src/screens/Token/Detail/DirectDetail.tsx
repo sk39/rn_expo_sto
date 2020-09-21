@@ -13,9 +13,10 @@ import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import AnimatedCardHeader from "@common/components/CardWithModal/AnimatedCardHeader";
-import ListItemContent from "../ListItem/ListItemContent";
+import ListItemContent from "../List/ListItemContent";
 import CashImage from "@common/components/Image/CashImage";
 import ForDirectCard from "./ForDirectCard";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
 
 @inject('rootStore')
 @observer
@@ -70,21 +71,7 @@ export default class DirectDetail extends PureComponent<NavigationProps & RootSt
                                   onBackPress={this.onBack}
                     />
                 </AnimatedCardHeader>
-                <Animated.ScrollView
-                    scrollEventThrottle={16}
-                    onScroll={
-                        Animated.event([
-                                {
-                                    nativeEvent: {
-                                        contentOffset: {
-                                            y: this.scrollY,
-                                        },
-                                    },
-                                },
-                            ],
-                            {useNativeDriver: true})
-                    }
-                >
+                <MyScrollView scroll={this.scrollY}>
                     <View style={styles.cardWrapper}>
                         <ForDirectCard style={styles.card}
                                        imageWrapperStyle={styles.imageWrapper}
@@ -98,7 +85,7 @@ export default class DirectDetail extends PureComponent<NavigationProps & RootSt
                     </View>
 
                     <DetailContents selectedItem={this.tokenState.selectedItem}/>
-                </Animated.ScrollView>
+                </MyScrollView>
 
                 <DetailFooter selectedItem={this.tokenState.selectedItem}
                               tokenState={this.tokenState}/>

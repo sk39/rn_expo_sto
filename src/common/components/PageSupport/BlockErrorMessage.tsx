@@ -85,7 +85,7 @@ export default class BlockErrorMessage extends Component<Props & RootStoreProps>
                     </View>
                     <View style={styles.messageBlock}>
                         <Text style={[styles.message, {
-                            color: attr.color,
+                            color: Colors.font,
                             fontSize: large ? 20 : 16
                         }]}>
                             {message}

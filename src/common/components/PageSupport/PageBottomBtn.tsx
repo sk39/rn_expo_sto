@@ -4,7 +4,7 @@ import Colors from "@constants/Colors";
 import ViewUtils from "@common/utils/ViewUtils";
 import {Button} from "react-native-elements";
 import {observer} from "mobx-react";
-import AnimatedSlideUp from "@common/components/Animation/AnimatedSlideUp";
+import AnimatedSlide from "@common/components/Animation/AnimatedSlide";
 import {observable} from "mobx";
 
 interface Props {
@@ -45,9 +45,10 @@ export default class PageBottomBtn extends Component<Props> {
         if (animation) {
             return (
                 <View style={styles.container}>
-                    <AnimatedSlideUp delay={animationDelay || 500}>
+                    <AnimatedSlide delay={animationDelay || 500}
+                                   moveDistance={56}>
                         {this.renderContents()}
-                    </AnimatedSlideUp>
+                    </AnimatedSlide>
                 </View>
             )
         }

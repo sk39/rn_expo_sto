@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         width: 94,
     },
     text: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "700",
         letterSpacing: 1
     }

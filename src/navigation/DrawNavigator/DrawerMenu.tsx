@@ -10,6 +10,7 @@ import {RootStoreProps} from "@store/RootStoreProvider";
 import {inject, observer} from "mobx-react";
 import Logo from "@common/components/Image/Logo";
 import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
+import Format from "@constants/Format";
 
 @inject('rootStore')
 @observer
@@ -92,7 +93,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                         <NumberLabel
                             value={balance.totalBalance}
                             decimals={0}
-                            prefix={"$"}
+                            prefix={Format.baseCcySymbol}
                             style={styles.balanceValue}/>
                     </View>
                 </View>

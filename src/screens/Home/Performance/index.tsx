@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {inject, observer} from "mobx-react";
-import HomeChild from "../HomeChild";
+import {observer} from "mobx-react";
 import HomeChildTitle from "../HomeChildTitle";
 import PerformanceBarChart from "./PerformanceBarChart";
 import HomeListSupport from "../HomeListSupport";
 import PerformanceState from "./PerformanceState";
+import RootStore from "@store/RootStore";
 
-@inject('rootStore')
+interface Props {
+    rootStore: RootStore;
+    navigation: Navigation
+}
+
 @observer
-export default class Performance extends HomeChild {
+export default class Performance extends Component<Props> {
 
     performanceState: PerformanceState;
 
@@ -19,8 +23,9 @@ export default class Performance extends HomeChild {
     }
 
     loadData(loggedIn) {
-        if (loggedIn)
-            this.performanceState.loadData();
+        loggedIn
+            ? this.performanceState.loadData()
+            : this.performanceState.clear();
     }
 
     onLinkPress = () => {
@@ -53,7 +58,6 @@ const styles = StyleSheet.create({
     body: {
         width: "100%",
         alignItems: "center",
-        // justifyContent: "space-between",
         flexDirection: "row",
         paddingRight: 8,
         paddingLeft: 24,

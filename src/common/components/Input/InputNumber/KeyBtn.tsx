@@ -39,7 +39,7 @@ export function KeyIconBtn(props) {
                 type={"clear"}
                 buttonStyle={mini ? styles.keyMini : styles.keyIcon}
                 titleStyle={styles.keyText}
-                disabledStyle={styles.keyDisable}
+                disabledStyle={styles.keyDisableIcon}
                 disabledTitleStyle={styles.keyDisableText}
                 disabled={disabled}
                 onPressIn={onPress}
@@ -51,14 +51,14 @@ export function KeyIconBtn(props) {
 
 const styles = StyleSheet.create({
     key: {
-        width: (Layout.window.width - 24) / 3,
+        width: (Layout.window.width - 8) / 3,
         height: 48,
-        backgroundColor: "rgba(227,227,248,0.1)",
+        backgroundColor: Colors.back,
         borderWidth: 1,
-        borderColor: "rgba(227,227,248,0.7)"
+        borderColor: Colors.listBorder
     },
     keyIcon: {
-        width: (Layout.window.width - 24) / 3,
+        width: (Layout.window.width - 8) / 3,
         height: 48,
     },
     keyMini: {
@@ -66,16 +66,21 @@ const styles = StyleSheet.create({
         height: 52,
     },
     keyText: {
-        color: Colors.labelFont,
+        color: Colors.font,
         fontSize: 22
     },
     keyDisable: {
-        backgroundColor: "rgba(227,227,248,0)",
+        backgroundColor: "rgba(255,255,255,0.4)",
+        // borderColor: "rgba(0,0,0,0)",
+    },
+    keyDisableIcon: {
+        backgroundColor: "rgba(255,255,255,0)",
+        borderColor: "rgba(0,0,0,0)",
     },
     keyDisableText: {
         color: "#ccc",
     },
     keyBtnWrapper: {
-        padding: 2,
+        padding: 0,
     }
 });

@@ -1,38 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import AnimatedRow from "@common/components/Animation/AnimatedRow";
-import {inject, observer} from "mobx-react";
-import ListItem from "./ListItem";
 import TokenState from "../../Token/TokenState";
-import HomeChild from "../HomeChild";
 import HomeChildTitle from "../HomeChildTitle";
 import HomeListSupport from "../HomeListSupport";
+import HorizontalListItem from "../../Token/List/Horizontal/ListItem";
+import RootStore from "@store/RootStore";
+import AnimatedSlide from "@common/components/Animation/AnimatedSlide";
+import Colors from "@constants/Colors";
 
-@inject("rootStore")
-@observer
-export default class PickupTokens extends HomeChild {
+interface Props {
+    rootStore: RootStore;
+    navigation: Navigation
+}
+
+export default class BaseHorizontalTokens extends Component<Props> {
 
     tokenState: TokenState;
+    title;
+    list;
 
     constructor(props) {
         super(props);
         this.tokenState = new TokenState(props.navigation, props.rootStore)
-        this.tokenState.loadData(true)
-    }
-
-    componentDidMount() {
-        this.tokenState.navigation.addListener(
-            'didFocus',
-            () => this.loadData()
-        );
-    }
-
-    loadData() {
-        this.tokenState.loadData(true)
     }
 
     onListItemPressed = item => {
-        const {tokenState} = this
+        const {tokenState} = this;
         tokenState.navigation.setParams({tabBarVisible: item == null})
         tokenState.selectItem(item);
     };
@@ -47,41 +40,46 @@ export default class PickupTokens extends HomeChild {
         const style = {
             paddingRight: index === (list.length - 1) ? 12 : 8,
             paddingLeft: index === 0 ? 12 : 0,
-            paddingVertical: 12,
+            paddingVertical: 4,
         }
 
         return (
             <View key={item.name}
                   style={style}>
-                <AnimatedRow delay={(index + 1) * 200}>
-                    <ListItem
-                        item={item}
-                        tokenState={tokenState}
-                        onPress={this.onListItemPressed}
-                    />
-                </AnimatedRow>
+                <AnimatedSlide delay={(index + 1) * 36}
+                               direction="toLeft"
+                               duration={700}
+                               moveDistance={8}>
+                    <View style={styles.itemWrapper}>
+                        <HorizontalListItem
+                            item={item}
+                            tokenState={tokenState}
+                            onPress={this.onListItemPressed}
+                        />
+                    </View>
+                </AnimatedSlide>
             </View>
         );
     };
 
     render() {
         const {tokenState} = this;
-        const {pickupList, processing} = tokenState;
+        const {processing} = tokenState;
         return (
             <View style={styles.container}>
-                <HomeChildTitle title="Pickup Tokens"
+                <HomeChildTitle title={this.title}
                                 linkTitle="More"
                                 onLinkPress={this.onLinkPress}
                 />
                 <FlatList
-                    data={pickupList}
+                    data={this.list}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={item => item.name}
                     renderItem={this.renderItem}
                 />
-                <HomeListSupport processing={processing && pickupList.length === 0}
-                                 list={pickupList}
+                <HomeListSupport processing={processing && this.list.length === 0}
+                                 list={this.list}
                                  paddingTop={30}
                                  errorMessage={tokenState.stoStore.errorMessage}/>
             </View>
@@ -91,6 +89,10 @@ export default class PickupTokens extends HomeChild {
 
 const styles = StyleSheet.create({
     container: {
-        minHeight: 180
+        minHeight: 226,
     },
+    itemWrapper: {
+        borderWidth: 1,
+        borderColor: Colors.listBorder
+    }
 });

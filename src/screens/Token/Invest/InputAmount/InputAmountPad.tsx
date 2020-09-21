@@ -32,6 +32,9 @@ export default class InputAmountPad extends BaseNumberPad<Props> {
 const styles = StyleSheet.create({
     header: {
         paddingTop: 8,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+
     },
     titleArea: {
         paddingHorizontal: 12,

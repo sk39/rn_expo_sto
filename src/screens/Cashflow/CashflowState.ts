@@ -23,7 +23,6 @@ export default class CashflowState {
         }
         try {
             this.processing = true;
-            this.clear();
             await ViewUtils.sleep(300);
             let total = Number(balancesStore.deposit);
             const list = data.map(item => {

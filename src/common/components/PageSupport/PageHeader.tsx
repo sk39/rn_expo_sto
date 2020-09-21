@@ -4,21 +4,43 @@ import Colors from "@constants/Colors";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import ViewUtils from "@common/utils/ViewUtils";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import BackButton from "@common/components/Button/BackButton";
 
 interface Props {
     title: string;
     navigation?: Navigation
+    noShadow?: boolean;
+    dense?: boolean;
+    onBackPress?: () => void
 }
 
 export default class PageHeader extends PureComponent<Props> {
 
+    renderBackButton() {
+        const {onBackPress} = this.props;
+        if (!onBackPress) {
+            return null;
+        }
+        return (
+            <View style={{marginLeft: -12}}>
+                <BackButton onPress={onBackPress}
+                            shadowColor="transparent"
+                            color={Colors.font}
+                />
+            </View>
+        )
+    }
+
     render() {
+        const {noShadow, dense} = this.props;
+        const styles = dense ? stylesDense : stylesNormal
         return (
             <React.Fragment>
                 <MyStatusBar dark={false}
                              transparent
                              navigation={this.props.navigation}/>
-                <View style={styles.container}>
+                <View style={[styles.container, (noShadow ? {} : {...getPlatformElevation(4)})]}>
+                    {this.renderBackButton()}
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleText}>{this.props.title}</Text>
                     </View>
@@ -31,7 +53,7 @@ export default class PageHeader extends PureComponent<Props> {
     }
 }
 
-const styles = StyleSheet.create({
+const stylesNormal = StyleSheet.create({
     container: {
         height: ViewUtils.isIphoneX() ? 84 : 70,
         paddingTop: ViewUtils.isIphoneX() ? 38 : 24,
@@ -40,7 +62,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flexDirection: "row",
         backgroundColor: Colors.toolBar,
-        ...getPlatformElevation(4)
     },
     titleContainer: {
         flex: 1,
@@ -52,3 +73,23 @@ const styles = StyleSheet.create({
     }
 });
 
+const stylesDense = StyleSheet.create({
+    container: {
+        height: ViewUtils.isIphoneX() ? 78 : 62,
+        paddingBottom: 10,
+        alignItems: 'flex-end',
+        justifyContent: "space-between",
+        paddingHorizontal: 16,
+        flexDirection: "row",
+        backgroundColor: Colors.toolBar,
+    },
+    titleContainer: {
+        flex: 1,
+    },
+    titleText: {
+        fontSize: 14,
+        letterSpacing: 1,
+        fontWeight: '700',
+        color: Colors.tabDefault,
+    }
+});

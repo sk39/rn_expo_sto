@@ -32,7 +32,6 @@ export default class MyStatusBar extends Component<Props> {
                 const {dark} = this.props;
                 if (MyStatusBar.lastBackIsDark != null
                     && MyStatusBar.lastBackIsDark != dark) {
-                    console.log("StatusBar.pushStackEntry")
                     StatusBar.pushStackEntry({
                         barStyle: dark ? "light-content" : "dark-content",
                         animated: true

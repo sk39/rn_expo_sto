@@ -2,13 +2,13 @@ import React, {PureComponent} from 'react';
 import {BackHandler, StyleSheet} from 'react-native'
 import Colors from "@constants/Colors";
 import {observer} from "mobx-react";
-import {STO} from "@common/model/domainModel";
 import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import {computed, observable} from "mobx";
 import TokenState from "../TokenState";
+import StoVM from "@common/model/StoVM";
 
 interface Props {
-    selectedItem: STO;
+    selectedItem: StoVM;
     tokenState: TokenState;
     onBackPress?: () => void;
     hardwareBackPress?: boolean;

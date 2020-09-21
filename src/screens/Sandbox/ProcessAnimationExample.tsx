@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Text} from "react-native"
-import {Button, View} from "native-base";
+import {View} from "react-native"
+import ProcessAnimation from "@common/components/Modal/ProcessDialog/ProcessAnimation";
 import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
-import ProcessAnimation from "@common/components/Animation/ProcessAnimation";
 import {observer} from "mobx-react";
+import {Button} from "react-native-elements";
 
 @observer
 export default class ProcessAnimationExample extends Component {
 
     processState: ProcessDialogState = new ProcessDialogState();
 
-    onAnimationFinish() {
-        console.log("Sandbox#onAnimationFinish");
+    onAnimationFinish = () => {
     }
 
     render() {
@@ -20,27 +19,25 @@ export default class ProcessAnimationExample extends Component {
             <View style={{flex: 1, paddingTop: 44}}>
                 <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
                     <ProcessAnimation
-                        processing={processState.processing}
-                        finish={processState.isFinish}
-                        error={processState.isError}
-                        onAnimationFinish={this.onAnimationFinish.bind(this)}
+                        state={processState.state}
+                        onAnimationFinish={this.onAnimationFinish}
                     />
                 </View>
                 <View style={{padding: 32}}>
-                    <Button block light onPress={() => {
-                        processState.clear();
-                        setTimeout(() => processState.startProcessing(), 0)
-                    }}>
-                        <Text>Start Loading</Text>
-                    </Button>
+                    <Button title="Start Loading"
+                            raised
+                            onPress={() => {
+                                processState.clear();
+                                setTimeout(() => processState.startProcessing(), 0)
+                            }}/>
                     <View style={{marginBottom: 16}}/>
-                    <Button block light onPress={() => processState.success()}>
-                        <Text>Finish !</Text>
-                    </Button>
+                    <Button title="Finish !"
+                            raised
+                            onPress={() => processState.success()}/>
                     <View style={{marginBottom: 16}}/>
-                    <Button block light onPress={() => processState.error("Dummy error message.")}>
-                        <Text>Error</Text>
-                    </Button>
+                    <Button title="Error !"
+                            raised
+                            onPress={() => processState.error("Dummy error message.")}/>
                 </View>
 
             </View>

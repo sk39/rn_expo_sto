@@ -1,10 +1,11 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {observer} from "mobx-react";
 import NumberPadLabel from "@common/components/Input/InputNumber/NumberPadLabel";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import {computed} from "mobx";
 import Colors from "@constants/Colors";
+import Format from "@constants/Format";
 
 interface Props {
     value: string,
@@ -37,22 +38,23 @@ export default class InputAmountLabel extends PureComponent<Props> {
                                 onPress={onPress}
                 />
                 <View style={styles.baseWrapper}>
-                    <NumberLabel value={this.amountBaseCcy}
-                                 style={styles.valueText}
-                                 suffix={"USD"}
-                                 suffixStyle={styles.unit}
-                                 decimals={0}/>
+                    <Text style={styles.label}>Payment</Text>
+                    <View style={styles.valueWrapper}>
+                        <NumberLabel value={this.amountBaseCcy}
+                                     style={styles.valueText}
+                                     prefix={Format.baseCcySymbol}/>
+                    </View>
                 </View>
             </View>
         )
     }
 }
 
-
 const styles = StyleSheet.create({
     baseWrapper: {
-        alignItems: "flex-end",
-        justifyContent: "center",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
         width: "100%",
         height: 36,
         paddingTop: 12,
@@ -63,15 +65,15 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         color: Colors.labelFontThin
     },
+    valueWrapper: {
+        paddingLeft: 12,
+        minWidth: 110,
+        alignItems: "flex-end",
+    },
     valueText: {
         fontSize: 16,
         fontWeight: "700",
         color: Colors.font,
         letterSpacing: 1,
-    },
-    unit: {
-        color: Colors.unitFont,
-        fontSize: 10,
-        marginLeft: 10
     },
 });

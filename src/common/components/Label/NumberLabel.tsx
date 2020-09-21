@@ -1,13 +1,12 @@
 import React, {Component} from "react";
-import {Text} from "native-base";
-import {StyleProp, StyleSheet, TextStyle, View} from "react-native";
+import {StyleProp, StyleSheet, Text, TextStyle, View} from "react-native";
 import ViewUtils from "@common/utils/ViewUtils";
 import {Icon} from "react-native-elements";
 import Colors from "@constants/Colors";
 
 interface Props {
     value?: number | string,
-    decimals: number;
+    decimals?: number;
     prefix?: string,
     suffix?: string;
     sign?: boolean;
@@ -17,6 +16,10 @@ interface Props {
 }
 
 export default class NumberLabel extends Component<Props> {
+
+    static defaultProps = {
+        decimals: 0,
+    }
 
     renderPrefix(stylesArr) {
         const {prefix, prefixStyle} = this.props;

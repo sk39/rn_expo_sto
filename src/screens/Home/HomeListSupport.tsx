@@ -18,7 +18,7 @@ interface Props {
 export default class HomeListSupport extends Component<Props & RootStoreProps> {
 
     static defaultProps = {
-        paddingTop: 46,
+        paddingTop: 16,
         needAuth: false,
     };
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: "rgba(247,246,255,0.8)",
+        backgroundColor: "rgba(247,246,255,0.62)",
         paddingTop: 46,
     }
 });

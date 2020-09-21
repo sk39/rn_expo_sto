@@ -20,14 +20,14 @@ export default class HomeChildTitle extends Component<Props> {
                         <Icon
                             name="chevron-right"
                             type="feather"
-                            size={16}
+                            size={15}
                             color={Colors.link}
                         />
                     }
                     type="clear"
                     iconRight
                     buttonStyle={{alignItems: "center"}}
-                    titleStyle={{color: Colors.link, fontSize: 16, fontWeight: "500"}}
+                    titleStyle={{color: Colors.link, fontSize: 14, letterSpacing: 1}}
                     title={linkTitle}
                     onPress={onLinkPress}
                 />
@@ -39,14 +39,15 @@ export default class HomeChildTitle extends Component<Props> {
 
 const styles = StyleSheet.create({
     titleWrapper: {
-        paddingLeft: 20,
-        paddingRight: 12,
+        paddingLeft: 16,
+        paddingRight: 6,
+        paddingVertical: 4,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
     },
     title: {
-        fontSize: 18,
+        fontSize: 16,
         color: Colors.toolBarInverse,
         opacity: 0.7,
         fontWeight: "700",

@@ -1,22 +1,21 @@
 import React, {Component} from "react";
-import {Easing, StyleSheet, View} from "react-native";
-import Colors from "@constants/Colors";
-import {Text} from "native-base";
-import ProcessDialogState from "./ProcessDialogState";
-import ProcessAnimation from "../../Animation/ProcessAnimation";
-import DialogContent from "./DialogContent";
+import {BackHandler, Easing, StyleSheet, View} from "react-native";
+import {observable, runInAction} from "mobx";
 import {observer} from "mobx-react";
-import {action, observable} from "mobx";
-import commonStyles from "@common/utils/commonStyle";
+import Colors from "@constants/Colors";
 import DisableLayer from "@common/components/Modal/DisableLayer";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
+import commonStyles from "@common/utils/commonStyle";
+import MobxHelper from "@common/utils/MobxHelper";
+import ProcessDialogState from "./ProcessDialogState";
+import ProcessDialogContent from "./ProcessDialogContent";
 
 interface Props {
     model: ProcessDialogState;
-    onClose: any,
-    onError: any,
-    indicatorColor?: string,
-    indicatorBackgroundColor?: string,
+    onClose: () => void,
+    renderConfirm: () => any;
+    renderSuccess?: () => any;
+    renderError?: () => any;
     disablesLayerBackgroundColor?: string,
 }
 
@@ -24,84 +23,85 @@ interface Props {
 export default class ProcessDialog extends Component<Props> {
 
     static defaultProps = {
-        indicatorColor: Colors.primary,
-        indicatorBackgroundColor: "#fff",
         disablesLayerBackgroundColor: Colors.disablesLayerDark
     };
 
-    @observable finAnimation: boolean = false;
+    contentsRef = React.createRef<View>()
+    mobxHelper = new MobxHelper();
+    @observable confirmHeight: number = null;
 
-    @action
-    onAnimationFinish = (finish, error) => {
-        this.finAnimation = finish || error;
+    componentDidMount() {
+        this.mobxHelper.reaction(
+            () => this.props.model.showDialog,
+            show => {
+                setTimeout(() => {
+                    if (show && this.contentsRef.current) {
+                        this.contentsRef.current.measure((fx, fy, width, height, px, py) => {
+                            runInAction(() => {
+                                this.confirmHeight = height;
+                            })
+                        })
+                    }
+                }, 0)
+            }
+        )
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
     }
 
-    @action
-    onClose = () => {
-        this.finAnimation = false;
-        this.props.onClose();
+    componentWillUnmount(): void {
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+        this.mobxHelper.onUnmount();
     }
 
-    @action
-    onError = () => {
-        this.finAnimation = false;
-        this.props.onError();
-    }
+    handleBackButtonPressAndroid = () => {
+        const {model} = this.props
+        if (model.showDialog) {
+            if (model.state !== "processing") {
+                this.props.onClose();
+            }
+            return true;
+        }
+    };
 
     renderContents() {
-        const {model} = this.props;
-        const {showConfirm, processing, isFinish, isError, errorMsg} = model;
-        if (isFinish) {
-            return (
-                <DialogContent show={this.finAnimation} btnText={t("btn.close")} onPress={this.onClose}>
-                    <View style={styles.textWrapper}>
-                        <Text style={[styles.successMsg]}>Success!</Text>
-                        <Text style={[styles.successSubMsg]}>Invest Security Token</Text>
-                    </View>
-                </DialogContent>
-            )
-        } else if (isError) {
-            return (
-                <DialogContent show={this.finAnimation} btnText={t("btn.close")} onPress={this.onError}>
-                    <View style={styles.textWrapper}>
-                        <Text style={[styles.msg, styles.errorMsg]}>{errorMsg}</Text>
-                    </View>
-                </DialogContent>
-            )
-        } else if (showConfirm) {
-            return this.props.children
-        } else if (processing) {
-            return (
-                <DialogContent show>
-                    <View style={styles.textWrapper}>
-                        <Text style={styles.msg}>Processing...</Text>
-                    </View>
-                </DialogContent>
-            )
+        const {model} = this.props
+        if (!model.showDialog) {
+            return null;
         }
+
+        if (model.state === "confirm") {
+            return this.props.renderConfirm();
+        }
+
+        const {renderSuccess, renderError, onClose} = this.props;
+        return (
+            <ProcessDialogContent
+                model={model}
+                startMinHeight={this.confirmHeight}
+                onClose={onClose}
+                renderSuccess={renderSuccess}
+                renderError={renderError}
+            />
+        )
     }
 
     render() {
-        const {model, disablesLayerBackgroundColor, indicatorBackgroundColor} = this.props;
-        const {showDialog, processing, isFinish, isError} = model;
+        const {model, disablesLayerBackgroundColor} = this.props;
+        const {showDialog} = model;
         return (
             <DisableLayer show={showDialog}
-                          disablesLayerBackgroundColor={disablesLayerBackgroundColor}
-                          close={this.onClose}>
+                          disablesLayerBackgroundColor={disablesLayerBackgroundColor}>
                 <AnimatedRow delay={0}
                              duration={200}
                              easing={Easing.ease}
                              moveDistance={20}>
-                    <View style={[
-                        styles.indicatorWrapper,
-                        {backgroundColor: indicatorBackgroundColor}
-                    ]}>
-                        <ProcessAnimation
-                            processing={processing}
-                            finish={isFinish}
-                            error={isError}
-                            onAnimationFinish={this.onAnimationFinish}
-                        />
+                    <View ref={this.contentsRef} style={styles.contentWrapper}>
                         {this.renderContents()}
                     </View>
                 </AnimatedRow>
@@ -111,53 +111,11 @@ export default class ProcessDialog extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-    indicatorWrapper: {
+    contentWrapper: {
         ...commonStyles.modalContent,
-        height: 420,
+        flexDirection: "column",
+        justifyContent: "space-between",
         alignItems: "center",
-        justifyContent: "flex-start",
-        paddingTop: 98,
-    },
-    closeBtn: {
-        borderRadius: 0,
-        borderBottomRightRadius: 10,
-        borderBottomStartRadius: 10,
-        backgroundColor: Colors.btn
-    },
-    content: {
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0
-    },
-    textWrapper: {
-        height: 140,
-        padding: 12,
-        alignItems: "center",
-        justifyContent: "flex-start"
-    },
-    msg: {
-        marginVertical: 12,
-        fontSize: 20,
-        color: Colors.labelFont,
-    },
-    successMsg: {
-        fontSize: 26,
-        fontWeight: "700",
-        marginVertical: 6,
-        color: Colors.primary,
-        letterSpacing: 2,
-    },
-    successSubMsg: {
-        fontSize: 16,
-        fontWeight: "700",
-        marginVertical: 6,
-        marginBottom: 24,
-        color: Colors.font,
-        letterSpacing: 1,
-    },
-    errorMsg: {
-        color: Colors.error,
-        fontSize: 16,
+        backgroundColor: Colors.back,
     }
 });

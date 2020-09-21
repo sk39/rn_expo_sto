@@ -5,6 +5,7 @@
     "cancel": "キャンセル",
     "close": "閉じる",
     "set": "設定",
+    "done": "実行",
     "detail": "詳細",
     "invest": "購入する",
     "verify": "検証",
@@ -58,6 +59,14 @@
       "explanationVerify": "認証アプリに表示された6桁の認証コードを入力して下さい",
       "registerAuthApp": "認証アプリを起動する",
       "registerOther": "別のデバイスに登録する"
+    },
+    "tokens": {
+      "status": {
+        "offering": "募集中",
+        "waiting": "募集開始前",
+        "closed": "募集終了",
+        "all": "すべて"
+      }
     },
     "settings": {
       "pageTitle": "設定",

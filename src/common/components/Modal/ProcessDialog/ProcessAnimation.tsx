@@ -4,10 +4,8 @@ import LottieView from "lottie-react-native";
 import {action, observable} from "mobx";
 
 interface Props {
-    processing?: boolean,
-    finish?: boolean,
-    error?: boolean,
-    onAnimationFinish: (finish: boolean, error: boolean) => void
+    state: "confirm" | "processing" | "success" | "error",
+    onAnimationFinish: () => void
 }
 
 @observer
@@ -22,19 +20,21 @@ export default class ProcessAnimation extends Component<Props> {
     waitLastAnimation = false;
 
     componentDidMount() {
-        if (this.props.processing) {
+        if (this.props.state === "processing") {
             this.startLoadingAnimation();
         }
     }
 
     componentDidUpdate(prevProps: Props) {
-        if (!this.props.processing) {
+        const {state} = this.props;
+        const prevState = prevProps.state;
+        if (state == null) {
             this.clear();
-        } else if (!prevProps.processing && this.props.processing) {
+        } else if (prevState !== state && state === "processing") {
             this.startLoadingAnimation();
-        } else if (!prevProps.finish && this.props.finish) {
+        } else if (prevState !== state && state === "success") {
             this.startWaitFinish(false);
-        } else if (!prevProps.error && this.props.error) {
+        } else if (prevState !== state && state === "error") {
             this.startWaitFinish(true);
         }
     }
@@ -50,7 +50,6 @@ export default class ProcessAnimation extends Component<Props> {
             this.waitFinish = true;
             this.waitError = false;
         }
-
     }
 
     @action
@@ -76,25 +75,25 @@ export default class ProcessAnimation extends Component<Props> {
     }
 
     onAnimationFinish = () => {
-        const {finish, error, processing} = this.props;
+        const {state} = this.props;
         if (this.waitLastAnimation) {
-            this.props.onAnimationFinish(finish, error);
+            this.props.onAnimationFinish();
             this.endWaitFinish();
-        } else if (finish && this.waitFinish) {
+        } else if (state === "success" && this.waitFinish) {
             this.lottieRef.current.play(239, 400);
             this.waitLastAnimation = true;
             this.waitFinish = false;
-        } else if (error && this.waitError) {
+        } else if (state === "error" && this.waitError) {
             this.lottieRef.current.play(657, 823);
             this.waitLastAnimation = true;
             this.waitError = false;
-        } else if (this.loop && processing) {
+        } else if (this.loop && state === "processing") {
             this.lottieRef.current.play(0, 120);
         }
     }
 
     render() {
-        if (!this.props.processing) {
+        if (!this.props.state) {
             return null;
         }
         return (
