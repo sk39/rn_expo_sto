@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     valueLargeText: {
-            fontSize: 18,
+        fontSize: 18,
         fontWeight: "700",
         color: Colors.primary,
         letterSpacing: 1,
