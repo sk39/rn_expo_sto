@@ -120,7 +120,8 @@ function Required() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
+        paddingHorizontal: 24,
+        paddingTop: 16,
         paddingBottom: 56
     },
     descriptionDetail: {

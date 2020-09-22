@@ -21,7 +21,7 @@ export default class BalanceStore {
 
     @computed
     get deposit() {
-        return this.summary[0].balanceBaseCurrency
+        return (this.summary && this.summary.length > 0) ? this.summary[0].balanceBaseCurrency : 0
     }
 
     @computed
