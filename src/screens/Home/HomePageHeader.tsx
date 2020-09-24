@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingRight: 12,
     },
-    noAuth: {
-    }
+    noAuth: {}
 });
 

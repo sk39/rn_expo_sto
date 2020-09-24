@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
-import * as Progress from 'react-native-progress';
 import StoVM from "@common/model/StoVM";
 import {Icon} from "react-native-elements";
-import NumberLabel from "@common/components/Label/NumberLabel";
 import InvestmentGoalLabel from "@common/components/Label/InvestmentGoalLabel";
 
 interface Props {
@@ -15,7 +13,7 @@ export default class CarouselListItemContent extends Component<Props> {
 
     render() {
         const {item} = this.props;
-        const {raisePer, investmentGoal, name, summary} = item;
+        const {raisePerText, investmentGoal, name, summary} = item;
         const {daysToGo, investors} = item;
         return (
             <View style={styles.back}>
@@ -29,15 +27,10 @@ export default class CarouselListItemContent extends Component<Props> {
                 </View>
                 <View style={styles.raiseContainer}>
                     <View style={styles.barContainer}>
-                        <Progress.Bar progress={raisePer}
-                                      width={30}
-                                      height={5}
-                                      color={"white"}
-                                      borderColor={"white"}
-                                      unfilledColor={"#aaa"}/>
+                        <View style={[styles.bar, {width: `${raisePerText}%`}]}/>
                     </View>
                     <InvestmentGoalLabel value={investmentGoal}
-                                 style={[styles.text, styles.valueText]}/>
+                                         style={[styles.text, styles.valueText]}/>
                     <View style={styles.rightValWrapper}>
                         <Icon type="feather"
                               name="users"
@@ -93,8 +86,24 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.3)",
     },
     barContainer: {
-        padding: 6,
-        // backgroundColor: "rgba(255,255,255,0.4)",
+        backgroundColor: Colors.link,
+        height: 8,
+        width: 40,
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: "center",
+        borderColor: "white",
+        borderWidth: 1,
+        overflow: "hidden",
+        marginBottom: 5,
+        marginRight: 5,
+    },
+    bar: {
+        position: "absolute",
+        backgroundColor: "white",
+        top: 0,
+        bottom: 0,
+        left: 0
     },
     unitText: {
         marginLeft: 2,
@@ -104,7 +113,6 @@ const styles = StyleSheet.create({
     valueText: {
         fontSize: 14,
         fontWeight: '700',
-        // letterSpacing: 1,
     },
     separate: {
         fontSize: 16,
@@ -121,7 +129,6 @@ const styles = StyleSheet.create({
         marginLeft: 4,
         fontSize: 14,
         fontWeight: "700",
-        // letterSpacing: 1,
     },
     rightUnitText: {
         marginLeft: 2,

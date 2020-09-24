@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
@@ -9,6 +9,7 @@ import NumberLabel from "@common/components/Label/NumberLabel";
 import Format from "@constants/Format";
 import {BalanceTokenVM} from "./BalanceState";
 import CashImage from "@common/components/Image/CashImage";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     list: BalanceTokenVM[];
@@ -154,10 +155,11 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     value: {
+        ...commonStyles.amountLabel,
         marginTop: 2,
         color: Colors.labelFont,
         fontSize: 14,
-        letterSpacing: 1
+        fontWeight: "400"
     },
     unit: {
         color: Colors.unitFont,
@@ -168,10 +170,13 @@ const styles = StyleSheet.create({
         marginLeft: 4,
     },
     balanceBaseCurrency: {
+        ...commonStyles.amountLabel,
         color: Colors.font,
-        fontWeight: "700",
-        fontSize: 16,
-        letterSpacing: 1,
+        ...Platform.select({
+            ios: {
+                fontWeight: "500"
+            },
+        })
     },
     tokenNameWrapper: {
         flexDirection: "row",

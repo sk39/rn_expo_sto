@@ -29,7 +29,7 @@ export default class HorizontalListItem extends BaseListItem {
                 renderModalFooter={this.renderModalFooter}
                 renderCardBody={this.renderCardBody}
                 imageHeight={130}
-                bodyHeightLarge={154}
+                bodyHeightLarge={148}
             />
         );
     }

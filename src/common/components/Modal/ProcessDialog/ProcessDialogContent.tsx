@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         paddingBottom: 44,
     },
     procAnimationWrapper: {
-        paddingTop: 32,
+        paddingTop: 44,
     },
     bodyWrapper: {
         alignItems: "center",

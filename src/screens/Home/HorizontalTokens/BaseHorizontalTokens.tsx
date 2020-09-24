@@ -5,8 +5,8 @@ import HomeChildTitle from "../HomeChildTitle";
 import HomeListSupport from "../HomeListSupport";
 import HorizontalListItem from "../../Token/List/Horizontal/ListItem";
 import RootStore from "@store/RootStore";
-import AnimatedSlide from "@common/components/Animation/AnimatedSlide";
 import Colors from "@constants/Colors";
+import AnimatedSlide from "@common/components/Animation/AnimatedSlide";
 
 interface Props {
     rootStore: RootStore;
@@ -44,12 +44,10 @@ export default class BaseHorizontalTokens extends Component<Props> {
         }
 
         return (
-            <View key={item.name}
-                  style={style}>
-                <AnimatedSlide delay={(index + 1) * 36}
-                               direction="toLeft"
-                               duration={700}
-                               moveDistance={8}>
+            <View key={item.name} style={style}>
+                <AnimatedSlide delay={(index + 1) * 120}
+                               moveDistance={10}
+                >
                     <View style={styles.itemWrapper}>
                         <HorizontalListItem
                             item={item}
@@ -89,7 +87,7 @@ export default class BaseHorizontalTokens extends Component<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        minHeight: 226,
+        minHeight: 236
     },
     itemWrapper: {
         borderWidth: 1,

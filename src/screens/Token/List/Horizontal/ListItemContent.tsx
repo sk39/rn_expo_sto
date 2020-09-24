@@ -81,6 +81,5 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '700',
         color: Colors.font,
-        // letterSpacing: 1,
     },
 });

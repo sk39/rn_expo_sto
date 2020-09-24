@@ -6,10 +6,12 @@ import NumberLabel from "@common/components/Label/NumberLabel";
 import {computed} from "mobx";
 import Colors from "@constants/Colors";
 import Format from "@constants/Format";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     value: string,
     unit?: string;
+    hidePayment?: boolean;
     offeringPrice: number;
     modal?: boolean;
     onPress?: () => void;
@@ -71,9 +73,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
     },
     valueText: {
-        fontSize: 16,
-        fontWeight: "700",
+        ...commonStyles.amountLabel,
         color: Colors.font,
-        letterSpacing: 1,
     },
 });

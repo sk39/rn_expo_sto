@@ -10,6 +10,7 @@ import BalancePieChart from "../../Portfolio/Balance/BalancePieChart";
 import BalanceState from "../../Portfolio/Balance/BalanceState";
 import Format from "@constants/Format";
 import Layout from "@constants/Layout";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     balanceState: BalanceState;
@@ -22,6 +23,7 @@ export default class BalanceSummary extends Component<Props> {
 
     renderItem = ({item, index}) => {
         const styles = stylesNormal;
+        const stylesChange = this.props.large ? stylesLarge : stylesNormal;
         return (
             <View key={index}>
                 <AnimatedRow delay={120 * index}>
@@ -36,7 +38,7 @@ export default class BalanceSummary extends Component<Props> {
                                     value={item.balanceBaseCurrency}
                                     decimals={0}
                                     prefix={Format.baseCcySymbol}
-                                    style={styles.value}
+                                    style={stylesChange.value}
                                 />
                             </View>
                         </View>
@@ -116,11 +118,10 @@ const stylesNormal = StyleSheet.create({
         })
     },
     totalBalance: {
+        ...commonStyles.amountLabel,
         color: Colors.font,
         opacity: 0.8,
         fontSize: 14,
-        fontWeight: "700",
-        letterSpacing: 1,
     },
     row: {
         padding: 10,
@@ -140,17 +141,20 @@ const stylesNormal = StyleSheet.create({
         color: Colors.labelFont,
         fontSize: 14,
         fontWeight: "700",
-        // letterSpacing: 1
     },
     valueWrapper: {
         alignItems: "flex-end",
         justifyContent: "flex-end",
     },
     value: {
+        ...commonStyles.amountLabel,
         color: Colors.font,
         fontSize: 14,
-        fontWeight: "700",
-        letterSpacing: 1,
+        ...Platform.select({
+            ios: {
+                fontWeight: "500"
+            },
+        })
     },
     mark: {
         width: 8,
@@ -188,10 +192,19 @@ const stylesLarge = StyleSheet.create({
         })
     },
     totalBalance: {
+        ...commonStyles.amountLabel,
         color: Colors.font,
         opacity: 0.8,
         fontSize: 22,
-        fontWeight: "700",
-        letterSpacing: 1,
-    }
+    },
+    value: {
+        ...commonStyles.amountLabel,
+        color: Colors.font,
+        fontSize: 16,
+        ...Platform.select({
+            ios: {
+                fontWeight: "500"
+            },
+        })
+    },
 });

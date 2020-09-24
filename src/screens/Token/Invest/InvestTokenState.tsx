@@ -49,13 +49,32 @@ export default class InvestTokenState extends TokenState {
     }
 
     @computed
+    get fees() {
+        if (!this.amountBaseCcy) {
+            return null;
+        }
+        return this.amountBaseCcy / 1000;
+    }
+
+    @computed
+    get paymentTotal() {
+        if (!this.amountBaseCcy) {
+            return null;
+        }
+        return this.amountBaseCcy + this.fees;
+    }
+
+    @computed
     get userDeposit() {
         return this.balanceStore.deposit
     }
 
     @computed
     get afterUserDeposit() {
-        return this.balanceStore.deposit - this.amountBaseCcy;
+        if (!this.amountBaseCcy) {
+            return null;
+        }
+        return this.balanceStore.deposit - this.paymentTotal;
     }
 
     @computed

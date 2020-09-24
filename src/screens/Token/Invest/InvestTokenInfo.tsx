@@ -7,6 +7,7 @@ import CashImage from "@common/components/Image/CashImage";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import Format from "@constants/Format";
 import Colors from "@constants/Colors";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     tokenState: InvestTokenState;
@@ -51,16 +52,13 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
     titleNameText: {
-        // color: "white",
         fontSize: 16,
         fontWeight: "700",
-        // letterSpacing: 1
     },
     titleSymbolText: {
         fontSize: 12,
         fontWeight: "700",
         color: Colors.labelFontThin,
-        // letterSpacing: 1,
         marginTop: 2,
     },
     offeringPrice: {
@@ -75,10 +73,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 6
     },
     value: {
-        fontWeight: "700",
-        fontSize: 16,
+        ...commonStyles.amountLabel,
         color: Colors.primary,
-        letterSpacing: 1
     },
     unit: {
         marginTop: 2,

@@ -1,22 +1,25 @@
 import React, {PureComponent} from 'react';
-import {Keyboard, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native'
+import {StyleSheet, Text, View} from 'react-native'
 import Layout from "@constants/Layout";
 import {inject, observer} from "mobx-react";
 import Colors from "@constants/Colors";
 import AnimatedRow from "@common/components/Animation/AnimatedRow";
 import ViewUtils from "@common/utils/ViewUtils";
-import InvestInfo from "./InvestInfo";
 import InvestTokenState from "./InvestTokenState";
 import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import BlockLoading from "@common/components/PageSupport/BlockLoading";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import InputAmount from "./InputAmount";
-import Agreement from "./Agreement";
-import PageHeader from "@common/components/PageSupport/PageHeader";
 import InvestTokenInfo from "./InvestTokenInfo";
 import ConfirmContent from "@common/components/Modal/ProcessDialog/ConfirmContent";
 import ProcessDialog from "@common/components/Modal/ProcessDialog";
 import InvestConfirm from "./InvestConfirm";
+import PaymentInfo from "./PaymentInfo";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
+import Agreement from "./Agreement";
+import PageHeader from "@common/components/PageSupport/PageHeader";
+import DepositInfo from "./DepositInfo";
+import {Button} from "react-native-elements";
 
 @inject('rootStore')
 @observer
@@ -78,50 +81,75 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
             )
         }
 
+        let index = 0;
         return (
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View style={styles.container}>
-                    <PageHeader title={"Invest Security Token"}
-                                onBackPress={this.onClose}/>
-                    <ProcessDialog
-                        model={processState}
-                        onClose={this.closeModal}
-                        renderConfirm={this.renderConfirm}
+            <View style={styles.container}>
+                <PageHeader title="Invest Security Token" onBackPress={this.onClose}>
+                    <Button title="Deposit"
+                            type="clear"
+                            containerStyle={{marginLeft: 12}}
+                            titleStyle={styles.depositButton}
+                            onPress={() => alert("TODO:")}
                     />
-                    <View style={{flex: 1, paddingBottom: ViewUtils.getBottomBtnHeight()}}>
-                        <ScrollView>
-                            <Title>Target</Title>
-                            <View style={styles.area}>
-                                <InvestTokenInfo tokenState={this.tokenState}/>
+                </PageHeader>
+                <ProcessDialog
+                    model={processState}
+                    onClose={this.closeModal}
+                    renderConfirm={this.renderConfirm}
+                />
+                <View style={{flex: 1, paddingBottom: ViewUtils.getBottomBtnHeight()}}>
+                    <MyScrollView>
+                        <View style={styles.depositContainer}>
+                            <Text style={styles.depositTitle}>Your Balance</Text>
+                            <View style={{flexDirection: "row"}}>
+                                <DepositInfo tokenState={this.tokenState}/>
                             </View>
-                            <Title>Invest Amount</Title>
-                            <View style={[styles.area, styles.inputContainer]}>
+                        </View>
+
+                        <Area index={index++} title="Security Token">
+                            <InvestTokenInfo tokenState={this.tokenState}/>
+                        </Area>
+
+                        <Area index={index++} title="Entry Amount">
+                            <View style={[styles.inputContainer]}>
                                 <Text style={styles.inputLabel}>Amount</Text>
                                 <InputAmount tokenState={this.tokenState}/>
                             </View>
-                            <Title>Post Invest</Title>
-                            <View style={[styles.area, {paddingTop: 4}]}>
-                                <InvestInfo tokenState={this.tokenState}/>
-                            </View>
-                            <View style={{height: ViewUtils.getBottomBtnHeight()}}/>
-                        </ScrollView>
-                        <AnimatedRow delay={200}>
-                            <Agreement tokenState={this.tokenState}/>
-                        </AnimatedRow>
-                    </View>
+                        </Area>
 
-                    <PageBottomBtn
-                        onPress={this.confirm}
-                        text="Confirm"
-                        loading={confirming}
-                        disabled={amount.value.length === 0 || !this.tokenState.agreed}
-                        animation
-                        animationDelay={200}
-                    />
+                        <Area index={index++} title="Payment">
+                            <View style={styles.dataContainer}>
+                                <PaymentInfo tokenState={this.tokenState}/>
+                            </View>
+                        </Area>
+                    </MyScrollView>
+                    <AnimatedRow delay={200}>
+                        <Agreement tokenState={this.tokenState}/>
+                    </AnimatedRow>
                 </View>
-            </TouchableWithoutFeedback>
+
+                <PageBottomBtn
+                    onPress={this.confirm}
+                    text="Confirm"
+                    loading={confirming}
+                    disabled={amount.value.length === 0 || !this.tokenState.agreed}
+                    animation
+                    animationDelay={200}
+                />
+            </View>
         );
     }
+}
+
+function Area({title, index, children}) {
+    return (
+        <AnimatedRow delay={(index + 1) * 200}>
+            <Title>{title}</Title>
+            <View style={styles.areaBody}>
+                {children}
+            </View>
+        </AnimatedRow>
+    )
 }
 
 function Title(props) {
@@ -138,34 +166,51 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
         backgroundColor: Colors.back
     },
-    description: {
-        color: Colors.labelFontThin,
-        textAlign: "center",
-        fontSize: 14,
-        fontWeight: "700",
-    },
     titleWrapper: {
         backgroundColor: Colors.back2,
-        paddingVertical: 8,
-        paddingHorizontal: 12
+        paddingVertical: 10,
+        paddingHorizontal: 14
     },
     title: {
         fontSize: 14,
         fontWeight: "700",
         color: Colors.labelFont
     },
-    area: {
+    areaBody: {
         padding: 12
+    },
+    depositContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 10,
+        paddingHorizontal: 16,
+    },
+    depositTitle: {
+        fontSize: 14,
+        fontWeight: "700",
+        color: Colors.labelFont,
+        marginRight: 24,
+    },
+    depositButton: {
+        color: Colors.second,
+        fontWeight: "700",
+        fontSize: 14
     },
     inputContainer: {
         flexDirection: "row",
         alignItems: "flex-start",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        padding: 4,
+        paddingLeft: 8,
+    },
+    dataContainer: {
+        paddingLeft: 8,
+        paddingRight: 12,
     },
     inputLabel: {
-        marginTop: 12,
-        marginLeft: 8,
-        color: Colors.labelFontThin
-    }
+        marginTop: 10,
+        color: Colors.labelFont
+    },
 });
 

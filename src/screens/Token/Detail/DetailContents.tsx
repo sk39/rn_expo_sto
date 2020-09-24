@@ -155,14 +155,12 @@ const styles = StyleSheet.create({
     value: {
         fontSize: 14,
         color: Colors.font,
-        // letterSpacing: 1
     },
     subValue: {
         marginTop: 6,
         fontSize: 12,
         fontWeight: "700",
         color: Colors.primary,
-        // letterSpacing: 1
     },
     unit: {
         marginTop: 2,

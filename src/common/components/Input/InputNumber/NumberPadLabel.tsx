@@ -6,6 +6,7 @@ import ViewUtils from "@common/utils/ViewUtils";
 import {Button} from "react-native-elements";
 import Colors from "@constants/Colors";
 import InputCursor from "@common/components/Input/InputNumber/InputCursor";
+import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
     value: string,
@@ -73,9 +74,9 @@ const stylesNormal = StyleSheet.create({
         borderWidth: 1
     },
     title: {
-        fontSize: 20,
+        ...commonStyles.amountLabel,
+        fontSize: 18,
         color: Colors.primary,
-        letterSpacing: 1,
     },
     unit: {
         marginLeft: 8,

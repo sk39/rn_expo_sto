@@ -4,6 +4,7 @@ import Colors from "@constants/Colors";
 import {Icon} from "react-native-elements";
 import StoVM from "@common/model/StoVM";
 import InvestmentGoalLabel from "@common/components/Label/InvestmentGoalLabel";
+import NumberLabel from "@common/components/Label/NumberLabel";
 
 interface Props {
     item: StoVM;
@@ -22,15 +23,15 @@ export default class ListItemContent extends Component<Props> {
                 </View>
                 <View style={styles.dataContainer}>
                     <View style={styles.raiseContainer}>
+                        <View style={[styles.raiseRow]}>
+                            <NumberLabel value={raisePerText} decimals={1} style={styles.raisePerText} suffix="%"/>
+                            <Text style={styles.raisePerTitle}>Funded</Text>
+                        </View>
+                        <View style={{height: 2}}/>
                         <View style={styles.raiseRow}>
                             <Text style={styles.goalTitle}>Goal</Text>
                             <InvestmentGoalLabel value={investmentGoal}
                                                  style={styles.goalValue}/>
-                        </View>
-                        <View style={[styles.raiseRow, {paddingTop: 2}]}>
-                            <Text style={styles.raisePerTitle}>Funded at </Text>
-                            <Text style={styles.raisePerText}>{raisePerText}</Text>
-                            <Text style={styles.raisePerText}>%</Text>
                         </View>
                     </View>
                     <View style={styles.rightContainer}>
@@ -67,7 +68,7 @@ export default class ListItemContent extends Component<Props> {
                     <Text style={styles.symbol}>{symbol}</Text>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text style={styles.description}>{summary}</Text>
+                    <Text style={styles.description} numberOfLines={2}>{summary}</Text>
                 </View>
             </View>
         );
@@ -145,11 +146,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 8,
+        paddingTop: 4,
+        paddingBottom: 10,
     },
     raiseContainer: {
-        // flex: 1,
-        //
+        flex: 1.2,
         paddingHorizontal: 20,
         alignItems: 'center',
     },
@@ -158,9 +159,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     raisePerTitle: {
-        marginTop: 2,
-        fontSize: 12,
-        // fontWeight: "700",
+        marginLeft: 4,
+        fontSize: 14,
+        fontWeight: "700",
         color: Colors.primary,
     },
     raisePerText: {
@@ -169,19 +170,18 @@ const styles = StyleSheet.create({
         color: Colors.primary,
     },
     goalTitle: {
-        fontSize: 14,
+        fontSize: 12,
         color: Colors.font,
-        // marginLeft: 8,
         marginRight: 8,
     },
     goalValue: {
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: "700",
         color: Colors.font,
     },
     rightContainer: {
-        flex: 1,
-        paddingHorizontal: 8,
+        flex: 0.8,
+        paddingHorizontal: 16,
         // paddingTop: 2,
         alignItems: "center",
         justifyContent: "center",

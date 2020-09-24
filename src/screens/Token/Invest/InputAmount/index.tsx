@@ -4,8 +4,8 @@ import {observer} from "mobx-react";
 import InputAmountPad from "./InputAmountPad";
 import BottomModal from "@common/components/Modal/BottomModal";
 import InvestTokenState from "../InvestTokenState";
-import InputAmountLabel from "./InputAmountLabel";
 import ViewUtils from "@common/utils/ViewUtils";
+import NumberPadLabel from "@common/components/Input/InputNumber/NumberPadLabel";
 
 interface Props {
     tokenState: InvestTokenState,
@@ -37,11 +37,10 @@ export default class InputAmount extends PureComponent<Props> {
         const {tokenState} = this.props;
         return (
             <View>
-                <View style={{width: 200, paddingRight: 12}}>
-                    <InputAmountLabel value={tokenState.amount.value}
-                                      unit={tokenState.amount.unit}
-                                      offeringPrice={tokenState.offeringPrice}
-                                      onPress={this.open}/>
+                <View style={{width: 180, paddingRight: 12}}>
+                    <NumberPadLabel value={tokenState.amount.value}
+                                    unit={tokenState.amount.unit}
+                                    onPress={this.open}/>
                 </View>
                 <BottomModal
                     ref={this.modalRef}

@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: "row",
-        paddingVertical: 8,
+        paddingTop: 2,
         paddingHorizontal: 6,
-        paddingRight: 44,
+        paddingRight: 40,
     },
     shadow: {
         position: "absolute",

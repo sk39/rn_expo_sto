@@ -40,6 +40,7 @@ export default class Balance extends Component<Props> {
                                 linkTitle="Portfolio"
                                 onLinkPress={this.onLinkPress}
                 />
+                <View style={{height: 8}}/>
                 <BalanceSummary balanceState={balanceState} checkAuth/>
                 <HomeListSupport processing={this.balanceState.processing}
                                  needAuth

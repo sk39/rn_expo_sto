@@ -32,7 +32,7 @@ export default class CarouselListItem extends BaseListItem {
                 imageHeight={230}
                 imageHeightLarge={Layout.card.imageHeightLarge}
                 bodyHeight={0}
-                bodyHeightLarge={154}
+                bodyHeightLarge={148}
                 activeAnimation={false}
             />
         );
