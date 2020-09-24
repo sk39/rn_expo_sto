@@ -101,7 +101,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
                 <View style={{flex: 1, paddingBottom: ViewUtils.getBottomBtnHeight()}}>
                     <MyScrollView>
                         <View style={styles.depositContainer}>
-                            <Text style={styles.depositTitle}>Your Balance</Text>
+                            <Text style={styles.depositTitle}>Your Deposit</Text>
                             <View style={{flexDirection: "row"}}>
                                 <DepositInfo tokenState={this.tokenState}/>
                             </View>
