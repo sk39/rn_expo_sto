@@ -11,11 +11,13 @@ LoginEntryScreen.navigationOptions = {
 }
 // @ts-ignore
 SetupMfaScreen.navigationOptions = {
-    title: t("screen.setup2fa.pageTitle")
+    title: t("screen.setup2fa.pageTitle"),
+    headerBackTitle: 'Back'
 };
 // @ts-ignore
 VerifyMfaScreen.navigationOptions = {
-    title: t("screen.2fa.pageTitle")
+    title: t("screen.2fa.pageTitle"),
+    headerBackTitle: 'Back'
 };
 
 export default createStackNavigator({

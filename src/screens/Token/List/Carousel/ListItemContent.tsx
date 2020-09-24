@@ -5,6 +5,7 @@ import * as Progress from 'react-native-progress';
 import StoVM from "@common/model/StoVM";
 import {Icon} from "react-native-elements";
 import NumberLabel from "@common/components/Label/NumberLabel";
+import InvestmentGoalLabel from "@common/components/Label/InvestmentGoalLabel";
 
 interface Props {
     item: StoVM;
@@ -35,9 +36,8 @@ export default class CarouselListItemContent extends Component<Props> {
                                       borderColor={"white"}
                                       unfilledColor={"#aaa"}/>
                     </View>
-                    <NumberLabel value={investmentGoal}
-                                 style={[styles.text, styles.valueText]}
-                                 prefix="$"/>
+                    <InvestmentGoalLabel value={investmentGoal}
+                                 style={[styles.text, styles.valueText]}/>
                     <View style={styles.rightValWrapper}>
                         <Icon type="feather"
                               name="users"

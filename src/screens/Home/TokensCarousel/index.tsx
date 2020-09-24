@@ -101,10 +101,12 @@ export default class TokensCarousel extends Component<Props> {
     @action
     resetAndStop() {
         this.stopAutoplay();
-        if (this.activeSlide !== 0 && this.carouselRef.current) {
-            this.activeSlide = 0;
-            this.carouselRef.current.snapToItem(0, false)
-        }
+
+        // iOSでバグるので無効化
+        // if (this.activeSlide !== 0 && this.carouselRef.current) {
+        //     this.activeSlide = 0;
+        //     this.carouselRef.current.snapToItem(0, false)
+        // }
     }
 
     onListItemPressed = item => {

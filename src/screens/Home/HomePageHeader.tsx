@@ -8,6 +8,7 @@ import Logo from "@common/components/Image/Logo";
 import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 import RootStore from "@store/RootStore";
 import {observer} from "mobx-react";
+import {Button} from "react-native-elements";
 
 interface Props {
     navigation: Navigation;
@@ -28,11 +29,12 @@ export default class HomePageHeader extends PureComponent<Props> {
     renderContentsNoAuth() {
         return (
             <View style={styles.noAuth}>
-                {/*<Button title={t("btn.sign-in")}*/}
-                {/*        raised*/}
-                {/*        buttonStyle={styles.authButton}*/}
-                {/*        onPress={() => this.props.navigation.navigate("Login")}*/}
-                {/*/>*/}
+                <Button title={t("btn.sign-in")}
+                        type="clear"
+                        titleStyle={styles.authButtonText}
+                        buttonStyle={styles.authButton}
+                        onPress={() => this.props.navigation.navigate("Login")}
+                />
             </View>
         )
     }
@@ -81,9 +83,14 @@ const styles = StyleSheet.create({
         letterSpacing: 4,
     },
     authButton: {
-        backgroundColor: Colors.btnPrimaryLight,
-        height: 34,
+        height: 30,
+        padding: 0,
         paddingHorizontal: 16,
+        borderColor: Colors.primary,
+    },
+    authButtonText: {
+        fontSize: 16,
+        color: Colors.primary,
     },
     auth: {
         flexDirection: "row",
@@ -92,7 +99,6 @@ const styles = StyleSheet.create({
         paddingRight: 12,
     },
     noAuth: {
-        paddingRight: 6
     }
 });
 

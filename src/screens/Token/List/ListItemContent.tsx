@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
 import {Icon} from "react-native-elements";
 import StoVM from "@common/model/StoVM";
-import NumberLabel from "@common/components/Label/NumberLabel";
+import InvestmentGoalLabel from "@common/components/Label/InvestmentGoalLabel";
 
 interface Props {
     item: StoVM;
@@ -24,7 +24,8 @@ export default class ListItemContent extends Component<Props> {
                     <View style={styles.raiseContainer}>
                         <View style={styles.raiseRow}>
                             <Text style={styles.goalTitle}>Goal</Text>
-                            <NumberLabel prefix="$" value={investmentGoal} style={styles.goalValue}/>
+                            <InvestmentGoalLabel value={investmentGoal}
+                                                 style={styles.goalValue}/>
                         </View>
                         <View style={[styles.raiseRow, {paddingTop: 2}]}>
                             <Text style={styles.raisePerTitle}>Funded at </Text>

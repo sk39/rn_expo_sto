@@ -58,7 +58,9 @@
       "explanationRegister": "認証アプリを起動して、本アプリのアカウントキーを登録して下さい",
       "explanationVerify": "認証アプリに表示された6桁の認証コードを入力して下さい",
       "registerAuthApp": "認証アプリを起動する",
-      "registerOther": "別のデバイスに登録する"
+      "registerOther": "別のデバイスに登録する",
+      "explanationQRCode": "下記のアカウントを認証アプリに登録してください。",
+      "accountCode": "アカウントキー"
     },
     "tokens": {
       "status": {

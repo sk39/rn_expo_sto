@@ -25,8 +25,9 @@ export default class OTPQRCode extends Component<Props> {
         return (
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.disp}>Please register the following account to the authentication
-                        application.</Text>
+                    <Text style={styles.explanation}>
+                        {t("screen.setup2fa.explanationQRCode")}
+                    </Text>
                 </View>
                 <View style={styles.qrWrapper}>
                     <QRCode
@@ -35,7 +36,7 @@ export default class OTPQRCode extends Component<Props> {
                     />
                 </View>
                 <View>
-                    <Text style={styles.label}>Account Code</Text>
+                    <Text style={styles.label}>{t("screen.setup2fa.accountCode")}</Text>
                     <View style={styles.valueWrapper}>
                         <View style={styles.valueBack}>
                             <Text style={styles.value}>{this.accountCode}</Text>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 24,
     },
-    disp: {
+    explanation: {
         fontSize: 16,
         color: Colors.labelFontThin
     },
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         color: Colors.labelFontThin
     },
     value: {
-        fontSize: 20,
+        fontSize: 16,
         letterSpacing: 3,
         color: Colors.primaryDark,
     },

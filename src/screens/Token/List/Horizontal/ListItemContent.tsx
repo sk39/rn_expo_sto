@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Colors from "@constants/Colors";
 import StoVM from "@common/model/StoVM";
-import NumberLabel from "@common/components/Label/NumberLabel";
+import InvestmentGoalLabel from "@common/components/Label/InvestmentGoalLabel";
 
 interface Props {
     item: StoVM;
@@ -19,9 +19,8 @@ export default class HorizontalListItemContent extends Component<Props> {
                     <Text style={styles.title}>{name}</Text>
                 </View>
                 <View style={styles.raiseContainer}>
-                    <NumberLabel value={investmentGoal}
-                                 style={[styles.valueText]}
-                                 prefix="$"/>
+                    <InvestmentGoalLabel value={investmentGoal}
+                                         style={[styles.valueText]}/>
                 </View>
                 <View style={styles.barWrapper}>
                     <View style={styles.barContainer}>

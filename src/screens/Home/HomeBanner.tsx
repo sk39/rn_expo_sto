@@ -5,7 +5,6 @@ import ViewUtils from "@common/utils/ViewUtils";
 import {observable, runInAction} from "mobx";
 import {observer} from "mobx-react";
 import RootStore from "@store/RootStore";
-import {Button} from "react-native-elements";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 
 interface Props {
@@ -62,24 +61,10 @@ export default class HomeBanner extends PureComponent<Props> {
         })
     }
 
-    renderContentsAuth() {
+    renderContents() {
         return (
             <View style={styles.auth}>
                 <Text style={styles.text}>Welcome Back!</Text>
-            </View>
-        )
-    }
-
-    renderContentsNoAuth() {
-        return (
-            <View style={styles.noAuth}>
-                <Text style={styles.text}>Please Sign in.</Text>
-                <Button title={t("btn.sign-in")}
-                        type="clear"
-                        titleStyle={styles.authButtonText}
-                        buttonStyle={styles.authButton}
-                        onPress={() => this.props.navigation.navigate("Login")}
-                />
             </View>
         )
     }
@@ -100,11 +85,10 @@ export default class HomeBanner extends PureComponent<Props> {
             }
         };
 
-        const {auth} = this.props.rootStore;
         return (
             <React.Fragment>
                 <Animated.View style={[styles.container, ani.header]}>
-                    {auth.loggedIn ? this.renderContentsAuth() : this.renderContentsNoAuth()}
+                    {this.renderContents()}
                 </Animated.View>
             </React.Fragment>
         );
@@ -126,11 +110,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flexDirection: "row",
         backgroundColor: Colors.primaryDark,
-        // borderColor: Colors.primary,
-        // borderBottomWidth: 1,
-        // backgroundColor: "#515466",
-        // borderColor: Colors.toolBarInverse,
-        // borderBottomWidth: 1,
         ...getPlatformElevation(4),
     },
     text: {

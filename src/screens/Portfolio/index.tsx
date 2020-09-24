@@ -55,7 +55,7 @@ export default class Portfolio extends Component<NavigationProps & RootStoreProp
 
     renderContents() {
         const {auth} = this.props.rootStore
-        if (!auth.loggedIn) {
+        if (!auth.loggedIn || this.balanceState.summary.length === 0) {
             return null;
         }
         const {navigation} = this.props;
