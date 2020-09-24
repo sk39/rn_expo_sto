@@ -1,7 +1,7 @@
 const env = require('@sk39/dotenv-ex').config()
 export default {
-    name: "rn_expo_sto_demo",
-    slug: "rn_expo_sto_demo",
+    name: "rn_expo_sto_demo_v1_0",
+    slug: "rn_expo_sto_demo_v1_0",
     description: "Security Token Trade App. Powered by React Native (Expo).",
     privacy: "public",
     platforms: [
