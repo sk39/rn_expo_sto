@@ -19,7 +19,6 @@ import MyScrollView from "@common/components/PageSupport/MyScrollView";
 import Agreement from "./Agreement";
 import PageHeader from "@common/components/PageSupport/PageHeader";
 import DepositInfo from "./DepositInfo";
-import {Button} from "react-native-elements";
 
 @inject('rootStore')
 @observer
@@ -65,6 +64,8 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
             <ConfirmContent
                 onPress={this.invest}
                 onCancel={this.closeModal}
+                btnText="Invest"
+                doneBtnStyle={{backgroundColor: Colors.second}}
             >
                 <InvestConfirm tokenState={this.tokenState}/>
             </ConfirmContent>
@@ -85,12 +86,12 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
         return (
             <View style={styles.container}>
                 <PageHeader title="Invest Security Token" onBackPress={this.onClose}>
-                    <Button title="Deposit"
-                            type="clear"
-                            containerStyle={{marginLeft: 12}}
-                            titleStyle={styles.depositButton}
-                            onPress={() => alert("TODO:")}
-                    />
+                    {/*<Button title="Deposit"*/}
+                    {/*        type="clear"*/}
+                    {/*        containerStyle={{marginLeft: 12}}*/}
+                    {/*        titleStyle={styles.depositButton}*/}
+                    {/*        onPress={() => alert("TODO:")}*/}
+                    {/*/>*/}
                 </PageHeader>
                 <ProcessDialog
                     model={processState}
@@ -143,7 +144,7 @@ export default class InvestToken extends PureComponent<NavigationProps & RootSto
 
 function Area({title, index, children}) {
     return (
-        <AnimatedRow delay={(index + 1) * 200}>
+        <AnimatedRow delay={100 + (index + 1) * 200}>
             <Title>{title}</Title>
             <View style={styles.areaBody}>
                 {children}
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
         marginRight: 24,
     },
     depositButton: {
-        color: Colors.second,
+        color: Colors.primary,
         fontWeight: "700",
         fontSize: 14
     },

@@ -8,7 +8,7 @@ export default {
         "ios",
         "android"
     ],
-    version: "1.0.3",
+    version: "1.1.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
     splash: {

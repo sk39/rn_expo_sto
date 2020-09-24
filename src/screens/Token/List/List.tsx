@@ -22,6 +22,7 @@ export default class List extends PureComponent<Props> {
     @observable refreshing = false;
     tokenState: TokenState;
     scrollRef: RefObject<MyScrollView>;
+    showStatus = false;
 
     constructor(props) {
         super(props);
@@ -29,6 +30,8 @@ export default class List extends PureComponent<Props> {
         const filter = []
         if (props.showStatus && props.showStatus !== "all") {
             filter.push(props.showStatus)
+        } else {
+            this.showStatus = true;
         }
 
         this.tokenState = new TokenState(props.navigation, props.rootStore, filter)
@@ -40,8 +43,9 @@ export default class List extends PureComponent<Props> {
 
     onListItemPressed = item => {
         const {tokenState} = this
-        tokenState.navigation.setParams({tabBarVisible: item == null})
-        tokenState.selectItem(item);
+        tokenState.navigation.navigate("TokenDetail", {symbol: item.symbol})
+        // tokenState.navigation.setParams({tabBarVisible: item == null})
+        // tokenState.selectItem(item);
     };
 
     renderItem = ({item, index}) => {
@@ -54,6 +58,7 @@ export default class List extends PureComponent<Props> {
                         <ListItem
                             item={item}
                             tokenState={tokenState}
+                            showStatus={this.showStatus}
                             onPress={this.onListItemPressed}
                         />
                     </View>

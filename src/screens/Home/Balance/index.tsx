@@ -37,7 +37,7 @@ export default class Balance extends Component<Props> {
         return (
             <View style={styles.container}>
                 <HomeChildTitle title="Your Balances"
-                                linkTitle="Portfolio"
+                                linkTitle={t("navigation.menu.Portfolio")}
                                 onLinkPress={this.onLinkPress}
                 />
                 <View style={{height: 8}}/>

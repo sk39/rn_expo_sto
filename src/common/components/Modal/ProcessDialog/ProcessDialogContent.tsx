@@ -72,14 +72,14 @@ export default class ProcessDialogContent extends PureComponent<Props> {
         if (this.finAnimation && state === "success") {
             const {renderSuccess} = this.props;
             body = renderSuccess ? renderSuccess() : (
-                <AnimatedSlide delay={0} direction="toLeft" moveDistance={100}>
+                <AnimatedSlide delay={0} direction="toLeft" moveDistance={20}>
                     <SuccessContent message={model.message}/>
                 </AnimatedSlide>
             )
         } else if (this.finAnimation && state === "error") {
             const {renderError} = this.props;
             body = renderError ? renderError() : (
-                <AnimatedSlide delay={0} direction="toLeft" moveDistance={100}>
+                <AnimatedSlide delay={0} direction="toLeft" moveDistance={20}>
                     <ErrorContent message={model.message}/>
                 </AnimatedSlide>
             )

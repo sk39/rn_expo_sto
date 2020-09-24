@@ -13,14 +13,14 @@ const second = '#fd8418';
 const red1 = '#f11561';
 const red2 = '#ff330f';
 
-export default {
+const Colors = {
     font,
     back,
     back2,
     back3,
     primary,
     primary2,
-    primaryThin: "rgba(116,98,255,0.1)",
+    primaryThin: "rgb(230,230,255)",
     primaryLight,
     primaryDark,
     second,
@@ -38,6 +38,7 @@ export default {
     disablesLayerDark: "rgba(11,10,25,0.7)",
     cardBack: '#fff',
     positive: 'rgb(75,210,16)',
+    positiveThin: 'rgb(236,245,235)',
     positiveLight: 'rgb(187,252,112)',
     negative: red1,
     error: red2,
@@ -52,9 +53,32 @@ export default {
     inputBack: "#fff",
     inputBorder: "rgba(15,20,92,0.1)",
     inputPadBack: "#e8ebf1",
-    link: "#6f7499"
+    link: "#6f7499",
+
 };
 
+export const NotifyColor = {
+    normal: {
+        backgroundColor: Colors.back2,
+        color: Colors.font
+    },
+    primary: {
+        backgroundColor: Colors.primaryThin,
+        color: Colors.primary
+    },
+    success: {
+        backgroundColor: Colors.positiveThin,
+        color: Colors.positive
+    },
+    waring: {
+        backgroundColor: Colors.secondThin,
+        color: Colors.second
+    },
+    disable: {
+        backgroundColor: "#ccc",
+        color: "#888"
+    }
+}
 export const ChartColor = [
     '#f15073',
     '#ff7557',
@@ -75,3 +99,6 @@ export const BarChartColor = [
     'rgb(255,169,0)',
     'rgb(48,48,48)',
 ];
+
+
+export default Colors;

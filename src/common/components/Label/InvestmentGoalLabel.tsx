@@ -25,7 +25,9 @@ const InvestmentGoalLabel: FC<Props> = (props) => {
     }
     return (
         <NumberLabel {...props}
-                     prefix={Format.baseCcySymbol}/>
+                     prefix={Format.baseCcySymbol}
+                     prefixStyle={{marginRight: 1}}
+        />
     )
 }
 

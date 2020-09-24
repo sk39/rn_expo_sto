@@ -25,9 +25,11 @@ export default class BaseHorizontalTokens extends Component<Props> {
     }
 
     onListItemPressed = item => {
-        const {tokenState} = this;
-        tokenState.navigation.setParams({tabBarVisible: item == null})
-        tokenState.selectItem(item);
+        const {tokenState} = this
+        tokenState.navigation.navigate("TokenDetail", {symbol: item.symbol})
+
+        // tokenState.navigation.setParams({tabBarVisible: item == null})
+        // tokenState.selectItem(item);
     };
 
     onLinkPress = () => {
@@ -66,7 +68,7 @@ export default class BaseHorizontalTokens extends Component<Props> {
         return (
             <View style={styles.container}>
                 <HomeChildTitle title={this.title}
-                                linkTitle="More"
+                                linkTitle={t("btn.more")}
                                 onLinkPress={this.onLinkPress}
                 />
                 <FlatList

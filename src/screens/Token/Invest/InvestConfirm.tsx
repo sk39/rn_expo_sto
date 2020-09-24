@@ -25,6 +25,7 @@ export default class InvestConfirm extends PureComponent<Props> {
                 <SummaryMark symbol={item.symbol}/>
                 <View style={styles.dataWrapper}>
                     <Area>
+                        <View style={styles.border}/>
                         <PaymentInfo tokenState={tokenState}/>
                     </Area>
                     <Area>
@@ -52,10 +53,10 @@ function SummaryMark({symbol}) {
     return (
         <View style={styles.summaryWrapper}>
             <View style={styles.summaryItem}>
-                <Icon name='dollar-sign' type="feather" color={Colors.primary2} size={24}/>
+                <Icon name='dollar-sign' type="feather" color={Colors.labelFont} size={24}/>
             </View>
-            <View style={{marginHorizontal: 6}}>
-                <Icon name='arrow-right' type="feather" color={Colors.primary2} size={24}/>
+            <View style={{marginHorizontal: 12}}>
+                <Icon name='arrow-right' type="feather" color={Colors.labelFont} size={24}/>
             </View>
             <View style={styles.summaryItem}>
                 <Text style={styles.summaryItemText}>{symbol}</Text>
@@ -73,12 +74,12 @@ const styles = StyleSheet.create({
         paddingTop: 32,
     },
     explain: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: "700",
         color: Colors.labelFont,
     },
     depositTitle: {
-        fontSize: 16,
+        fontSize: 14,
         color: Colors.labelFont,
     },
     areaBody: {
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     },
     row: {
         width: "100%",
-        paddingVertical: 6,
+        paddingVertical: 4,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between"
@@ -99,12 +100,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        marginVertical: 22,
+        marginVertical: 26,
         opacity: 0.8
     },
     summaryItem: {
         borderWidth: 3,
-        borderColor: Colors.primary2,
+        borderColor: Colors.labelFont,
         height: 60,
         width: 60,
         alignItems: "center",
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     summaryItemText: {
-        color: Colors.primary2,
+        color: Colors.labelFont,
         fontWeight: "700",
         fontSize: 12,
     },

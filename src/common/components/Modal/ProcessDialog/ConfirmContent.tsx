@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {StyleSheet, View} from 'react-native'
+import {StyleProp, StyleSheet, TextStyle, View, ViewStyle} from 'react-native'
 import commonStyles from "@common/utils/commonStyle";
 import Colors from "@constants/Colors";
 import {Button} from "react-native-elements";
@@ -8,6 +8,8 @@ interface Props {
     onCancel: () => void;
     onPress: () => void;
     btnText?: string;
+    doneBtnStyle?: StyleProp<ViewStyle>
+    doneBtnTitleStyle?: StyleProp<TextStyle>
 }
 
 export default class ConfirmContent extends PureComponent<Props> {
@@ -17,7 +19,7 @@ export default class ConfirmContent extends PureComponent<Props> {
     };
 
     render() {
-        const {onCancel, onPress, btnText} = this.props;
+        const {onCancel, onPress, btnText, doneBtnStyle, doneBtnTitleStyle} = this.props;
         return (
             <View style={[styles.content]}>
                 <View>
@@ -33,7 +35,8 @@ export default class ConfirmContent extends PureComponent<Props> {
                     <Button title={btnText}
                             raised
                             containerStyle={{flex: 2, marginLeft: 8}}
-                            buttonStyle={[styles.btnDone]}
+                            buttonStyle={[styles.btnDone, doneBtnStyle]}
+                            titleStyle={doneBtnTitleStyle}
                             onPress={onPress}/>
                 </View>
             </View>

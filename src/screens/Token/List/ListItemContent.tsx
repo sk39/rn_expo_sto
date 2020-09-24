@@ -12,15 +12,12 @@ interface Props {
 
 export default class ListItemContent extends Component<Props> {
 
+    summaryNumberOfLines = 2;
+
     renderContent(item) {
         const {investmentGoal, raisePerText, daysToGo, investors} = item;
         return (
             <React.Fragment>
-                <View style={{paddingHorizontal: 12, paddingVertical: 4}}>
-                    <View style={styles.barContainer}>
-                        <View style={[styles.bar, {width: `${raisePerText}%`}]}/>
-                    </View>
-                </View>
                 <View style={styles.dataContainer}>
                     <View style={styles.raiseContainer}>
                         <View style={[styles.raiseRow]}>
@@ -59,6 +56,17 @@ export default class ListItemContent extends Component<Props> {
         );
     }
 
+    renderBar(item) {
+        const {raisePerText} = item;
+        return (
+            <View style={{paddingHorizontal: 12, paddingVertical: 4}}>
+                <View style={styles.barContainer}>
+                    <View style={[styles.bar, {width: `${raisePerText}%`}]}/>
+                </View>
+            </View>
+        )
+    }
+
     renderHeader(item) {
         const {name, symbol, summary} = item;
         return (
@@ -68,7 +76,7 @@ export default class ListItemContent extends Component<Props> {
                     <Text style={styles.symbol}>{symbol}</Text>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text style={styles.description} numberOfLines={2}>{summary}</Text>
+                    <Text style={styles.description} numberOfLines={this.summaryNumberOfLines}>{summary}</Text>
                 </View>
             </View>
         );
@@ -79,7 +87,7 @@ export default class ListItemContent extends Component<Props> {
         return (
             <React.Fragment>
                 {this.renderHeader(item)}
-                {/*<Divider/>*/}
+                {this.renderBar(item)}
                 {this.renderContent(item)}
             </React.Fragment>
         )
@@ -90,10 +98,9 @@ const styles = StyleSheet.create({
     header: {
         alignItems: 'center',
         flexDirection: 'column',
-        paddingBottom: 8,
+        paddingBottom: 3,
         backgroundColor: "white",
         flexWrap: "nowrap",
-        maxHeight: 85,
         overflow: "hidden"
     },
     nameContainer: {

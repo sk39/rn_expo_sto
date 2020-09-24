@@ -7,7 +7,6 @@ import Colors from "@constants/Colors";
 import Balance from "./Balance";
 import {observable} from "mobx";
 import Performance from "./Performance";
-import {Host} from "react-native-portalize";
 import MyScrollView from "@common/components/PageSupport/MyScrollView";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import NewestTokens from "./HorizontalTokens/NewestTokens";
@@ -62,7 +61,7 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
                     return;
                 }
                 if (this.carouselRef.current)
-                    this.carouselRef.current.reset()
+                    this.carouselRef.current.startAutoplay()
                 this.loadSto()
             }
         );
@@ -70,7 +69,7 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
             'didBlur',
             () => {
                 if (this.carouselRef.current)
-                    this.carouselRef.current.resetAndStop()
+                    this.carouselRef.current.stopAutoplay()
             }
         );
 
@@ -99,50 +98,48 @@ export default class Home extends Component<NavigationProps & RootStoreProps> {
     render() {
         const {navigation, rootStore} = this.props;
         return (
-            <Host>
-                <Container style={styles.back}>
-                    <HomePageHeader navigation={navigation} rootStore={rootStore}/>
-                    <HomeBanner scroll={this.scroll}
-                                navigation={navigation}
-                                rootStore={rootStore}
-                    />
-                    <View style={styles.body}>
-                        <MyScrollView
-                            onRefresh={this.onRefresh}
-                            scroll={this.scroll}
-                        >
-                            <View style={{height: HomeBanner.HEIGHT - 1}}/>
-                            <TokensCarousel
-                                ref={this.carouselRef}
+            <Container style={styles.back}>
+                <HomePageHeader navigation={navigation} rootStore={rootStore}/>
+                <HomeBanner scroll={this.scroll}
+                            navigation={navigation}
+                            rootStore={rootStore}
+                />
+                <View style={styles.body}>
+                    <MyScrollView
+                        onRefresh={this.onRefresh}
+                        scroll={this.scroll}
+                    >
+                        <View style={{height: HomeBanner.HEIGHT - 1}}/>
+                        <TokensCarousel
+                            ref={this.carouselRef}
+                            navigation={navigation}
+                            rootStore={rootStore}/>
+                        <View style={styles.areaCard}>
+                            <PickupTokens
                                 navigation={navigation}
                                 rootStore={rootStore}/>
-                            <View style={styles.areaCard}>
-                                <PickupTokens
-                                    navigation={navigation}
-                                    rootStore={rootStore}/>
-                                <View style={{height: 12}}/>
-                                <NewestTokens
-                                    navigation={navigation}
-                                    rootStore={rootStore}/>
-                            </View>
-                            <View style={styles.areaCard}>
-                                <Balance
-                                    ref={this.balanceRef}
-                                    navigation={navigation}
-                                    rootStore={rootStore}/>
-                                <View style={{height: 12}}/>
-                            </View>
-                            <View style={styles.areaCard}>
-                                <Performance
-                                    ref={this.performanceRef}
-                                    navigation={navigation}
-                                    rootStore={rootStore}/>
-                            </View>
-                            <View style={{height: 72}}/>
-                        </MyScrollView>
-                    </View>
-                </Container>
-            </Host>
+                            <View style={{height: 12}}/>
+                            <NewestTokens
+                                navigation={navigation}
+                                rootStore={rootStore}/>
+                        </View>
+                        <View style={styles.areaCard}>
+                            <Balance
+                                ref={this.balanceRef}
+                                navigation={navigation}
+                                rootStore={rootStore}/>
+                            <View style={{height: 12}}/>
+                        </View>
+                        <View style={styles.areaCard}>
+                            <Performance
+                                ref={this.performanceRef}
+                                navigation={navigation}
+                                rootStore={rootStore}/>
+                        </View>
+                        <View style={{height: 72}}/>
+                    </MyScrollView>
+                </View>
+            </Container>
         );
     }
 }

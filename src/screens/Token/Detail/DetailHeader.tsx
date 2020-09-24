@@ -18,9 +18,9 @@ export default class DetailHeader extends PureComponent<Props> {
 
     share = async () => {
         try {
-            const {name, symbol, summary, raise} = this.props.item;
+            const {name, symbol, summary} = this.props.item;
             const result = await Share.share({
-                message: JSON.stringify({name, symbol, summary, raise},),
+                message: JSON.stringify({name, symbol, summary},),
             });
 
             if (result.action === Share.sharedAction) {

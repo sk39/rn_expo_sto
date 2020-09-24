@@ -4,7 +4,6 @@ import List from './List/List';
 import Colors from "@constants/Colors";
 import {TabBarIcon} from "@common/components/ScreenIcon";
 import {inject, observer} from "mobx-react";
-import {Host} from "react-native-portalize";
 import {Tab, Tabs} from "native-base";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
@@ -52,36 +51,33 @@ export default class Tokens extends Component<NavigationProps & RootStoreProps> 
 
     render() {
         return (
-            <Host>
-                <View style={styles.container}>
-                    <PageHeader title="Browse Security Tokens"
-                                navigation={this.props.navigation}
-                                noShadow
-                                dense/>
-                    <Tabs
-                        tabContainerStyle={styles.tabContainerStyle}
-                        tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
-                        onChangeTab={this.onChangeTab}
-                    >
-                        {Tokens.status.map((status, index) => {
-                            return (
-                                <Tab key={index}
-                                     tabStyle={styles.tab}
-                                     textStyle={styles.tabText}
-                                     activeTabStyle={styles.activeTab}
-                                     activeTextStyle={styles.activeTabText}
-                                     heading={t(`screen.tokens.status.${status}`)}>
-                                    <List ref={this.tabRefs[index]}
-                                          showStatus={status}
-                                          navigation={this.props.navigation}
-                                          rootStore={this.props.rootStore}/>
-                                </Tab>
-                            )
-                        })}
-                    </Tabs>
-
-                </View>
-            </Host>
+            <View style={styles.container}>
+                <PageHeader title="Browse Security Tokens"
+                            navigation={this.props.navigation}
+                            noShadow
+                            dense/>
+                <Tabs
+                    tabContainerStyle={styles.tabContainerStyle}
+                    tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
+                    onChangeTab={this.onChangeTab}
+                >
+                    {Tokens.status.map((status, index) => {
+                        return (
+                            <Tab key={index}
+                                 tabStyle={styles.tab}
+                                 textStyle={styles.tabText}
+                                 activeTabStyle={styles.activeTab}
+                                 activeTextStyle={styles.activeTabText}
+                                 heading={t(`screen.tokens.status.${status}`)}>
+                                <List ref={this.tabRefs[index]}
+                                      showStatus={status}
+                                      navigation={this.props.navigation}
+                                      rootStore={this.props.rootStore}/>
+                            </Tab>
+                        )
+                    })}
+                </Tabs>
+            </View>
         );
     }
 }
