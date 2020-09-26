@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "700",
         color: Colors.labelFont,
-        marginHorizontal: 12
+        marginHorizontal: 10
     },
     border: {
         height: 1,

@@ -12,7 +12,8 @@ import RootStoreProvider from "./src/store/RootStoreProvider";
 import {EasingFunction} from "react-native";
 import {Root} from 'native-base';
 import {Host} from "react-native-portalize";
-
+import UpdateManager from "@common/plugins/UpdateManager";
+import Update from "./src/screens/System/Update";
 
 const AppContainer = createAppContainer(RootStack);
 
@@ -32,22 +33,32 @@ declare module "react-native" {
 export default class App extends React.Component {
 
     @observable isReady: boolean = false;
+    @observable isUpdateNew: boolean = false;
 
     async componentDidMount() {
-        await Font.loadAsync({
-            Roboto: require('native-base/Fonts/Roboto.ttf'),
-            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-            ...Feather.font,
-            ...Ionicons.font,
-        });
+        await Promise.all([
+            Font.loadAsync({
+                Roboto: require('native-base/Fonts/Roboto.ttf'),
+                Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+                ...Feather.font,
+                ...Ionicons.font,
+            }),
+            this.checkUpdate(),
+            RootStoreProvider.rootStore.initialize()
+        ]);
 
-        await RootStoreProvider.rootStore.initialize();
         this.isReady = true;
+    }
+
+    async checkUpdate() {
+        this.isUpdateNew = await UpdateManager.checkUpdate();
     }
 
     render() {
         if (!this.isReady) {
             return <AppLoading/>;
+        } else if (this.isUpdateNew) {
+            return <Update/>;
         }
 
         return (

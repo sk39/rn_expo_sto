@@ -40,6 +40,11 @@
     }
   },
   "screen": {
+    "update": {
+      "title": "アップデート",
+      "message": "利用可能なアップデートがあります。更新しますか？",
+      "doneBtn": "更新"
+    },
     "login": {
       "title": "Digital Security",
       "subTitle": "",

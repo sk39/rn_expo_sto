@@ -26,6 +26,11 @@ export default class StoVM implements STO {
     }
 
     @computed
+    get canInvest(): boolean {
+        return this.status === "offering"
+    }
+
+    @computed
     get raisePer(): number {
         const {investedAmount, investmentGoal} = this;
         return (Number(investedAmount) / Number(investmentGoal));

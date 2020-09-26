@@ -63,7 +63,7 @@ export default class TokenDetail extends PureComponent<NavigationProps & RootSto
                     <Index item={item}/>
                 </MyScrollView>
 
-                <DetailFooter selectedItem={this.tokenState.selectedItem}
+                <DetailFooter item={this.tokenState.selectedItem}
                               tokenState={this.tokenState}/>
             </View>
         );

@@ -15,6 +15,7 @@ export default class InvestTokenState extends TokenState {
     constructor(symbol: string, navigation, rootStore: RootStore) {
         super(navigation, rootStore);
         this.amount = new InputNumberState();
+        this.amount.maxLength = 5
         this.amount.setUnit(symbol)
     }
 

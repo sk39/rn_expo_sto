@@ -40,6 +40,11 @@
     }
   },
   "screen": {
+    "update": {
+      "title": "Update",
+      "message": "Update is available.",
+      "doneBtn": "Update Now"
+    },
     "login": {
       "title": "Welcome Back",
       "subTitle": "Sign in to Digital Security",

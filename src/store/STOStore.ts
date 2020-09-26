@@ -31,7 +31,7 @@ export default class STOStore {
         try {
             this.errorMessage = null;
             this.processing = true;
-            await ViewUtils.sleep(500)
+            await ViewUtils.sleep(300)
             this.list = data.map(m => new StoVM(m));
         } catch (e) {
             this.errorMessage = "Server error!";

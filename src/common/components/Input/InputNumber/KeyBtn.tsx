@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     key: {
         width: (Layout.window.width - 8) / 3,
         height: 48,
-        backgroundColor: Colors.back,
+        backgroundColor: "#fff",
         borderWidth: 1,
         borderColor: Colors.listBorder
     },

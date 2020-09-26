@@ -11,6 +11,7 @@ import {inject, observer} from "mobx-react";
 import Logo from "@common/components/Image/Logo";
 import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 import Format from "@constants/Format";
+import UpdateManager from "@common/plugins/UpdateManager";
 
 @inject('rootStore')
 @observer
@@ -27,6 +28,14 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
         auth.signOut();
         const {navigation} = this.props;
         (navigation as any).closeDrawer();
+    }
+
+    reload = () => {
+        UpdateManager.reload();
+    }
+
+    checkUpdate = () => {
+        UpdateManager.checkUpdate();
     }
 
     renderItem = (key) => {
@@ -124,6 +133,23 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                             "LocationTest", "AuthTest", "Lottie",
                             "InnerRouter", "AppInfo"
                         ].map(this.renderItemDev)}
+                    </View>
+
+                    <View style={{
+                        flexDirection: "row",
+                        marginBottom: 16,
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <Button title="Check Update"
+                                type="clear"
+                                containerStyle={{marginRight:12}}
+                                onPress={this.checkUpdate}
+                        />
+                        <Button title="Reload"
+                                type="clear"
+                                onPress={this.reload}
+                        />
                     </View>
                 </ScrollView>
             </View>

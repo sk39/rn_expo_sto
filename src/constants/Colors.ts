@@ -52,9 +52,8 @@ const Colors = {
     btnDark: inverseBack,
     inputBack: "#fff",
     inputBorder: "rgba(15,20,92,0.1)",
-    inputPadBack: "#e8ebf1",
+    inputPadBack: "#f1f1f4",
     link: "#6f7499",
-
 };
 
 export const NotifyColor = {

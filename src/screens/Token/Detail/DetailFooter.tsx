@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
-import {BackHandler, StyleSheet} from 'react-native'
-import Colors from "@constants/Colors";
+import {BackHandler} from 'react-native'
 import {observer} from "mobx-react";
 import PageBottomBtn from "@common/components/PageSupport/PageBottomBtn";
 import {computed, observable} from "mobx";
@@ -8,7 +7,7 @@ import TokenState from "../TokenState";
 import StoVM from "@common/model/StoVM";
 
 interface Props {
-    selectedItem: StoVM;
+    item: StoVM;
     tokenState: TokenState;
     onBackPress?: () => void;
     hardwareBackPress?: boolean;
@@ -69,13 +68,13 @@ export default class DetailFooter extends PureComponent<Props> {
             return;
         }
 
-        const {selectedItem} = this.props;
-        navigation.navigate("InvestToken", {symbol: selectedItem.symbol})
+        const {item} = this.props;
+        navigation.navigate("InvestToken", {symbol: item.symbol})
     }
 
     render() {
-        const {selectedItem} = this.props;
-        if (!selectedItem) {
+        const {item} = this.props;
+        if (!item) {
             return null;
         }
 
@@ -83,55 +82,10 @@ export default class DetailFooter extends PureComponent<Props> {
             <PageBottomBtn
                 onPress={this.startInvest}
                 text={this.loggedIn ? "Invest" : "Sign In & Invest"}
+                hidden={!item.canInvest}
                 animation
                 animationDelay={200}
             />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'transparent',
-        flex: 1
-    },
-    titleContainer: {
-        flex: 1,
-    },
-    itemContainer: {
-        marginHorizontal: 16,
-        marginVertical: 8,
-    },
-    rowContainer: {
-        alignItems: 'center',
-        flexDirection: "row"
-    },
-    titleText: {
-        color: '#f1f1f1',
-    },
-    amountText: {
-        fontSize: 18,
-        fontWeight: '900',
-        color: '#f1f1f1',
-    },
-    vatText: {
-        fontSize: 10,
-        color: 'gray',
-    },
-    descriptionDetail: {
-        color: Colors.labelFont,
-        fontSize: 14,
-        lineHeight: 22
-    },
-    areaCard: {
-        padding: 12,
-        paddingTop: 6,
-    },
-    headerText: {
-        fontSize: 20,
-        color: Colors.primaryDark,
-        opacity: 0.5,
-        fontWeight: "700",
-        letterSpacing: 2,
-    }
-});
