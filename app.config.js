@@ -24,11 +24,11 @@ export default {
     ],
     ios: {
         supportsTablet: true,
-        bundleIdentifier: "com.sk39.sto.demo"
+        bundleIdentifier: "com.sk39.sto.demov1"
     },
     android: {
-        package: "com.sk39.sto.demo",
-        googleServicesFile: "./google-services.json",
+        package: "com.sk39.sto.demov1",
+        // googleServicesFile: "./google-services.json",
         softwareKeyboardLayoutMode: "pan",
         adaptiveIcon: {
             foregroundImage: "./assets/android/foreground.png",
