@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import UpdateManager from "@common/plugins/UpdateManager";
 import {StyleSheet, Text, View} from "react-native";
 import Colors from "@constants/Colors";
 import Layout from "@constants/Layout";
 import * as Progress from 'react-native-progress';
 
-export default class Update extends React.Component {
+export default class Update extends Component {
 
     async componentDidMount() {
         await UpdateManager.fetchUpdate();

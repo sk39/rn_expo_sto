@@ -18,7 +18,7 @@ export default {
     },
     card: {
         imageHeight: 150,
-        imageHeightLarge: (height > 890) ? 320 : (height > 700) ? 280 : 250
+        imageHeightLarge: (height > 700) ? 280 : 250
     },
     isSmallDevice: width < 375,
 };

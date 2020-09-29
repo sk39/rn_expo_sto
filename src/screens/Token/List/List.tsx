@@ -85,9 +85,12 @@ export default class List extends PureComponent<Props> {
                     <SimpleList data={list}
                                 renderItem={this.renderItem}/>
                 </MyScrollView>
-                <ListPageSupport processing={processing}
-                                 list={list}
-                                 errorMessage={tokenState.stoStore.errorMessage}/>
+                <ListPageSupport
+                    processing={processing}
+                    list={list}
+                    errorMessage={tokenState.stoStore.errorMessage}
+                    onRefresh={this.onRefresh}
+                />
             </View>
         );
     }

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {observer} from "mobx-react";
 import LottieView from "lottie-react-native";
 import {action, observable} from "mobx";
+import {Platform} from "react-native";
 
 interface Props {
     state: "confirm" | "processing" | "success" | "error",
@@ -74,21 +75,30 @@ export default class ProcessAnimation extends Component<Props> {
         this.lottieRef.current.play(0, 120);
     }
 
+    private play(startFrame?: number, endFrame?: number) {
+        // see:https://github.com/react-native-community/lottie-react-native/issues/505
+        if (Platform.OS === "android") {
+            setTimeout(() => this.lottieRef.current.play(startFrame, endFrame), 10)
+            return;
+        }
+        this.lottieRef.current.play(startFrame, endFrame);
+    }
+
     onAnimationFinish = () => {
         const {state} = this.props;
         if (this.waitLastAnimation) {
             this.props.onAnimationFinish();
             this.endWaitFinish();
         } else if (state === "success" && this.waitFinish) {
-            this.lottieRef.current.play(239, 400);
+            this.play(239, 400);
             this.waitLastAnimation = true;
             this.waitFinish = false;
         } else if (state === "error" && this.waitError) {
-            this.lottieRef.current.play(657, 823);
+            this.play(657, 823);
             this.waitLastAnimation = true;
             this.waitError = false;
         } else if (this.loop && state === "processing") {
-            this.lottieRef.current.play(0, 120);
+            this.play(0, 120);
         }
     }
 

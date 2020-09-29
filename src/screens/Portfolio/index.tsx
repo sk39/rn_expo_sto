@@ -88,10 +88,14 @@ export default class Portfolio extends Component<NavigationProps & RootStoreProp
                         {this.renderContents()}
                     </MyScrollView>
                 </View>
-                <ListPageSupport processing={this.balanceState.processing}
-                                 errorMessage={this.balanceState.balancesStore.errorMessage}
-                                 auth={auth}
-                                 list={this.balanceState.summary}/>
+                <ListPageSupport
+                    processing={this.balanceState.processing}
+                    errorMessage={this.balanceState.balancesStore.errorMessage}
+                    auth={auth}
+                    list={this.balanceState.summary}
+                    navigation={this.props.navigation}
+                    onRefresh={this.onRefresh}
+                />
             </Container>
         );
     }

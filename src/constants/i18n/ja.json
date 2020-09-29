@@ -84,11 +84,11 @@
       },
       "clearSto": {
         "title": "STO画像キャッシュ",
-        "subTitle": "STO画像のキャッシュをクリアします。AndroidではHTTPキャッシュが有効なので再起動が必要です。",
-        "done": "クリア",
+        "subTitle": "STO画像のキャッシュを消去します。AndroidではHTTPキャッシュが有効なので再起動が必要です。",
+        "done": "消去",
         "message": {
-          "success": "クリアしました",
-          "error": "クリアに失敗しました"
+          "success": "消去しました",
+          "error": "消去に失敗しました"
         }
       },
       "initialize": {

@@ -11,6 +11,7 @@ module.exports = function (api) {
                 "root": ["./"],
                 extensions: ['.ts', '.tsx', '.ios.ts', '.android.ts', '.ios.tsx', '.android.tsx', '.json'],
                 "alias": {
+                    "@": path.resolve("./"),
                     "@assets": path.resolve("assets"),
                     "@common": path.resolve("src/common"),
                     "@constants": path.resolve("src/constants"),

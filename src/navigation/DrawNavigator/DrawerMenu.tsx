@@ -143,7 +143,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                     }}>
                         <Button title="Check Update"
                                 type="clear"
-                                containerStyle={{marginRight:12}}
+                                containerStyle={{marginRight: 12}}
                                 onPress={this.checkUpdate}
                         />
                         <Button title="Reload"

@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
     },
     btn: {
         width: 120,
+        height: 40,
+        paddingVertical: 0,
         backgroundColor: Colors.btnPrimary
     },
     initBtn: {

@@ -42,7 +42,7 @@ export default class ViewUtils {
     }
 
     static getBottomBtnPaddingBottom() {
-        return this.isIphoneX() ? 16 : 0
+        return this.isIphoneX() ? 20 : 0
     }
 
     static getFloatPageHeaderHeight() {

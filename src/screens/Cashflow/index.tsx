@@ -110,9 +110,13 @@ export default class CashflowScreen extends Component<NavigationProps & RootStor
                         {this.renderList()}
                     </View>
                 </MyScrollView>
-                <ListPageSupport auth={auth}
-                                 processing={processing}
-                                 list={list}/>
+                <ListPageSupport
+                    auth={auth}
+                    processing={processing}
+                    list={list}
+                    navigation={this.props.navigation}
+                    onRefresh={this.onRefresh}
+                />
             </Container>
         );
     }

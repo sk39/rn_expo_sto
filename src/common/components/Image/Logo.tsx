@@ -26,7 +26,7 @@ export default class Logo extends Component<Props> {
         return (
             <Image
                 style={style}
-                source={require('@assets/icon.png')}
+                source={require('@assets/logo.png')}
             />
         )
     }

@@ -96,12 +96,14 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                 </View>
                 <View style={styles.form}>
                     <Input inputState={this.loginState.userId}
+                           containerStyle={styles.inputContainer}
                            label={t("screen.login.userId")}
                            leftIcon={
                                <Icon name='user' type="feather" color={Colors.primary} size={16}/>
                            }
                     />
                     <Input inputState={this.loginState.password}
+                           containerStyle={styles.inputContainer}
                            label={t("screen.login.password")}
                            secureTextEntry
                            leftIcon={
@@ -145,6 +147,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.back
     },
     form: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         paddingBottom: 68,
@@ -169,6 +172,7 @@ const styles = StyleSheet.create({
     },
     headerArea: {
         flex: 1,
+        maxHeight: 330,
         paddingLeft: 44,
         paddingTop: 24,
         width: "100%",
@@ -207,4 +211,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         letterSpacing: 1,
     },
+    inputContainer: {
+        width: Layout.window.width - 76,
+        paddingBottom: 24,
+    }
 });

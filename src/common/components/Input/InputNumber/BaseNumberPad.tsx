@@ -8,6 +8,7 @@ import Colors from "@constants/Colors";
 import ClipboardAccessor from "@common/plugins/ClipboardAccessor";
 import {KeyBtn, KeyIconBtn} from "@common/components/Input/InputNumber/KeyBtn";
 import Layout from "@constants/Layout";
+import ViewUtils from "@common/utils/ViewUtils";
 
 interface Props {
     inputState: InputNumberState,
@@ -184,7 +185,8 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     bottomBtn: {
-        height: 48,
+        height: ViewUtils.getBottomBtnHeight(),
+        paddingBottom: ViewUtils.getBottomBtnPaddingBottom(),
         width: (Layout.window.width) / 3,
     }
 });
