@@ -16,7 +16,7 @@ export default {
         type: "feather"
     },
     Portfolio: {
-        name: `credit-card`,
+        name: `pie-chart`,
         type: "feather"
     },
     Cashflow: {
@@ -25,6 +25,10 @@ export default {
     },
     Settings: {
         name: "settings",
+        type: "feather"
+    },
+    SystemInfo: {
+        name: "info",
         type: "feather"
     },
     More: {

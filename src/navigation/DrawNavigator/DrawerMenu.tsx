@@ -124,14 +124,13 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                 {this.renderHeader()}
                 <ScrollView>
                     <View style={{paddingVertical: 12}}>
-                        {["Home", "Tokens", "Portfolio", "Cashflow", "Settings"].map(this.renderItem)}
+                        {["Home", "Tokens", "Portfolio", "Cashflow", "Settings", "SystemInfo"].map(this.renderItem)}
                     </View>
                     <View style={styles.devWrapper}>
                         <Text style={styles.devTitle}>Development</Text>
                         {[
-                            "Sandbox", "Chart", "ProcessAnimation", "PushTest", "QRTest",
-                            "LocationTest", "AuthTest", "Lottie",
-                            "InnerRouter", "AppInfo"
+                            "Sandbox", "Chart", "ProcessAnimation", "QRTest",
+                            "LocationTest", "AuthTest", "Lottie", "InnerRouter"
                         ].map(this.renderItemDev)}
                     </View>
 

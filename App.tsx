@@ -14,6 +14,7 @@ import {Root} from 'native-base';
 import {Host} from "react-native-portalize";
 import UpdateManager from "@common/plugins/UpdateManager";
 import Update from "./src/screens/System/Update";
+import Analytics from "@common/plugins/firebase/Analytics";
 
 const AppContainer = createAppContainer(RootStack);
 
@@ -48,6 +49,7 @@ export default class App extends React.Component {
         ]);
 
         this.isReady = true;
+        Analytics.log("Open")
     }
 
     async checkUpdate() {

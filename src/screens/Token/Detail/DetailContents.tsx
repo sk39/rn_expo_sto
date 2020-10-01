@@ -157,8 +157,6 @@ export default class DetailContents extends PureComponent<Props> {
                 <View style={{height: 24}}/>
                 <Title title="Legal"/>
                 {this.renderRegal(item)}
-
-                <View style={{height: 32}}/>
             </View>
         );
     }
@@ -213,7 +211,7 @@ function Block({icon, value, unit, notifyColor}) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
-        paddingBottom: 56,
+        paddingBottom: 32,
     },
     description: {
         color: Colors.labelFont,

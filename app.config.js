@@ -1,4 +1,5 @@
 const env = require('@sk39/dotenv-ex').config()
+const googleServiceWeb = require("./google-services-web.json");
 export default {
     name: "rn_expo_sto_demo",
     slug: "rn_expo_sto_demo",
@@ -24,7 +25,8 @@ export default {
     ],
     ios: {
         supportsTablet: true,
-        bundleIdentifier: "com.sk39.sto.demo"
+        bundleIdentifier: "com.sk39.sto.demo",
+        googleServicesFile: "./GoogleService-Info.plist",
     },
     android: {
         package: "com.sk39.sto.demo",
@@ -33,6 +35,11 @@ export default {
         adaptiveIcon: {
             foregroundImage: "./assets/android/foreground.png",
             backgroundColor: "#fff"
+        }
+    },
+    web: {
+        config: {
+            ...googleServiceWeb
         }
     },
     androidStatusBar: {

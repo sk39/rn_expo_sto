@@ -10,6 +10,7 @@ import {observable} from "mobx";
 import MyToast from "@common/utils/MyToast";
 import BackButtonBehavior from "@common/components/PageSupport/AppEventBehavior/BackButtonBehavior";
 import MyScrollView from "@common/components/PageSupport/MyScrollView";
+import PushNotification from "@common/plugins/PushNotification";
 
 @inject('rootStore')
 @observer
@@ -20,6 +21,28 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
     changeEnableBiometric = async (val) => {
         const {settings} = this.props.rootStore;
         settings.enableLocalAuth = val
+        await settings.saveStorage();
+    }
+
+    changePushNotification = async (val) => {
+        const {settings} = this.props.rootStore;
+        if (val) {
+            try {
+                await PushNotification.register()
+            } catch (e) {
+                alert(`Failed enable Push Notification.\n${e.message}`)
+                return;
+            }
+        } else {
+            try {
+                await PushNotification.unregister()
+            } catch (e) {
+                alert(`Failed disable Push Notification.\n${e.message}`)
+                return;
+            }
+        }
+
+        settings.enablePushNotification = val
         await settings.saveStorage();
     }
 
@@ -69,6 +92,16 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
                             </View>
                             <Switch value={settings.enableLocalAuth}
                                     onValueChange={this.changeEnableBiometric}/>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.header}>
+                            <View style={{flex: 1}}>
+                                <Text style={styles.title}>{t("screen.settings.push.title")}</Text>
+                                <Text style={styles.subTitle}>{t("screen.settings.push.subTitle")}</Text>
+                            </View>
+                            <Switch value={settings.enablePushNotification}
+                                    onValueChange={this.changePushNotification}/>
                         </View>
                     </View>
                     <View style={styles.row}>

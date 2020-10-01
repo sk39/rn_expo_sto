@@ -9,10 +9,12 @@ const STORAGE_KEY = "sto-demo-settings";
 export default class SettingsStore {
 
     @observable enableLocalAuth = true;
+    @observable enablePushNotification = false;
 
     async saveStorage() {
         await Storage.save(STORAGE_KEY, {
-            enableLocalAuth: this.enableLocalAuth
+            enableLocalAuth: this.enableLocalAuth,
+            enablePushNotification: this.enablePushNotification,
         })
     }
 
@@ -22,6 +24,7 @@ export default class SettingsStore {
         if (data) {
             runInAction(() => {
                 this.enableLocalAuth = data.enableLocalAuth;
+                this.enablePushNotification = data.enablePushNotification;
             });
         }
     }

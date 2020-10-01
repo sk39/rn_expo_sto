@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Share, StyleSheet, View} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import {observer} from "mobx-react";
 import Layout from "@constants/Layout";
 import ViewUtils from "@common/utils/ViewUtils";
@@ -7,6 +7,7 @@ import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
 import BackButton from "@common/components/Button/BackButton";
 import IconButton from "@common/components/Button/IconButton";
 import StoVM from "@common/model/StoVM";
+import ShareHelper from "@common/plugins/ShareHelper";
 
 interface Props {
     item: StoVM,
@@ -16,25 +17,9 @@ interface Props {
 @observer
 export default class DetailHeader extends PureComponent<Props> {
 
-    share = async () => {
-        try {
-            const {name, symbol, summary} = this.props.item;
-            const result = await Share.share({
-                message: JSON.stringify({name, symbol, summary},),
-            });
-
-            if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                    // shared with activity type of result.activityType
-                } else {
-                    // shared
-                }
-            } else if (result.action === Share.dismissedAction) {
-                // dismissed
-            }
-        } catch (error) {
-            alert(error.message);
-        }
+    share = () => {
+        const {name, symbol, summary} = this.props.item;
+        ShareHelper.share("Token", {name, symbol, summary})
     }
 
     onBackPress = () => {

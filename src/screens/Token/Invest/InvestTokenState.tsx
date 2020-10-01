@@ -4,6 +4,7 @@ import InputNumberState from "@common/components/Input/InputNumberState";
 import ViewUtils from "@common/utils/ViewUtils";
 import {action, computed, observable} from "mobx";
 import ProcessDialogState from "@common/components/Modal/ProcessDialog/ProcessDialogState";
+import Analytics from "@common/plugins/firebase/Analytics";
 
 export default class InvestTokenState extends TokenState {
 
@@ -107,6 +108,7 @@ export default class InvestTokenState extends TokenState {
             this.processState.startProcessing();
             await ViewUtils.sleep(1500);
             this.processState.success("Token investment application accepted.");
+            Analytics.log("Invest", {amount: this.amount.value})
         } catch (e) {
             //TODO:
             this.processState.error("Amount must be more than zero.");

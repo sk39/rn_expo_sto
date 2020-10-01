@@ -31,7 +31,8 @@
       "Tokens": "Tokens",
       "Portfolio": "Portfolio",
       "Cashflow": "Cashflow",
-      "Settings": "Settings"
+      "Settings": "Settings",
+      "SystemInfo": "Info"
     },
     "tab": {
       "Home": "Home",
@@ -81,6 +82,10 @@
       "biometric": {
         "title": "Biometric",
         "subTitle": "Enable Biometric. FaceID and TouchID (iOS) or the Biometric Prompt (Android)."
+      },
+      "push": {
+        "title": "Push Notification (beta)",
+        "subTitle": "Enable Push Notification."
       },
       "clearSto": {
         "title": "STO Image Cache",
