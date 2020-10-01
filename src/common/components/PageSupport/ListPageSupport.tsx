@@ -17,32 +17,34 @@ interface Props {
 @observer
 export default class ListPageSupport extends Component<Props> {
 
-    onPress = () => {
-        const {auth, onRefresh, navigation} = this.props;
-        if (navigation && auth && !auth.loggedIn) {
-            return navigation.navigate("Login");
-        }
-
-        if (onRefresh) {
-            onRefresh();
-        }
+    onAuthPress = () => {
+        const {navigation} = this.props;
+        return navigation.navigate("Login");
     }
 
-    renderMessage(type, message) {
+    renderMessage(type, message, onPress) {
+        if (onPress) {
+            return (
+                <View style={styles.disablesLayer}>
+                    <TouchableOpacity onPress={onPress}>
+                        <BlockErrorMessage type={type} message={message} large/>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+
         return (
             <View style={styles.disablesLayer}>
-                <TouchableOpacity onPress={this.onPress}>
-                    <BlockErrorMessage type={type} message={message} large/>
-                </TouchableOpacity>
+                <BlockErrorMessage type={type} message={message} large/>
             </View>
         )
     }
 
     render() {
-        const {processing, list, errorMessage} = this.props;
+        const {processing, list, errorMessage, onRefresh} = this.props;
         const {auth} = this.props;
         if (auth && !auth.loggedIn) {
-            return this.renderMessage("lock", t("msg.canAfterAuthed"))
+            return this.renderMessage("lock", t("msg.canAfterAuthed"), this.onAuthPress)
         }
 
         if (processing && (!list || list.length === 0)) {
@@ -55,10 +57,10 @@ export default class ListPageSupport extends Component<Props> {
 
         if (!list || list.length === 0) {
             if (!s.isBlank(errorMessage)) {
-                return this.renderMessage("error", errorMessage)
+                return this.renderMessage("error", errorMessage, onRefresh)
             }
 
-            return this.renderMessage("empty", t("msg.noData"))
+            return this.renderMessage("empty", t("msg.noData"), onRefresh)
         }
         return null;
     }

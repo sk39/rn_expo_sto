@@ -18,8 +18,6 @@ class LottieScreen extends Component {
             <Container style={{backgroundColor: Colors.back, paddingBottom: 30}}>
                 <Tabs tabBarUnderlineStyle={{backgroundColor: Colors.primary}}>
                     {[
-                        require("assets/lottie/3738-blockchain-2.json"),
-                        require("assets/lottie/5720-trustless.json"),
                         require("@sk39/lottie-files/dist/error-icon.json"),
                         require('@sk39/lottie-files/dist/error-icon2.json'),
                         require('@sk39/lottie-files/dist/error-icon-bounce.json'),

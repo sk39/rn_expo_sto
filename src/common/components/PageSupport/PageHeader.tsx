@@ -11,13 +11,14 @@ interface Props {
     navigation?: Navigation
     noShadow?: boolean;
     dense?: boolean;
+    dark?: boolean;
     onBackPress?: () => void
 }
 
 export default class PageHeader extends PureComponent<Props> {
 
     renderBackButton() {
-        const {onBackPress} = this.props;
+        const {onBackPress, dark} = this.props;
         if (!onBackPress) {
             return null;
         }
@@ -25,24 +26,39 @@ export default class PageHeader extends PureComponent<Props> {
             <View style={{marginLeft: -12}}>
                 <BackButton onPress={onBackPress}
                             shadowColor="transparent"
-                            color={Colors.font}
+                            color={dark ? "white" : Colors.font}
                 />
             </View>
         )
     }
 
     render() {
-        const {noShadow, dense} = this.props;
+        const {noShadow, dense, dark} = this.props;
         const styles = dense ? stylesDense : stylesNormal
+        const stylesAppend: any = {
+            container: {},
+            titleText: {}
+        }
+        if (!noShadow) {
+            stylesAppend.container = {
+                ...getPlatformElevation(4)
+            }
+        }
+        if (dark) {
+            stylesAppend.container.backgroundColor = Colors.toolBarInverse
+            stylesAppend.titleText.color = "white"
+        }
         return (
             <React.Fragment>
-                <MyStatusBar dark={false}
+                <MyStatusBar dark={dark}
                              transparent
                              navigation={this.props.navigation}/>
-                <View style={[styles.container, (noShadow ? {} : {...getPlatformElevation(4)})]}>
+                <View style={[styles.container, stylesAppend.container]}>
                     {this.renderBackButton()}
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>{this.props.title}</Text>
+                        <Text style={[styles.titleText, stylesAppend.titleText]}>
+                            {this.props.title}
+                        </Text>
                     </View>
                     <View>
                         {this.props.children}

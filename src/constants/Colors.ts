@@ -73,6 +73,10 @@ export const NotifyColor = {
         backgroundColor: Colors.secondThin,
         color: Colors.second
     },
+    error: {
+        backgroundColor: Colors.errorThin,
+        color: Colors.error
+    },
     disable: {
         backgroundColor: "#ccc",
         color: "#888"

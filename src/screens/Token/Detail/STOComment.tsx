@@ -126,7 +126,7 @@ export default class STOComment extends Component<NavigationProps> {
                     <View style={styles.overlay}/>
                     <View style={styles.tokenNameWrapper}>
                         <Text style={styles.tokenName}>{item.name}</Text>
-                        <Text style={styles.summary} numberOfLines={1}>{item.summary}</Text>
+                        <Text style={styles.summary} numberOfLines={2}>{item.summary}</Text>
                     </View>
                 </View>
                 <If test={this.username.length > 0}>
@@ -134,6 +134,7 @@ export default class STOComment extends Component<NavigationProps> {
                         <View style={{flex: 1}}>
                             <Input inputState={this.newComment}
                                    placeholder="New Comment"
+                                   multiline
                             />
                         </View>
                         <Button buttonStyle={styles.btn}
@@ -171,10 +172,13 @@ const styles = StyleSheet.create({
     },
     btnText: {},
     header: {
+        borderTopWidth: 1,
         borderBottomWidth: 1,
+        borderColor: Colors.labelFont,
         backgroundColor: Colors.back3,
         borderBottomColor: Colors.listBorder,
-        height: 80,
+        height: 100,
+        alignItems: "center",
         justifyContent: "center"
     },
     inputArea: {
@@ -182,32 +186,33 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "100%",
         padding: 8,
-        paddingTop: 10,
-        paddingBottom: 16,
+        paddingVertical: 16,
         borderBottomColor: Colors.listBorder,
         borderBottomWidth: 1,
         backgroundColor: Colors.toolBar,
         ...getPlatformElevation(2)
     },
     tokenNameWrapper: {
-        padding: 6
+        padding: 6,
     },
     image: {
         ...StyleSheet.absoluteFillObject,
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: "rgba(0,0,0,0.6)"
+        backgroundColor: "rgba(19,15,60,0.8)"
     },
     tokenName: {
         color: "white",
-        fontSize: 18,
-        marginHorizontal: 12
+        fontSize: 16,
+        fontWeight: "700",
+        marginHorizontal: 12,
+        opacity: 0.9
     },
     summary: {
         color: "white",
         opacity: 0.7,
-        fontSize: 12,
+        fontSize: 14,
         marginTop: 4,
         marginHorizontal: 12,
     },

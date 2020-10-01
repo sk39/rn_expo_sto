@@ -13,6 +13,7 @@ interface Props {
     inputStyle?: StyleProp<TextStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     placeholder?: string;
+    multiline?: boolean;
 }
 
 @observer
@@ -20,7 +21,7 @@ export default class Input extends PureComponent<Props> {
     render() {
         const {
             inputState, label, inputStyle, containerStyle,
-            secureTextEntry, leftIcon, placeholder
+            secureTextEntry, leftIcon, placeholder, multiline
         } = this.props;
         return (
             <ElInput
@@ -35,6 +36,7 @@ export default class Input extends PureComponent<Props> {
                 errorStyle={styles.inputError}
                 errorMessage={inputState.errorMsg}
                 onChangeText={(v) => inputState.setValue(v)}
+                multiline={multiline}
             />
         )
     }
