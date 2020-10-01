@@ -1,12 +1,4 @@
 {
   "firebase": {
-    "apiKey": "AIzaSyBLN8u75kwo2Btro2HCRWb6_1Y-IzjIFbA",
-    "authDomain": "sto-demo-d7a95.firebaseapp.com",
-    "databaseURL": "https://sto-demo-d7a95.firebaseio.com",
-    "projectId": "sto-demo-d7a95",
-    "storageBucket": "sto-demo-d7a95.appspot.com",
-    "messagingSenderId": "981304590494",
-    "appId": "1:981304590494:web:f0077125f05a0ea07bbb8f",
-    "measurementId": "G-50HMLF78P0"
   }
 }

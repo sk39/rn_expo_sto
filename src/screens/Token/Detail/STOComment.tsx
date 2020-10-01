@@ -126,6 +126,7 @@ export default class STOComment extends Component<NavigationProps> {
                     <View style={styles.overlay}/>
                     <View style={styles.tokenNameWrapper}>
                         <Text style={styles.tokenName}>{item.name}</Text>
+                        <Text style={styles.summary} numberOfLines={1}>{item.summary}</Text>
                     </View>
                 </View>
                 <If test={this.username.length > 0}>
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         borderBottomColor: Colors.listBorder,
         borderBottomWidth: 1,
-        backgroundColor: "white",
+        backgroundColor: Colors.toolBar,
         ...getPlatformElevation(2)
     },
     tokenNameWrapper: {
@@ -201,7 +202,14 @@ const styles = StyleSheet.create({
     tokenName: {
         color: "white",
         fontSize: 18,
-        marginLeft: 12
+        marginHorizontal: 12
+    },
+    summary: {
+        color: "white",
+        opacity: 0.7,
+        fontSize: 12,
+        marginTop: 4,
+        marginHorizontal: 12,
     },
     row: {
         padding: 16,
@@ -211,7 +219,8 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     innerRow: {
-        paddingLeft: 16
+        paddingLeft: 16,
+        flex: 1,
     },
     time: {
         color: Colors.labelFontThin,
@@ -220,6 +229,6 @@ const styles = StyleSheet.create({
     },
     comment: {
         color: Colors.font,
-        fontSize: 16
-    }
+        fontSize: 14,
+    },
 });
