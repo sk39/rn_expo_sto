@@ -9,6 +9,7 @@ import {If} from "@common/components/PageSupport/If";
 import Logo from "@common/components/Image/Logo";
 import ShareHelper from "@common/plugins/ShareHelper";
 import {Button, Icon} from "react-native-elements";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
 
 const {name, sdkVersion, version, releaseChannel} = Constants.manifest;
 const isExpoClient = Constants.appOwnership === "expo";
@@ -47,38 +48,40 @@ export default class SystemInfo extends Component<NavigationProps> {
                             onPress={this.share}
                             type="clear"/>
                 </PageHeader>
-                <View style={{flexDirection: "row", alignItems: "center"}}>
-                    <Logo/>
-                    <View>
-                        <Text style={{fontSize: 18, marginLeft: 8}}>{app.name}</Text>
-                        <Text style={{
-                            fontWeight: "700",
-                            fontSize: 16,
-                            marginTop: 4,
-                            marginLeft: 8,
-                            color: Colors.primary
-                        }}>
-                            v{app.version}
-                        </Text>
+                <MyScrollView>
+                    <View style={{flexDirection: "row", alignItems: "center"}}>
+                        <Logo/>
+                        <View>
+                            <Text style={{fontSize: 18, marginLeft: 8}}>{app.name}</Text>
+                            <Text style={{
+                                fontWeight: "700",
+                                fontSize: 16,
+                                marginTop: 4,
+                                marginLeft: 8,
+                                color: Colors.primary
+                            }}>
+                                v{app.version}
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <Area title="App">
-                    <Row title="SDK" value={app.sdkVersion}/>
-                    <Row title="Release Channel" value={app.releaseChannel}/>
-                    <Row title="Ownership" value={app.ownership}/>
-                    <If test={app.isExpoClient}>
-                        <Row title="Expo Client Version" value={app.expoVersion}/>
-                    </If>
-                </Area>
-                <Area title="Device">
-                    <Row title="ID" value={device.id}/>
-                    <Row title="OS" value={device.os}/>
-                    <Row title="Model" value={device.model}/>
-                    <Row title="Size" value={device.size}/>
-                    <If test={Platform.OS === "android"}>
-                        <Row title="API Level" value={device.apiLevel}/>
-                    </If>
-                </Area>
+                    <Area title="App">
+                        <Row title="SDK" value={app.sdkVersion}/>
+                        <Row title="Release Channel" value={app.releaseChannel}/>
+                        <Row title="Ownership" value={app.ownership}/>
+                        <If test={app.isExpoClient}>
+                            <Row title="Expo Client Version" value={app.expoVersion}/>
+                        </If>
+                    </Area>
+                    <Area title="Device">
+                        <Row title="ID" value={device.id}/>
+                        <Row title="OS" value={device.os}/>
+                        <Row title="Model" value={device.model}/>
+                        <Row title="Size" value={device.size}/>
+                        <If test={Platform.OS === "android"}>
+                            <Row title="API Level" value={device.apiLevel}/>
+                        </If>
+                    </Area>
+                </MyScrollView>
             </View>
         );
     }
@@ -137,5 +140,9 @@ const styles = StyleSheet.create({
     label: {
         color: Colors.labelFont
     },
-    value: {}
+    value: {
+        flex: 1,
+        paddingLeft: 24,
+        textAlign: "right"
+    }
 });

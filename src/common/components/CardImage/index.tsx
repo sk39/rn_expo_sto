@@ -12,7 +12,7 @@ import React, {Component} from "react";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import {observable, runInAction} from "mobx";
 import Colors from "@constants/Colors";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 import {CardPosition} from "@common/components/CardWithModal/CardModels";
 import {Portal} from "react-native-portalize";
 
@@ -144,7 +144,7 @@ export default class CardImage extends Component<Props> {
         return (
             <Portal>
                 <Animated.View style={[styles.imageWrapper, touchPos, ani.image]}>
-                    <CashImage source={image}/>
+                    <CacheImage source={image}/>
                 </Animated.View>
             </Portal>
         )
@@ -172,7 +172,7 @@ export default class CardImage extends Component<Props> {
                             <View
                                 ref={this.imageRef}
                                 style={[styles.imageWrapper, {height: imageHeight}]}>
-                                <CashImage source={image}/>
+                                <CacheImage source={image}/>
                             </View>
                             <View>
                                 {this.props.children}

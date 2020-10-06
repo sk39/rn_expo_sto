@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, YellowBox} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
 import Colors from "@constants/Colors";
@@ -11,7 +11,7 @@ import SimpleList from "@common/components/List/SimpleList";
 import TokenState from "../../Token/TokenState";
 import Firestore from "@common/plugins/firebase/Firestore";
 import ListPageSupport from "@common/components/PageSupport/ListPageSupport";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 import {getPlatformElevation} from "@common/utils/getPlatformElevation";
 import Avatar from "@common/components/Image/Avatar";
 import RootStoreProvider from "@store/RootStoreProvider";
@@ -20,8 +20,6 @@ import firebase from "firebase";
 import moment from "moment";
 import Format from "@constants/Format";
 import MyScrollView from "@common/components/PageSupport/MyScrollView";
-
-YellowBox.ignoreWarnings(['Setting a timer']);
 
 @observer
 export default class STOComment extends Component<NavigationProps> {
@@ -82,6 +80,9 @@ export default class STOComment extends Component<NavigationProps> {
 
     add = async () => {
         try {
+            if (s.isBlank(this.newComment.value)) {
+                return;
+            }
             this.adding = true;
             const ref = this.docRef();
             await ref.add({
@@ -121,7 +122,7 @@ export default class STOComment extends Component<NavigationProps> {
                 <PageHeader title="Comment (beta)" onBackPress={this.onBack}/>
                 <View style={styles.header}>
                     <View style={styles.image}>
-                        <CashImage source={item.imageSource}/>
+                        <CacheImage source={item.imageSource}/>
                     </View>
                     <View style={styles.overlay}/>
                     <View style={styles.tokenNameWrapper}>

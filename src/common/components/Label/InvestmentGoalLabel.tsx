@@ -15,11 +15,12 @@ interface Props {
 
 const InvestmentGoalLabel: FC<Props> = (props) => {
     if (isJa) {
-        const {value, style} = props;
+        const {value, style, suffixStyle} = props;
         return (
             <NumberLabel value={Number(value) / 10000}
                          style={style}
                          suffix={"万円"}
+                         suffixStyle={suffixStyle}
             />
         )
     }

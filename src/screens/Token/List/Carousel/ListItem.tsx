@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import CarouselListItemContent from "./ListItemContent";
 import BaseListItem from "../BaseListItem";
 import CardImage from "@common/components/CardImage";
+import Layout from "@constants/Layout";
 
 @observer
 export default class CarouselListItem extends BaseListItem {
@@ -12,7 +13,7 @@ export default class CarouselListItem extends BaseListItem {
         return (
             <CardImage
                 image={item.imageSource}
-                imageHeight={230}
+                imageHeight={Layout.card.carouselImageHeight}
                 onPress={this.onPressed}
                 activeAnimation
             >

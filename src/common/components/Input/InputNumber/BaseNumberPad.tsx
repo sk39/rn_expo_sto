@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     },
     bottomBtn: {
         height: ViewUtils.getBottomBtnHeight(),
+        paddingTop: 0,
         paddingBottom: ViewUtils.getBottomBtnPaddingBottom(),
         width: (Layout.window.width) / 3,
     }

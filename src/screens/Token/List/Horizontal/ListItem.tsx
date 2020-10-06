@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import HorizontalListItemContent from "./ListItemContent";
 import BaseListItem from "../BaseListItem";
 import CardImage from "@common/components/CardImage";
+import Layout from "@constants/Layout";
 
 @observer
 export default class HorizontalListItem extends BaseListItem {
@@ -12,7 +13,7 @@ export default class HorizontalListItem extends BaseListItem {
         return (
             <CardImage
                 image={item.imageSource}
-                imageHeight={130}
+                imageHeight={Layout.card.horizontalImageHeight}
                 onPress={this.onPressed}
                 activeAnimation
             >

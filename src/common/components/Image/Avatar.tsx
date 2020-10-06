@@ -21,7 +21,7 @@ export default class Avatar extends Component<Props> {
         size: 60,
     };
 
-    @observable notSet;
+    @observable notSet = false
 
     render() {
         const {email, size, demo, title} = this.props;
@@ -47,7 +47,7 @@ export default class Avatar extends Component<Props> {
             <View style={styles.imageWrapper}>
                 <Image style={[styles.image, {width: size, height: size}]}
                        source={{uri}}
-                       onError={(e) => this.notSet = true}/>
+                       onError={() => this.notSet = true}/>
             </View>
         )
     }

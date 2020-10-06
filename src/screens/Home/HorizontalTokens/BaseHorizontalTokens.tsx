@@ -46,7 +46,7 @@ export default class BaseHorizontalTokens extends Component<Props> {
         }
 
         return (
-            <View key={item.name} style={style}>
+            <View style={style}>
                 <AnimatedSlide delay={(index + 1) * 120}
                                moveDistance={10}
                 >
@@ -75,7 +75,7 @@ export default class BaseHorizontalTokens extends Component<Props> {
                     data={this.list}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    keyExtractor={item => item.name}
+                    keyExtractor={item => item.symbol}
                     renderItem={this.renderItem}
                 />
                 <HomeListSupport processing={processing && this.list.length === 0}

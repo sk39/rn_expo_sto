@@ -51,7 +51,7 @@ export default class List extends PureComponent<Props> {
     renderItem = ({item, index}) => {
         const {tokenState} = this;
         return (
-            <View key={item.name}
+            <View key={item.symbol}
                   style={[styles.cardWrapper, {paddingTop: index === 0 ? 12 : 0}]}>
                 <AnimatedRow delay={(index + 1) * 200}>
                     <View style={styles.itemWrapper}>

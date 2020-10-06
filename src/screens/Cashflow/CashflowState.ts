@@ -63,7 +63,7 @@ export default class CashflowState {
             return [0, 20, 0, 20, 0, 20, 0, 20];
         }
 
-        const list: any[] = this.list.map((d, i) => {
+        const list: any[] = this.list.map(d => {
             return d.totalBalance
         });
 

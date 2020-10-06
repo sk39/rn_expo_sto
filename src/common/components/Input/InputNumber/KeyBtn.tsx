@@ -49,17 +49,19 @@ export function KeyIconBtn(props) {
     )
 }
 
+const keyBtnH = 48;
+const keyBtnW = (Layout.window.width - 8) / 3;
 const styles = StyleSheet.create({
     key: {
-        width: (Layout.window.width - 8) / 3,
-        height: 48,
+        width: keyBtnW,
+        height: keyBtnH,
         backgroundColor: "#fff",
         borderWidth: 1,
         borderColor: Colors.listBorder
     },
     keyIcon: {
-        width: (Layout.window.width - 8) / 3,
-        height: 48,
+        width: keyBtnW,
+        height: keyBtnH,
     },
     keyMini: {
         width: 56,

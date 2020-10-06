@@ -25,7 +25,7 @@ export default class ListPageSupport extends Component<Props> {
     renderMessage(type, message, onPress) {
         if (onPress) {
             return (
-                <View style={styles.disablesLayer}>
+                <View style={styles.disablesLayer} pointerEvents="box-none">
                     <TouchableOpacity onPress={onPress}>
                         <BlockErrorMessage type={type} message={message} large/>
                     </TouchableOpacity>

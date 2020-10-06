@@ -1,6 +1,9 @@
 import {action, computed, observable} from "mobx";
 import RootStore from "@store/RootStore";
 import StoVM from "@common/model/StoVM";
+import STOStore from "@store/STOStore";
+import AuthStore from "@store/AuthStore";
+import BalanceStore from "@store/BalanceStore";
 
 export default class TokenState {
 
@@ -8,9 +11,9 @@ export default class TokenState {
     @observable filterStatus: string[];
 
     navigation;
-    stoStore;
-    authStore;
-    balanceStore;
+    stoStore: STOStore;
+    authStore: AuthStore;
+    balanceStore: BalanceStore;
 
     constructor(navigation, rootStore: RootStore, filterStatus?: string[]) {
         this.navigation = navigation;
@@ -54,7 +57,6 @@ export default class TokenState {
         return this.stoStore.get(symbol);
     }
 
-    @action
     clear() {
     }
 
@@ -62,7 +64,6 @@ export default class TokenState {
     selectItem(item) {
         this.selectedItem = item;
     }
-
 }
 
 

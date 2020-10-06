@@ -5,6 +5,7 @@ import BaseListItem from "./BaseListItem";
 import CardImage from "@common/components/CardImage";
 import {StyleSheet, View} from "react-native";
 import STOStatusLabel from "@common/components/Label/STOStatusLabel";
+import Layout from "@constants/Layout";
 
 @observer
 export default class ListItem extends BaseListItem {
@@ -28,7 +29,7 @@ export default class ListItem extends BaseListItem {
             <View style={{position: "relative"}}>
                 <CardImage
                     image={item.imageSource}
-                    imageHeight={200}
+                    imageHeight={Layout.card.imageHeight}
                     onPress={this.onPressed}
                     activeAnimation
                 >

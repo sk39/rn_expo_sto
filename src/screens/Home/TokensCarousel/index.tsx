@@ -9,7 +9,7 @@ import TokenState from "../../Token/TokenState";
 import CarouselListItem from "../../Token/List/Carousel/ListItem";
 import RootStore from "@store/RootStore";
 import MobxHelper from "@common/utils/MobxHelper";
-import SkeletonLoader from "@common/components/PageSupport/SkeletonLoader";
+import {SkeletonLoader} from "@sk39/expo-image-cache";
 
 interface Props {
     rootStore: RootStore;
@@ -35,16 +35,6 @@ export default class TokensCarousel extends Component<Props> {
     }
 
     componentDidMount(): void {
-        this.mobxHelper.reaction(
-            () => this.tokenState.selectedItem,
-            item => {
-                if (!item) {
-                    this.startAutoplay();
-                } else {
-                    this.stopAutoplay();
-                }
-            }
-        );
         this.mobxHelper.reaction(
             () => this.tokenState.stoStore.list,
             () => this.reset()
@@ -101,8 +91,6 @@ export default class TokensCarousel extends Component<Props> {
     onListItemPressed = item => {
         const {tokenState} = this;
         tokenState.navigation.navigate("TokenDetail", {symbol: item.symbol})
-        // tokenState.navigation.setParams({tabBarVisible: item == null})
-        // tokenState.selectItem(item);
     };
 
     renderItem = ({item}) => {

@@ -17,8 +17,10 @@ export default {
         heightIPhoneX: 66,
     },
     card: {
-        imageHeight: 150,
-        imageHeightLarge: (height > 700) ? 280 : 250
+        imageHeight: (height > 800) ? 200 : (height > 700) ? 180 : 168,
+        imageHeightLarge: (height > 700) ? 280 : 240,
+        horizontalImageHeight: (height > 700) ? 130 : 120,
+        carouselImageHeight: (height > 700) ? 230 : 204
     },
     isSmallDevice: width < 375,
 };

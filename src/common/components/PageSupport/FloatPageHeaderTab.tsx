@@ -6,11 +6,11 @@ import {Tabs, View} from "native-base";
 import {observable, runInAction} from "mobx";
 import {observer} from "mobx-react";
 
-interface Props {
-    title: string;
-    scroll?: Animated.Value;
-    navigation?: Navigation
-}
+// interface Props {
+//     title: string;
+//     scroll?: Animated.Value;
+//     navigation?: Navigation
+// }
 
 const height = ViewUtils.getFloatPageHeaderTabHeight();
 
@@ -81,7 +81,7 @@ export default class FloatPageHeaderTab extends Tabs {
                 borderTopWidth: 0
             },
             disabled: _tabsThis._children().map(child => child.props.disabled),
-            accessible: _tabsThis._children().map(child => child.props.accessible == false ? false : true || true),
+            accessible: _tabsThis._children().map(child => child.props.accessible != false),
             accessibilityLabel: _tabsThis._children().map(child => child.props.accessibilityLabel),
             activeTab: this.state.currentPage,
             scrollValue: this.state.scrollValue,

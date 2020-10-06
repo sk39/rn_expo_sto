@@ -43,7 +43,7 @@ export default class StoVM implements STO {
 
     @computed
     get daysToGo(): number {
-        return moment(this.closeDate).diff(moment(), "d")
+        return Math.max(moment(this.closeDate).diff(moment(), "d"), 0)
     }
 
     @computed

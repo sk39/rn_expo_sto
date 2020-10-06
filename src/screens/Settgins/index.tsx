@@ -65,7 +65,6 @@ export default class Settings extends Component<NavigationProps & RootStoreProps
     clearSTOCache = () => {
         const {rootStore} = this.props;
         this.exec("clearSto", async () => {
-            await rootStore.image.clear();
             await rootStore.sto.clear();
         })
     }

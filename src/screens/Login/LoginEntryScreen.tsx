@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text} from 'react-native';
 import {inject, observer} from "mobx-react";
 import {View} from 'native-base';
 import {Button, Icon} from "react-native-elements";
@@ -13,6 +13,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import Layout from "@constants/Layout";
 import DisableLayer from "@common/components/Modal/DisableLayer";
 import MyStatusBar from "@common/components/PageSupport/MyStatusBar";
+import MyScrollView from "@common/components/PageSupport/MyScrollView";
 
 @inject('rootStore')
 @observer
@@ -90,38 +91,40 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
                 <MyStatusBar dark={false} transparent/>
                 <PageLoading loading={this.loginState.processing}/>
                 <DisableLayer show={this.loginState.initializing}/>
-                <View style={styles.headerArea}>
-                    <Text style={styles.title}>{t("screen.login.title")}</Text>
-                    <Text style={styles.subTitle}>{t("screen.login.subTitle")}</Text>
-                </View>
-                <View style={styles.form}>
-                    <Input inputState={this.loginState.userId}
-                           containerStyle={styles.inputContainer}
-                           label={t("screen.login.userId")}
-                           leftIcon={
-                               <Icon name='user' type="feather" color={Colors.primary} size={16}/>
-                           }
-                    />
-                    <Input inputState={this.loginState.password}
-                           containerStyle={styles.inputContainer}
-                           label={t("screen.login.password")}
-                           secureTextEntry
-                           leftIcon={
-                               <Icon name='lock' type="feather" color={Colors.primary} size={16}/>
-                           }
-                    />
-                    <Button buttonStyle={styles.btn}
-                            title={t("btn.sign-in")}
-                            titleStyle={styles.btnText}
-                            onPress={this.handleLogin}
-                    />
-                    <Button buttonStyle={styles.forgotPassword}
-                            title={t("screen.login.forgotPassword")}
-                            type='clear'
-                            titleStyle={styles.forgotPasswordText}
-                            onPress={this.linkForgotPassword}
-                    />
-                </View>
+                <LoginKeyboardAvoidingView>
+                    <View style={styles.headerArea}>
+                        <Text style={styles.title}>{t("screen.login.title")}</Text>
+                        <Text style={styles.subTitle}>{t("screen.login.subTitle")}</Text>
+                    </View>
+                    <View style={styles.form}>
+                        <Input inputState={this.loginState.userId}
+                               containerStyle={styles.inputContainer}
+                               label={t("screen.login.userId")}
+                               leftIcon={
+                                   <Icon name='user' type="feather" color={Colors.primary} size={16}/>
+                               }
+                        />
+                        <Input inputState={this.loginState.password}
+                               containerStyle={styles.inputContainer}
+                               label={t("screen.login.password")}
+                               secureTextEntry
+                               leftIcon={
+                                   <Icon name='lock' type="feather" color={Colors.primary} size={16}/>
+                               }
+                        />
+                        <Button buttonStyle={styles.btn}
+                                title={t("btn.sign-in")}
+                                titleStyle={styles.btnText}
+                                onPress={this.handleLogin}
+                        />
+                        <Button buttonStyle={styles.forgotPassword}
+                                title={t("screen.login.forgotPassword")}
+                                type='clear'
+                                titleStyle={styles.forgotPasswordText}
+                                onPress={this.linkForgotPassword}
+                        />
+                    </View>
+                </LoginKeyboardAvoidingView>
                 <View style={styles.bottomArea}>
                     <Button buttonStyle={styles.bottomBtn}
                             title={t("screen.login.skip")}
@@ -141,6 +144,20 @@ export default class LoginEntryScreen extends Component<NavigationProps & RootSt
     }
 }
 
+function LoginKeyboardAvoidingView({children}) {
+    if (Platform.OS === "ios") {
+        return (
+            <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+                <MyScrollView>
+                    {children}
+                </MyScrollView>
+            </KeyboardAvoidingView>
+        )
+    }
+
+    return children;
+}
+
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
@@ -150,7 +167,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 68,
         width: Layout.window.width
     },
     btn: {
@@ -164,15 +180,15 @@ const styles = StyleSheet.create({
         color: "white",
     },
     forgotPassword: {
-        marginTop: 12,
+        marginTop: 20,
     },
     forgotPasswordText: {
         color: Colors.link,
         fontSize: 16,
     },
     headerArea: {
-        flex: 1,
-        maxHeight: 330,
+        // flex: 1,
+        height: Layout.window.height / 3,
         paddingLeft: 44,
         paddingTop: 24,
         width: "100%",

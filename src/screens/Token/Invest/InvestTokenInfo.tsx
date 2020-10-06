@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native'
 import {observer} from "mobx-react";
 import {RootStoreProps} from "@store/RootStoreProvider";
 import InvestTokenState from "./InvestTokenState";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import Format from "@constants/Format";
 import Colors from "@constants/Colors";
@@ -22,7 +22,7 @@ export default class InvestTokenInfo extends PureComponent<RootStoreProps & Prop
         return (
             <View style={styles.container}>
                 <View style={styles.image}>
-                    <CashImage source={item.imageSource}/>
+                    <CacheImage source={item.imageSource}/>
                 </View>
                 <View style={{alignItems: "flex-start"}}>
                     <Text style={styles.titleNameText}>{item.name}</Text>

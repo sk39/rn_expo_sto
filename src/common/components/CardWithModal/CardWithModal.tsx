@@ -17,7 +17,7 @@ import AnimatedCard from "./AnimatedCard";
 import Colors from "@constants/Colors";
 import AnimatedCardHeader from "@common/components/CardWithModal/AnimatedCardHeader";
 import AnimatedCardContents from "@common/components/CardWithModal/AnimatedCardContents";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 import {CardPosition} from "@common/components/CardWithModal/CardModels";
 import MyScrollView from "@common/components/PageSupport/MyScrollView";
 
@@ -223,7 +223,7 @@ export default class CardWithModal extends Component<Props> {
                             imageHeightLarge={imageHeightLarge}
                             {...props}
                         >
-                            <CashImage source={image}/>
+                            <CacheImage source={image}/>
                             <View>
                                 {renderCardBody ? renderCardBody(true, duration.phase2) : this.props.children}
                             </View>
@@ -266,7 +266,7 @@ export default class CardWithModal extends Component<Props> {
                         <View style={styles.cardWrapper}>
                             <Animated.View ref={this.cardRef} style={[styles.card, ani.card]}>
                                 <Animated.View style={[styles.imageWrapper, {height: imageHeight}]}>
-                                    <CashImage source={image}/>
+                                    <CacheImage source={image}/>
                                 </Animated.View>
                                 <View>
                                     {renderCardBody ? renderCardBody(false, 400) : this.props.children}

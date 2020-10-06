@@ -32,7 +32,7 @@
       "Portfolio": "ポートフォリオ",
       "Cashflow": "入出金履歴",
       "Settings": "設定",
-      "SystemInfo": "システム"
+      "SystemInfo": "アプリ情報"
     },
     "tab": {
       "Home": "ホーム",
@@ -82,6 +82,10 @@
       "biometric": {
         "title": "生体認証",
         "subTitle": "生体認証を有効にします。"
+      },
+      "push": {
+        "title": "Push通知 (beta)",
+        "subTitle": "Push通知を有効にします。"
       },
       "clearSto": {
         "title": "STO画像キャッシュ",

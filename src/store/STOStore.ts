@@ -4,6 +4,7 @@ import _ from "lodash";
 import data from "@constants/dummyData/sto";
 import MyToast from "@common/utils/MyToast";
 import StoVM from "@common/model/StoVM";
+import {ImageStore} from "@sk39/expo-image-cache";
 
 export default class STOStore {
 
@@ -20,6 +21,7 @@ export default class STOStore {
         this.processing = false;
         this.list = [];
         this.errorMessage = null;
+        await ImageStore.getInstance().clear();
     }
 
     async loadData(cacheOk?: boolean) {
@@ -32,6 +34,7 @@ export default class STOStore {
             this.errorMessage = null;
             this.processing = true;
             await ViewUtils.sleep(300)
+            await ImageStore.getInstance().refresh(true);
             this.list = data.map(m => new StoVM(m));
         } catch (e) {
             this.errorMessage = "Server error!";

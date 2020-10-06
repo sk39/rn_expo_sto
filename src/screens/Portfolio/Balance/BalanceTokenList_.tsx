@@ -8,7 +8,7 @@ import SimpleList from "@common/components/List/SimpleList";
 import NumberLabel from "@common/components/Label/NumberLabel";
 import Format from "@constants/Format";
 import {BalanceTokenVM} from "./BalanceState";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 import commonStyles from "@common/utils/commonStyle";
 
 interface Props {
@@ -57,7 +57,7 @@ export default class BalanceTokenList extends Component<Props> {
                     <View style={styles.row}>
                         <View style={styles.tokenNameWrapper}>
                             <View style={styles.image}>
-                                <CashImage source={item.imageSource}/>
+                                <CacheImage source={item.imageSource}/>
                             </View>
                             <Text style={styles.tokenName}>{item.name}</Text>
                         </View>

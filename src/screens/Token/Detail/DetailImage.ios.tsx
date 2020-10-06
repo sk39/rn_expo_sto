@@ -2,7 +2,7 @@ import {Animated, ImageSourcePropType, StyleSheet, View} from "react-native";
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import Layout from "@constants/Layout";
-import CashImage from "@common/components/Image/CashImage";
+import {CacheImage} from "@sk39/expo-image-cache";
 
 interface Props {
     source: ImageSourcePropType;
@@ -52,8 +52,8 @@ export default class DetailImageIos extends Component<Props> {
             <Animated.View style={[ani.container]}>
                 <Animated.View style={ani.imageScale}>
                     <View style={styles.imageWrapper}>
-                        <CashImage style={styles.image}
-                                   source={source}/>
+                        <CacheImage style={styles.image}
+                                    source={source}/>
                     </View>
                 </Animated.View>
             </Animated.View>
