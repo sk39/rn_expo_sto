@@ -13,6 +13,7 @@ import ProcessAnimationExample from "../../screens/Sandbox/ProcessAnimationExamp
 import Portfolio from "../../screens/Portfolio";
 import Cashflow from "../../screens/Cashflow";
 import SystemInfo from "../../screens/System/SystemInfo";
+import CacheImageTestScreen from "../../screens/Sandbox/CacheImageTestScreen";
 
 export const TabScreens = {
     Home: Home,
@@ -30,6 +31,7 @@ const Screens = {
     LocationTest: LocationTestScreen,
     AuthTest: LocalAuthTestScreen,
     Lottie: LottieScreen,
+    ImageTest: CacheImageTestScreen,
     Chart: ChartScreen,
     InnerRouter: InnerRouterScreen,
 };

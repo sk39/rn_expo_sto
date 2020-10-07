@@ -12,6 +12,8 @@ import Logo from "@common/components/Image/Logo";
 import LoginUserAvatar from "@common/components/Image/LoginUserAvatar";
 import Format from "@constants/Format";
 import UpdateManager from "@common/plugins/UpdateManager";
+import env from "@common/plugins/env";
+import {If} from "@common/components/PageSupport/If";
 
 @inject('rootStore')
 @observer
@@ -44,7 +46,7 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
                               style={styles.item}
                               onPress={() => this.jump(key)}>
                 <View style={{width: 36}}>
-                    <ScreenIcon screenName={key} color={Colors.primary} size={24}/>
+                    <ScreenIcon screenName={key} color={Colors.btnPrimary} size={24}/>
                 </View>
                 <Text style={styles.itemText}>{t(`navigation.menu.${key}`)}</Text>
             </TouchableOpacity>
@@ -120,36 +122,37 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={styles.back}>
                 {this.renderHeader()}
                 <ScrollView>
-                    <View style={{paddingVertical: 12}}>
+                    <View style={{paddingVertical: 16}}>
                         {["Home", "Tokens", "Portfolio", "Cashflow", "Settings", "SystemInfo"].map(this.renderItem)}
                     </View>
-                    <View style={styles.devWrapper}>
-                        <Text style={styles.devTitle}>Development</Text>
-                        {[
-                            "Sandbox", "Chart", "ProcessAnimation", "QRTest",
-                            "LocationTest", "AuthTest", "Lottie", "InnerRouter"
-                        ].map(this.renderItemDev)}
-                    </View>
-
-                    <View style={{
-                        flexDirection: "row",
-                        marginBottom: 16,
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}>
-                        <Button title="Check Update"
-                                type="clear"
-                                containerStyle={{marginRight: 12}}
-                                onPress={this.checkUpdate}
-                        />
-                        <Button title="Reload"
-                                type="clear"
-                                onPress={this.reload}
-                        />
-                    </View>
+                    <If test={env.SHOW_DEV_SCREENS}>
+                        <View style={styles.devWrapper}>
+                            <Text style={styles.devTitle}>Development</Text>
+                            {[
+                                "Sandbox", "Chart", "ProcessAnimation", "QRTest",
+                                "LocationTest", "AuthTest", "Lottie", "InnerRouter", "ImageTest"
+                            ].map(this.renderItemDev)}
+                        </View>
+                        <View style={{
+                            flexDirection: "row",
+                            marginBottom: 16,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                            <Button title="Check Update"
+                                    type="clear"
+                                    containerStyle={{marginRight: 12}}
+                                    onPress={this.checkUpdate}
+                            />
+                            <Button title="Reload"
+                                    type="clear"
+                                    onPress={this.reload}
+                            />
+                        </View>
+                    </If>
                 </ScrollView>
             </View>
         )
@@ -157,19 +160,22 @@ export default class DrawerMenu extends Component<DrawerContentComponentProps & 
 }
 
 const styles = StyleSheet.create({
+    back: {
+        flex: 1,
+        backgroundColor: Colors.tabBar,
+        paddingHorizontal: 12,
+    },
     header: {
         paddingTop: ViewUtils.isIphoneX() ? 60 : 34,
         alignItems: "center",
-        paddingBottom: 8,
+        paddingBottom: 12,
         borderBottomWidth: 1,
         borderBottomColor: Colors.listBorder,
-        backgroundColor: Colors.listBorder
     },
     userHeader: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal: 12,
-        paddingBottom: 8,
+        paddingVertical: 12,
     },
     username: {
         fontSize: 18,
@@ -180,7 +186,7 @@ const styles = StyleSheet.create({
     balanceLabel: {
         color: Colors.labelFont,
         fontSize: 12,
-        opacity: 0.8,
+        // opacity: 0.8,
         // fontWeight: "700"
     },
     balanceValue: {
@@ -197,13 +203,13 @@ const styles = StyleSheet.create({
     logoText: {
         marginTop: 2,
         color: Colors.labelFont,
-        opacity: 0.8,
+        // opacity: 0.8,
         fontWeight: "700",
         fontSize: 18,
         letterSpacing: 2,
     },
     item: {
-        paddingLeft: 22,
+        paddingLeft: 12,
         height: 50,
         alignItems: "center",
         justifyContent: "flex-start",
@@ -217,11 +223,13 @@ const styles = StyleSheet.create({
     },
     btnWrapper: {
         paddingVertical: 16,
-        width: 150,
+        width: 130,
     },
     authButton: {
         backgroundColor: Colors.btnPrimaryLight,
-        borderRadius: 0
+        padding: 0,
+        height: 40,
+        borderRadius: 26,
     },
     devWrapper: {
         borderTopWidth: 1,
@@ -233,7 +241,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "700",
         opacity: 0.4,
-        marginLeft: 16,
+        // marginLeft: 16,
         marginBottom: 12,
     },
 });
